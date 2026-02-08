@@ -1,0 +1,233 @@
+{
+    "topic": "Percentages",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Basic Calculations & Concept",
+            "concept": "A percentage is simply a fraction with a denominator of 100. 'Per cent' literally means 'for every 100'. It is a way to express a part of a whole. If you have 50%, it means you have 50 parts usually out of 100.",
+            "formula": "Value = (Percentage / 100) × Total Value",
+            "solvingTechnique": "To find a percentage of a number, convert the percentage to a fraction (divide by 100) and multiply by the number. To find what percentage part A is of whole B, use (A/B)*100.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Calculate 30% of 500.",
+                    "solution": "Step 1: Convert 30% to a fraction: 30/100.\nStep 2: Multiply by 500.\nCalculation: (30/100) × 500 = 30 × 5 = 150."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "What is 25% of 40% of 600?",
+                    "solution": "Step 1: Write the expression: (25/100) × (40/100) × 600.\nStep 2: Simplify fractions. 25/100 = 1/4, 40/100 = 2/5.\nStep 3: Calculate: (1/4) × (2/5) × 600 = (2/20) × 600 = (1/10) × 600 = 60."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "If 16% of a number is 24, calculate 24% of the same number.",
+                    "solution": "Step 1: Let the number be x.\nStep 2: Given 0.16x = 24. So, x = 24 / 0.16 = 2400 / 16 = 150.\nStep 3: Now find 24% of 150.\nCalculation: (24/100) × 150 = 24 × 1.5 = 36.\nShort Method: (24% is 1.5 times 16%), so answer is 1.5 times 24 = 36."
+                }
+            ]
+        },
+        {
+            "questionType": "Fraction to Percentage Conversions",
+            "concept": "Speed in calculating percentages comes from memorizing standard fraction-to-percentage conversions. Instead of calculating (1/8)*100 each time, you should know it is 12.5%.",
+            "formula": "Percentage = Fraction × 100",
+            "solvingTechnique": "Memorize the table: 1/2=50%, 1/3=33.33%, 1/4=25%, 1/5=20%, 1/6=16.66%, 1/7=14.28%, 1/8=12.5%, 1/9=11.11%, 1/10=10%, 1/11=9.09%. Use these as building blocks.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Convert 3/8 into a percentage.",
+                    "solution": "Step 1: We know 1/8 = 12.5%.\nStep 2: Therefore, 3/8 = 3 × 12.5%.\nStep 3: Calculate: 3 × 12.5 = 37.5%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "What is 83.33% of 120?",
+                    "solution": "Step 1: Recognize that 83.33% = 50% + 33.33% OR 100% - 16.66%.\nAlternative: We know 1/6 = 16.66%. So 5/6 = 1 - 1/6 = 100% - 16.66% = 83.33%.\nStep 2: Convert percentage to fraction: 5/6.\nStep 3: Calculate (5/6) × 120 = 5 × 20 = 100."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "Find 62.5% of 320.",
+                    "solution": "Step 1: Break down 62.5% into known fractions. 62.5% = 50% + 12.5% = 1/2 + 1/8.\nStep 2: Alternatively, 12.5% = 1/8. So 62.5% = 5 × 12.5% = 5/8.\nStep 3: Calculate (5/8) × 320.\nStep 4: 320 / 8 = 40. Then 40 × 5 = 200."
+                }
+            ]
+        },
+        {
+            "questionType": "Percentage Increase & Decrease",
+            "concept": "This measures how much a value has changed relative to its original value.",
+            "formula": "% Change = (Change / Initial Value) × 100",
+            "solvingTechnique": "Always identify the 'Initial Value' correctly. If a price goes from 40 to 50, the initial is 40. If it goes from 50 to 40, the initial is 50. The denominator is always the value BEFORE the change.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "The salary of a person increases from $200 to $250. Find the percentage increase.",
+                    "solution": "Step 1: Find the change (difference): 250 - 200 = 50.\nStep 2: Identify initial value: 200.\nStep 3: Apply formula: (50 / 200) × 100.\nStep 4: (1/4) × 100 = 25%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "A number is decreased by 20% to get 64. What was the original number?",
+                    "solution": "Step 1: Let the original number be x.\nStep 2: If decreased by 20%, the remaining part is 80%.\nStep 3: Equation: 80% of x = 64.\nStep 4: 0.8x = 64 => x = 64 / 0.8 = 640 / 8 = 80."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "The population of a town increased by 20% in one year and then decreased by 10% in the next. If the final population is 5400, what was the initial population?",
+                    "solution": "Step 1: Let initial population be P.\nStep 2: After 1st year: P × 1.20 (120%).\nStep 3: After 2nd year: (P × 1.20) × 0.90 (90%).\nStep 4: Total multiplier: 1.2 × 0.9 = 1.08.\nStep 5: 1.08P = 5400 => P = 5400 / 1.08 = 5000."
+                }
+            ]
+        },
+        {
+            "questionType": "Comparison (More than / Less than)",
+            "concept": "These questions ask how much percent A is more or less than B.",
+            "formula": "% Difference = (Difference / Than_Value) × 100",
+            "solvingTechnique": "Crucial concept: The value that follows the word 'THAN' is always the DENOMINATOR.\n- A is what % more than B: (A-B)/B * 100\n- A is what % less than B: (B-A)/B * 100",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "If A's income is 25% more than B, by what % is B's income less than A?",
+                    "solution": "Step 1: Assume B = 100. Then A = 125.\nStep 2: Comparison: 'B is less than A'. Difference = 25.\nStep 3: Denominator is A (because 'than A').\nStep 4: (25 / 125) × 100 = (1/5) × 100 = 20%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "The height of Tower A is 40% less than Tower B. By how much percent is Tower B taller than Tower A?",
+                    "solution": "Step 1: Assume B = 100. Then A = 60.\nStep 2: Comparison: 'B taller than A'. Difference = 40.\nStep 3: Denominator is A (because 'than A').\nStep 4: (40 / 60) × 100 = (2/3) × 100 = 66.66%."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "Two numbers are 20% and 50% more than a third number respectively. What percentage is the first of the second?",
+                    "solution": "Step 1: Let 3rd number = 100.\nStep 2: 1st number = 120. 2nd number = 150.\nStep 3: Question asks: First is what % OF second?\nStep 4: Formula: (First/Second) × 100 = (120/150) × 100.\nStep 5: (4/5) × 100 = 80%."
+                }
+            ]
+        },
+        {
+            "questionType": "Successive Percentage Changes",
+            "concept": "When a value changes by x% and then the modified value changes by y%, the net change is not simply x+y.",
+            "formula": "Net Change % = x + y + (xy / 100)",
+            "solvingTechnique": "Use the sign properly! Increase is positive (+), Decrease is negative (-). The formula works for two changes.\nFor Discount: Discount is a decrease, so use negative values.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A number is increased by 20% and then by 10%. Find net increase.",
+                    "solution": "Step 1: Use formula: x=20, y=10.\nStep 2: Net = 20 + 10 + (20×10)/100.\nStep 3: Net = 30 + 2 = 32%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "A price is increased by 20% and then decreased by 20%. What is the specified change?",
+                    "solution": "Step 1: x = +20, y = -20.\nStep 2: Net = 20 - 20 + (20 × -20)/100.\nStep 3: Net = 0 - 400/100 = -4%.\nStep 4: Negative sign means 4% Decrease.\nRule: Same % increase and decrease always results in loss of (x^2/100)%."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "Two successive discounts of 20% and 10% are equivalent to what single discount?",
+                    "solution": "Step 1: Use x = -20, y = -10 (discounts are negative).\nStep 2: Net = -20 - 10 + ((-20)×(-10))/100.\nStep 3: Net = -30 + 200/100 = -30 + 2 = -28%.\nStep 4: 28% Discount."
+                }
+            ]
+        },
+        {
+            "questionType": "Product Constancy (Expenditure & Consumption)",
+            "concept": "If Product = A × B, and Product is constant, then A is inversely proportional to B. If price increases, consumption must decrease to keep expenditure same.",
+            "formula": "If A increases by x%, B must decrease by (x / (100+x)) × 100%.\nIf A decreases by x%, B must increase by (x / (100-x)) × 100%.",
+            "solvingTechnique": "Use the fraction method. If Price goes up by 1/n, Consumption must drop by 1/(n+1) to keep expenditure constant.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "The price of sugar increases by 25%. By what % should a family reduce consumption to keep expenditure same?",
+                    "solution": "Step 1: 25% = 1/4 increase.\nStep 2: Using trick: If increase is 1/n, decrease is 1/(n+1).\nStep 3: Decrease = 1/(4+1) = 1/5.\nStep 4: 1/5 = 20%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "Length of a rectangle is increased by 20%. By what % should breadth be decreased to keep Area constant?",
+                    "solution": "Step 1: Area = Length × Breadth (A x B type).\nStep 2: Length +20% (or +1/5).\nStep 3: Breadth must decrease by 1/(5+1) = 1/6.\nStep 4: 1/6 = 16.66%."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "Price of petrol increased by 20% but a man increases his expenditure by only 10%. By what % has his consumption decreased?",
+                    "solution": "Step 1: Exp = Price × Cons.\nStep 2: Let initial P=100, C=100 -> Exp=10000.\nStep 3: New P=120, New Exp=11000 (10% more).\nStep 4: New Cons = Net Exp / New Price = 11000 / 120 = 91.66.\nStep 5: Decrease in Cons = 100 - 91.66 = 8.33%.\nAlternative: Net% = x + y + xy/100. 10 = 20 + y + 20y/100. Solve for y."
+                }
+            ]
+        },
+        {
+            "questionType": "Examination & Venn Diagrams",
+            "concept": "Problems involving students passing/failing in subjects, often visualized using sets.",
+            "formula": "n(A ∪ B) = n(A) + n(B) - n(A ∩ B)\nTotal = Passed in A only + Passed in B only + Passed in Both + Failed in Both",
+            "solvingTechnique": "Draw circles representing sets. Fill the INTERSECTION (Both) part first. Then subtract intersection from individual totals to get 'Only A' and 'Only B'.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "In a class, 40% passed Math, 50% passed English, and 20% passed both. What % passed at least one?",
+                    "solution": "Step 1: Formula: n(M U E) = n(M) + n(E) - n(Both).\nStep 2: = 40 + 50 - 20.\nStep 3: = 70%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "A student scored 30% marks and failed by 10 marks. Another scored 40% and got 15 marks more than passing. Find max marks.",
+                    "solution": "Step 1: Let Max Marks = x.\nStep 2: Pass Marks = 0.30x + 10.\nStep 3: Pass Marks = 0.40x - 15.\nStep 4: Equate: 0.30x + 10 = 0.40x - 15.\nStep 5: 0.10x = 25 => x = 250."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "In a group, 70% speak English, 65% speak Hindi. If 27% speak neither, what % speaks both?",
+                    "solution": "Step 1: Total = 100%.\nStep 2: Formula: Total = n(E) + n(H) - n(Both) + n(Neither).\nStep 3: 100 = 70 + 65 - Both + 27.\nStep 4: 100 = 162 - Both.\nStep 5: Both = 62%."
+                }
+            ]
+        },
+        {
+            "questionType": "Population & Value Depreciation",
+            "concept": "Used for compound growth or decay over years.",
+            "formula": "Final = Initial × (1 ± r/100)^n",
+            "solvingTechnique": "This is essentially compound interest. For machines/depreciation, use minus (-). For population growth, use plus (+).",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A machine worth $10,000 depreciates by 10% annually. Value after 2 years?",
+                    "solution": "Step 1: Value = 10000 × (1 - 10/100)^2.\nStep 2: = 10000 × (0.9)^2.\nStep 3: = 10000 × 0.81 = $8,100."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "Population of a town is 10,000. It increases by 10% first year and 20% second year. Find population after 2 years.",
+                    "solution": "Step 1: Pop = 10000 × (110/100) × (120/100).\nStep 2: = 10000 × 1.1 × 1.2.\nStep 3: = 10000 × 1.32 = 13,200."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "Population increased by 5% annually. If present population is 9261, what was it 3 years ago?",
+                    "solution": "Step 1: 9261 = P × (1 + 5/100)^3.\nStep 2: 9261 = P × (21/20)^3.\nStep 3: 9261 = P × (9261/8000).\nStep 4: P = 8000."
+                }
+            ]
+        },
+        {
+            "questionType": "Election & Voting",
+            "concept": "Problems involve candidates, valid votes, and majorities.",
+            "formula": "Total Votes = Valid + Invalid\nWinner's Votes - Loser's Votes = Majority",
+            "solvingTechnique": "Usually assume Total Votes = 100 units. Subtract invalid votes %. Distribute remainder between Winner and Loser.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "In an election between 2 candidates, winner got 60% votes and won by 200 votes. Find total votes.",
+                    "solution": "Step 1: Winner = 60%, Loser = 40%.\nStep 2: Majority (Difference) = 60% - 40% = 20%.\nStep 3: Given 20% = 200.\nStep 4: 1% = 10. Total (100%) = 10 × 100 = 1000."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "8% of voters did not vote. Winner got 48% of TOTAL votes and won by 1100 votes. Find total voters.",
+                    "solution": "Step 1: Let Total = 100x.\nStep 2: Winner = 48x.\nStep 3: Did not vote = 8x. Remaining (Loser) = 100x - 48x - 8x = 44x.\nStep 4: Majority = 48x - 44x = 4x.\nStep 5: 4x = 1100 -> x = 275. Total = 27500."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "10% didn't vote, 10% invalid. Winner got 54% of VALID votes and won by 1620 votes.",
+                    "solution": "Step 1: Total = 100. Voted = 90. Valid = 90 - 10%(90) = 81.\nStep 2: Winner = 54% of 81 = 43.74. Loser = 46% of 81 = 37.26.\nStep 3: Diff = 8% of Valid Votes = 0.08 × 81 units = 6.48 units.\nStep 4: 6.48 units = 1620 -> 1 unit = 250.\nStep 5: Total = 100 × 250 = 25,000."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Reciprocal Fractions: Memorize 1/2 to 1/20. E.g., 1/16 = 6.25%. This saves massive time.",
+        "Splitting Method: To find 55%, find 50% (half) + 5% (move decimal). To find 99%, find 100% - 1%.",
+        "AB Rule: If a value changes by x% and y% successivley, Net = x + y + xy/100.",
+        "Reverse Multiplier: If A is 20% (1/5) more than B, B is 1/6 (16.66%) less than A. (1/n increase -> 1/(n+1) decrease).",
+        "x% of y = y% of x: 28% of 50 is hard? Calculate 50% of 28 (which is 14). It's the same."
+    ],
+    "commonMistakes": [
+        "Confusing the Base: Denominator for '% more than' is different from '% less than'. Look for 'than X'. X is denominator.",
+        "Adding Successive %: +20% and +20% is NOT +40%. It is 44% (compounding).",
+        "Average Speed Trap: Average speed of x km/h and y km/h is NOT (x+y)/2. It is 2xy/(x+y).",
+        "Reverse Calculation: If 120% of X = 600, X is NOT 600 - 20%. X is 600/1.2.",
+        "Ignoring Units: Ensure both values are in same units (e.g., meters vs km) before finding percentage."
+    ],
+    "placementTips": [
+        "Data Interpretation (DI) relies heavily on fast percentage calculations. Master the approximation of fractions.",
+        "Start with easy questions. If a calculation looks messy (e.g., 37.9% of 4321), check options approx. or skip.",
+        "Use Options: Sometimes it's faster to check which option fits the condition than solving for x.",
+        "Time Mgmt: Don't spend >2 mins on one quant question. Mark for review and move on."
+    ]
+}
