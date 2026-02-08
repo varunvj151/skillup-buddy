@@ -1,0 +1,44 @@
+{
+    "topic": "Simple & Compound Interest",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Simple Interest",
+            "concept": "Interest is calculated only on principal amount.",
+            "formula": "SI = (P * R * T) / 100",
+            "solvingTechnique": "SI is constant every year.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "SI on 5000 at 10% for 2 years?",
+                    "solution": "Step 1: SI = (5000 * 10 * 2) / 100.\nStep 2: = 1000."
+                }
+            ]
+        },
+        {
+            "questionType": "Compound Interest",
+            "concept": "Interest on interest.",
+            "formula": "Total Amount = P(1 + R/100)^n",
+            "solvingTechnique": "Use Successive Percentage change formula or Pascal Triangle ratios (2:1 for 2 yrs, 3:3:1 for 3 yrs).",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "CI on 1000 at 10% for 2 yrs?",
+                    "solution": "Step 1: 10% of 1000 = 100 (1st yr).\nStep 2: 2nd yr = 10% of 1100 = 110.\nStep 3: Total CI = 100+110 = 210."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Diff between CI and SI for 2 yrs = P(R/100)^2.",
+        "Rule of 72: Doubling time approx = 72/Rate."
+    ],
+    "commonMistakes": [
+        "Calculating CI directly from formula (Formula gives Amount, not Interest). Subtract P!",
+        "Mixing half-yearly and quarterly rates. (For half-yearly: Rate/2, Time*2)."
+    ],
+    "placementTips": [
+        "Learn squares up to 30 for CI calculations.",
+        "Difference between SI and CI questions are frequent."
+    ]
+}

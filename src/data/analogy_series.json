@@ -1,0 +1,44 @@
+{
+    "topic": "Analogy & Series",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Number Series",
+            "concept": "Find pattern in sequence.",
+            "formula": "Diff, Double Diff, Square/Cube, Mult + Add.",
+            "solvingTechnique": "Check differences first. If growing fast, check multiplication.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "2, 4, 8, 16, ?",
+                    "solution": "Step 1: x2 pattern.\nStep 2: 32."
+                }
+            ]
+        },
+        {
+            "questionType": "Letter Series",
+            "concept": "Alphabet patterns.",
+            "formula": "Positions shift.",
+            "solvingTechnique": "Convert to numbers.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A, C, E, G, ?",
+                    "solution": "Step 1: +2 pattern.\nStep 2: I."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Look for Prime Numbers series (2, 3, 5, 7, 11...).",
+        "x^2 + 1 and x^3 - 1 patterns are common."
+    ],
+    "commonMistakes": [
+        "Getting stuck on one logic. Move on if not found in 1 min.",
+        "Calculation errors in differences."
+    ],
+    "placementTips": [
+        "Learn squares (1-30) and cubes (1-15).",
+        "Write difference layers clearly."
+    ]
+}

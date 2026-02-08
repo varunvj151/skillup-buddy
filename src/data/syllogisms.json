@@ -1,0 +1,44 @@
+{
+    "topic": "Syllogisms",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Basic Venn",
+            "concept": "Deductive reasoning using Venn diagrams.",
+            "formula": "All A are B (A inside B). Some A are B (Intersection).",
+            "solvingTechnique": "Draw minimum overlap diagram.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "All Cats are Dogs. All Dogs are Birds. Cats are Birds?",
+                    "solution": "Step 1: Cats inside Dogs inside Birds.\nStep 2: Yes, Cats are inside Birds."
+                }
+            ]
+        },
+        {
+            "questionType": "Possibility",
+            "concept": "Can it happen?",
+            "formula": "If definite Conclusion is False, Possibility MIGHT be True.",
+            "solvingTechnique": "Try to draw a counter-diagram. If you can, possibility exists.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "Some A are B. No B is C. Can A be C?",
+                    "solution": "Step 1: A overlaps B. B separate from C.\nStep 2: Part of A could overlap C.\nStep 3: Yes, possible."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Restatement is NOT a valid conclusion.",
+        "Either-Or condition: Elements same, one +ve, one -ve, both invalid individually."
+    ],
+    "commonMistakes": [
+        "Thinking 'Some' means 'Some implies not All'. (Some includes All).",
+        "Using real world logic (Cats aren't Dogs!)."
+    ],
+    "placementTips": [
+        "Master the 'Only a few' concept (means Some AND Some Not).",
+        "Draw big clear diagrams."
+    ]
+}

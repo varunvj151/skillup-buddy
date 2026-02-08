@@ -1,0 +1,44 @@
+{
+    "topic": "Pipes & Cisterns",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Inlet and Outlet",
+            "concept": "Same as Time & Work but Outlet does negative work.",
+            "formula": "Net Rate = Sum of Inlets - Sum of Outlets",
+            "solvingTechnique": "Use positive sign for filling pipes and negative for emptying.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Pipe A fills in 10h. Pipe B empties in 5h. (Impossible, but assuming B is slower) Pipe A fill 10h, B fills 20h.",
+                    "solution": "Step 1: Both filling.\nStep 2: 1/10 + 1/20 = 3/20.\nStep 3: Time = 20/3 hours."
+                }
+            ]
+        },
+        {
+            "questionType": "Leak Problems",
+            "concept": "Leak acts as an outlet pipe.",
+            "formula": "Time to empty = Capacity / Leak Rate",
+            "solvingTechnique": "Treat leak as a pipe with negative efficiency.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Tank fills in 4h, but leak takes it 5h. Time for leak to empty full tank?",
+                    "solution": "Step 1: Fill Rate = 1/4. Net Rate = 1/5.\nStep 2: Leak = Fill - Net = 1/4 - 1/5 = 1/20.\nStep 3: Time = 20 hours."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If A fills in x & B empties in y (y>x), full tank empties in xy/(x-y)?? No fills in xy/(y-x).",
+        "Capacity = Rate * Time."
+    ],
+    "commonMistakes": [
+        "Confusing 'Time to fill with leak' vs 'Time for leak to empty'.",
+        "Forgetting negative sign for outlets."
+    ],
+    "placementTips": [
+        "Pipes & Cisterns is just Time & Work with negative numbers.",
+        "Always check if the tank is being filled or emptied in the question."
+    ]
+}

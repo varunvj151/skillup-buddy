@@ -1,0 +1,57 @@
+{
+    "topic": "Time & Work",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Individual Work",
+            "concept": "Work is inversely proportional to Time. If A takes n days, A's 1 day work is 1/n.",
+            "formula": "Total Work = LCM of days taken by individuals.",
+            "solvingTechnique": "LCM Method: Assume Total Work = LCM(Time A, Time B). Calculate efficiency (units/day) for each person.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A does work in 10 days, B in 15 days. Together?",
+                    "solution": "Step 1: LCM(10, 15) = 30 units (Total Work).\nStep 2: A's rate = 30/10 = 3 u/day. B's rate = 30/15 = 2 u/day.\nStep 3: Combined rate = 5 u/day.\nStep 4: Time = 30/5 = 6 days."
+                }
+            ]
+        },
+        {
+            "questionType": "Work & Wages",
+            "concept": "Wages are distributed in proportion to WORK DONE, not time spent (unless efficiencies are same).",
+            "formula": "Ratio of Wages = Ratio of Work Done = Ratio of Efficiencies",
+            "solvingTechnique": "Find the ratio of work units completed by each person to divide money.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "A can do work in 10 days, B in 20 days. They work together and get $300. Share of A?",
+                    "solution": "Step 1: Ratio of times = 10:20 = 1:2.\nStep 2: Ratio of Efficiency = 2:1.\nStep 3: A's share = (2/3) * 300 = $200."
+                }
+            ]
+        },
+        {
+            "questionType": "Pipes & Cisterns",
+            "concept": "Inlet fills (+), Outlet empties (-). Same rules as Time & Work.",
+            "formula": "Net Rate = Inlet Rate - Outlet Rate",
+            "solvingTechnique": "Assign negative sign to emptying pipes.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "Pipe A fills in 10h, B empties in 20h. Steps to full if both open?",
+                    "solution": "Step 1: Total Capacity = LCM(10, 20) = 20 liters.\nStep 2: A = +2 L/h, B = -1 L/h.\nStep 3: Net = 1 L/h.\nStep 4: Time = 20/1 = 20 hours."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If A is n times as good as B, A takes 1/n of the time B takes.",
+        "If A and B do work in x and y days, together = (xy)/(x+y)."
+    ],
+    "commonMistakes": [
+        "Adding days directly (10 days + 15 days != 25 days). Always add RATES.",
+        "Forgetting to subtract rate for outlet pipes (Pipes & Cisterns)."
+    ],
+    "placementTips": [
+        "Use LCM method for almost all Time & Work questions to avoid messy fractions.",
+        "Checking efficiency ratio helps in logical guessing."
+    ]
+}

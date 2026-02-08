@@ -1,0 +1,44 @@
+{
+    "topic": "Coding & Decoding",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Letter Coding",
+            "concept": "Replacing letters with others based on a pattern.",
+            "formula": "Shift (+1, -1), Reverse, Direct Map.",
+            "solvingTechnique": "Write A-M and N-Z below it. Check positions.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "If CAT = DBU, DOG = ?",
+                    "solution": "Step 1: C->D (+1), A->B (+1), T->U (+1).\nStep 2: D->E, O->P, G->H.\nStep 3: EPH."
+                }
+            ]
+        },
+        {
+            "questionType": "Number Coding",
+            "concept": "Mapping letters to numbers.",
+            "formula": "A=1, B=2... Z=26.",
+            "solvingTechnique": "Sum of positions. Sum * Count. Opposite positions.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "CAT = 24. DOG = ?",
+                    "solution": "Step 1: C(3)+A(1)+T(20) = 24.\nStep 2: D(4)+O(15)+G(7) = 26."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Memorize EJOTY (5, 10, 15, 20, 25).",
+        "Opposite Pairs: AZ, BY, CX, DW... (A-Z to M-N)."
+    ],
+    "commonMistakes": [
+        "Miscounting position shifts (e.g., confusing +2 with +3).",
+        "Not checking the full pattern (sometimes it changes halfway)."
+    ],
+    "placementTips": [
+        "Write the alphabet sheet before the exam starts.",
+        "Look for 'Vowel/Consonant' logic if simple shift fails."
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "topic": "Seating Arrangement",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Linear Arrangement",
+            "concept": "Row seating. North vs South facing.",
+            "formula": "Left/Right changes based on facing direction.",
+            "solvingTechnique": "Fix definite positions first.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "5 people facing North. A at left end. B right to A.",
+                    "solution": "Step 1: A _ _ _ _\nStep 2: A B _ _ _."
+                }
+            ]
+        },
+        {
+            "questionType": "Circular Arrangement",
+            "concept": "Facing center vs Facing outside.",
+            "formula": "Center: Left is CW, Right is ACW.",
+            "solvingTechnique": "Draw circle, mark Left/Right arrows.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "4 people at round table. A opposite B. C left of A.",
+                    "solution": "Step 1: Draw circle.\nStep 2: Place A bottom. B Top.\nStep 3: Left of A is right side. C is there."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Start with the person whose position is most defined.",
+        "If facing South, Left becomes Right."
+    ],
+    "commonMistakes": [
+        "Confusing Left/Right in circular arrangement.",
+        "Not creating multiple cases (possibilities) for ambiguous clues."
+    ],
+    "placementTips": [
+        "Practice implies specific direction (North) if not stated.",
+        "Circular arrangement is very high value (5 questions set)."
+    ]
+}

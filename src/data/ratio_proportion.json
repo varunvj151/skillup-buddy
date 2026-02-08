@@ -1,0 +1,44 @@
+{
+    "topic": "Ratio & Proportion",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Basic Ratios",
+            "concept": "Comparison of two quantities by division.",
+            "formula": "a:b = a/b",
+            "solvingTechnique": "Use the 'k' method. If a:b = 2:3, let quantities be 2k and 3k.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Divide $500 in ratio 2:3.",
+                    "solution": "Step 1: Total parts = 2+3=5.\nStep 2: 1 part = 500/5 = 100.\nStep 3: A = 200, B = 300."
+                }
+            ]
+        },
+        {
+            "questionType": "Proportion",
+            "concept": "Equality of two ratios.",
+            "formula": "a:b :: c:d => ad = bc (Product of extremes = Product of means)",
+            "solvingTechnique": "If a, b, c are in proportion, b^2 = ac.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Find fourth proportional to 4, 9, 12.",
+                    "solution": "Step 1: 4:9 :: 12:x.\nStep 2: 4x = 9*12.\nStep 3: x = (9*12)/4 = 27."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If A:B = x:y and B:C = m:n, then A:B:C = xm : ym : yn.",
+        "Compounding ratio: Multiply numerators and denominators."
+    ],
+    "commonMistakes": [
+        "Order matters! 2:3 is not same as 3:2.",
+        "Trying to add parts directly without checking total."
+    ],
+    "placementTips": [
+        "Ratios are the foundation for Ages, Partnerships, and Mixture problems.",
+        "Practice finding combined ratios (A:B:C) quickly."
+    ]
+}

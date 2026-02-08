@@ -1,0 +1,44 @@
+{
+    "topic": "Probability",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Coins & Dice",
+            "concept": "Probability = Favorable Outcomes / Total Outcomes.",
+            "formula": "P(E) = n(E) / n(S)",
+            "solvingTechnique": "n Coins: 2^n outcomes. n Dice: 6^n outcomes.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Two coins tossed. Prob of getting at least one head?",
+                    "solution": "Step 1: Total = {HH, HT, TH, TT} = 4.\nStep 2: Favorable = {HH, HT, TH} = 3.\nStep 3: Prob = 3/4."
+                }
+            ]
+        },
+        {
+            "questionType": "Balls & Cards",
+            "concept": "Drawing without replacement reduces total count.",
+            "formula": "To choose r items from n: nCr.",
+            "solvingTechnique": "AND means Multiply, OR means Add.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Bag has 3 Red, 4 Blue balls. 2 drawn. Prob both Blue?",
+                    "solution": "Step 1: Total balls = 7. Choose 2 = 7C2 = 21.\nStep 2: Favorable = 4C2 = 6.\nStep 3: Prob = 6/21 = 2/7."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "P(A) + P(not A) = 1.",
+        "At least one = 1 - None."
+    ],
+    "commonMistakes": [
+        "Confusing AND (multiply) with OR (add).",
+        "Forgetting that 52 cards include 4 suits of 13 each."
+    ],
+    "placementTips": [
+        "At least one head/tail questions are very common.",
+        "Learn 52 card distribution by heart."
+    ]
+}

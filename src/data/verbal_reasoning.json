@@ -1,0 +1,44 @@
+{
+    "topic": "Verbal Reasoning",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Analogy",
+            "concept": "Relation between first pair applies to second pair.",
+            "formula": "A : B :: C : D",
+            "solvingTechnique": "Identify relation type: Synonym, Antonym, Part-Whole, Tool-Worker.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Newspaper : Press :: Cloth : ?",
+                    "solution": "Step 1: Newspaper is made in Press.\nStep 2: Cloth is made in Mill."
+                }
+            ]
+        },
+        {
+            "questionType": "Classification",
+            "concept": "Find the odd one out.",
+            "formula": "3 items share a property, 1 does not.",
+            "solvingTechnique": "Look for category mismatch (Fruit vs Veg, Prime vs Composite).",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Odd one: Ear, Eye, Nose, Kidney.",
+                    "solution": "Step 1: Ear, Eye, Nose are external.\nStep 2: Kidney is internal."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Eliminate options that are definitely related.",
+        "For word problems, vocabulary is key."
+    ],
+    "commonMistakes": [
+        "Overthinking partial relationships.",
+        "Ignoring secondary meanings of words."
+    ],
+    "placementTips": [
+        "Improve vocabulary for better verbal reasoning score.",
+        "Don't spend too much time if you don't know the word."
+    ]
+}

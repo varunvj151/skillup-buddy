@@ -1,0 +1,31 @@
+{
+    "topic": "Data Sufficiency",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Math/Logic based",
+            "concept": "Is info enough to answer?",
+            "formula": "Check S1 alone. Check S2 alone. Check Both.",
+            "solvingTechnique": "Don't find the answer. Just check distinguishability/uniqueness.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "What is x? I. x > 5. II. x < 7. x is integer.",
+                    "solution": "Step 1: I implies x=6,7... Not unique.\nStep 2: II implies x=...,5,6. Not unique.\nStep 3: Combined: x=6. Unique.\nStep 4: Both required."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If Statement 1 is a subset of Statement 2, answer is usually 'S2 alone' or 'Neither'.",
+        "Watch for 'Is x even?'. Yes/No both are valid answers."
+    ],
+    "commonMistakes": [
+        "Trying to calculate the exact value when knowing it's possible is enough.",
+        "Assuming info from S1 while checking S2 (Must check independently first!)."
+    ],
+    "placementTips": [
+        "Data Sufficiency is tricky. Go slow.",
+        "Double check 'Neither' case."
+    ]
+}

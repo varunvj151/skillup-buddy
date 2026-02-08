@@ -1,0 +1,57 @@
+{
+    "topic": "Time, Speed & Distance",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Basic TSD",
+            "concept": "Relationship between Speed, Distance, and Time.",
+            "formula": "D = S * T | S = D / T",
+            "solvingTechnique": "Be careful with units. Km/hr to m/s -> Multiply by 5/18.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Train covers 20m in 2 sec. Speed in km/hr?",
+                    "solution": "Step 1: Speed = 20/2 = 10 m/s.\nStep 2: Convert: 10 * (18/5).\nStep 3: = 36 km/hr."
+                }
+            ]
+        },
+        {
+            "questionType": "Relative Speed",
+            "concept": "Two objects moving relative to each other.",
+            "formula": "Opposite Direction: S = S1 + S2 | Same Direction: S = S1 - S2",
+            "solvingTechnique": "Imagine yourself freezing one object and giving its speed to the other.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Two trains 100m each moving opposite at 50kmph and 40kmph. Cross time?",
+                    "solution": "Step 1: Relative Speed = 50+40 = 90 kmph = 25 m/s.\nStep 2: Total D = 100+100 = 200m.\nStep 3: Time = 200/25 = 8 sec."
+                }
+            ]
+        },
+        {
+            "questionType": "Boats & Streams",
+            "concept": "Downstream (with flow), Upstream (against flow).",
+            "formula": "Down = B + S | Up = B - S",
+            "solvingTechnique": "Boat Speed (B) = (Down + Up)/2. Stream Speed (S) = (Down - Up)/2.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "Boat goes 12km downstream in 2h, upstream in 3h. Find stream speed.",
+                    "solution": "Step 1: Down Speed = 12/2 = 6 kmph.\nStep 2: Up Speed = 12/3 = 4 kmph.\nStep 3: Stream = (6-4)/2 = 1 kmph."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Distance Constant -> Speed ratio a:b -> Time ratio b:a.",
+        "Late/Early Concept: D = (S1*S2)/(S1-S2) * TimeDiff."
+    ],
+    "commonMistakes": [
+        "Not converting minutes to hours when speed is in km/hr.",
+        "Adding speeds in same direction (Relative speed should be subtracted)."
+    ],
+    "placementTips": [
+        "Trains problems are guaranteed. Master the 'Relative Speed' concept.",
+        "Draw diagrams for relative motion questions."
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "topic": "Logical Reasoning",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Statement & Assumption",
+            "concept": "Validating the underlying assumption of a statement.",
+            "formula": "Assumption is implicit. It must link premise and conclusion.",
+            "solvingTechnique": "Use the 'Unless' test. Is the statement possible without the assumption?",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Statement: 'Buy pure milk from us.' Assumption: Pure milk is desirable.",
+                    "solution": "Step 1: If pure milk wasn't desirable, the ad makes no sense.\nStep 2: Valid."
+                }
+            ]
+        },
+        {
+            "questionType": "Statement & Conclusion",
+            "concept": "Drawing definite conclusions from given facts.",
+            "formula": "Conclusion must NOT introduce new info.",
+            "solvingTechnique": "Stick strictly to the statement. Avoid external knowledge.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "All players are fit. Ram is a player.",
+                    "solution": "Step 1: Ram is a player -> Ram is fit.\nStep 2: Conclusion: Ram is fit. Valid."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Words like 'All', 'Always', 'Only' usually indicate invalid assumptions (too extreme).",
+        "Assumptions are always positive/supportive of the statement."
+    ],
+    "commonMistakes": [
+        "Using real-world knowledge instead of given statements.",
+        "Confusing Assumption (Implicit) with Conclusion (Derivable)."
+    ],
+    "placementTips": [
+        "Read carefully. One word changes the meaning.",
+        "Practice 50 questions to get the 'intuition'."
+    ]
+}

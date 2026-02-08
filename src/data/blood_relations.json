@@ -1,0 +1,44 @@
+{
+    "topic": "Blood Relations",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Family Tree",
+            "concept": "Mapping relationships across generations.",
+            "formula": "Male (+), Female (-), Sibling (=), Spouse (<->).",
+            "solvingTechnique": "Draw generation gap vertically.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A is B's brother. C is A's father. D is C's sister. B to D?",
+                    "solution": "Step 1: C is father of A & B.\nStep 2: D is aunt of A & B.\nStep 3: B is niece/nephew of D."
+                }
+            ]
+        },
+        {
+            "questionType": "Coded Relations",
+            "concept": "A+B means A is father of B.",
+            "formula": "Decode back to front or front to back.",
+            "solvingTechnique": "Substitute symbols with relations.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "P+Q means P is father of Q. P-Q means P is sister. A+B-C. A to C?",
+                    "solution": "Step 1: B is sister of C.\nStep 2: A is father of B.\nStep 3: A is father of C."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "My mother's husband = My father.",
+        "Only son of my grandfather's only child = Me (if male)."
+    ],
+    "commonMistakes": [
+        "Assuming gender based on name (don't assume 'Ram' is male unless specified).",
+        "Mixing 'Paternal' (father side) and 'Maternal' (mother side)."
+    ],
+    "placementTips": [
+        "Draw trees. Don't solve in head.",
+        "Start with 'My...' statements and work outwards."
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "topic": "Permutations & Combinations",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Arrangements (Permutation)",
+            "concept": "Order matters (e.g. Seating, Letters).",
+            "formula": "nPr = n! / (n-r)!",
+            "solvingTechnique": "If items distinct: n!. If repeated: n!/p!q!.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Arrangements of word 'APPLE'?",
+                    "solution": "Step 1: Total letters 5. P is repeated 2 times.\nStep 2: 5! / 2! = 120 / 2 = 60."
+                }
+            ]
+        },
+        {
+            "questionType": "Selection (Combination)",
+            "concept": "Order does NOT matter (e.g. Teams, Committees).",
+            "formula": "nCr = n! / (r! * (n-r)!)",
+            "solvingTechnique": "Committee of 3 from 5 men, 4 women.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Select 2 men from 5 men.",
+                    "solution": "Step 1: 5C2 = (5*4)/(2*1) = 10."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "nCr = nC(n-r).",
+        "Number of handshakes = nC2."
+    ],
+    "commonMistakes": [
+        "Confusing Permutation (Arrangement) with Combination (Selection).",
+        "Forgetting to divide by r! in Combinations."
+    ],
+    "placementTips": [
+        "Circular Permutations = (n-1)!",
+        "Committee formation rules (At least 1 woman) are frequent."
+    ]
+}

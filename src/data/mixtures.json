@@ -1,0 +1,44 @@
+{
+    "topic": "Mixtures & Allegations",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Basic Mixtures",
+            "concept": "Mixing ingredients of different prices/qualities.",
+            "formula": "(Cheaper Qty) / (Dearer Qty) = (D - Mean) / (Mean - C)",
+            "solvingTechnique": "Use the X diagram (Allegation cross).",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Tea at $60 mixed with Tea at $65 to get $62 mix. Ratio?",
+                    "solution": "Step 1: Mean = 62. C = 60. D = 65.\nStep 2: D-Mean = 3. Mean-C = 2.\nStep 3: Ratio 3:2."
+                }
+            ]
+        },
+        {
+            "questionType": "Replacement",
+            "concept": "Removing part of mixture and adding water.",
+            "formula": "Final Conc = Initial * (1 - x/Vol)^n",
+            "solvingTechnique": "Track the pure component (e.g., Milk) left.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "10L drawn from 100L milk, replaced by water. Done twice. Milk left?",
+                    "solution": "Step 1: Formula = 100 * (1 - 10/100)^2.\nStep 2: 100 * (0.9)^2 = 81L."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "The component that is NOT added/removed remains constant in absolute terms.",
+        "Allegation applies to average speed, average marks, etc."
+    ],
+    "commonMistakes": [
+        "Using SP in allegation when CP is needed (Mean must be CP).",
+        "Mixing ratios without equalizing volumes."
+    ],
+    "placementTips": [
+        "Master the Cross Method. It solves Profit/Loss and SI questions too!",
+        "Identify 'Weighted Average' problems instantly."
+    ]
+}

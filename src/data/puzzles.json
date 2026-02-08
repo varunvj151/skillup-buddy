@@ -1,0 +1,44 @@
+{
+    "topic": "Puzzles",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Scheduling",
+            "concept": "Arranging events by days/months.",
+            "formula": "Table with Days fixed column.",
+            "solvingTechnique": "Note hints like '2 days gap', 'immediately before'.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "A on Mon, B after A. C before D.",
+                    "solution": "Step 1: Mon-A. Tue-B.\nStep 2: Check other constraints."
+                }
+            ]
+        },
+        {
+            "questionType": "Floor Puzzle",
+            "concept": "People on different floors.",
+            "formula": "Ground floor is 1.",
+            "solvingTechnique": "Use two columns for Case 1 and Case 2.",
+            "examples": [
+                {
+                    "difficulty": "Hard",
+                    "question": "A lives on odd floor. B above A.",
+                    "solution": "Step 1: Try A=1, A=3.\nStep 2: Place B relative to A."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Start with definite information (e.g. 'A is on 4th floor').",
+        "Group related clues together (e.g. all clues about B)."
+    ],
+    "commonMistakes": [
+        "Reading 'gap of 2 floors' as '2nd floor above'. Gap 2 means 3rd floor above.",
+        "Not eliminating invalid cases quickly."
+    ],
+    "placementTips": [
+        "Leave puzzles for last if they look too long.",
+        "If you solve the puzzle, you get 5 marks easily."
+    ]
+}

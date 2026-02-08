@@ -1,0 +1,44 @@
+{
+    "topic": "Number System",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Divisibility Rules",
+            "concept": "Quick checks to see if a number is divisible.",
+            "formula": "Div by 3: Sum of digits. Div by 4: Last 2 digits.",
+            "solvingTechnique": "Memorize 2 to 11 rules. 11: Diff of sum of odd and even places is 0 or div by 11.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Is 12345 divisible by 3?",
+                    "solution": "Step 1: Sum = 1+2+3+4+5 = 15.\nStep 2: 15 is div by 3.\nStep 3: Yes."
+                }
+            ]
+        },
+        {
+            "questionType": "Unit Digit",
+            "concept": "Finding the last digit of a power.",
+            "formula": "Cyclicity of numbers (2,3,7,8 -> 4; 4,9 -> 2).",
+            "solvingTechnique": "Divide power by cyclicity (usually 4), take remainder.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Unit digit of 2^33?",
+                    "solution": "Step 1: 33 / 4 gives Remainder 1.\nStep 2: 2^1 = 2.\nStep 3: Answer 2."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "LCM of fractions = LCM(num) / HCF(den).",
+        "Product of two numbers = LCM * HCF."
+    ],
+    "commonMistakes": [
+        "Confusing Factors and Multiples.",
+        "Ignoring remainder 0 case in unit digit (If Rem=0, use power 4)."
+    ],
+    "placementTips": [
+        "Number System questions are often tricky but short.",
+        "Focus on Remainder Theorem and Unit Digit."
+    ]
+}

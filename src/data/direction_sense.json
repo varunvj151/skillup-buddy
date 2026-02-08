@@ -1,0 +1,44 @@
+{
+    "topic": "Direction Sense",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Movement",
+            "concept": "Moving N, S, E, W.",
+            "formula": "Draw cross. Up=N, Down=S, Right=E, Left=W.",
+            "solvingTechnique": "Trace path on paper. Use Pythagoras for diagonal distance.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Go North 3km, Turn Right, Go 4km. Distance from start?",
+                    "solution": "Step 1: Triangle base 4, height 3.\nStep 2: Hypotenuse = sqrt(3^2 + 4^2) = 5km."
+                }
+            ]
+        },
+        {
+            "questionType": "Shadows",
+            "concept": "Sun rises in East, sets in West.",
+            "formula": "Morning: Shadow West. Evening: Shadow East.",
+            "solvingTechnique": "If shadow is to Left/Right, person is facing North/South.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Morning sun. Ram's shadow to his left. Which way facing?",
+                    "solution": "Step 1: Sun East -> Shadow West.\nStep 2: Shadow is Left -> West is Left.\nStep 3: Facing North."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "3 Left turns = 1 Right turn.",
+        "Clockwise = Right. Anti-Clockwise = Left."
+    ],
+    "commonMistakes": [
+        "Confusing Left/Right when facing South (It reverses!).",
+        "Mixing up Sunrise/Sunset shadow directions."
+    ],
+    "placementTips": [
+        "Always draw a small compass (N-E-S-W) on paper.",
+        "Watch out for 'Total Distance' vs 'Shortest Distance' (displacement)."
+    ]
+}

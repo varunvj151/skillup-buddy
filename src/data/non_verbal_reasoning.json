@@ -1,0 +1,44 @@
+{
+    "topic": "Non-Verbal Reasoning",
+    "category": "Reasoning",
+    "sections": [
+        {
+            "questionType": "Series",
+            "concept": "Predict next image in sequence.",
+            "formula": "Look for rotation (CW/ACW), movement, or element addition.",
+            "solvingTechnique": "Track one element at a time.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Arrow rotates 90 deg clockwise each step. Up, Right, Down, ?",
+                    "solution": "Step 1: Next is Left."
+                }
+            ]
+        },
+        {
+            "questionType": "Mirror Images",
+            "concept": "Reflection across a line.",
+            "formula": "Left becomes Right. Top/Bottom unchanged.",
+            "solvingTechnique": "Check distinct features on left/right.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Mirror image of 'b'.",
+                    "solution": "Step 1: Vertical line stays.\nStep 2: Loop moves to left.\nStep 3: 'd'."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "Use elimination on options. Don't draw the answer.",
+        "Check orientation of asymmetric letters (F, R, G)."
+    ],
+    "commonMistakes": [
+        "Confusing Mirror Image (Left-Right) with Water Image (Top-Bottom).",
+        "Missing small details like dot position."
+    ],
+    "placementTips": [
+        "Visual spatial skills improve with practice.",
+        "Pay attention to rotation angles (45 vs 90)."
+    ]
+}

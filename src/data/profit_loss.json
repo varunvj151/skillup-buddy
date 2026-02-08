@@ -1,0 +1,67 @@
+{
+    "topic": "Profit & Loss",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Basic Profit & Loss",
+            "concept": "Profit is the financial gain when the Selling Price (SP) is higher than the Cost Price (CP). Loss is the financial loss when CP is higher than SP.",
+            "formula": "Profit = SP - CP | Loss = CP - SP | Profit % = (Profit/CP) * 100",
+            "solvingTechnique": "Everything revolves around the Cost Price (CP). Always calculate percentages on CP unless specified otherwise.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "A toy is bought for $500 and sold for $600. Find the profit percentage.",
+                    "solution": "Step 1: Profit = 600 - 500 = 100.\nStep 2: Percentage = (100/500) * 100.\nStep 3: = 20%."
+                },
+                {
+                    "difficulty": "Medium",
+                    "question": "By selling a watch for $1440, a man loses 10%. At what price should he sell it to gain 10%?",
+                    "solution": "Step 1: 90% of CP = 1440.\nStep 2: CP = 1440 / 0.9 = 1600.\nStep 3: New SP = 110% of 1600.\nStep 4: = 1.1 * 1600 = 1760."
+                }
+            ]
+        },
+        {
+            "questionType": "Discount & Marked Price",
+            "concept": "Marked Price (MP) is the price tag. Discount is calculated on MP.",
+            "formula": "SP = MP - Discount | Discount % = (Discount/MP) * 100",
+            "solvingTechnique": "Remember the chain: CP -> (+Markup) -> MP -> (-Discount) -> SP.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "MP is 1000, Discount is 10%. Find SP.",
+                    "solution": "Step 1: Discount = 10% of 1000 = 100.\nStep 2: SP = 1000 - 100 = 900."
+                },
+                {
+                    "difficulty": "Hard",
+                    "question": "A trader marks goods 20% above CP and allows 10% discount. Find gain %.",
+                    "solution": "Step 1: Let CP = 100. MP = 120.\nStep 2: Discount = 10% of 120 = 12.\nStep 3: SP = 120 - 12 = 108.\nStep 4: Gain = 108 - 100 = 8%."
+                }
+            ]
+        },
+        {
+            "questionType": "Dishonest Dealer",
+            "concept": "Dealers using false weights to cheat customers.",
+            "formula": "Gain % = (Error / (True Value - Error)) * 100",
+            "solvingTechnique": "Think in terms of goods saved. If he sells 900g instead of 1kg, he saves 100g on every 900g sold.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "A dealer sells goods at cost price but uses 900g weight strictly for a kg. Find his gain %.",
+                    "solution": "Step 1: Error = 1000g - 900g = 100g.\nStep 2: Cost basis for him is 900g.\nStep 3: Gain% = (100/900) * 100.\nStep 4: = 11.11%."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If CP of x items = SP of y items, Profit% = ((x-y)/y)*100.",
+        "Two items sold at same SP, one at x% profit, other at x% loss -> Always Loss of (x^2/100)%."
+    ],
+    "commonMistakes": [
+        "Calculating profit % on Selling Price instead of Cost Price.",
+        "Assuming Discount is calculated on Cost Price (It's always on Marked Price)."
+    ],
+    "placementTips": [
+        "Profit & Loss is the most common topic in banking and placement exams.",
+        "Master the MP -> SP -> CP chain."
+    ]
+}

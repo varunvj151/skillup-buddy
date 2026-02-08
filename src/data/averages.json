@@ -1,0 +1,44 @@
+{
+    "topic": "Averages",
+    "category": "Aptitude",
+    "sections": [
+        {
+            "questionType": "Simple Average",
+            "concept": "Central tendency of a group.",
+            "formula": "Avg = Sum of observations / Number of observations",
+            "solvingTechnique": "Think of average as 'equal distribution'. If everyone gives to make equal, that's the average.",
+            "examples": [
+                {
+                    "difficulty": "Easy",
+                    "question": "Avg of 10, 20, 30, 40, 50?",
+                    "solution": "Step 1: Sum = 150.\nStep 2: Count = 5.\nStep 3: Avg = 30."
+                }
+            ]
+        },
+        {
+            "questionType": "Weighted Average",
+            "concept": "When groups have different weights or counts.",
+            "formula": "Avg = (n1*a1 + n2*a2) / (n1+n2)",
+            "solvingTechnique": "Deviation method: Assume an average, calculate deviations, average the deviations and add to assumed.",
+            "examples": [
+                {
+                    "difficulty": "Medium",
+                    "question": "Class A (20 students) avg 50. Class B (30 students) avg 60. Combined avg?",
+                    "solution": "Step 1: Tot A = 20*50 = 1000. Tot B = 30*60 = 1800.\nStep 2: Total = 2800.\nStep 3: Total count = 50.\nStep 4: Avg = 2800/50 = 56."
+                }
+            ]
+        }
+    ],
+    "shortcuts": [
+        "If each number increases by x, Average increases by x.",
+        "If a person joins and avg increases, he brought MORE than the current avg."
+    ],
+    "commonMistakes": [
+        "Average Speed is NOT (S1+S2)/2.",
+        "Including the excluded member in count (n vs n-1)."
+    ],
+    "placementTips": [
+        "Use deviation method for large numbers.",
+        "Averages is key for Data Interpretation sets."
+    ]
+}
