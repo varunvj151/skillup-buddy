@@ -39,13 +39,19 @@ const createTopicFromJSON = (id: string, icon: string, data: any, description: s
         content: data.sections.map((s: any) =>
           `## ${s.questionType}\n\n**Concept:** ${s.concept}\n\n**Formula:** ${s.formula}\n\n**Technique:** ${s.solvingTechnique}`
         ).join("\n\n---\n\n"),
-        examples: data.sections.flatMap((s: any) =>
-          s.examples.map((ex: any) => ({
+        examples: data.examples
+          ? data.examples.map((ex: any) => ({
             problem: `${ex.difficulty}: ${ex.question}`,
             solution: ex.solution,
-            explanation: "See detailed solution steps above."
+            explanation: ex.explanation || "See detailed solution steps."
           }))
-        ),
+          : data.sections.flatMap((s: any) =>
+            (s.examples || []).map((ex: any) => ({
+              problem: `${ex.difficulty}: ${ex.question}`,
+              solution: ex.solution,
+              explanation: ex.explanation || "See detailed solution steps above."
+            }))
+          ),
         tips: [
           ...(data.shortcuts || []).map((s: string) => `Shortcut: ${s}`),
           ...(data.commonMistakes || []).map((m: string) => `Mistake: ${m}`),

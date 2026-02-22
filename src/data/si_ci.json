@@ -3,42 +3,214 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Simple Interest",
-            "concept": "Interest is calculated only on principal amount.",
-            "formula": "SI = (P * R * T) / 100",
-            "solvingTechnique": "SI is constant every year.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "SI on 5000 at 10% for 2 years?",
-                    "solution": "Step 1: SI = (5000 * 10 * 2) / 100.\nStep 2: = 1000."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Interest is the cost of borrowing money. Simple Interest (SI) is calculated only on the principal amount. Compound Interest (CI) is calculated on the principal plus the accumulated interest.",
+            "formula": "SI = (P × R × T) / 100\nA = P(1 + R/100)^T\nCI = A - P",
+            "solvingTechnique": "For CI, use the 'Successive Percentage' method or 'Ratio Method' to avoid calculating large powers."
         },
         {
-            "questionType": "Compound Interest",
-            "concept": "Interest on interest.",
-            "formula": "Total Amount = P(1 + R/100)^n",
-            "solvingTechnique": "Use Successive Percentage change formula or Pascal Triangle ratios (2:1 for 2 yrs, 3:3:1 for 3 yrs).",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "CI on 1000 at 10% for 2 yrs?",
-                    "solution": "Step 1: 10% of 1000 = 100 (1st yr).\nStep 2: 2nd yr = 10% of 1100 = 110.\nStep 3: Total CI = 100+110 = 210."
-                }
-            ]
+            "questionType": "Difference between SI & CI",
+            "concept": "For 1 year, SI = CI (if compounded annually). But for >1 year, CI > SI because interest earns interest.",
+            "formula": "Diff (2 years) = P(R/100)^2\nDiff (3 years) = P(R/100)^2 * (3 + R/100)",
+            "solvingTechnique": "Memorize the 2-year difference formula; it's a guaranteed question type."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find the Simple Interest on ₹5000 at 10% p.a. for 3 years.",
+            "solution": "Step 1: P=5000, R=10, T=3.\nStep 2: SI = (5000 * 10 * 3) / 100.\nStep 3: SI = 50 * 30 = ₹1500.",
+            "explanation": "Direct formula application."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: At what rate percent per annum will a sum of money double itself in 10 years at Simple Interest?",
+            "solution": "Step 1: Let P = 100. Amount = 200 (Double).\nStep 2: Interest = 200 - 100 = 100.\nStep 3: SI = PRT/100 => 100 = (100 * R * 10) / 100.\nStep 4: R = 10%.",
+            "explanation": "Interest = Principal means money doubled."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Calculate Amount on ₹2000 at 5% CI for 2 years.",
+            "solution": "Step 1: A = P(1 + R/100)^n.\nStep 2: A = 2000(1 + 5/100)^2 = 2000(21/20)^2.\nStep 3: A = 2000 * 441/400 = 5 * 441 = ₹2205.",
+            "explanation": "Standard CI Amount formula."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: The S.I. on a sum is 1/4th of the principal and number of years is equal to rate percent. Find Rate.",
+            "solution": "Step 1: SI = P/4. R = T.\nStep 2: P/4 = (P * R * R) / 100.\nStep 3: 1/4 = R^2 / 100 => R^2 = 25 => R = 5%.",
+            "explanation": "Substitute variables as given."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find CI on ₹10,000 for 1 year at 20% compounded half-yearly.",
+            "solution": "Step 1: Half-yearly: Rate becomes half (10%), Time becomes double (2 periods).\nStep 2: CI = 10000(1 + 10/100)^2 - 10000.\nStep 3: 10000(1.21) - 10000 = 12100 - 10000 = ₹2100.",
+            "explanation": "Remember standard half-yearly adjustments."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A sum amounts to ₹1200 in 2 years and ₹1300 in 3 years at SI. Find P.",
+            "solution": "Step 1: SI for 1 yr = 1300 - 1200 = 100.\nStep 2: SI for 2 yrs = 200.\nStep 3: P = Amount(2yr) - SI(2yr) = 1200 - 200 = ₹1000.",
+            "explanation": "SI is constant every year."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: In how many years will ₹1000 amount to ₹1331 at 10% CI?",
+            "solution": "Step 1: 1331 = 1000(1 + 10/100)^T.\nStep 2: 1331/1000 = (11/10)^T.\nStep 3: 1.331 = (1.1)^3.\nStep 4: T = 3 Years.",
+            "explanation": "Recognize cubes: 11^3 = 1331."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find the difference between SI and CI on ₹500 at 10% for 1 year compounded annually.",
+            "solution": "Step 1: For 1 year, compounded annually, SI = CI.\nStep 2: Difference = 0.",
+            "explanation": "Trick question. Diff exists only after 1st period."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: What principal will yield ₹120 as SI in 3 years at 4% p.a?",
+            "solution": "Step 1: 120 = (P * 4 * 3)/100.\nStep 2: 120 = 12P/100.\nStep 3: P = 12000/12 = ₹1000.",
+            "explanation": "Rearrange SI formula for P."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: If Rate is 5% and Principal is 2000, what is CI for 2nd year only?",
+            "solution": "Step 1: 1st Year Interest = 5% of 2000 = 100.\nStep 2: 2nd Year Principal = 2100.\nStep 3: 2nd Year Interest = 5% of 2100 = 105.",
+            "explanation": "Calculate year by year for specific year queries."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: The difference between CI and SI on a sum for 2 years at 10% is ₹20. Find sum.",
+            "solution": "Step 1: Formula: Diff = P(R/100)^2.\nStep 2: 20 = P(10/100)^2.\nStep 3: 20 = P(1/100).\nStep 4: P = 2000.",
+            "explanation": "Standard 2-year difference formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A sum amounts to ₹4840 in 2 years and ₹5324 in 3 years at CI. Find Rate.",
+            "solution": "Step 1: Interest for 3rd year = 5324 - 4840 = ₹484.\nStep 2: This interest is earned on Amount of 2nd year (4840).\nStep 3: Rate = (484 / 4840) * 100 = 10%.",
+            "explanation": "For consecutive years, treating previous amount as Principal gives Rate."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A sum of money placed at CI triples itself in 4 years. In how many years will it amount to 27 times itself?",
+            "solution": "Step 1: 3 times in 4 years.\nStep 2: 27 times = 3^3 times.\nStep 3: Time = 4 * 3 = 12 years.\nStep 4: Logic: 3^1 -> 4y, 3^3 -> 4*3y.",
+            "explanation": "Power Rule: If P->xP in t years, P->x^n P in n*t years."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: The simple interest on a sum of money is 4/9 of the principal. Find the rate percent and time, if both are numerically equal.",
+            "solution": "Step 1: SI = 4/9 P. R = T.\nStep 2: 4/9 P = (P * R * R)/100.\nStep 3: R^2 = 400/9 => R = 20/3 = 6.66%.",
+            "explanation": "SI = PRT/100 substitution."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: What annual payment will discharge a debt of ₹6450 due in 4 years at 5% simple interest?",
+            "solution": "Step 1: Let installment = x.\nStep 2: Amounts: x + (x + SI 1yr) + (x + SI 2yr) + (x + SI 3yr) = Debt.\nStep 3: 1st inst earns 3 yrs interest, last earns 0.\nStep 4: (x + 15%x) + (x + 10%x) + (x + 5%x) + x = 6450.\nStep 5: 4x + (30%x) = 6450 => 4.3x = 6450 => x = 1500.",
+            "explanation": "Installment logic is tricky. Money paid early earns interest."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A man invests ₹4000 at 5% p.a. CI for 1 year, payable half-yearly. How much more would he gain if compounded annually?",
+            "solution": "Step 1: Half-yearly: R=2.5%, T=2. A = 4000(1.025)^2 = 4202.5.\nStep 2: Annually: 5%, 1yr. A = 4000(1.05) = 4200.\nStep 3: Wait, Half yearly gives MORE. Question asks 'How much more would he gain'.\nStep 4: Gain in Half-Yearly = 2.5.\nStep 5: He gains 2.5 more in Half-Yearly.",
+            "explanation": "More compounding frequency -> More Interest."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Divide ₹6000 into two parts such that SI on first part for 2 years at 6% is equal to SI on second part for 3 years at 8%.",
+            "solution": "Step 1: Let parts be A and B.\nStep 2: (A*6*2)/100 = (B*8*3)/100.\nStep 3: 12A = 24B => A = 2B => A/B = 2/1.\nStep 4: Part A = 6000 * 2/3 = 4000. Part B = 2000.",
+            "explanation": "Equate the SI expressions."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Population of a town 2 years ago was 62,500. Due to migration it decreases continuously at 4% per annum. Present population?",
+            "solution": "Step 1: P = 62500(1 - 4/100)^2.\nStep 2: P = 62500 * (24/25)^2.\nStep 3: 62500 * 576/625 = 100 * 576 = 57,600.",
+            "explanation": "Depreciation formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A sum of money at simple interest doubles in 7 years. In how many years will it become 4 times?",
+            "solution": "Step 1: Double (2P) means Interest = P in 7 years.\nStep 2: 4 times (4P) means Interest = 3P.\nStep 3: P interest in 7 yrs -> 3P interest in 21 yrs.",
+            "explanation": "Unitary method on Interest Amount."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: The CI on ₹10000 at 20% pa for 9 months compounded quarterly is?",
+            "solution": "Step 1: Quarterly: R = 20/4 = 5%. T = 9mo/3mo = 3 periods.\nStep 2: A = 10000(1.05)^3 = 10000 * 1.157625.\nStep 3: A = 11576.25. CI = ₹1576.25.",
+            "explanation": "Adjust R and T for quarterly."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: The difference between CI and SI on a certain sum at 20% per annum for 3 years is ₹128. Find the sum.",
+            "solution": "Step 1: Diff(3yr) = P(R/100)^2 * (3 + R/100).\nStep 2: 128 = P(1/5)^2 * (3 + 1/5).\nStep 3: 128 = P(1/25) * (16/5).\nStep 4: 128 = 16P / 125.\nStep 5: P = (128 * 125) / 16 = 8 * 125 = 1000.",
+            "explanation": "3-year difference formula is essential for speed."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A man borrows ₹2550 to be paid back with compound interest at the rate of 4% per annum by the end of 2 years in two equal yearly installments. How much will each installment be?",
+            "solution": "Step 1: Let Inst = x. 4% = 1/25.\nStep 2: PV of Inst 1 + PV of Inst 2 = Loan.\nStep 3: x/(1.04) + x/(1.04)^2 = 2550.\nStep 4: x[ 25/26 + 625/676 ] = 2550.\nStep 5: x [ (650 + 625)/676 ] = 2550.\nStep 6: x [ 1275/676 ] = 2550 => x = 2550 * 676 / 1275.\nStep 7: x = 2 * 676 = 1352.",
+            "explanation": "Loan Installments use Present Value summation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Divide ₹3903 between A and B, so that A's share at the end of 7 years is equal to B's share at the end of 9 years, compound interest being at 4%.",
+            "solution": "Step 1: A(1.04)^7 = B(1.04)^9.\nStep 2: A/B = (1.04)^2 = (26/25)^2 = 676/625.\nStep 3: Ratio A:B = 676:625.\nStep 4: Total parts = 1301. Amount = 3903 (3 times 1301).\nStep 5: A = 676*3 = 2028. B = 625*3 = 1875.",
+            "explanation": "Equating Future Values gives the ratio of principals."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: If the simple interest on a sum of money for 2 years at 5% per annum is ₹50, what is the compound interest on the same sum at the same rate and for the same time?",
+            "solution": "Step 1: SI = 50. PRT/100 = 50 => P*5*2/100 = 50 => P = 500.\nStep 2: Apply CI formula on 500.\nStep 3: CI = 500(1.05)^2 - 500 = 500(1.1025) - 500 = 551.25 - 500 = 51.25.\nStep 4: Shortcut: CI = SI + Diff. Diff = SI * R/200 = 50 * 5/200 = 1.25. Total = 51.25.",
+            "explanation": "Relationship between SI and CI for 2 years."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Mr. X invested 1/7 of his total investment at 4%, 1/2 at 5% and the rest at 6% for one year. He receives a total interest of ₹730. Total investment?",
+            "solution": "Step 1: Let Total = P.\nStep 2: (P/7 * 4%) + (P/2 * 5%) + (Rem * 6%) = 730.\nStep 3: Rem fraction = 1 - 1/7 - 1/2 = (14-2-7)/14 = 5/14.\nStep 4: P/100 [ 4/7 + 5/2 + 30/14 ] = 730.\nStep 5: P/100 [ 8/14 + 35/14 + 30/14 ] = 730.\nStep 6: P/100 [ 73/14 ] = 730 => P/1400 = 10 => P = 14000.",
+            "explanation": "Weighted Interest rate concept."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Rate of interest for 1st 3 years is 6%, for next 4 years is 7% and for period beyond 7 years is 7.5%. A man invests ₹18800 for 11 years, find SI.",
+            "solution": "Step 1: Total Rate % = (6*3) + (7*4) + (7.5 * (11-7)).\nStep 2: Total Rate % = 18 + 28 + (7.5 * 4) = 18 + 28 + 30 = 76%.\nStep 3: SI = 76% of 18800.\nStep 4: 188 * 76 = 14288.",
+            "explanation": "Effective R% accumulation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A sum of money becomes ₹13380 after 3 years and ₹20070 after 6 years on compound interest. Find the sum.",
+            "solution": "Step 1: A3 = P(R)^3 = 13380. A6 = P(R)^6 = 20070 (Let R factor = 1+r/100).\nStep 2: A6/A3 = R^3 = 20070/13380 = 3/2 = 1.5.\nStep 3: P(1.5) = 13380 => P = 13380 / 1.5 = 8920.",
+            "explanation": "A_2n / A_n = R^n."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: The effective annual rate of interest corresponding to a nominal rate of 6% per annum payable half-yearly is?",
+            "solution": "Step 1: Rate 3% per 6 months. Successive: 3 + 3 + (9/100).\nStep 2: 6.09%.\nStep 3: Effective Rate is slightly higher than Nominal due to compounding.",
+            "explanation": "Effective Annual Rate (EAR) formula."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two equal sums were lent out at 7% and 5% S.I. respectively. The interest earned on the two loans add up to ₹960 for 4 years. Find the total sum lent.",
+            "solution": "Step 1: Total Sum = 2P (Usually 'sum' means each P, 'Total sum' 2P).\nStep 2: SI1 + SI2 = 960.\nStep 3: P*7*4/100 + P*5*4/100 = 960.\nStep 4: P/100 (28 + 20) = 960 => 48P = 96000 => P = 2000.\nStep 5: Total sum lent = 2P = 4000.",
+            "explanation": "Read carefully if they ask for 'each sum' or 'total sum'."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A sum of ₹725 is lent in the beginning of a year at a certain rate of interest. After 8 months, a sum of ₹362.50 more is lent but at the rate twice the former. At the end of the year, ₹33.50 is earned as interest from both the loans. What was the original rate of interest?",
+            "solution": "Step 1: P1=725, T1=1, R1=r. SI1 = 7.25r.\nStep 2: P2=362.5, T2=4/12=1/3, R2=2r. SI2 = (362.5 * 2r * 1/3) / 100 = 2.416r.\nStep 3: Total = 7.25r + 2.416r = 9.66r = 33.50.\nStep 4: r = 3.46%. (Approx). Let's recheck math. 362.5 is half of 725. \nStep 5: SI2 = (725/2 * 2r * 1/3)/100 = 7.25r / 3. \nStep 6: Total = 7.25r + 7.25r/3 = 7.25r (4/3) = 33.5.\nStep 7: 7.25r = 25.125. r = 3.46%. Solution logic holds.",
+            "explanation": "Set up the equation Total SI = SI1 + SI2."
         }
     ],
     "shortcuts": [
-        "Diff between CI and SI for 2 yrs = P(R/100)^2.",
-        "Rule of 72: Doubling time approx = 72/Rate."
+        "Diff between SI & CI (2 yrs) = P(R/100)^2.",
+        "Diff between SI & CI (3 yrs) = P(R/100)^2 * (3 + R/100).",
+        "Rule of 72: Money doubles at R% CI in approx 72/R years.",
+        "SI is constant. CI ratio is constant."
     ],
     "commonMistakes": [
-        "Calculating CI directly from formula (Formula gives Amount, not Interest). Subtract P!",
-        "Mixing half-yearly and quarterly rates. (For half-yearly: Rate/2, Time*2)."
+        "Mistake: For half-yearly, forgetting to Halve Rate and Double Time.",
+        "Mistake: Calculating 'Amount' but marking 'Interest' as the answer.",
+        "Mistake: In Installments, assuming P / n. (Installments include interest component)."
     ],
     "placementTips": [
-        "Learn squares up to 30 for CI calculations.",
-        "Difference between SI and CI questions are frequent."
+        "If options are far apart, use SI to approximate CI.",
+        "Memorize powers of 1.05, 1.1, 1.2 (e.g., 1.1^2=1.21, 1.1^3=1.331).",
+        "Installment questions are the hardest; practice the formula P = x/(1+r) + x/(1+r)^2..."
     ]
 }

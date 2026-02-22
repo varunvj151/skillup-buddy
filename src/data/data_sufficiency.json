@@ -3,29 +3,206 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Math/Logic based",
-            "concept": "Is info enough to answer?",
-            "formula": "Check S1 alone. Check S2 alone. Check Both.",
-            "solvingTechnique": "Don't find the answer. Just check distinguishability/uniqueness.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "What is x? I. x > 5. II. x < 7. x is integer.",
-                    "solution": "Step 1: I implies x=6,7... Not unique.\nStep 2: II implies x=...,5,6. Not unique.\nStep 3: Combined: x=6. Unique.\nStep 4: Both required."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Determining if the given statements are sufficient to answer the question. You do not need to find the answer, only the sufficiency.",
+            "solvingTechnique": "Check Statement I alone. Check Statement II alone. If both fail, check Combined. Options: A (I alone), B (II alone), C (Either), D (Neither), E (Both)."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: What is value of x?\nI. x + 5 = 10\nII. x - y = 5",
+            "solution": "Step 1: I gives x=5 (Sufficient).\nStep 2: II needs y. (Insufficient).\nStep 3: Answer: I alone is sufficient.",
+            "explanation": "Single variable constraint."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Is x even?\nI. x is divisible by 4.\nII. x is divisible by 3.",
+            "solution": "Step 1: I -> x = 4k. Always Even. (Sufficient).\nStep 2: II -> x = 3, 6, 9... (Odd or Even). (Insufficient).\nStep 3: Answer: I alone.",
+            "explanation": "Property check."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find Area of rectangle.\nI. Length = 5.\nII. Breadth = 4.",
+            "solution": "Step 1: Need L and B.\nStep 2: I alone (No). II alone (No).\nStep 3: Combined L*B = 20. (Sufficient).\nStep 4: Answer: Both required.",
+            "explanation": "Formula sufficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Is A > B?\nI. A = 5.\nII. B = 3.",
+            "solution": "Step 1: Combined we know 5 > 3. Yes.\nStep 2: Individually insufficient.\nStep 3: Answer: Both required.",
+            "explanation": "Comparison."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Who is tallest among A, B, C?\nI. A > B.\nII. B > C.",
+            "solution": "Step 1: Combined A > B > C. A is tallest. (Sufficient).\nStep 2: Answer: Both required.",
+            "explanation": "Ordering."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find simple interest.\nI. Principal = 1000.\nII. Rate = 10%.",
+            "solution": "Step 1: Formula P*R*T/100.\nStep 2: Data has P, R. Missing T.\nStep 3: Even combined, T is unknown.\nStep 4: Answer: Data Inadequate (Neither).",
+            "explanation": "Missing variable."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Value of n?\nI. n is single digit positive integer.\nII. n > 8.",
+            "solution": "Step 1: I -> 1 to 9.\nStep 2: II -> 9, 10, ...\nStep 3: Combined -> n must be 9. (Sufficient).\nStep 4: Answer: Both.",
+            "explanation": "Intersection."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Code for 'SKY'?\nI. 'SKY IS BLUE' = 123.\nII. 'BLUE IS RED' = 234.",
+            "solution": "Step 1: Compare. 'IS BLUE' = '23'. SKY = 1.\nStep 2: Need both to eliminate common terms.\nStep 3: Answer: Both.",
+            "explanation": "Coding elimination."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Is x positive?\nI. x^2 = 9.\nII. x^3 = 27.",
+            "solution": "Step 1: I -> x = +3 or -3 (No unique ans).\nStep 2: II -> x = +3 (Unique ans).\nStep 3: Answer: II alone.",
+            "explanation": "Sign ambiguity."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Cost of 3 apples?\nI. Cost of 1 apple is 10.\nII. Cost of 2 apples is 20.",
+            "solution": "Step 1: I gives rate. (Sufficient).\nStep 2: II gives rate. (Sufficient).\nStep 3: Answer: Either I or II.",
+            "explanation": "Redundant info (Either)."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Is x a prime number?\nI. x is odd.\nII. x < 10.",
+            "solution": "Step 1: I -> 9 (No), 3 (Yes). Not Suff.\nStep 2: II -> 2, 4. Not Suff.\nStep 3: Combined: Odd and <10: 1, 3, 5, 7, 9. 1 is not prime. 9 not prime. 3,5,7 prime. Still mixed.\nStep 4: Answer: Neither.",
+            "explanation": "Check all cases."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Distance between A and B?\nI. Speed 50 kmph takes 4 hours.\nII. Speed 100 kmph takes 2 hours.",
+            "solution": "Step 1: I -> 50*4 = 200. (Suff).\nStep 2: II -> 100*2 = 200. (Suff).\nStep 3: Answer: Either I or II.",
+            "explanation": "Independent calculation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: How is M related to N?\nI. M is sister of P. P is brother of N.\nII. N is daughter of T.",
+            "solution": "Step 1: I -> M is sister of P (Male). P brother of N. M is sister of N? Yes. (Suff).\nStep 2: II -> No info on M. (Not Suff).\nStep 3: Answer: I alone.",
+            "explanation": "Relation chain."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Find two digit number.\nI. Sum of digits is 5.\nII. Difference of digits is 3.",
+            "solution": "Step 1: Sum 5: 14, 41, 23, 32, 50.\nStep 2: Diff 3: 14, 41.\nStep 3: Combined: 14 or 41. Not unique.\nStep 4: Answer: Neither.",
+            "explanation": "Uniqueness constraint."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Is A the mother of B?\nI. A is female.\nII. B is son of A.",
+            "solution": "Step 1: I Not Suff.\nStep 2: II -> B is son of A. A is Parent. A could be Father or Mother.\nStep 3: Combined: A is Female Parent -> Mother.\nStep 4: Answer: Both.",
+            "explanation": "Gender + Relation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Value of (a+b)^2?\nI. a - b = 5.\nII. ab = 2.",
+            "solution": "Step 1: (a+b)^2 = (a-b)^2 + 4ab.\nStep 2: Use I and II. 5^2 + 4(2) = 25+8=33.\nStep 3: Answer: Both.",
+            "explanation": "Identity."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: On which day did Ram go?\nI. After Tuesday before Friday.\nII. After Wednesday.",
+            "solution": "Step 1: I -> Wed, Thu.\nStep 2: II -> Thu, Fri, Sat...\nStep 3: Combined -> Thursday. (Unique).\nStep 4: Answer: Both.",
+            "explanation": "Date narrowing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Is x > y?\nI. x / y > 1.\nII. y is positive.",
+            "solution": "Step 1: I -> x>y (if y+) OR x<y (if y-). Ambiguous.\nStep 2: II clarifies y+. So Combined x > y.\nStep 3: Answer: Both.",
+            "explanation": "Inequality sign flip."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Volume of cylinder?\nI. Height = Radius.\nII. Height = 7.",
+            "solution": "Step 1: I -> V = pi h^3.\nStep 2: Combined -> V = pi 7^3. (Suff).\nStep 3: Answer: Both.",
+            "explanation": "Formula variables."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: How many sons does X have?\nI. X has 3 children.\nII. X has 2 daughters.",
+            "solution": "Step 1: Combined: 3 - 2 = 1 son. (Suff).\nStep 2: Answer: Both.",
+            "explanation": "Complement."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Three Statement DS: What is speed of train?\nI. Crosses pole in 10s.\nII. Length is 200m.\nIII. Crosses platform of 300m in 25s.",
+            "solution": "Step 1: I and II -> Speed = 200/10 = 20. (Suff).\nStep 2: II and III -> Speed = (200+300)/25 = 20. (Suff).\nStep 3: I and III? L/10 = (L+300)/25. Solve L. Then Speed. (Suff).\nStep 4: Answer: Any two of the three.",
+            "explanation": "Multiple paths."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Find x, y, z integers.\nI. x + y = 5.\nII. y + z = 7.\nIII. z + x = 12.",
+            "solution": "Step 1: 3 equations, 3 variables. Solvable.\nStep 2: All three required.\nStep 3: Answer: All three.",
+            "explanation": "Simultaneous equations."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Is P > Q?\nI. P^2 > Q^2.\nII. P > 0, Q < 0.",
+            "solution": "Step 1: I -> Not sufficient (e.g., (-5)^2 > 2^2, but -5 < 2).\nStep 2: II -> Positive always > Negative. P > Q. (Suff).\nStep 3: Answer: II alone.",
+            "explanation": "Number properties."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: In a circle of 5 people, who is Left of A?\nI. B is right of A.\nII. C is left of B.",
+            "solution": "Step 1: I -> B A (Right of A is B? No, B is right OF A. A <- B).\nStep 2: Left of A unknown.\nStep 3: Combined: A <- B <- C? Need positions of D, E. \nStep 4: Not sufficient. 5 people. Gaps unknown.\nStep 5: Answer: Neither.",
+            "explanation": "Incomplete arrangement."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Rate of interest?\nI. Diff between CI and SI for 2 years is 20.\nII. SI for 2 years is 200.",
+            "solution": "Step 1: Diff = P(R/100)^2 = 20.\nStep 2: SI = 2PR/100 = 200 -> PR/100 = 100.\nStep 3: Divide equations: (PR/100 * R/100) / (PR/100) = 20 / 100.\nStep 4: R/100 = 0.2 -> R=20%.\nStep 5: Answer: Both.",
+            "explanation": "CI SI Diff relation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Cost of tiling floor?\nI. Length 10m.\nII. Cost per sq m is 5.\nIII. Perimeter is 30m.",
+            "solution": "Step 1: Need Area * Rate.\nStep 2: I and III -> Perim=2(L+B). 30=2(10+B) -> B=5. Area=50. Area*II -> Cost.\nStep 3: Answer: All three.",
+            "explanation": "Geometry sufficiency."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Is integer N divisible by 7?\nI. N = 7k + 3.\nII. N + 4 is divisible by 7.",
+            "solution": "Step 1: I -> Remainder 3. Not div. (Sufficient to say NO).\nStep 2: II -> N+4=7m -> N = 7m-4. Remainder 3. Not div. (Sufficient to say NO).\nStep 3: Answer: Either.",
+            "explanation": "Definite NO is also sufficient."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Find P.\nI. Profit% = 20%.\nII. SP = 600.",
+            "solution": "Step 1: Both give CP. CP + Profit = SP? Questions asks P (Profit amount or Principle/CP?). Assume CP.\nStep 2: Answer: Both.",
+            "explanation": "P&L sufficiency."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: How is A related to B?\nI. A is brother of C.\nII. C is sister of B.",
+            "solution": "Step 1: A(Male)-C(Female)-B.\nStep 2: A is brother. B could be Brother/Sister.\nStep 3: A to B is Brother. (We know A's gender).\nStep 4: Answer: Both.",
+            "explanation": "Target gender known matters."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Avg age of class?\nI. Avg of Boys is 15.\nII. Avg of Girls is 12.\nIII. Ratio of B:G is 1:1.",
+            "solution": "Step 1: Need weighted average.\nStep 2: I, II, III -> (15*1 + 12*1)/2 = 13.5.\nStep 3: Answer: All three.",
+            "explanation": "Weighted Average."
         }
     ],
     "shortcuts": [
-        "If Statement 1 is a subset of Statement 2, answer is usually 'S2 alone' or 'Neither'.",
-        "Watch for 'Is x even?'. Yes/No both are valid answers."
+        "Sufficient means 'Can I answer Yes/No definitely?' or 'Can I find a unique value?'.",
+        "Divisibility Questions: 'No' is also an answer. Don't mark Insufficient.",
+        "Geometric Shapes: Need dimensions to fix area/volume. Ratio alone often not enough."
     ],
     "commonMistakes": [
-        "Trying to calculate the exact value when knowing it's possible is enough.",
-        "Assuming info from S1 while checking S2 (Must check independently first!)."
+        "Mistake: Solving the full problem. Stop as soon as you know it's solvable.",
+        "Mistake: Thinking 'x could be 5 or 6' is sufficient (Must be unique).",
+        "Mistake: Ignoring the constraint in the main question stem (e.g. 'x is positive')."
     ],
     "placementTips": [
-        "Data Sufficiency is tricky. Go slow.",
-        "Double check 'Neither' case."
+        "Check statements individually first (AD vs BCE method).",
+        "For Math DS, counting variables vs equations helps (n vars need n equations).",
+        "Watch out for quadratic equations giving two values (e.g. x^2=25)."
     ]
 }

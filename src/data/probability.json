@@ -3,42 +3,213 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Coins & Dice",
-            "concept": "Probability = Favorable Outcomes / Total Outcomes.",
-            "formula": "P(E) = n(E) / n(S)",
-            "solvingTechnique": "n Coins: 2^n outcomes. n Dice: 6^n outcomes.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Two coins tossed. Prob of getting at least one head?",
-                    "solution": "Step 1: Total = {HH, HT, TH, TT} = 4.\nStep 2: Favorable = {HH, HT, TH} = 3.\nStep 3: Prob = 3/4."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Probability is the measure of the likelihood that an event will occur.",
+            "formula": "P(E) = Number of Favorable Outcomes / Total Number of Outcomes",
+            "solvingTechnique": "Always count the Total Sample Space (S) first. For 'At least one', use 1 - P(None)."
         },
         {
-            "questionType": "Balls & Cards",
-            "concept": "Drawing without replacement reduces total count.",
-            "formula": "To choose r items from n: nCr.",
-            "solvingTechnique": "AND means Multiply, OR means Add.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Bag has 3 Red, 4 Blue balls. 2 drawn. Prob both Blue?",
-                    "solution": "Step 1: Total balls = 7. Choose 2 = 7C2 = 21.\nStep 2: Favorable = 4C2 = 6.\nStep 3: Prob = 6/21 = 2/7."
-                }
-            ]
+            "questionType": "Key Concepts",
+            "concept": "AND means Combine (Multiply). OR means Option (Add).",
+            "formula": "P(A U B) = P(A) + P(B) - P(A n B)",
+            "solvingTechnique": "For Coins: 2^n outcomes. For Dice: 6^n outcomes. Cards: 52 total (4 suits of 13)."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Tossing a coin. Probability of Head?",
+            "solution": "Step 1: Total = {H, T} = 2.\nStep 2: Favorable = {H} = 1.\nStep 3: P(H) = 1/2.",
+            "explanation": "Simplest case."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Throwing a die. Probability of getting 5?",
+            "solution": "Step 1: Total = {1,2,3,4,5,6} = 6.\nStep 2: Favorable = {5} = 1.\nStep 3: P(5) = 1/6.",
+            "explanation": "Single outcome."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Drawing a King from 52 cards.",
+            "solution": "Step 1: Total = 52.\nStep 2: Kings = 4 (One of each suit).\nStep 3: P(K) = 4/52 = 1/13.",
+            "explanation": "Standard deck knowledge."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Two dice thrown. Sum is 12.",
+            "solution": "Step 1: Total = 6*6 = 36.\nStep 2: Sum 12 only possible if {6,6}.\nStep 3: P(12) = 1/36.",
+            "explanation": "Only one pair gives sum 12."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Probability of picking a vowel from 'HELLO'.",
+            "solution": "Step 1: Total letters = 5.\nStep 2: Vowels = {E, O} = 2.\nStep 3: P(V) = 2/5.",
+            "explanation": "Count distinct selection."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Drawing a Red card.",
+            "solution": "Step 1: Total 52.\nStep 2: Red = Hearts + Diamonds = 13 + 13 = 26.\nStep 3: P(Red) = 26/52 = 1/2.",
+            "explanation": "Color split is half-half."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Probability that a leap year has 53 Sundays.",
+            "solution": "Step 1: 366 days = 52 weeks + 2 days.\nStep 2: Extra 2 days can be {Sun,Mon}, {Mon,Tue}... {Sat,Sun}.\nStep 3: 7 possibilities. 2 contain Sunday ({Sat,Sun}, {Sun,Mon}).\nStep 4: P = 2/7.",
+            "explanation": "Leap year remainder logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Tossing 3 coins. Probability of exactly 2 Heads.",
+            "solution": "Step 1: Total 2^3 = 8.\nStep 2: Fav: {HHT, HTH, THH}.\nStep 3: P = 3/8.",
+            "explanation": "List sample space."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Bag has 3 Red, 5 Blue. Draw Blue.",
+            "solution": "Step 1: Total = 8.\nStep 2: Blue = 5.\nStep 3: P(B) = 5/8.",
+            "explanation": "Direct selection."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Selecting a number multiple of 3 from 1 to 10.",
+            "solution": "Step 1: Total 10.\nStep 2: Multiples: {3, 6, 9}.\nStep 3: P = 3/10.",
+            "explanation": "Count manually."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: From a pack of 52, 2 cards drawn. Probability both Kings.",
+            "solution": "Step 1: Total ways = 52C2.\nStep 2: Fav ways = 4C2 (Select 2 from 4 Kings).\nStep 3: P = (4*3/2) / (52*51/2) = 6 / 1326 = 1/221.",
+            "explanation": "Composition of drawing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Two dice thrown. Sum is prime.",
+            "solution": "Step 1: Total 36.\nStep 2: Primes: 2, 3, 5, 7, 11.\nStep 3: Cases: 2(1,1), 3(1,2;2,1), 5(1,4;4,1;2,3;3,2), 7(1,6;6,1;2,5;5,2;3,4;4,3), 11(5,6;6,5).\nStep 4: Count: 1+2+4+6+2 = 15.\nStep 5: P = 15/36 = 5/12.",
+            "explanation": "Systematic counting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A speaks truth in 75%, B in 80%. Percentage they contradict each other?",
+            "solution": "Step 1: Contradict = (A true, B false) OR (A false, B true).\nStep 2: P(A) = 3/4, P(B) = 4/5.\nStep 3: (3/4 * 1/5) + (1/4 * 4/5).\nStep 4: 3/20 + 4/20 = 7/20.\nStep 5: 7/20 = 35%.",
+            "explanation": "Exclusive events."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Probability of getting 53 Fridays in a non-leap year.",
+            "solution": "Step 1: 365 = 52 weeks + 1 day.\nStep 2: Extra day can be any of 7.\nStep 3: Need Friday. 1 case.\nStep 4: P = 1/7.",
+            "explanation": "Non-leap year = 1 extra day."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Three coins tossed. At least 2 Heads.",
+            "solution": "Step 1: Total 8.\nStep 2: At least 2H = {HHT, HTH, THH, HHH}.\nStep 3: Count 4.\nStep 4: P = 4/8 = 1/2.",
+            "explanation": "Includes 2 and 3 Heads."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Bag: 6 White, 4 Black. 2 drawn. Probability same color.",
+            "solution": "Step 1: Total 10C2 = 45.\nStep 2: Same = (2 White) OR (2 Black).\nStep 3: 6C2 + 4C2 = 15 + 6 = 21.\nStep 4: P = 21/45 = 7/15.",
+            "explanation": "Add mutually exclusive cases."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Letters of 'SOCIETY' arranged. Probability vowels come together.",
+            "solution": "Step 1: Total = 7!.\nStep 2: Fav = (SOCTY) (OIE) -> treat vowels as 1. 5! * 3!.\nStep 3: P = (120*6) / 5040 = 720/5040 = 1/7.",
+            "explanation": "Permutation logic in Probability."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A card drawn. Either Heart or King?",
+            "solution": "Step 1: P(H) = 13/52. P(K) = 4/52.\nStep 2: P(H n K) = 1/52 (King of Hearts).\nStep 3: P(H U K) = 13+4-1 / 52 = 16/52 = 4/13.",
+            "explanation": "Set Theory Formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Odds in favor of event A are 2:3. Probability of A?",
+            "solution": "Step 1: Fav = 2. Unfav = 3. Total = 5.\nStep 2: P(A) = 2/5.",
+            "explanation": "Odds definition."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Tickets 1 to 20. Probability multiple of 3 or 5?",
+            "solution": "Step 1: M3 = {3,6,9,12,15,18} (6).\nStep 2: M5 = {5,10,15,20} (4).\nStep 3: Common = {15} (1).\nStep 4: P = (6+4-1)/20 = 9/20.",
+            "explanation": "Subtact intersection."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A bag contains 4 Red, 5 Green, 6 Blue balls. 3 balls drawn. Probability no Blue?",
+            "solution": "Step 1: Total = 15. Draw 3 = 15C3 = (15*14*13)/6 = 455.\nStep 2: No Blue means picked from (4R + 5G) = 9 balls.\nStep 3: Fav = 9C3 = (9*8*7)/6 = 84.\nStep 4: P = 84/455 = 12/65.",
+            "explanation": "Reduce the sample universe."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A speaks truth in 60% cases, B in 90% cases. In what % do they agree?",
+            "solution": "Step 1: P(A)=0.6, P(B)=0.9.\nStep 2: Agree = (Both True) OR (Both False).\nStep 3: (0.6*0.9) + (0.4*0.1).\nStep 4: 0.54 + 0.04 = 0.58 = 58%.",
+            "explanation": "Agreeing on a lie is still agreeing."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A problem is given to 3 students A, B, C. Chances of solving are 1/2, 1/3, 1/4. Probability problem is solved?",
+            "solution": "Step 1: Problem solved = At least one solves.\nStep 2: P(Solved) = 1 - P(None).\nStep 3: P(None) = (1-1/2)(1-1/3)(1-1/4) = 1/2 * 2/3 * 3/4 = 1/4.\nStep 4: P(Solved) = 1 - 1/4 = 3/4.",
+            "explanation": "Inverse probability is much faster."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: In a lottery, 10 prizes and 25 blanks. Probability of getting a prize?",
+            "solution": "Step 1: Total tickets = 35.\nStep 2: Fav = 10.\nStep 3: P = 10/35 = 2/7.",
+            "explanation": "Don't confuse Total with Blanks."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 4 letters, 4 envelopes. Probability exactly 1 letter in correct envelope?",
+            "solution": "Step 1: Total = 4! = 24.\nStep 2: Select 1 correct: 4C1 = 4 ways.\nStep 3: Other 3 must be deranged (D3 = 2).\nStep 4: Fav = 4 * 2 = 8.\nStep 5: P = 8/24 = 1/3.",
+            "explanation": "Derangement logic."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two dice thrown. A sum of 7 is thrown. Probability that one die shows 3?",
+            "solution": "Step 1: Conditional Probability: P(3 | Sum7).\nStep 2: Sample Space (Sum=7) = {(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)}. Total 6.\nStep 3: Fav cases with 3: {(3,4), (4,3)}. Total 2.\nStep 4: P = 2/6 = 1/3.",
+            "explanation": "Reduced Sample Space."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Box A: 2W 3R. Box B: 4W 5R. One ball transfer A->B, then one drawn from B. Probability White?",
+            "solution": "Step 1: Case 1: Transfer W (P=2/5). B becomes 5W 5R. Draw W (P=5/10). Joint = 2/5 * 1/2 = 1/5.\nStep 2: Case 2: Transfer R (P=3/5). B becomes 4W 6R. Draw W (P=4/10). Joint = 3/5 * 2/5 = 6/25.\nStep 3: Total = 1/5 + 6/25 = 5/25 + 6/25 = 11/25.",
+            "explanation": "Total Probability Theorem."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A number selected from 1 to 100. Prob it is a perfect square or cube?",
+            "solution": "Step 1: Squares: 1,4,9,16,25,36,49,64,81,100 (10).\nStep 2: Cubes: 1,8,27,64 (4).\nStep 3: Common: 1, 64 (2).\nStep 4: Fav = 10 + 4 - 2 = 12.\nStep 5: P = 12/100 = 3/25.",
+            "explanation": "Intersection check."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 5 men and 5 women seated round table. Probability men and women alternate?",
+            "solution": "Step 1: Total = (10-1)! = 9!.\nStep 2: Seat men first: (5-1)! = 24 ways.\nStep 3: 5 gaps. Seat women: 5! = 120.\nStep 4: Fav = 24 * 120.\nStep 5: P = (24 * 120) / 362880... Simplified: 4! 5! / 9!.\nStep 6: (24 * 120) / (362880) = 2880 / 362880 = 1/126.",
+            "explanation": "Circular permutation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Husband and wife interview for 2 posts. P(H)=1/7, P(W)=1/5. Prob only one selected?",
+            "solution": "Step 1: (H yes, W no) + (H no, W yes).\nStep 2: (1/7 * 4/5) + (6/7 * 1/5).\nStep 3: 4/35 + 6/35 = 10/35 = 2/7.",
+            "explanation": "Specific cases."
         }
     ],
     "shortcuts": [
-        "P(A) + P(not A) = 1.",
-        "At least one = 1 - None."
+        "At least one = 1 - None.",
+        "Probability of A or B = P(A) + P(B) - P(And).",
+        "Leap Year: 2/7 for day X. Non-Leap: 1/7."
     ],
     "commonMistakes": [
-        "Confusing AND (multiply) with OR (add).",
-        "Forgetting that 52 cards include 4 suits of 13 each."
+        "Mistake: Forgetting intersection P(A n B) in Union formula.",
+        "Mistake: In Coins, thinking HT and TH are same (They are distinct outcomes).",
+        "Mistake: Not reducing sample space in Conditional Probability."
     ],
     "placementTips": [
-        "At least one head/tail questions are very common.",
-        "Learn 52 card distribution by heart."
+        "Visualize cards (Hearts/Diamonds Red, Spades/Clubs Black).",
+        "Memoize 2^n values.",
+        "Assume replacement unless stated 'Without Replacement'."
     ]
 }

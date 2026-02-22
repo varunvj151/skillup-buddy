@@ -3,42 +3,211 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Series",
-            "concept": "Predict next image in sequence.",
-            "formula": "Look for rotation (CW/ACW), movement, or element addition.",
-            "solvingTechnique": "Track one element at a time.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Arrow rotates 90 deg clockwise each step. Up, Right, Down, ?",
-                    "solution": "Step 1: Next is Left."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Visual reasoning involving shapes, patterns, and spatial manipulation.",
+            "solvingTechnique": "Use Elimination Method. Check rotation (CW/ACW). Check element movement. Check shading changes."
         },
         {
-            "questionType": "Mirror Images",
-            "concept": "Reflection across a line.",
-            "formula": "Left becomes Right. Top/Bottom unchanged.",
-            "solvingTechnique": "Check distinct features on left/right.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Mirror image of 'b'.",
-                    "solution": "Step 1: Vertical line stays.\nStep 2: Loop moves to left.\nStep 3: 'd'."
-                }
-            ]
+            "questionType": "Types",
+            "concept": "Mirror Image (Left-Right flip), Water Image (Top-Bottom flip), Paper Folding, Series.",
+            "solvingTechnique": "For Mirror: Left becomes Right. Top stays Top. For Water: Top becomes Bottom. Left stays Left."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Mirror Image of 'B'.",
+            "solution": "Step 1: Vertical line stays left? No, mirrors to right.\nStep 2: Curve points Left.\nStep 3: Visual: \u042f.",
+            "explanation": "Lateral inversion."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Water Image of 'A'.",
+            "solution": "Step 1: Invert vertically.\nStep 2: Point Top becomes Bottom.\nStep 3: Visual: V shape with bar.",
+            "explanation": "Vertical inversion."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: Circle, Circle+Dot, Circle+2Dots. Next?",
+            "solution": "Step 1: Pattern +1 dot.\nStep 2: Circle+3Dots.",
+            "explanation": "Incremental addition."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Odd One Out: Square, Rectangle, Triangle, Circle.",
+            "solution": "Step 1: Sq, Rect, Tri are polygons (Lines).\nStep 2: Circle is curve.\nStep 3: Circle.",
+            "explanation": "Shape property."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Rotation: Arrow Up -> Arrow Right -> Arrow Down -> ?",
+            "solution": "Step 1: 90 deg CW rotation.\nStep 2: Next is Arrow Left.",
+            "explanation": "Rotation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Paper Fold: Square folded half. Hole punched in center. Unfolded?",
+            "solution": "Step 1: Unfold once (Mirror).\nStep 2: Hole becomes 2 holes symmetric.",
+            "explanation": "Symmetry."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Embedded Figures: Find 'L' shape in complex grid.",
+            "solution": "Step 1: Isolate 'L' components.\nStep 2: Trace visually.",
+            "explanation": "Visual trace."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Mirror Image of 'FUN'.",
+            "solution": "Step 1: Order reverses: N U F.\nStep 2: Each letter flips. N(rev) U F(rev).",
+            "explanation": "Word mirror."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Dotted line symmetry. Square divided diagonally.",
+            "solution": "Step 1: Fold along diagonal.\nStep 2: Check overlap.",
+            "explanation": "Folding."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Count triangles in a square with diagonals.",
+            "solution": "Step 1: 4 small triangles.\nStep 2: 4 large (half-square) triangles.\nStep 3: Total 8.",
+            "explanation": "Counting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Dice: 1 opposite 6. 2 opposite 5. 3 opposite 4. Standard Dice? Yes. If 1 on top, what on bottom?",
+            "solution": "Step 1: Standard dice sum 7.\nStep 2: 7-1 = 6.",
+            "explanation": "Dice rule."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Dice: Two positions shown. (1,2,3) and (1,3,5). Opp to 5?",
+            "solution": "Step 1: Common: 1, 3.\nStep 2: Remaining faces must be opposite.\nStep 3: 2 is opp 5.",
+            "explanation": "Two common face rule."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Cube Unfolded: 1,2,3,4 in row. 5 top, 6 bottom. Opp to 2?",
+            "solution": "Step 1: Alternate faces are opposite in row.\nStep 2: 1-3, 2-4.\nStep 3: Opp to 2 is 4.",
+            "explanation": "Net folding."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Mirror Image of clock 3:00.",
+            "solution": "Step 1: 3:00 -> Hour E, Min N.\nStep 2: Mirror -> Hour W, Min N.\nStep 3: Time 9:00.\nStep 4: Formula: 11:60 - Time.",
+            "explanation": "Clock mirror formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 1 line, 2 lines (L), 3 lines (C), 4 lines (Square)?",
+            "solution": "Step 1: Incremental sides.\nStep 2: Logic suggests polygon formation or letter stroke count.",
+            "explanation": "Stroke count."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Figure Matrix: Row 1: O, OO, OOO. Row 2: X, XX, XXX. Row 3: A, AA, ?",
+            "solution": "Step 1: Pattern is replication.\nStep 2: AAA.",
+            "explanation": "Matrix logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Count triangles in Star (Pentagram).",
+            "solution": "Step 1: 5 small points.\nStep 2: 5 large triangles (connecting points).\nStep 3: Total 10.",
+            "explanation": "Star counting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Odd One: H, I, O, X, A.",
+            "solution": "Step 1: Symmetry check. H (Both), I (Both), O (Both), X (Both).\nStep 2: A is only vertical symmetry (Horizontal fails).\nStep 3: A.",
+            "explanation": "Symmetry axes."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Paper fold: Circle folded 2 times (Quarter). Cut square at corner.",
+            "solution": "Step 1: Unfolding replicates cut 4 times.\nStep 2: Center will have 4 squares -> Large square hole.",
+            "explanation": "Radial replication."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Pattern Completion: Square. Top-Left shaded, Bottom-Right shaded. Top-Right?",
+            "solution": "Step 1: Checkerboard pattern.\nStep 2: Top-Right should be unshaded.",
+            "explanation": "Alternating pattern."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Counting Squares in 4x4 Grid.",
+            "solution": "Step 1: 1x1: 16.\nStep 2: 2x2: 9.\nStep 3: 3x3: 4.\nStep 4: 4x4: 1.\nStep 5: Total 30. (Sum of n^2).",
+            "explanation": "Grid formula."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Counting Rectangles in 4x4 Grid.",
+            "solution": "Step 1: Formula [n(n+1)/2]^2.\nStep 2: For 4: sum 10. 10^2 = 100.",
+            "explanation": "Rectangle formula."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: Rotation + Element Change. Fig 1(N, A), Fig 2(E, B), Fig 3(S, C). Fig 4?",
+            "solution": "Step 1: Rotation CW (N->E->S -> W).\nStep 2: Letter +1 (A->B->C -> D).\nStep 3: West, D.",
+            "explanation": "Dual series."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Dice: 3 positions. Find opp to 3.",
+            "solution": "Step 1: Compare pos 1 and 2. Rotate from common face.\nStep 2: List circular order.\nStep 3: Match pairs.",
+            "explanation": "Rotation method."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Odd One: Figures with lines intersecting. 3 figures intersect at 90 deg. 1 figure at 60 deg.",
+            "solution": "Step 1: Check angle of intersection.\nStep 2: Odd one is acute angle.",
+            "explanation": "Geometric property."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Complex Mirror: Image with clock hands and numbers. Mirror placed at 45 deg?",
+            "solution": "Step 1: Standard mirror is vertical.\nStep 2: 45 deg mirror acts like x=y reflection (Swap coordinates).\nStep 3: Tough spatial visualization.",
+            "explanation": "Angled mirror."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Cube Painting. 3x3x3 cube painted Red. Cut into 1x1x1. How many 2 faces painted?",
+            "solution": "Step 1: 2 faces = Edges (excluding corners).\nStep 2: 12 edges * (n-2).\nStep 3: 12 * (3-2) = 12.",
+            "explanation": "Cube formula."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Count triangles in complex median structure.",
+            "solution": "Step 1: Count basic components.\nStep 2: Combine 2 components.\nStep 3: Combine 3 components (Large).\nStep 4: Systematic enumeration.",
+            "explanation": "Systematic Counting."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: Dot moves 1 step, then 2 steps, then 3 steps CW.",
+            "solution": "Step 1: Track position index. 1 -> 2 -> 4 -> 7.\nStep 2: 7 + 4 = 11 (Map to polygon vertex).",
+            "explanation": "Variable step series."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Grouping of Figures. 9 figures. Group into 3 classes.",
+            "solution": "Step 1: Identify properties (Curved, Straight, Closed, Open).\nStep 2: Group (1,5,9 - Triangles), (2,4,7 - Circles).",
+            "explanation": "Classification."
         }
     ],
     "shortcuts": [
-        "Use elimination on options. Don't draw the answer.",
-        "Check orientation of asymmetric letters (F, R, G)."
+        "Mirror Image Time: 11:60 - Given Time.",
+        "Water Image Time: 17:90 (or 18:30) - Given Time.",
+        "Counting Squares: Sum of squares (1^2 + 2^2...)."
     ],
     "commonMistakes": [
-        "Confusing Mirror Image (Left-Right) with Water Image (Top-Bottom).",
-        "Missing small details like dot position."
+        "Mistake: Mirror Image: Creating an upside-down image (That is Water Image).",
+        "Mistake: Dice: Assuming 1 is always opp 6 (Only true for Standard Dice).",
+        "Mistake: Series: Focusing on only one element and ignoring the rotation of another."
     ],
     "placementTips": [
-        "Visual spatial skills improve with practice.",
-        "Pay attention to rotation angles (45 vs 90)."
+        "Use rough sheet! Draw the figure and flip the paper to see Mirror Image.",
+        "For Series, break it down: Track Arrow first, then Dot, then Shading.",
+        "Odd One Out is often about 'Number of Lines' or 'Direction of Rotation'."
     ]
 }

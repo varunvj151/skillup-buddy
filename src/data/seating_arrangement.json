@@ -3,42 +3,211 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Linear Arrangement",
-            "concept": "Row seating. North vs South facing.",
-            "formula": "Left/Right changes based on facing direction.",
-            "solvingTechnique": "Fix definite positions first.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "5 people facing North. A at left end. B right to A.",
-                    "solution": "Step 1: A _ _ _ _\nStep 2: A B _ _ _."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Arranging people/objects in specific geometric patterns based on constraints.",
+            "solvingTechnique": "Determine Left/Right based on facing direction. For Circle(In): Left is Clockwise. For Circle(Out): Left is Anti-CW."
         },
         {
-            "questionType": "Circular Arrangement",
-            "concept": "Facing center vs Facing outside.",
-            "formula": "Center: Left is CW, Right is ACW.",
-            "solvingTechnique": "Draw circle, mark Left/Right arrows.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "4 people at round table. A opposite B. C left of A.",
-                    "solution": "Step 1: Draw circle.\nStep 2: Place A bottom. B Top.\nStep 3: Left of A is right side. C is there."
-                }
-            ]
+            "questionType": "Types",
+            "concept": "Linear (North/South), Circular, Square Table, Parallel Rows.",
+            "solvingTechnique": "Fix one person first. Relative positions are easier to place."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Circle (Facing In): A left of B.",
+            "solution": "Step 1: Place B.\nStep 2: Left is CW. Place A next to B in CW direction.",
+            "explanation": "Direction rule."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Row (North): A is 3rd to left of B.",
+            "solution": "Step 1: A _ _ B.\nStep 2: Standard Left.",
+            "explanation": "Linear gap."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Square Table: A, B, C, D at corners facing center. A opp C. B opp D. A is right of B.",
+            "solution": "Step 1: Place B.\nStep 2: Right of B is A.\nStep 3: Opp A is C.\nStep 4: Opp B is D.",
+            "explanation": "Corner logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 5 friends Row South. A in middle. B right of A.",
+            "solution": "Step 1: South facing: Right is our Left.\nStep 2: _ _ A _ _.\nStep 3: Right of A is slot 2 (from left of page). _ B A _ _.",
+            "explanation": "South reversal."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Circle 6 people. A opp B. C opp D. E opp F.",
+            "solution": "Step 1: 3 pairs of opposites.\nStep 2: Symmetric.",
+            "explanation": "Pairing."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Linear: A next to B. C next to D. D not next to E. E on left end.",
+            "solution": "Step 1: E _ _ _ _.\nStep 2: D not next to E -> Slot 2 is NOT D.\nStep 3: C next to D.\nStep 4: A next to B.",
+            "explanation": "Constraint."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 7 people row. M at left end. N is neighbour of M.",
+            "solution": "Step 1: M N _ _ _ _ _.",
+            "explanation": "End fixing."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Circle: P is between Q and R.",
+            "solution": "Step 1: Q P R or R P Q.",
+            "explanation": "Between case."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Row: X is 4th to right of Y.",
+            "solution": "Step 1: Y _ _ _ X.",
+            "explanation": "Counting."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Hexagon Table: 6 people. A, B, C, D, E, F.",
+            "solution": "Step 1: Same as circle logic.",
+            "explanation": "Geometric similarity."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 8 people Circle Facing Center. A 4th right of B. C 2nd left of B.",
+            "solution": "Step 1: A 4th right of B (in 8 people) means Opposite.\nStep 2: B (Bottom). A (Top).\nStep 3: C 2nd left B -> Left is CW. B, gap, C.\nStep 4: Positions set.",
+            "explanation": "8 people opposition."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 5 people facing North. A is right of B. E is left of B but right of C. A is left of D.",
+            "solution": "Step 1: B A.\nStep 2: C E B.\nStep 3: A D.\nStep 4: C E B A D.",
+            "explanation": "Merge fragments."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 people Triangle Table. 3 Corner, 3 Side. A (Corner). B immed right A.",
+            "solution": "Step 1: Place A at Corner.\nStep 2: Right of A is Side. B is at Side.",
+            "explanation": "Shape properties."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 8 people Parallel Rows (4 each). P,Q,R,S (South). A,B,C,D (North). P faces B.",
+            "solution": "Step 1: P (Row 1) \u2193. B (Row 2) \u2191.\nStep 2: Aligned vertically.",
+            "explanation": "Facing pair."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: One row 7 people. A is 4th from left. B is left of A.",
+            "solution": "Step 1: _ _ _ A _ _ _.\nStep 2: B in 1,2, or 3.",
+            "explanation": "Slot narrowing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Circle 8 people. A not neighbour of B or C. D is neighbour of A.",
+            "solution": "Step 1: Place A. Spots 2, 8 are D and ? (cannot be B/C).\nStep 2: Spots 3, 7 cannot be B/C? No constraint on 3/7.\nStep 3: Use D to anchor.",
+            "explanation": "Negative constraint."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Square table 8 people. Corner (Out), Side (In). A at Corner.",
+            "solution": "Step 1: A faces Out. Left is Anti-CW.\nStep 2: Be careful with mixed directions.",
+            "explanation": "Mixed facing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 people row. A and F at ends. C next to A. D next to F.",
+            "solution": "Step 1: A C _ _ D F.\nStep 2: Rem B, E in center.",
+            "explanation": "End filling."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Circle 7 people. A, B, C... G. G is 2nd left of C. C is neighbour of F.",
+            "solution": "Step 1: C, gap, G.\nStep 2: F is nbr C -> F could be between C/G or other side.",
+            "explanation": "Case generation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Uncertain row: P 3rd from left. Q 5th from right. 4 between P and Q.",
+            "solution": "Step 1: Case 1: P _ _ _ _ Q. (Total 3+4+5=12).\nStep 2: Case 2: Overlap is possible? P is 3. Q is 5 from R. 4 between. \nStep 3: Overlap formula L+R-gap-2 => 3+5-4-2 = 2. \nStep 4: Possible.",
+            "explanation": "Check both possibilities."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 12 people, 2 parallel rows. Row 1 (A-F) South. Row 2 (P-U) North. E sits 3rd to right of B. B faces P. S sits 2nd to left of P.",
+            "solution": "Step 1: B (Row 1). Right is Left on Page. E _ _ B? No. B _ _ E.\nStep 2: B faces P. P is under B.\nStep 3: S 2nd left P -> S _ P.\nStep 4: Layout: \n R1: ? ? B ? ? E\n R2: S ? P ? ? ?",
+            "explanation": "Complex mapping."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 people Circle. Some In, Some Out. A sits 3rd right of B. B faces Out. C sits 2nd left A.",
+            "solution": "Step 1: Fix B (Out). Right is ACW. B _ _ A.\nStep 2: A's direction unknown. \nStep 3: If A In -> Left is CW. A, gap, C. \nStep 4: If A Out -> Left is ACW. A, gap, C (Overlap with B?).",
+            "explanation": "Direction ambiguity."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 9 people linear row North. A 4th from left. B 2nd right of A. C 3rd left of B. D neighbour of C.",
+            "solution": "Step 1: _ _ _ A _ B _ _ _. (A@4, B@6).\nStep 2: C 3rd left B -> 6-3=3. C@3.\nStep 3: D nbr C -> D@2 or D@4(A)? A is ocupied. D@2.",
+            "explanation": "Coordinate system."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Rectangular table. 4 on long side, 2 on short. 12 people.",
+            "solution": "Step 1: Draw diagram first.\nStep 2: Be aware of 'Opposite' meaning (Diagonal vs Direct).",
+            "explanation": "Diagram importance."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 friends A-H. A sits 3rd to left of G. Only 2 people between E and F. F sits 2nd to right of A. H is not neighbour of A or E.",
+            "solution": "Step 1: Assume Circle In.\nStep 2: G _ _ A.\nStep 3: A _ F (2nd Right).\nStep 4: E/F gap 2. F _ _ E.\nStep 5: Fill H based on elimination.",
+            "explanation": "Link linking."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 10 people circular. 5 men 5 women. No two women together. A (Man) between B(W) and C(W).",
+            "solution": "Step 1: Alternating pattern M W M W...\nStep 2: Fix A. B and C are neighbours.\nStep 3: Solve relative to A.",
+            "explanation": "Pattern constraint."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 people. A, B, C, D, E, F, G, H. Linear. Some North, Same South. A is North. B is South. Not more than 2 adjacent have same direction.",
+            "solution": "Step 1: N, N, S, S, N... pattern constraint.\nStep 2: Logic requires fitting constraints.",
+            "explanation": "Direction grouping."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Concentric squares. 4 people inner, 4 outer. Inner face out, Outer face in. Facing each other.",
+            "solution": "Step 1: Map Inner-Outer pairs.\nStep 2: Treat as single 8-person system with alignment.",
+            "explanation": "Coupled systems."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 7 people row. A, B... G. Just as many people to left of B as to right of G.",
+            "solution": "Step 1: B and G are symmetric positions (e.g. 1 and 7, 2 and 6).\nStep 2: Reduces possibilities.",
+            "explanation": "Symmetry condition."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 people circle. A is 2nd left of B. B is 3rd right of C. D is 2nd left C. E neighbour of A and D.",
+            "solution": "Step 1: C _ _ B (3rd Right).\nStep 2: B A _ (2nd Left of B? B is In? Assume In). B _ A.\nStep 3: D 2nd left C -> D _ C.\nStep 4: E nbr A, D. Check if space exists.",
+            "explanation": "Assume 'Face Center' if not specified."
         }
     ],
     "shortcuts": [
-        "Start with the person whose position is most defined.",
-        "If facing South, Left becomes Right."
+        "Circle with 8 people: Person opposite is 4 places away.",
+        "Row: 'A is 4th to right of B' -> 3 people between A and B.",
+        "Symmetry: 'Same number left of A as right of B' -> Positions sum to N+1."
     ],
     "commonMistakes": [
-        "Confusing Left/Right in circular arrangement.",
-        "Not creating multiple cases (possibilities) for ambiguous clues."
+        "Mistake: Mixing up Left/Right for South facing rows.",
+        "Mistake: In Circle (Out), treating Left as CW (It's ACW).",
+        "Mistake: Assuming 'Neighbour' means a specific side."
     ],
     "placementTips": [
-        "Practice implies specific direction (North) if not stated.",
-        "Circular arrangement is very high value (5 questions set)."
+        "Start with the condition that fixes a person's position definitely.",
+        "Draw the empty slots first (e.g., 8 dashes for linear).",
+        "Use initials (A, B) instead of full names to save time."
     ]
 }

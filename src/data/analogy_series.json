@@ -1,44 +1,213 @@
 {
-    "topic": "Analogy & Series",
+    "topic": "Series & Analogy",
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Number Series",
-            "concept": "Find pattern in sequence.",
-            "formula": "Diff, Double Diff, Square/Cube, Mult + Add.",
-            "solvingTechnique": "Check differences first. If growing fast, check multiplication.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "2, 4, 8, 16, ?",
-                    "solution": "Step 1: x2 pattern.\nStep 2: 32."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Series: Finding the missing or wrong term in a sequence. Analogy: Finding a pair that shares the same relationship.",
+            "solvingTechnique": "Series: Check Differences (1st layer, 2nd layer). Check Squares/Cubes. Analogy: Identify relationship type (Synonym, Part-Whole, Tool-Worker)."
         },
         {
-            "questionType": "Letter Series",
-            "concept": "Alphabet patterns.",
-            "formula": "Positions shift.",
-            "solvingTechnique": "Convert to numbers.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "A, C, E, G, ?",
-                    "solution": "Step 1: +2 pattern.\nStep 2: I."
-                }
-            ]
+            "questionType": "Patterns",
+            "concept": "AP (+d), GP (*r), Mixed (+, *), Primes, n^2, n^3.",
+            "solvingTechnique": "If rise is slow -> Addition. If rise is sharp -> Multiplication."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: 2, 4, 6, 8, ?",
+            "solution": "Step 1: +2 pattern.\nStep 2: 8+2 = 10.",
+            "explanation": "Even numbers."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: 10, 20, 40, 80, ?",
+            "solution": "Step 1: *2 pattern.\nStep 2: 80*2 = 160.",
+            "explanation": "Doubling."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Analogy: Doctor : Hospital :: Teacher : ?",
+            "solution": "Step 1: Worker : Workplace.\nStep 2: Teacher works in School.",
+            "explanation": "Workplace relation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: 1, 4, 9, 16, ?",
+            "solution": "Step 1: Squares. 1^2, 2^2, 3^2, 4^2.\nStep 2: 5^2 = 25.",
+            "explanation": "Perfect squares."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Analogy: Good : Bad :: Happy : ?",
+            "solution": "Step 1: Antonyms.\nStep 2: Opp of Happy is Sad.",
+            "explanation": "Antonyms."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: A, C, E, G, ?",
+            "solution": "Step 1: +2 letters. A(1), C(3), E(5), G(7).\nStep 2: 9 is I.",
+            "explanation": "Letter gap."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: 100, 90, 80, ?",
+            "solution": "Step 1: -10 pattern.\nStep 2: 70.",
+            "explanation": "Subtraction."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Analogy: Pen : Write :: Knife : ?",
+            "solution": "Step 1: Tool : Action.\nStep 2: Knife cuts. Answer Cut.",
+            "explanation": "Function."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Series: 2, 3, 5, 7, ?",
+            "solution": "Step 1: Primes.\nStep 2: Next prime is 11. (Not 9).",
+            "explanation": "Prime numbers."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Analogy: Bird : Wing :: Fish : ?",
+            "solution": "Step 1: Organ for movement.\nStep 2: Fish uses Fin.",
+            "explanation": "Biology."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 6, 12, 21, 33, ?",
+            "solution": "Step 1: Diff: 6, 9, 12.\nStep 2: Diff of Diff: +3.\nStep 3: Next diff 15.\nStep 4: 33+15 = 48.",
+            "explanation": "Double difference."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 2, 6, 12, 20, 30, ?",
+            "solution": "Step 1: Diff: 4, 6, 8, 10.\nStep 2: Next diff 12.\nStep 3: 30+12 = 42.\nStep 4: Alt logic: 1*2, 2*3, 3*4, 4*5, 5*6 -> 6*7=42.",
+            "explanation": "n(n+1) pattern."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Analogy: 12 : 144 :: 15 : ?",
+            "solution": "Step 1: Square relation.\nStep 2: 15^2 = 225.",
+            "explanation": "Math analogy."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: AZ, CX, EV, GT, ?",
+            "solution": "Step 1: First letters: A, C, E, G (+2) -> I.\nStep 2: Second letters: Z, X, V, T (-2) -> R.\nStep 3: IR.",
+            "explanation": "Double letter series."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 0, 7, 26, 63, ?",
+            "solution": "Step 1: 1^3 - 1 = 0.\nStep 2: 2^3 - 1 = 7.\nStep 3: 3^3 - 1 = 26.\nStep 4: 4^3 - 1 = 63.\nStep 5: 5^3 - 1 = 124.",
+            "explanation": "n^3 - 1."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Analogy: Flow : River :: Stagnant : ?",
+            "solution": "Step 1: River water flows.\nStep 2: Stagnant water is Pool.",
+            "explanation": "State of matter."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Odd One Out: 3, 5, 7, 9, 11, 13.",
+            "solution": "Step 1: All primes except 9.\nStep 2: 9 is composite (3*3).",
+            "explanation": "Prime check."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 1, 1, 2, 6, 24, ?",
+            "solution": "Step 1: *1, *2, *3, *4.\nStep 2: Next *5.\nStep 3: 24*5 = 120.",
+            "explanation": "Factorials."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Series: 120, 99, 80, 63, 48, ?",
+            "solution": "Step 1: 11^2-1, 10^2-1, 9^2-1, 8^2-1, 7^2-1.\nStep 2: Next 6^2-1 = 35.",
+            "explanation": "Square minus 1."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Analogy: B : 8 :: C : ?",
+            "solution": "Step 1: B is 2. 2^3 = 8.\nStep 2: C is 3. 3^3 = 27.",
+            "explanation": "Letter rank power."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 6, 13, 28, 59, ?",
+            "solution": "Step 1: 6*2 + 1 = 13.\nStep 2: 13*2 + 2 = 28.\nStep 3: 28*2 + 3 = 59.\nStep 4: 59*2 + 4 = 118 + 4 = 122.",
+            "explanation": "x2 + n pattern."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 3, 12, 27, 48, 75, ?",
+            "solution": "Step 1: 3(1^2), 3(2^2), 3(3^2), 3(4^2), 3(5^2).\nStep 2: Next 3(6^2) = 3*36 = 108.",
+            "explanation": "3 * n^2."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Analogy: 123 : 13^2 :: 235 : ?",
+            "solution": "Step 1: 123 -> 1,2,3? No. 13^2=169. Logic? \nStep 2: Maybe Sum? 1+2+3=6 -> 36? No.\nStep 3: Maybe 12, 3? 12+1 = 13. 13^2.\nStep 4: 235 -> 23 + 5? No. \nStep 5: 123 -> (1+2)^2 + 3? No.\nStep 6: Exam trick: 123 : 36. (1+2+3)^2. 235 -> (2+3+5)^2 = 100.",
+            "explanation": "Sum of digits squared."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 4, 6, 12, 14, 28, 30, ?",
+            "solution": "Step 1: +2, *2, +2, *2, +2.\nStep 2: Next *2.\nStep 3: 30*2 = 60.",
+            "explanation": "Alternating oper."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Odd One: 253, 136, 352, 462, 324.",
+            "solution": "Step 1: 324 is square (18^2). Others not.\nStep 2: Or check divisibility. \nStep 3: Check Middle Digit = Sum of others? 253 (2+3=5). 136 (No). 352 (3+2=5). 462 (4+2=6). \nStep 4: 136 is odd one out.",
+            "explanation": "Digit logic."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 0, 6, 24, 60, 120, 210, ?",
+            "solution": "Step 1: n^3 - n.\nStep 2: 1-1, 8-2, 27-3, 64-4, 125-5, 216-6.\nStep 3: Next 7^3 - 7 = 343 - 7 = 336.",
+            "explanation": "n^3 - n pattern."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 2, 9, 28, 65, ?",
+            "solution": "Step 1: n^3 + 1.\nStep 2: 1+1, 8+1, 27+1, 64+1.\nStep 3: 125+1 = 126.",
+            "explanation": "n^3 + 1."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 10, 14, 26, 42, 70, ?",
+            "solution": "Step 1: Diff: 4, 12, 16, 28. (Irregular).\nStep 2: Alt: 10 + 4 = 14. 14 + 12. \nStep 3: Primes? No.\nStep 4: Maybe: 10 = 2*5. 14=2*7. 26=2*13. 42=2*21. 70=2*35.\nStep 5: Factors: 5, 7, 13, 21, 35. Diff: 2, 6, 8, 14. \nStep 6: Answer likely 114 via diff logic 44? 28+16=44? 70+44=114.",
+            "explanation": "Complex difference."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Analogy: ACF : GIL :: OQT : ?",
+            "solution": "Step 1: A(+6)G, C(+6)I, F(+6)L.\nStep 2: O(+6)U, Q(+6)W, T(+6)Z.\nStep 3: UWZ.",
+            "explanation": "Shift by 6."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Series: 1, 2, 6, 21, 88, ?",
+            "solution": "Step 1: *1+1, *2+2, *3+3, *4+4.\nStep 2: Next *5+5.\nStep 3: 88*5 + 5 = 440 + 5 = 445.",
+            "explanation": "Product Sum."
         }
     ],
     "shortcuts": [
-        "Look for Prime Numbers series (2, 3, 5, 7, 11...).",
-        "x^2 + 1 and x^3 - 1 patterns are common."
+        "Check n^2 and n^3 first for number series.",
+        "For Word Analogy: Create a sentence 'A is tool of B' and apply to C.",
+        "Letter Series: Write ranks (1-26). Easier to see mathematical pattern."
     ],
     "commonMistakes": [
-        "Getting stuck on one logic. Move on if not found in 1 min.",
-        "Calculation errors in differences."
+        "Mistake: Giving up after 1st difference (Always check 2nd difference).",
+        "Mistake: Confusing 64 as 8^2 when pattern uses 4^3.",
+        "Mistake: Weak relationship in analogy (e.g. 'Dog:Bark' -> 'Cat:Pet' is wrong. 'Cat:Meow' is right)."
     ],
     "placementTips": [
-        "Learn squares (1-30) and cubes (1-15).",
-        "Write difference layers clearly."
+        "Learn Squares to 30, Cubes to 15.",
+        "Patterns x*2 +/- 1 are very common in placement.",
+        "Odd One Out often uses 'Digits Sum' or 'Prime' logic if numbers are large."
     ]
 }

@@ -3,42 +3,212 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Movement",
-            "concept": "Moving N, S, E, W.",
-            "formula": "Draw cross. Up=N, Down=S, Right=E, Left=W.",
-            "solvingTechnique": "Trace path on paper. Use Pythagoras for diagonal distance.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Go North 3km, Turn Right, Go 4km. Distance from start?",
-                    "solution": "Step 1: Triangle base 4, height 3.\nStep 2: Hypotenuse = sqrt(3^2 + 4^2) = 5km."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Finding distance and direction from a starting point.",
+            "formula": "NEWS: North, East, West, South.\nPythagoras Theorem: H^2 = P^2 + B^2.",
+            "solvingTechnique": "Always draw a small compass (N up, E right). Mark Starting Point. Trace the path."
         },
         {
             "questionType": "Shadows",
-            "concept": "Sun rises in East, sets in West.",
-            "formula": "Morning: Shadow West. Evening: Shadow East.",
-            "solvingTechnique": "If shadow is to Left/Right, person is facing North/South.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Morning sun. Ram's shadow to his left. Which way facing?",
-                    "solution": "Step 1: Sun East -> Shadow West.\nStep 2: Shadow is Left -> West is Left.\nStep 3: Facing North."
-                }
-            ]
+            "concept": "Morning: Sun in East, Shadow in West.\nEvening: Sun in West, Shadow in East.",
+            "solvingTechnique": "If shadow is to Left/Right, the person is facing North/South."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A man walks 5km North, turns Right, walks 5km. Direction from Start?",
+            "solution": "Step 1: Up 5. Right 5.\nStep 2: Position is NE of Start.\nStep 3: Dist = sqrt(5^2 + 5^2) = 5root2.",
+            "explanation": "Vector addition."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Walk 10m East, turn Right 10m. Turn Left 5m. Direction?",
+            "solution": "Step 1: East. Right is South. Left is East.\nStep 2: Final Facing East.",
+            "explanation": "Turn logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: If South becomes North-East, what will North become?",
+            "solution": "Step 1: S -> NE (135 deg ACW shift or 225 deg CW).\nStep 2: Apply same shift to North.\nStep 3: N + 135 deg ACW = South West.",
+            "explanation": "Rotation logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Morning, shadow falls to my left. Which way am I facing?",
+            "solution": "Step 1: Sun East. Shadow West.\nStep 2: My Left side is West.\nStep 3: If Left is West, I am facing North.",
+            "explanation": "Shadow rule."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A is 10m North of B. C is 10m East of B. Direction of A from C?",
+            "solution": "Step 1: B is origin. A is (0, 10). C is (10, 0).\nStep 2: From C to A is Left-Up.\nStep 3: North-West.",
+            "explanation": "Relative position."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Clock at 12:00. Hour hand North. At 1:30, Hour hand points?",
+            "solution": "Step 1: 1:30 -> Hour hand at 1.5 (Between 1 and 2).\nStep 2: Each hour mark 30 deg. 1.5 * 30 = 45 deg.\nStep 3: 45 deg from North (Clockwise) is North-East.",
+            "explanation": "Clock angles."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Walk 30m South. Turn left, 20m. Turn left 30m. How far from start?",
+            "solution": "Step 1: Down 30. Left (East) 20. Left (North) 30.\nStep 2: Vertical displacement 0. Horizontal 20.\nStep 3: 20 meters.",
+            "explanation": "Rectangular path."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Starting from P, go 10m West, then 10m South to Q. Q from P?",
+            "solution": "Step 1: West then South.\nStep 2: South-West.",
+            "explanation": "Quadrant check."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Man faces NW. Turns 90 deg CW, then 180 deg ACW. Final face?",
+            "solution": "Step 1: NW + 90 = NE.\nStep 2: NE - 180 = SW.\nStep 3: South-West.",
+            "explanation": "Angle addition."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Go 10m N, turn 180 deg. Go 5m. Direction from start?",
+            "solution": "Step 1: 10m N. Turn back. 5m S.\nStep 2: Net 5m N.\nStep 3: North.",
+            "explanation": "Backtracking."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A man walks 1 km East, turns South 5 km, turns East 2 km, turns North 9 km. Dist from start?",
+            "solution": "Step 1: East: 1 + 2 = 3 km.\nStep 2: North: -5 + 9 = 4 km.\nStep 3: Hypotenuse = sqrt(3^2 + 4^2) = 5 km.",
+            "explanation": "Coordinate summation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: One evening, A and B talking face to face. A's shadow exactly to right of B. B facing?",
+            "solution": "Step 1: Evening, Shadow East. \nStep 2: Shadow is Right of B. So East is Right of B.\nStep 3: If Right is East, B is facing North.",
+            "explanation": "Relative shadow."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: X is East of Y. Z is North of Y. P is South of Z. P from Y?",
+            "solution": "Step 1: Z\n       | \n       Y --- X\n       |\n       P (?)\nStep 2: P is South of Z. Can be North of Y, On Y, or South of Y.\nStep 3: Ambiguous distance implies Ambiguous direction? Usually P is assumed South of Y if distance Z-P > Z-Y. Let's assume P is South of Z, but distance unknown. \nStep 4: Answer: Cannot be determined / North or South or Same.",
+            "explanation": "Distance matters."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Walk 10m N, 10m E, 10m S, 10m W. Distance?",
+            "solution": "Step 1: Square loop.\nStep 2: Displacement 0.",
+            "explanation": "Closed loop."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Post Office is East of School. My House i South of School. Market North of PO. Distance equal. Market from House?",
+            "solution": "Step 1: H --(N)--> S --(E)--> PO --(N)--> M.\nStep 2: Result vector: N, N, E. -> North-East.",
+            "explanation": "Vector addition."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Facing North. 135 CW, 45 ACW. Then 45 CW. Final?",
+            "solution": "Step 1: Net = 135 - 45 + 45 = 135 CW.\nStep 2: North + 135 = South-East.",
+            "explanation": "Net rotation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 12:30. Hour hand North. Minute hand?",
+            "solution": "Step 1: 12:30 -> Hour hand halfway between 12 and 1. \nStep 2: Real Life: Minute hand at 6 (South).\nStep 3: If Hour (at N) is actually ~N. The Minute (at S) is South. Wait, Hour hand is at 12:30 is at 12 or 1? It's at 12.5 (N). \nStep 4: Angle between H and M is ~165 deg. \nStep 5: M is ~South.",
+            "explanation": "Clock relative position."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A turns Right 10m, Left 20m.. Wait. Starting direction unknown. Finishes North. Started?",
+            "solution": "Step 1: Reverse trace. End North.\nStep 2: Last move was Left 20. Reverse: Right 20 from South? No. From End point (N), go Back.\nStep 3: Before Left turn, was facing? Turn Left -> N. So was facing East. \nStep 4: Before Right turn, was facing? Turn Right -> E. So was facing North.\nStep 5: Started facing North.",
+            "explanation": "Reverse tracking."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: City A is 10km N of B. C 10km E of A. D 10km S of C. D from B?",
+            "solution": "Step 1: B ->(N)-> A ->(E)-> C ->(S)-> D.\nStep 2: Net N: 10 - 10 = 0. Net E: 10.\nStep 3: D is 10km East of B.",
+            "explanation": "Cancellation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Boy runs 10m S, turns left 10m, turns right 10m, turns left 10m. Direction?",
+            "solution": "Step 1: South.\nStep 2: Left -> East.\nStep 3: Right -> South.\nStep 4: Left -> East.",
+            "explanation": "Turn sequence."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A person moves 4 km towards west, then 3 km towards north and finally 5 km east. Distance and direction from start?",
+            "solution": "Step 1: Net E = 5 - 4 = 1 km. Net N = 3 km.\nStep 2: Dist = sqrt(1^2 + 3^2) = sqrt(10) km.\nStep 3: Dir = North-East.",
+            "explanation": "Pythagoras with remaining vectors."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two cars start from opposite places 80 km apart. Car A goes 10km, turns right 10km, turns left 10km. Car B goes 10km. Distance between?",
+            "solution": "Step 1: Start 0 and 80.\nStep 2: A: 10 -> Right 10 -> Left 10. Total Horizontal = 20. Vertical = 10. Pos (20, 10).\nStep 3: B: 10 (from other side). Pos (70, 0).\nStep 4: Diff x = 50. Diff y = 10.\nStep 5: Dist = sqrt(2500 + 100) = sqrt(2600) ~ 51 km.",
+            "explanation": "Coordinate Tracking."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: P is 300km E of Q. Q is 400km N of R. S is mid of Q,R. Dist P to S?",
+            "solution": "Step 1: R --(400N)--> Q --(300E)--> P.\nStep 2: S is mid Q,R. S is 200km S of Q.\nStep 3: Triangle S-Q-P. SQ=200, QP=300.\nStep 4: Hyp = sqrt(200^2 + 300^2) = 100 sqrt(13) km.",
+            "explanation": "Midpoint finding."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A faces North. Turns 45 CW, then 90 ACW, then 135 CW. Which direction?",
+            "solution": "Step 1: Net = +45 - 90 + 135 = +90 (CW).\nStep 2: North + 90 = East.",
+            "explanation": "Net Rotation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Sun is rising. Walk towards sun, turn right, turn right, turn left. Direction?",
+            "solution": "Step 1: Start East.\nStep 2: Right -> South.\nStep 3: Right -> West.\nStep 4: Left -> South.",
+            "explanation": "Morning Sun."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 4 friends play cards. A and B partners. D faces North. A faces West. Who faces South?",
+            "solution": "Step 1: A faces West. Partner B faces East.\nStep 2: D faces North. Partner C faces South.\nStep 3: Answer C.",
+            "explanation": "Partners face opposite."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Start at (0,0). Go (0,5), then (5,5), then (5,0), then (0,0). Area enclosed?",
+            "solution": "Step 1: Square of side 5.\nStep 2: Area 25.",
+            "explanation": "Geometry."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Man goes 5km East, then 5km South-East, then 5km South-West. Displacement?",
+            "solution": "Step 1: Vector 1: (5, 0).\nStep 2: Vector 2: (3.5, -3.5) [5/root2].\nStep 3: Vector 3: (-3.5, -3.5).\nStep 4: Sum X = 5. Sum Y = -7. \nStep 5: Result = sqrt(25 + 49) = sqrt(74). S-E.",
+            "explanation": "Vector resolution."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: If 3 o'clock is West, what is 9 o'clock?",
+            "solution": "Step 1: 3 is East usually. Rotated 180 to West.\nStep 2: 9 is West usually. Rotated 180 to East.",
+            "explanation": "Clock rotation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: River flows West to East. Left turn gives Semi-circle hill. Then Right turn. Final direction?",
+            "solution": "Step 1: Flow East. Left turn -> North. \nStep 2: Semi circle (180 deg) to Left or Right? Usually forward. Ends pointing South.\nStep 3: Right turn from South -> West. \nStep 4: Ambiguous 'Semi circle hill'. Assume 180 deg turn. N -> S.",
+            "explanation": "Path tracing."
         }
     ],
     "shortcuts": [
-        "3 Left turns = 1 Right turn.",
-        "Clockwise = Right. Anti-Clockwise = Left."
+        "Shadow Morning: Left=North, Right=South.",
+        "Shadow Evening: Left=South, Right=North.",
+        "Pythagoras Triplets: 3-4-5, 5-12-13, 8-15-17."
     ],
     "commonMistakes": [
-        "Confusing Left/Right when facing South (It reverses!).",
-        "Mixing up Sunrise/Sunset shadow directions."
+        "Mistake: Confusing Left/Right when facing South.",
+        "Mistake: Forgetting to reset origin for 'Relative Position' questions.",
+        "Mistake: Not adding angles correctly (+CW, -ACW)."
     ],
     "placementTips": [
-        "Always draw a small compass (N-E-S-W) on paper.",
-        "Watch out for 'Total Distance' vs 'Shortest Distance' (displacement)."
+        "Draw the diagram as you read.",
+        "Check if question asks 'Distance' (Shortest) or 'Total Distance' (Path Length).",
+        "Assume 'Turn' is always 90 degrees unless specified."
     ]
 }

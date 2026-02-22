@@ -3,42 +3,213 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Simple Average",
-            "concept": "Central tendency of a group.",
-            "formula": "Avg = Sum of observations / Number of observations",
-            "solvingTechnique": "Think of average as 'equal distribution'. If everyone gives to make equal, that's the average.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Avg of 10, 20, 30, 40, 50?",
-                    "solution": "Step 1: Sum = 150.\nStep 2: Count = 5.\nStep 3: Avg = 30."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Average (Mean) = Sum of quantities / Number of quantities.",
+            "formula": "Sum = Avg × N\nWeighted Avg = (n1a1 + n2a2)/(n1+n2).",
+            "solvingTechnique": "Deviation Method: Assume an average, find differences, adjust the mean. Very fast for large numbers."
         },
         {
-            "questionType": "Weighted Average",
-            "concept": "When groups have different weights or counts.",
-            "formula": "Avg = (n1*a1 + n2*a2) / (n1+n2)",
-            "solvingTechnique": "Deviation method: Assume an average, calculate deviations, average the deviations and add to assumed.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Class A (20 students) avg 50. Class B (30 students) avg 60. Combined avg?",
-                    "solution": "Step 1: Tot A = 20*50 = 1000. Tot B = 30*60 = 1800.\nStep 2: Total = 2800.\nStep 3: Total count = 50.\nStep 4: Avg = 2800/50 = 56."
-                }
-            ]
+            "questionType": "Properties",
+            "concept": "If each number increases by x, Average increases by x.\nIf each multiplied by k, Average multiplied by k.",
+            "formula": "Avg of AP = (First + Last)/2.",
+            "solvingTechnique": "For consecutive numbers, Average is the middle number."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find average of 10, 20, 30, 40, 50.",
+            "solution": "Step 1: Arithmetic Progression.\nStep 2: Avg = (10+50)/2 = 30.",
+            "explanation": "Middle term of AP."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Average of first 50 natural numbers.",
+            "solution": "Step 1: (1+50)/2 = 25.5.",
+            "explanation": "First n natural numbers mean is (n+1)/2."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Average of 5 numbers is 27. If one is excluded, average is 25. Excluded number?",
+            "solution": "Step 1: Sum 5 = 27*5 = 135.\nStep 2: Sum 4 = 25*4 = 100.\nStep 3: Excluded = 35.",
+            "explanation": "Sum difference."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Average of 7, 11, 15, x, 14, 21 is 15. Find x.",
+            "solution": "Step 1: Total 6 numbers. Sum = 15*6 = 90.\nStep 2: Current Sum = 7+11+15+14+21 = 68.\nStep 3: x = 90 - 68 = 22.",
+            "explanation": "Total Sum method."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Average of 5 consecutive odd numbers is 61. Difference between highest and lowest?",
+            "solution": "Step 1: Gaps between 5 nums = 4 gaps.\nStep 2: Each gap 2 (odd nos). Diff = 4*2 = 8.\nStep 3: Shortcut: Diff = 2(n-1).",
+            "explanation": "Property of consecutive series."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Batting average for 10 innings is 40. Next inning score? to make avg 42.",
+            "solution": "Step 1: Old Sum = 400.\nStep 2: New Sum = 42 * 11 = 462.\nStep 3: Score = 62.",
+            "explanation": "Incremental Sum."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Average age of 30 boys is 14. When teacher included, avg becomes 15. Teacher age?",
+            "solution": "Step 1: Teacher brings 15 for herself + gives 1 extra to 30 boys.\nStep 2: Age = 15 + 30(1) = 45.",
+            "explanation": "Deviation shortcut."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find average of cubes of first 5 natural numbers.",
+            "solution": "Step 1: Sum = [n(n+1)/2]^2 = 15^2 = 225.\nStep 2: Avg = 225/5 = 45.",
+            "explanation": "Sum formula application."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Mean of 10 numbers is 20. If 5 is subtracted from each, new mean?",
+            "solution": "Step 1: Old Mean - 5.\nStep 2: 20 - 5 = 15.",
+            "explanation": "Linear property of mean."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A student scored 50, 60, 70 in three tests. Score needed in 4th to avg 70?",
+            "solution": "Step 1: Shortfalls: 50(-20), 60(-10), 70(0). Total Deficit -30.\nStep 2: 4th must cover deficit + maintain avg.\nStep 3: 70 + 30 = 100.",
+            "explanation": "Deficit compensation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Average weight of 8 men increased by 1.5 kg when one weighing 65kg is replaced. Weight of new man?",
+            "solution": "Step 1: Avg increase means new man is heavier.\nStep 2: Extra = 8 * 1.5 = 12 kg.\nStep 3: New Man = 65 + 12 = 77 kg.",
+            "explanation": "Replacement logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Average of 25 results is 18. First 12 avg 14. Last 12 avg 17. 13th result?",
+            "solution": "Step 1: Total Sum = 25*18 = 450.\nStep 2: Part 1 = 12*14 = 168. Part 2 = 12*17 = 204.\nStep 3: 13th = 450 - (168 + 204) = 450 - 372 = 78.",
+            "explanation": "Overlap method."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A cricketer has avg 28 runs in 20 matches. How many runs in 21st to raise avg to 30?",
+            "solution": "Step 1: Need to raise avg by 2 for 21 matches.\nStep 2: Total Boost = 21 * 2 = 42.\nStep 3: Base value = 28. Score = 28 + 42 = 70? No.\nStep 4: Score = New Avg + Old N * Diff? No.\nStep 5: Score = Old Avg + (New N * Increase) = 28 + (21*2) = 70. Correct.",
+            "explanation": "Use formula: New Score = Old Avg + Diff(New N)."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: The average of 6 observations is 12. If 7th obsv is included, avg decreases by 1. 7th obsv?",
+            "solution": "Step 1: New Avg = 11. New N = 7.\nStep 2: Sum New = 77. Sum Old = 72.\nStep 3: 7th = 5.",
+            "explanation": "Sum subtraction."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 3 years ago, avg age of A,B,C was 27. 5 years ago B,C was 20. A's present age?",
+            "solution": "Step 1: Present Sum(A,B,C) = (27+3)*3 = 90.\nStep 2: Present Sum(B,C) = (20+5)*2 = 50.\nStep 3: A = 90 - 50 = 40 years.",
+            "explanation": "Time shift logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Average of 50 numbers is 38. Turns out 23 and 11 were wrongly read as 32 and 12. Correct Avg?",
+            "solution": "Step 1: Error = (32+12) - (23+11) = 44 - 34 = +10 (Excess read).\nStep 2: Sum needs to decrease by 10.\nStep 3: Avg needs to decrease by 10/50 = 0.2.\nStep 4: Correct Avg = 38 - 0.2 = 37.8.",
+            "explanation": "Correction = (Correct - Wrong) / N."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A man bought 13 shirts at 50 each, 15 pants at 60 each, 12 pairs of shoes at 65 each. Avg value?",
+            "solution": "Step 1: Weighted Avg.\nStep 2: [13(50) + 15(60) + 12(65)] / 40.\nStep 3: [650 + 900 + 780] / 40 = 2330 / 40 = 58.25.",
+            "explanation": "Total Cost / Total Items."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Average temp Mon-Wed is 40. Tue-Thu is 41. If Thu is 42, Mon?",
+            "solution": "Step 1: (M+T+W) = 120. (T+W+Th) = 123.\nStep 2: Subtract: Th - M = 3.\nStep 3: 42 - M = 3 => M = 39.",
+            "explanation": "Sliding window difference."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 9 people went to hotel. 8 spent ₹12 each. 9th spent ₹8 more than avg of all 9. Total Money?",
+            "solution": "Step 1: Let Avg = x.\nStep 2: 9th spent x + 8.\nStep 3: Total Sum = 9x = (12*8) + (x+8).\nStep 4: 9x = 96 + x + 8 => 8x = 104 => x = 13.\nStep 5: Total = 9*13 = 117.",
+            "explanation": "Definition of Average Equation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Avg weight of 3 men A,B,C is 84. D joins, avg becomes 80. E weighing 3kg more than D replaces A, avg becomes 79. Weight of A?",
+            "solution": "Step 1: Sum(A+B+C) = 252. Sum(A+B+C+D) = 320 => D=68.\nStep 2: E = 71.\nStep 3: B+C+D+E = 79*4 = 316. (B+C+68+71) = 316 => B+C = 177.\nStep 4: A = 252 - 177 = 75.",
+            "explanation": "Step by step elimination."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Average of n numbers is x. If 36 is subtracted from two numbers, new average is (x-8). Find n.",
+            "solution": "Step 1: Total reduction = 36*2 = 72.\nStep 2: Change in Avg = Total reduction / n.\nStep 3: 8 = 72 / n.\nStep 4: n = 9.",
+            "explanation": "Change = SumChange / N."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A bowler's avg is 12.4. He takes 5 wickets for 26 runs and avg improves by 0.4. Total wickets?",
+            "solution": "Step 1: Old Avg 12.4. Match Perf = 26/5 = 5.2.\nStep 2: New Avg = 12.0.\nStep 3: Allegation: 12.4 -- 5.2. Mean 12.\nStep 4: Diagonals: 12-5.2=6.8. 12.4-12=0.4.\nStep 5: Ratio Wickets (Old:New) = 6.8 : 0.4 = 17 : 1.\nStep 6: New Wickets = 5 (1 part). Old = 17*5 = 85.\nStep 7: Total = 90.",
+            "explanation": "Allegation on Bowling Average."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: In a class, avg marks of boys is A and girls is B. Overall is C. Ratio of boys:girls?",
+            "solution": "Step 1: Allegation.\nStep 2: Boys(A) ... Girls(B).\nStep 3: Mean(C).\nStep 4: Ratio = (B-C) : (C-A) (Assuming B>C>A) or difference absolute.",
+            "explanation": "Standard Formula derived from Weighted Avg."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: The average of 11 numbers is 10.9. If average of first six is 10.5 and last six is 11.4, find the middle number.",
+            "solution": "Step 1: Total Sum = 11 * 10.9 = 119.9.\nStep 2: S1 (First 6) = 6 * 10.5 = 63.\nStep 3: S2 (Last 6) = 6 * 11.4 = 68.4.\nStep 4: S1 + S2 = 131.4.\nStep 5: Middle (6th) counted twice. Value = 131.4 - 119.9 = 11.5.",
+            "explanation": "Double counting Overlap."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A batsman scores 87 in 17th inning, increasing avg by 3. Find current average.",
+            "solution": "Step 1: Let Old Avg = x.\nStep 2: 16x + 87 = 17(x+3).\nStep 3: 16x + 87 = 17x + 51.\nStep 4: x = 36.\nStep 5: New Avg = 36 + 3 = 39.",
+            "explanation": "Linear Equation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: There are 35 students in a hostel. If students increase by 7, mess bill increases by 42 per day, while avg per head diminishes by 1. Original expenditure?",
+            "solution": "Step 1: Old: N=35, Avg=A, Exp=35A.\nStep 2: New: N=42, Avg=A-1, Exp=42(A-1).\nStep 3: 42(A-1) - 35A = 42.\nStep 4: 7A - 42 = 42 => 7A = 84 => A = 12.\nStep 5: Original Exp = 35 * 12 = 420.",
+            "explanation": "Setup Equation. Note: Bill increase is Absolute, Avg decrease is Per Head."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A library has avg 510 visitors on Sunday and 240 on other days. Avg visitors in a month of 30 days starting with Sunday?",
+            "solution": "Step 1: Starts Sunday -> 5 Sundays (days 1,8,15,22,29). 25 Others.\nStep 2: Avg = (5*510 + 25*240) / 30.\nStep 3: (2550 + 6000) / 30 = 285.",
+            "explanation": "Count number of specific days."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Avg salary of all workers is 8000. Avg of 7 technicians is 12000. Avg of rest is 6000. Total workers?",
+            "solution": "Step 1: Allegation. Tech(12k) ... Rest(6k). Mean(8k).\nStep 2: Diagonals: |6-8|=2. |12-8|=4. Ratio 2:4 = 1:2.\nStep 3: 1 part = 7 technicians.\nStep 4: Rest (2 parts) = 14.\nStep 5: Total = 21.",
+            "explanation": "Allegation handles population mix well."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Average of 5 consecutive Integers starting with m is n. Avg of 6 consec integers starting with (m+2)?",
+            "solution": "Step 1: Set m=1. Series 1,2,3,4,5. Avg n=3.\nStep 2: Start m+2=3. Series 3,4,5,6,7,8. Avg = 5.5.\nStep 3: Relate 5.5 to n(3). n+2.5.\nStep 4: Logic: Shift start by 2 -> Avg +2. Add 1 term to 5 -> Avg +0.5. Net +2.5.",
+            "explanation": "Substitution method checks out."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8kg of variety A (price X) mixed with 4kg variety B (price Y). Avg Price 20. If 4kg A and 8kg B, Avg 25. Find X, Y.",
+            "solution": "Step 1: (8X+4Y)/12 = 20 => 2X+Y = 60.\nStep 2: (4X+8Y)/12 = 25 => X+2Y = 75.\nStep 3: Add: 3(X+Y) = 135 => X+Y = 45.\nStep 4: Subtract: Y-X = 15.\nStep 5: 2Y=60 => Y=30. X=15.",
+            "explanation": "System of equations."
         }
     ],
     "shortcuts": [
-        "If each number increases by x, Average increases by x.",
-        "If a person joins and avg increases, he brought MORE than the current avg."
+        "Weighted Avg = (n1*x1 + n2*x2)/(n1+n2). Use Allegation if x1,x2,Mean given.",
+        "New Avg = Old Avg + (Increase * N_new / N_total).",
+        "Avg of first n natural nos = (n+1)/2. Avg of squares = (n+1)(2n+1)/6."
     ],
     "commonMistakes": [
-        "Average Speed is NOT (S1+S2)/2.",
-        "Including the excluded member in count (n vs n-1)."
+        "Mistake: Avg Speed != (S1+S2)/2.",
+        "Mistake: Forgetting to include the 'new person' when calculating 'New N' denominator.",
+        "Mistake: Assuming '0' doesn't count in statistics (It does reduce the avg)."
     ],
     "placementTips": [
-        "Use deviation method for large numbers.",
-        "Averages is key for Data Interpretation sets."
+        "Use 'Assumed Mean' method for numbers close to each other (e.g. 998, 996, 1002).",
+        "Cricket Average questions are 100% sure-shot in exams.",
+        "Read 'Average of' vs 'Average increased by' carefully."
     ]
 }

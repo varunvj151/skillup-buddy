@@ -3,55 +3,213 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Individual Work",
-            "concept": "Work is inversely proportional to Time. If A takes n days, A's 1 day work is 1/n.",
-            "formula": "Total Work = LCM of days taken by individuals.",
-            "solvingTechnique": "LCM Method: Assume Total Work = LCM(Time A, Time B). Calculate efficiency (units/day) for each person.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "A does work in 10 days, B in 15 days. Together?",
-                    "solution": "Step 1: LCM(10, 15) = 30 units (Total Work).\nStep 2: A's rate = 30/10 = 3 u/day. B's rate = 30/15 = 2 u/day.\nStep 3: Combined rate = 5 u/day.\nStep 4: Time = 30/5 = 6 days."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Time and Work relates to the efficiency of individuals or machines. Work is usually considered as 1 unit (LCM Method preferred).",
+            "formula": "Work = Efficiency × Time\nIf A does work in x days, 1 day work = 1/x.",
+            "solvingTechnique": "LCM Method: Assume Total Work = LCM of days. Calculate efficiency (Work/Days). Add efficiencies for working together."
         },
         {
-            "questionType": "Work & Wages",
-            "concept": "Wages are distributed in proportion to WORK DONE, not time spent (unless efficiencies are same).",
-            "formula": "Ratio of Wages = Ratio of Work Done = Ratio of Efficiencies",
-            "solvingTechnique": "Find the ratio of work units completed by each person to divide money.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "A can do work in 10 days, B in 20 days. They work together and get $300. Share of A?",
-                    "solution": "Step 1: Ratio of times = 10:20 = 1:2.\nStep 2: Ratio of Efficiency = 2:1.\nStep 3: A's share = (2/3) * 300 = $200."
-                }
-            ]
+            "questionType": "Chain Rule (MDH)",
+            "concept": "Relating Men, Days, and Hours.",
+            "formula": "(M1 × D1 × H1) / W1 = (M2 × D2 × H2) / W2",
+            "solvingTechnique": "Always identify Work (W). If work is same, W1=W2=1."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A can do work in 10 days, B in 15 days. Together?",
+            "solution": "Step 1: LCM(10, 15) = 30 units (Total Work).\nStep 2: Efficiency A = 30/10 = 3 u/d. B = 30/15 = 2 u/d.\nStep 3: Total Eff = 3 + 2 = 5 u/d.\nStep 4: Time = 30 / 5 = 6 days.",
+            "explanation": "LCM method is standard."
         },
         {
-            "questionType": "Pipes & Cisterns",
-            "concept": "Inlet fills (+), Outlet empties (-). Same rules as Time & Work.",
-            "formula": "Net Rate = Inlet Rate - Outlet Rate",
-            "solvingTechnique": "Assign negative sign to emptying pipes.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "Pipe A fills in 10h, B empties in 20h. Steps to full if both open?",
-                    "solution": "Step 1: Total Capacity = LCM(10, 20) = 20 liters.\nStep 2: A = +2 L/h, B = -1 L/h.\nStep 3: Net = 1 L/h.\nStep 4: Time = 20/1 = 20 hours."
-                }
-            ]
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A and B together do work in 12 days. A alone in 20 days. B alone?",
+            "solution": "Step 1: LCM(12, 20) = 60.\nStep 2: A+B Eff = 5. A Eff = 3.\nStep 3: B Eff = 5 - 3 = 2.\nStep 4: B Time = 60 / 2 = 30 days.",
+            "explanation": "Subtract efficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A is twice as good a workman as B. Together they finish in 14 days. A alone?",
+            "solution": "Step 1: Let Eff(B) = 1. Eff(A) = 2. Total = 3.\nStep 2: Work = Eff * Time = 3 * 14 = 42 units.\nStep 3: A Time = 42 / 2 = 21 days.",
+            "explanation": "Work is constant."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 10 men can do a piece of work in 12 days. How many men for 8 days?",
+            "solution": "Step 1: M1*D1 = M2*D2.\nStep 2: 10 * 12 = x * 8.\nStep 3: 120 / 8 = 15 men.",
+            "explanation": "Simple Chain Rule."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A, B, C can do work in 10, 12, 15 days. Together?",
+            "solution": "Step 1: LCM(10, 12, 15) = 60.\nStep 2: Eff: A=6, B=5, C=4.\nStep 3: Total Eff = 15.\nStep 4: Time = 60/15 = 4 days.",
+            "explanation": "Add 3 efficiencies."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A can build a wall in 30 days. B can demolish it in 40 days. Together?",
+            "solution": "Step 1: Negative Work. LCM(30, 40) = 120.\nStep 2: Eff A = +4. Eff B = -3.\nStep 3: Net Eff = +1.\nStep 4: Time = 120 / 1 = 120 days.",
+            "explanation": "Demolition is Negative Efficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 5 men prepare 10 toys in 6 days. 12 men prepare 16 toys in ? days.",
+            "solution": "Step 1: M1 D1 / W1 = M2 D2 / W2.\nStep 2: (5 * 6) / 10 = (12 * x) / 16.\nStep 3: 3 = 12x / 16 = 3x/4.\nStep 4: x = 4 days.",
+            "explanation": "Work (toys) goes in denominator."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A works twice as fast as B. If B can complete a work in 12 days independently, the number of days in which A and B can together finish the work?",
+            "solution": "Step 1: Eff Ratio A:B = 2:1.\nStep 2: B takes 12 days, so Total Work = 1 * 12 = 12 units.\nStep 3: Combined Eff = 2+1 = 3.\nStep 4: Time = 12 / 3 = 4 days.",
+            "explanation": "Total Work = B's Eff * B's Days."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A does 1/4 work in 10 days. Total time?",
+            "solution": "Step 1: 1/4 Work -> 10 days.\nStep 2: Full Work -> 10 * 4 = 40 days.",
+            "explanation": "Unitary."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A works for 2 days then B finishes it in 9 days. If A can do the whole in 10 days, B alone?",
+            "solution": "Step 1: A does 2/10 = 1/5 work.\nStep 2: Remaining = 4/5.\nStep 3: B does 4/5 work in 9 days.\nStep 4: B does 1 work in 9 * 5/4 = 11.25 days.",
+            "explanation": "Fraction of work logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A and B can do a work in 12 days, B and C in 15 days, C and A in 20 days. A, B, C together?",
+            "solution": "Step 1: LCM(12, 15, 20) = 60.\nStep 2: A+B=5, B+C=4, C+A=3.\nStep 3: Sum = 2(A+B+C) = 12.\nStep 4: A+B+C = 6.\nStep 5: Time = 60/6 = 10 days.",
+            "explanation": "Cyclic work problems solve for 2(A+B+C)."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A is 50% more efficient than B. If B takes 12 days, how long for A?",
+            "solution": "Step 1: Eff B = 100, A = 150. Ratio 3:2.\nStep 2: Work = B * 12 = 2 * 12 = 24 units.\nStep 3: A Time = 24 / 3 = 8 days.\nStep 4: Shortcut: Efficiency is Inverse to Time. Time ratio 2:3. 3p=12, 2p=8.",
+            "explanation": "More efficient = Less time."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A can finish a work in 18 days and B in 15 days. B worked for 10 days and left. Days for A to finish?",
+            "solution": "Step 1: LCM(18, 15) = 90.\nStep 2: Eff A=5, B=6.\nStep 3: B worked 10 days -> 6*10 = 60 units done.\nStep 4: Rem = 30 units.\nStep 5: A time = 30/5 = 6 days.",
+            "explanation": "Work Done - Total Work = Remaining Work."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 12 men complete a work in 9 days. After they worked for 6 days, 6 more men joined. Remaining work time?",
+            "solution": "Step 1: Total Work = 12 * 9 = 108 man-days.\nStep 2: Work Done = 12 * 6 = 72.\nStep 3: Rem = 36 man-days.\nStep 4: New Strength = 12 + 6 = 18 men.\nStep 5: Time = 36 / 18 = 2 days.",
+            "explanation": "Man-Days concept."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A, B, C working alone can do a work in 40, 60, 120 days. A started it, B joined after 7 days, C after 14 days. Total days?",
+            "solution": "Step 1: LCM = 120. Eff: A=3, B=2, C=1.\nStep 2: First 7 days (A only) = 3*7 = 21.\nStep 3: Next 7 days (A+B) = 5*7 = 35. Total Used = 56. Rem = 64.\nStep 4: Now (A+B+C) = 6 u/d.\nStep 5: Time = 64/6 = 10.66 days.\nStep 6: Total Time = 7 + 7 + 10.66 = 24.66 days.",
+            "explanation": "Timeline method."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Wages: A and B can do a work in 10 and 15 days. They did it together for ₹4500. A's share?",
+            "solution": "Step 1: Ratio of Wages = Ratio of Efficiency (for same time).\nStep 2: Eff Ratio A:B <=> 1/10 : 1/15 <=> 3:2.\nStep 3: A's Share = (3/5) * 4500 = 2700.",
+            "explanation": "Wages depend on WORK DONE (Efficiency), not time."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 4 men and 6 women can complete a work in 8 days, while 3 men and 7 women in 10 days. 10 women alone?",
+            "solution": "Step 1: (4M + 6W)*8 = (3M + 7W)*10.\nStep 2: 32M + 48W = 30M + 70W => 2M = 22W => M = 11W.\nStep 3: Convert Task to Women. Task = (4(11W) + 6W)*8 = 50W * 8 = 400 Women-Days.\nStep 4: 10 Women will take 400/10 = 40 Days.",
+            "explanation": "Convert Men to Women equivalence."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A does half as much work as B in three-fourth of the time. Together they take 18 days. B alone?",
+            "solution": "Step 1: A doing 1/2 W in 3/4 T means A is slower.\nStep 2: Eff Ratio A:B. Let B do 1 work in 1 time. Eff B = 1.\nStep 3: A does 0.5 work in 0.75 time. Eff A = 0.5/0.75 = 2/3.\nStep 4: Ratio A:B = 2/3 : 1 = 2:3.\nStep 5: Total Eff = 5. Work = 5 * 18 = 90.\nStep 6: B time = 90/3 = 30 days.",
+            "explanation": "Normalize Work/Time to find Efficiency."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A can finish a work in 24 days, B in 9 days, C in 12 days. B and C start but leave after 3 days. A finishes remaining?",
+            "solution": "Step 1: LCM(24,9,12) = 72.\nStep 2: Eff A=3, B=8, C=6.\nStep 3: (B+C)*3 = (14)*3 = 42 done.\nStep 4: Rem = 30.\nStep 5: A Time = 30/3 = 10 days.",
+            "explanation": "Simple subtraction."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 10 men can finish in 10 days. 12 women in 12 days. 10 men and 6 women?",
+            "solution": "Step 1: 10M * 10 = 100 MD. M Eff = 1/100.\nStep 2: 12W * 12 = 144 WD. W Eff = 1/144.\nStep 3: Team = 10M + 6W = 10/100 + 6/144 = 1/10 + 1/24.\nStep 4: LCM(10,24) = 120. (12+5)/120 = 17/120 part per day.\nStep 5: Days = 120/17.",
+            "explanation": "Individual work finding."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A and B can complete a work in 15 days and 10 days respectively. They started doing the work together but after 2 days B had to leave and A alone completed the remaining work. The whole work was completed in?",
+            "solution": "Step 1: LCM=30. Eff A=2, B=3.\nStep 2: 2 days (A+B) = 5*2 = 10 units.\nStep 3: Rem 20. A does 20/2 = 10 days.\nStep 4: Total Time = 2 + 10 = 12 days.",
+            "explanation": "Common trap: Don't answer '10', answer 'Total Time' if asked. 'Whole work' implies start to finish."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A, B, and C can do a piece of work in 11 days, 20 days and 55 days respectively, working alone. How soon can the work be done if A is assisted by B and C on alternate days?",
+            "solution": "Step 1: LCM=220. Eff: A=20, B=11, C=4.\nStep 2: Cycle: Day 1 (A+B) = 31. Day 2 (A+C) = 24.\nStep 3: 2 Days Work = 55.\nStep 4: We need 220. 220/55 = 4 Cycles.\nStep 5: 4 Cycles * 2 Days = 8 Days.",
+            "explanation": "Alternate Days Cycle grouping."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 2 men and 3 boys can do a work in 10 days while 3 men and 2 boys can do it in 8 days. 2 men + 1 boy?",
+            "solution": "Step 1: (2M+3B)10 = (3M+2B)8.\nStep 2: 20M + 30B = 24M + 16B => 4M = 14B => 2M = 7B.\nStep 3: Work = (7B + 3B) * 10 = 100 Boy-Days.\nStep 4: Team = 2M + 1B = 7B + 1B = 8 Boys.\nStep 5: Days = 100/8 = 12.5 days.",
+            "explanation": "Consistency in unit conversion."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A team of 30 men is supposed to finish work in 38 days. After 25 days, 5 more men were employed and work finished 1 day earlier. How many days would it have been delayed if 5 men were not employed?",
+            "solution": "Step 1: 30 men worked 25 days. Then 35 men worked for (38-1-25) = 12 days.\nStep 2: Total Work = 30*25 + 35*12 = 750 + 420 = 1170.\nStep 3: If only 30 men worked: Days = 1170/30 = 39 days.\nStep 4: Schedule was 38 days.\nStep 5: Delay = 39 - 38 = 1 day.",
+            "explanation": "Scenario comparison."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Work could be finished in 100 days. However, due to absence of 10 workers, it took 110 days. Original number of workers?",
+            "solution": "Step 1: Let workers = x.\nStep 2: Work constant: x * 100 = (x-10) * 110.\nStep 3: 100x = 110x - 1100.\nStep 4: 10x = 1100 => x = 110.",
+            "explanation": "M1D1 = M2D2."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A does a work in 4 hours, B and C together in 3 hours, A and C together in 2 hours. B alone?",
+            "solution": "Step 1: LCM(4,3,2) = 12.\nStep 2: Eff A=3. Eff B+C=4. Eff A+C=6.\nStep 3: Eff C = (A+C) - A = 6 - 3 = 3.\nStep 4: Eff B = (B+C) - C = 4 - 3 = 1.\nStep 5: B time = 12/1 = 12 hours.",
+            "explanation": "Solve system of linear efficiency equations."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 20 Women can do a work in 16 days. 16 Men can do in 15 days. Ratio of capacity of Man to Woman?",
+            "solution": "Step 1: Work = 20W * 16 = 320W.\nStep 2: Work = 16M * 15 = 240M.\nStep 3: 320W = 240M.\nStep 4: M/W = 320/240 = 4/3.\nStep 5: Ratio 4:3.",
+            "explanation": "Capacity is Efficiency. Efficiency is inverse to Time taken for same work."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A work is done by 3 groups. Group 1 (3 men) takes 6 days. Group 2 (4 women) takes 9 days. Group 3 (6 children) takes 12 days. They all work together for 1 day, then men leave. Women and Children finish?",
+            "solution": "Step 1: 3M*6 = 18MD. 4W*9 = 36WD. 6C*12 = 72CD. All equal Work.\nStep 2: LCM(18, 36, 72) = 72.\nStep 3: 1 Man Eff = 72/18 = 4. 1 Woman = 72/36 = 2. 1 Child = 72/72 = 1.\nStep 4: Total Group Team = (3*4) + (4*2) + (6*1) = 12 + 8 + 6 = 26.\nStep 5: 1 Day work = 26. Rem = 72 - 26 = 46.\nStep 6: Rem Team = 4W + 6C = 8 + 6 = 14.\nStep 7: Time = 46/14 = 3.28 days.",
+            "explanation": "Find individual efficiency first."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A can complete a work in 'm' days and B in 'n' days. If A and B work together, time taken?",
+            "solution": "Step 1: mn / (m+n) days.\nStep 2: Standard formula derivation.",
+            "explanation": "Sometimes direct formula is asked."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A contractor undertook to do a work in 56 days and employed 104 men. After 30 days, 2/5 work was done. How many extra men needed to finish on time?",
+            "solution": "Step 1: 104 * 30 / (2/5) = (104+x) * 26 / (3/5).\nStep 2: 104*30*5 / 2 = (104+x)*26*5 / 3.\nStep 3: 52*30*5 = (104+x)*26*5/3.\nStep 4: (104+x) = (52*30*3) / 26 = 2*30*3 = 180.\nStep 5: x = 180 - 104 = 76 men.",
+            "explanation": "M1D1/W1 = M2D2/W2."
         }
     ],
     "shortcuts": [
-        "If A is n times as good as B, A takes 1/n of the time B takes.",
-        "If A and B do work in x and y days, together = (xy)/(x+y)."
+        "A+B time = (A*B)/(A+B).",
+        "If A is k times efficient as B, Ratio of Time A:B = 1:k.",
+        "Work/Wages depends on Efficiency, not Time spent (unless Time is same)."
     ],
     "commonMistakes": [
-        "Adding days directly (10 days + 15 days != 25 days). Always add RATES.",
-        "Forgetting to subtract rate for outlet pipes (Pipes & Cisterns)."
+        "Mistake: Adding Days directly (If A takes 10, B takes 12, A+B != 22).",
+        "Mistake: Efficiency and Days are Inversely Proportional (Eff 2:3 -> Days 3:2).",
+        "Mistake: In Men-Women problems, equating Men to Days instead of Men to Work."
     ],
     "placementTips": [
-        "Use LCM method for almost all Time & Work questions to avoid messy fractions.",
-        "Checking efficiency ratio helps in logical guessing."
+        "Always convert Men/Women/Boys to a single unit (e.g. all Boys).",
+        "Pipes & Cisterns is exactly same as Time & Work (Leak is negative efficiency).",
+        "Draw the timeline for 'Joining/Leaving' problems to avoid confusion."
     ]
 }

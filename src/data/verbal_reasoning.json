@@ -3,42 +3,206 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Analogy",
-            "concept": "Relation between first pair applies to second pair.",
-            "formula": "A : B :: C : D",
-            "solvingTechnique": "Identify relation type: Synonym, Antonym, Part-Whole, Tool-Worker.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Newspaper : Press :: Cloth : ?",
-                    "solution": "Step 1: Newspaper is made in Press.\nStep 2: Cloth is made in Mill."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Analyzing textual information to derive logical conclusions. Includes Theme Detection, Statement & Conclusion, and Verification of Truth.",
+            "solvingTechnique": "Stick strictly to the information provided. Do not use outside knowledge. For 'Theme Detection', look for the central idea, not details."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: 'Fortune favors the brave.'\nConclusion I: Cowards die many times.\nConclusion II: Brave people succeed.",
+            "solution": "Step 1: I is a related proverb but not derived directly.\nStep 2: II is the direct meaning of 'Fortune favors'.\nStep 3: Only II follows.",
+            "explanation": "Direct inference."
         },
         {
-            "questionType": "Classification",
-            "concept": "Find the odd one out.",
-            "formula": "3 items share a property, 1 does not.",
-            "solvingTechnique": "Look for category mismatch (Fruit vs Veg, Prime vs Composite).",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Odd one: Ear, Eye, Nose, Kidney.",
-                    "solution": "Step 1: Ear, Eye, Nose are external.\nStep 2: Kidney is internal."
-                }
-            ]
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: All students in the class are bright. X is not bright.\nConcl: X is not a student of this class.",
+            "solution": "Step 1: If X were a student, X would be bright.\nStep 2: Since X is not bright, X cannot be a student.\nStep 3: Conclusion follows.",
+            "explanation": "Modus Tollens."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Identify Section: 'A car always has?'\nOptions: Driver, Wheels, Bonnet, Bumper.",
+            "solution": "Step 1: Car cannot exist/move without Wheels.\nStep 2: Driver is external. Bonnet/Bumper are parts but Wheels are essential definition.",
+            "explanation": "Essential part."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Population increase is the main cause of poverty.\nConcl: I. Poverty can be reduced by controlling population.",
+            "solution": "Step 1: If A is main cause of B, reducing A reduces B.\nStep 2: Follows.",
+            "explanation": "Cause-Remedy."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Morning walk is good for health.\nConcl: I. All healthy people go for morning walk.",
+            "solution": "Step 1: Good for health does not mean 'Necessary' or 'Only' way.\nStep 2: Does not follow.",
+            "explanation": "Necessary condition error."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Vegetable prices are soaring.\nConcl: I. People should eat less vegetables.",
+            "solution": "Step 1: Advice/Course of Action, not a logical conclusion of the fact.\nStep 2: Fact describes state, not action.\nStep 3: Does not follow.",
+            "explanation": "Facts vs Advice."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find essential part: 'School'.\nOptions: Student, Building, Pencil, Book.",
+            "solution": "Step 1: School is an institution for students.\nStep 2: Students are the defining entity.",
+            "explanation": "Definition."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Irregularity represents failure.\nConcl: I. Regularity represents success.",
+            "solution": "Step 1: Inverse is not always true.\nStep 2: Does not follow.",
+            "explanation": "Logic fallacy."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Theme: 'Honesty is the best policy' implies?\nOptions: Liars are punished. Honesty brings long term reward.",
+            "solution": "Step 1: 'Best policy' implies effectiveness/reward.\nStep 2: Option 2 captures the positive essence.",
+            "explanation": "Theme."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Truth verification: 'Sun rises in the East.'\nOptions: Always, Never, Sometimes.",
+            "solution": "Step 1: Scientific fact.\nStep 2: Always.",
+            "explanation": "Fact check."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: The T.V. programs have degraded moral values.\nConcl: I. T.V. should be banned. II. Moral values are important.",
+            "solution": "Step 1: I is extreme action (Course of Action, not conclusion). \nStep 2: II is implicit (Why else worry about degradation?).\nStep 3: Only II follows.",
+            "explanation": "Implicit value."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Only good singers are invited. No one without sweet voice is a good singer.\nConcl: I. All invited singers have sweet voice.",
+            "solution": "Step 1: Invited -> Good Singer -> Sweet Voice.\nStep 2: Transitive property holds.\nStep 3: Follows.",
+            "explanation": "Transitive logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Soldiers serve the country.\nConcl: I. Men serve the country. II. Women do not serve.",
+            "solution": "Step 1: Soldiers can be Men or Women. Statement doesn't specify gender.\nStep 2: Neither follows.",
+            "explanation": "Gender assumption error."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Cause & Effect:\nI. The literacy rate has increased.\nII. The state administration has conducted extensive training.",
+            "solution": "Step 1: Training (Cause) -> Literacy (Effect).\nStep 2: II is Cause, I is Effect.",
+            "explanation": "Direct link."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Company X has a record of manufacturing cameras.\nConcl: I. Company X makes the best cameras.",
+            "solution": "Step 1: 'Record of manufacturing' != 'Best'.\nStep 2: Quality judgement not supported.\nStep 3: Does not follow.",
+            "explanation": "Subjective conclusion."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Essential Part: 'Book'.\nOptions: Pages, Cover, Title, Pictures.",
+            "solution": "Step 1: E-book implies no cover or pages? But traditionally Pages (Content holder) are essential.\nStep 2: Pages.",
+            "explanation": "Core component."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: India is a multilingual country. Hindi is the national language.\nConcl: I. All Indians should learn many languages.",
+            "solution": "Step 1: 'Should' is advice.\nStep 2: Fact simply states status.\nStep 3: Does not follow.",
+            "explanation": "Fact vs Normative."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Use of cosmetics is dangerous.\nConcl: I. Cosmetics have side effects. II. Cosmetics are not expensive.",
+            "solution": "Step 1: Dangerous implies negative effects (Side effects). (I Follows).\nStep 2: Price is unconnected. (II Fail).",
+            "explanation": "Synonymous inference."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: The best way to escape from a problem is to solve it.\nConcl: I. Your life will be dull if you don't face problems.",
+            "solution": "Step 1: Statement is about 'escaping'/'solving'.\nStep 2: Conclusion introduces 'dull life' (New concept).\nStep 3: Does not follow.",
+            "explanation": "Out of scope."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Domestic demand has been increasing faster than production.\nConcl: I. Identify shortfall. II. Export Surplus.",
+            "solution": "Step 1: Demand > Production = Shortfall. (I Follows).\nStep 2: No surplus exists. (II Fail).",
+            "explanation": "Economic inference."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Passage: 'Erosion of values and corruption are linked. Only value-based education can solve this.'\nConcl: I. Corruption is the result of value erosion.\nConcl: II. Police cannot stop corruption.",
+            "solution": "Step 1: Passage says 'linked'. Concl I says 'result of'. Plausible inference from 'Only value education can solve'. If education fixes it, lack of values caused it. (I Follows).\nStep 2: 'Police cannot' is an inference from 'Only value-based education can solve'. (II Follows).",
+            "explanation": "Strong inference 'Only'."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: A degree in law is mandatory to be a judge.\nConcl: I. All judges are lawyers. II. All lawyers are judges.",
+            "solution": "Step 1: Judge -> Law Degree. (Necessary).\nStep 2: Lawyer -> Law Degree.\nStep 3: Does Judge -> Lawyer? Use real world: Yes, usually one must be a lawyer first. But strictly logically? 'Degree in law' is the common set. Judge is a subset of Degree holders.\nStep 4: I Follows (Process usually requires Bar). II Fails.",
+            "explanation": "Real world context."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: If it is easy to become an engineer, I don't want to be one.\nConcl: I. I want to be a professional. II. I desire to achieve something difficult.",
+            "solution": "Step 1: 'If easy, I don't want' implies 'I want logical opposite' -> Difficult.\nStep 2: II follows.\nStep 3: Professional is not mentioned. I fails.",
+            "explanation": "Psychological inference."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Any young man who makes dowry a condition for marriage discredits himself.\nConcl: I. Those who take dowry should be condemned.\nConcl: II. Those who do not take dowry should be respected.",
+            "solution": "Step 1: 'Discredits himself' -> Condemnation. (I Follows).\nStep 2: Respect is positive inference? Not necessarily derived directly, but plausible. Strict logic: Only I.",
+            "explanation": "Strict scope."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Assert: We feel colder on mountains.\nReason: Temperature decreases with altitude.",
+            "solution": "Step 1: A is True. R is True.\nStep 2: R explains A correctly.",
+            "explanation": "Scientific reasoning."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Assert: Glass is a supercooled liquid.\nReason: It has a definite melting point.",
+            "solution": "Step 1: A is True. \nStep 2: R is False (Amorphous solids do NOT have definite mp).\nStep 3: A true, R false.",
+            "explanation": "Fact verification."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Money plays a vital role in politics.\nConcl: I. The poor can never become politicians. II. All rich men take part in politics.",
+            "solution": "Step 1: 'Vital role' != 'Sole factor'.\nStep 2: Poor 'can never' is too strong. (Fail).\nStep 3: 'All rich' is generalization. (Fail).",
+            "explanation": "Qualifier analysis."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Films have become indispensable for entertainment.\nConcl: I. Films are the only medium of entertainment.",
+            "solution": "Step 1: 'Indispensable' = Important/Necessary. != 'Only'.\nStep 2: Fail.",
+            "explanation": "Word nuance."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Humans are mammals. Whales are mammals.\nConcl: Humans are Whales.",
+            "solution": "Step 1: H in M. W in M.\nStep 2: No overlap inferred.\nStep 3: Fail.",
+            "explanation": "Syllogistic logic in Verbal."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: To catch a tartar.\nMeaning?",
+            "solution": "Step 1: Idiom. Means 'To deal with someone/something that proves more powerful/troublesome than expected'.",
+            "explanation": "Verbal ability overlap."
         }
     ],
     "shortcuts": [
-        "Eliminate options that are definitely related.",
-        "For word problems, vocabulary is key."
+        "Words like 'All', 'Only', 'Always', 'Never' often make a conclusion INVALID.",
+        "Words like 'Some', 'May', 'Can' often make a conclusion VALID.",
+        "In Cause & Effect, identifying the chronology helps (Cause happens before Effect)."
     ],
     "commonMistakes": [
-        "Overthinking partial relationships.",
-        "Ignoring secondary meanings of words."
+        "Mistake: Using outside knowledge (e.g., 'I know X is true'). Use ONLY statement data.",
+        "Mistake: Assuming the converse is true (A implies B, does not mean B implies A).",
+        "Mistake: Confusing 'Course of Action' with 'Logical Conclusion'."
     ],
     "placementTips": [
-        "Improve vocabulary for better verbal reasoning score.",
-        "Don't spend too much time if you don't know the word."
+        "Read the question stem carefully: 'Which conclusion follows?' vs 'Which does NOT follow?'.",
+        "Theme detection requires summarizing the paragraph in one sentence.",
+        "Practice Assertion-Reasoning from GK/Science topics."
     ]
 }

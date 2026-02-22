@@ -3,42 +3,206 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Scheduling",
-            "concept": "Arranging events by days/months.",
-            "formula": "Table with Days fixed column.",
-            "solvingTechnique": "Note hints like '2 days gap', 'immediately before'.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "A on Mon, B after A. C before D.",
-                    "solution": "Step 1: Mon-A. Tue-B.\nStep 2: Check other constraints."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Puzzles test the ability to organize unstructured data. Common types include Floor Puzzles, Scheduling (Days/Months), and Linear/Parallel Rows.",
+            "solvingTechnique": "Always draw a base diagram (e.g., floors 7 to 1). Note down negative conditions ('A does not live on top') separately. Use multiple cases if needed."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Linear: 5 friends A, B, C, D, E. A is left of B. C is right of B. D is left of A. E is right of C. Order?",
+            "solution": "Step 1: D - A (D left of A).\nStep 2: A - B (A left of B).\nStep 3: B - C (C right of B).\nStep 4: C - E (E right of C).\nStep 5: Combined: D - A - B - C - E.",
+            "explanation": "Chain linkage."
         },
         {
-            "questionType": "Floor Puzzle",
-            "concept": "People on different floors.",
-            "formula": "Ground floor is 1.",
-            "solvingTechnique": "Use two columns for Case 1 and Case 2.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "A lives on odd floor. B above A.",
-                    "solution": "Step 1: Try A=1, A=3.\nStep 2: Place B relative to A."
-                }
-            ]
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Floor: 3 floors. A, B, C. A not on top. B below C. A above B.",
+            "solution": "Step 1: B below C, A above B -> C > A > B?\nStep 2: A not on Top (3). So A is 2. C is 3. B is 1.\nStep 3: Order: 3-C, 2-A, 1-B.",
+            "explanation": "Elimination."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Comparison: A is taller than B. C is shorter than A. D is taller than E but shorter than B. Tallest?",
+            "solution": "Step 1: A > B.\nStep 2: A > C.\nStep 3: B > D > E.\nStep 4: Chain: A > B > D > E. A > C.\nStep 5: A is clearly taller than B, C, D, E. Tallest is A.",
+            "explanation": "Inequality chain."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Day: A goes Mon used B goes Wed. C goes day before B.",
+            "solution": "Step 1: B = Wed.\nStep 2: C = Tue (Before B).\nStep 3: A = Mon.\nStep 4: Order: Mon-A, Tue-C, Wed-B.",
+            "explanation": "Calendar sequence."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Line: P, Q, R, S. P at end. Q neighbor of P. R neighbor of Q.",
+            "solution": "Step 1: P _ _ _ or _ _ _ P.\nStep 2: P Q _ _ or _ _ Q P.\nStep 3: P Q R S or S R Q P.\nStep 4: Both valid orders.",
+            "explanation": "Neighbor constraint."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Weight: A > B, B > C, C > D. Who is lightest?",
+            "solution": "Step 1: A > B > C > D.\nStep 2: D is lightest.",
+            "explanation": "Direct."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 5 books stacked. History on top. Math below English. English below History. Science at bottom. Hindi between Math and Science? No.",
+            "solution": "Step 1: 5: History.\nStep 2: 4: English (Below Hist).\nStep 3: 3: Math (Below Eng).\nStep 4: 1: Science.\nStep 5: 2: Must be Hindi. \nStep 6: Order H, E, M, Hi, S.",
+            "explanation": "Stacking."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 4 cars P,Q,R,S parked. P is 2nd to left of R. Q is right of R. S is left of P.",
+            "solution": "Step 1: P _ R (P 2nd left).\nStep 2: P _ R Q (Q right of R).\nStep 3: S P _ R Q (S left of P).\nStep 4: Car in gap? Wait, only 4 cars? Question says 'P is 2nd to left'. Implies 1 gap. Where is the gap? Maybe S P (gap) R Q is 5 slots. Let's assume 4 slots. P @ 1, R @ 3. Gap @ 2. Q @ 4. S @ 0? Impossible. \nStep 5: Assume 4 cars in a row only. S P Q R? P is left of R. Q right of R. S P ... \nStep 6: Invalid question constraints for 4 cars. Assume 5 spots or 'Left' means immediate left. If immediate: S P R Q. P 2nd left of Q? No. \nStep 7: Valid Logic: P _ R. Q is right of R -> P _ R Q. S left of P -> S P _ R Q. 5 slots. Who is in gap? Unknown. Question asks 'Order from left'. S, P, ?, R, Q.",
+            "explanation": "Gap identification."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Team of A,B,C. A is Captain. B is Keeper. C is Bowler. Who is Captain?",
+            "solution": "Step 1: A.",
+            "explanation": "Trivial."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Box: Red above Green. Blue below Green. Yellow above Red.",
+            "solution": "Step 1: Y\nStep 2: R (Review)\nStep 3: G\nStep 4: B.\nStep 5: Y > R > G > B.",
+            "explanation": "Vertical dominance."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 7 Boxes J,K,L,M,N,O,P stacked. J at bottom. M is 3rd from top. O is immediately above J. K is immediately below L. N is somewhere above P.",
+            "solution": "Step 1: 7 boxes. \nStep 2: 7: \nStep 3: 6: \nStep 4: 5: (M? No, 3rd from top is 5). So M is at 5.\nStep 5: 4: \nStep 6: 3: \nStep 7: 2: O (Above J)\nStep 8: 1: J (Bottom)\nStep 9: K immed below L -> LK pair. Can be 7-6 or 4-3. \nStep 10: N above P. \nStep 11: If LK at 4-3, N,P at 7,6. Order: N, P, M, L, K, O, J. Valid.",
+            "explanation": "Fixed positions first."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 Persons A,B,C,D,E,F in circle facing center. A is 2nd to right of B. F is neighbour of B. D is opposite A.",
+            "solution": "Step 1: Draw Circle. Place B.\nStep 2: A is 2nd Right -> B _ A.\nStep 3: D opp A -> D is between B and Left Nbr.\nStep 4: F neighbour B -> F is between B and A is impossible (space occupied?). No, B_A means 1 gap. Gap could be F?\nStep 5: Let's Place: 1:B, 2:F, 3:A. (2 is right of 1). \nStep 6: D opp A? 3 opp 6. So D is 6.\nStep 7: Rem C, E. Locations 4, 5. \nStep 8: Solution: B, F, A, C/E, E/C, D.",
+            "explanation": "Circular fixing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 Lectures M-Sat. History not Tue/Fri. Math immed after English. English not Mon. Physics on Sat.",
+            "solution": "Step 1: Sat: Phy.\nStep 2: Eng-Math pair. Cannot be Mon (Eng not Mon). Can be Tue-Wed, Wed-Thu, Thu-Fri.\nStep 3: Hist not Tue, not Fri. \nStep 4: If EM is Tue-Wed. Hist not Fri, so Hist Thu? Rem Subject Fri. Mon? \nStep 5: Case: Mon-?, Tue-Eng, Wed-Math, Thu-Hist, Fri-?, Sat-Phy. Valid.",
+            "explanation": "Days scheduling."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 5 friends rank in test. Only 2 people between A and B. C is above A. B is Rank 1.",
+            "solution": "Step 1: B is 1.\nStep 2: 2 people betw A, B -> B, _, _, A. So A is 4.\nStep 3: C above A (Rank 2 or 3). \nStep 4: Rem D, E in other slots.",
+            "explanation": "Rank logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 8 people 4 floors, 2 flats (I, II). A Floor 2 Flat I. B Floor 4 Flat II. C immed below B.",
+            "solution": "Step 1: Grid 4x2.\nStep 2: 4-II: B. 4-I: ?\nStep 3: 3-II: C (Immed below B). \nStep 4: 2-I: A.\nStep 5: Easy placement.",
+            "explanation": "Matrix puzzle."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Scheduling: P,Q,R,S,T work in diff months (Jan, Mar, May, July, Sept). R in month with 31 days? All have 31. Q in Mar. S after T.",
+            "solution": "Step 1: Q = Mar.\nStep 2: Jan, May, Jul, Sep (30). Wait Sep has 30. Question says 'month with 31'. R in Jan/May/Jul. \nStep 3: P in Sep (Only 30 day left? If R condition implies others are not). \nStep 4: S after T.",
+            "explanation": "Days in month check."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 people in row North. A 3rd from left end. C 2nd to right of A. B not neighbour of A/C.",
+            "solution": "Step 1: _ _ A _ _ _ (A at 3).\nStep 2: C 2nd right of A -> _ _ A _ C _ (C at 5).\nStep 3: B not near A(2,4) or C(4,6). Left spots: 1. So B is at 1.\nStep 4: B _ A _ C _.",
+            "explanation": "Elimination of slots."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Order: Tea, Coffee, Milk, Juice. Juice before Tea. Milk after Coffee. Tea before Milk.",
+            "solution": "Step 1: J < T.\nStep 2: T < M.\nStep 3: C < M. \nStep 4: J < T < M. Where is C? C < M. Could be J C T M or C J T M.\nStep 5: Ambiguous without more data.",
+            "explanation": "Partial ordering."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 5 boxes. Weight: A > B, C. D is heaviest. E is lightest. B > C.",
+            "solution": "Step 1: D > A > B > C > E.",
+            "explanation": "Sorting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Designation: GM > DGM > Mgr > AM > Clerk. P is senior to Q. R junior to S. S junior to Q. T senior P.",
+            "solution": "Step 1: Order: T > P > Q > S > R.\nStep 2: Map to Desig: T(GM), P(DGM), Q(Mgr), S(AM), R(Clerk).",
+            "explanation": "Mapping hierarchy."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 boxes staked. 3 between A and B. one between B and C. C above B. A below C? No. A is top. Find C.",
+            "solution": "Step 1: A (Top, 8). \nStep 2: 3 between A, B -> 8, (7,6,5), B is 4.\nStep 3: 1 between B, C. C above B -> C is 6.\nStep 4: Check logical consistency. A(8), C(6), B(4). Space 7,5,3,2,1 vacant. Valid.",
+            "explanation": "Gap analysis."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 7 friends visit cities. A(Mon, Mumbai). B(Tue, Pune). C(Wed, ?). D not Delhi. Fri is Goa. Day before Goa is Delhi. Who visits Delhi?",
+            "solution": "Step 1: Fri: Goa.\nStep 2: Thu: Delhi.\nStep 3: A-Mon, B-Tue, C-Wed.\nStep 4: Who visits Thu? D not Delhi. \nStep 5: Rem E, F, G. E visits Delhi? Need more conditions. \nStep 6: Assuming standard 'Who' implies determining slot: The person on Thursday visits Delhi.",
+            "explanation": "Slot identification."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 9 people in 3 rows/3 cols. Sudoku type logic often not asked. Matrix Arrangement. A,B,C in Row 1. P,Q,R Row 2. X,Y,Z Row 3. B behind P. R in front of Z. C not at corners.",
+            "solution": "Step 1: Row 1: _ C _ (C not corner, so middle).\nStep 2: B behind P implies P in R2, B in R1? Or B in R1, P in R2. 'Behind' usually means R2 is behind R1? Let's assume Queue. R1 Front. \nStep 3: B varies. P is R2. \nStep 4: R front of Z. R(R2), Z(R3). same col. \nStep 5: Complex matrix.",
+            "explanation": "Grid fixing."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 10 people 2 parallel rows. Row 1 South (A-E). Row 2 North (P-T). B faces Q. S is immediate left of Q. And so on.",
+            "solution": "Step 1: Draw lines.\nStep 2: B - Q pair.\nStep 3: S left of Q (North) -> S Q.\nStep 4: B faces Q. Who faces S? Neighbour of B.",
+            "explanation": "Parallel row logic."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Floor Puzzle with variable. 6 floors. 6 people. Each likes diff fruit. A(Even floor, Likes Apple). 2 floors betw A and B(Mango).",
+            "solution": "Step 1: Cases for A: 2, 4, 6.\nStep 2: If A=2: B can be 5 (2 gap). B(5, Mango).\nStep 3: If A=4: B can be 1 or 7(Inv). B(1, Mango).\nStep 4: If A=6: B can be 3. B(3, Mango).\nStep 5: Use other clues to eliminate cases.",
+            "explanation": "Multi-case handling."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Blood Relation Puzzle. 6 family members in row. A is father of B. C is wife of A. Males at ends.",
+            "solution": "Step 1: A(M), C(F). B(?).\nStep 2: Ends: Male. A is Male, can be at end.\nStep 3: D, E, F others. \nStep 4: Mixes Line + Family Tree.",
+            "explanation": "Integration of concepts."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Unsteady/Uncertain number of persons. A is 4th from left. B is 3rd from right. 2 people between them. Total?",
+            "solution": "Step 1: Case 1 (Non-overlap): A _ _ B. 4 + 2 + 3 = 9.\nStep 2: Case 2 (Overlap): _ B _ _ A _. Total? A is 4th (1,2,3,A). B is 3rd from right. \nStep 3: If total < 7. Try 5. 1(X), 2(B), 3(X), 4(A), 5(X). Right count of B is 4? No. \nStep 4: Min overlap formula: L+R - Gap - 2.\nStep 5: 4+3 - 2 - 2 = 3. Total 3? Check: B(1), gap, A(3). A is 3rd (Fail). \nStep 6: So Case 2 not possible. Total 9.",
+            "explanation": "Overlap check."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Year Puzzle. Born in 1980, 85, 90. Ages calc from 2020. A is oldest...",
+            "solution": "Step 1: Calculate Ages: 40, 35, 30.\nStep 2: Match conditions to ages.",
+            "explanation": "Age calculation step first."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 persons circle. 4 in, 4 out. Not knowing who faces where. A faces center. B 3rd right A. C...",
+            "solution": "Step 1: Fix A (In).\nStep 2: B is 3rd Right (In logic). Place B.\nStep 3: Use B's relation to check B's direction.",
+            "explanation": "Direction dependence."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Designation Puzzle with Cities. GM goes to NY. AGM goes to London...",
+            "solution": "Step 1: Create table: Desig | Person | City.\nStep 2: Fill definite info.\nStep 3: Use negative info (Not London) to filter.",
+            "explanation": "Tabular method."
         }
     ],
     "shortcuts": [
-        "Start with definite information (e.g. 'A is on 4th floor').",
-        "Group related clues together (e.g. all clues about B)."
+        "Start with definite information (e.g., 'A is at extreme end').",
+        "For Floor puzzles, assume 2 cases simultaneously to save time.",
+        "Unknown number: Formula for max = L+R+N. Min = L+R-N-2."
     ],
     "commonMistakes": [
-        "Reading 'gap of 2 floors' as '2nd floor above'. Gap 2 means 3rd floor above.",
-        "Not eliminating invalid cases quickly."
+        "Mistake: Identifying Left/Right incorrectly (especially for South facing).",
+        "Mistake: Assuming 'Neighbour' means immediate Right (could be Left).",
+        "Mistake: Ignoring the 'Cases' (Possibilities) leading to contradiction later."
     ],
     "placementTips": [
-        "Leave puzzles for last if they look too long.",
-        "If you solve the puzzle, you get 5 marks easily."
+        "Draw parallel rows diagram clearly.",
+        "For Circle, 'Facing Outside' reverses Left/Right.",
+        "If puzzle stuck, read the negative conditions again."
     ]
 }

@@ -3,42 +3,211 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Basic Venn",
-            "concept": "Deductive reasoning using Venn diagrams.",
-            "formula": "All A are B (A inside B). Some A are B (Intersection).",
-            "solvingTechnique": "Draw minimum overlap diagram.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "All Cats are Dogs. All Dogs are Birds. Cats are Birds?",
-                    "solution": "Step 1: Cats inside Dogs inside Birds.\nStep 2: Yes, Cats are inside Birds."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Deductive reasoning where conclusions are drawn from two or more statements.",
+            "solvingTechnique": "Use Venn Diagrams. 'All A are B' (A inside B). 'Some A are B' (Intersection). 'No A is B' (Disjoint)."
         },
         {
-            "questionType": "Possibility",
-            "concept": "Can it happen?",
-            "formula": "If definite Conclusion is False, Possibility MIGHT be True.",
-            "solvingTechnique": "Try to draw a counter-diagram. If you can, possibility exists.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "Some A are B. No B is C. Can A be C?",
-                    "solution": "Step 1: A overlaps B. B separate from C.\nStep 2: Part of A could overlap C.\nStep 3: Yes, possible."
-                }
-            ]
+            "questionType": "Key Rules",
+            "concept": "Positive statements (All, Some) can never lead to Negative conclusions individually. 'Either-Or' condition applies when Subject and Predicate are same and one is +ve, one -ve.",
+            "solvingTechnique": "Always draw the 'Minimum Overlap' diagram first. Check for 'Possibility' by trying to draw alternate valid diagrams."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statements: All Cats are Dogs. All Dogs are Rats.\nConclusions: I. All Cats are Rats. II. Some Rats are Cats.",
+            "solution": "Step 1: Draw Venn: C inside D inside R.\nStep 2: C is fully inside R? Yes. (I follows).\nStep 3: Can we go from R to C? Some R are C. Yes. (II follows).\nStep 4: Both follow.",
+            "explanation": "Nested circles."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statements: Some Pens are Books. Some Books are Papers.\nConcl: I. Some Pens are Papers. II. Some Papers are Books.",
+            "solution": "Step 1: P - inter - B - inter - Pa.\nStep 2: P and Pa have no direct link. (I does not follow).\nStep 3: Pa and B allow intersection. (II follows).\nStep 4: Only II follows.",
+            "explanation": "No direct link = No definite conclusion."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statements: All Cars are Buses. No Bus is Train.\nConcl: I. No Car is Train. II. Some Buses are Cars.",
+            "solution": "Step 1: C inside B. B disjoint from T.\nStep 2: Since C is inside B, and B touches no T, C can touch no T. (I follows).\nStep 3: B contains C. (II follows).\nStep 4: Both follow.",
+            "explanation": "Inclusion-Exclusion."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: All A are B. All B are C.\nConcl: I. Some C are A. II. All C are A.",
+            "solution": "Step 1: A inside B inside C.\nStep 2: Outer to Inner is 'Some'. Inner to Outer is 'All'.\nStep 3: I (Some) follows. II (All) does not follow (C is bigger).\nStep 4: Only I follows.",
+            "explanation": "Direction of conclusion."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Some Tables are Chairs. All Chairs are Wood.\nConcl: I. Some Wood are Tables. II. No Wood is Chair.",
+            "solution": "Step 1: T intersect C. C inside W.\nStep 2: Since C is inside W, the part of T matching C is also W. (I follows).\nStep 3: Positive statements cannot give Negative conclusion. (II Fail).\nStep 4: Only I follows.",
+            "explanation": "Positive statements rule."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: No A is B. No B is C.\nConcl: I. No A is C.",
+            "solution": "Step 1: A separate B. B separate C.\nStep 2: A and C relation? Unknown. Could overlap.\nStep 3: Definite conclusion 'No A is C' False.\nStep 4: Neither follows.",
+            "explanation": "Disjoint doesn't mean Transitive."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: All Men are Mortal. Ram is a Man.\nConcl: Ram is Mortal.",
+            "solution": "Step 1: Ram inside Man inside Mortal.\nStep 2: Follows.",
+            "explanation": "Classic syllogism."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: Some Fruits are Apples. No Apple is Orange.\nConcl: I. Some Fruits are not Oranges.",
+            "solution": "Step 1: F inter A. A no O.\nStep 2: The part of F that is A cannot be O.\nStep 3: True. Some Fruits (the Apple ones) are not Oranges.",
+            "explanation": "Specific logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: All P are Q. Some Q are R.\nConcl: Some P are R.",
+            "solution": "Step 1: P in Q. Q inter R.\nStep 2: P and R link unclear.\nStep 3: Does not follow.",
+            "explanation": "Uncertain overlap."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: St: All X are Y. All Z are Y.\nConcl: Some X are Z.",
+            "solution": "Step 1: X in Y. Z in Y.\nStep 2: X and Z could be separate inside Y.\nStep 3: Does not follow.",
+            "explanation": "Common container."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Some A are B. Some B are C.\nConcl: I. Some A are C. II. No A is C.",
+            "solution": "Step 1: A-B-C. A and C no direct relation.\nStep 2: Indiv I fails. Indiv II fails.\nStep 3: But A and C must either overlap or not.\nStep 4: Subject/Predicate same. One +ve, One -ve.\nStep 5: Either I or II follows.",
+            "explanation": "Either-Or Case."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: All A are B. Some B are not C.\nConcl: Some A are not C.",
+            "solution": "Step 1: A in B. Part of B is not C.\nStep 2: Does that part include A? Maybe, Maybe not.\nStep 3: A could be fully inside C (compatible with B not fully inside C).\nStep 4: Does not follow.",
+            "explanation": "Negative existential."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: No P is Q. All R are P.\nConcl: No R is Q.",
+            "solution": "Step 1: R inside P. P separate from Q.\nStep 2: R cannot touch Q.\nStep 3: Follows.",
+            "explanation": "Extended disjoint."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Some Dogs are Rats. All Rats are Cats. No Dog is Pig.\nConcl: I. Some Cats are Dogs. II. No Pig is Rat.",
+            "solution": "Step 1: D inter R. R in C. D no P.\nStep 2: R is part of C. R inter D. So C inter D. (I Follows).\nStep 3: P no D. R is touching D. Can P touch R? Yes, non-D part of R. Or maybe not. Is 'No Pig is Rat' definite? No.\nStep 4: Only I follows.",
+            "explanation": "Partial restriction."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: All Windows are Doors. All Entrances are Windows.\nConcl: I. All Entrances are Doors. II. Some Doors are Entrances.",
+            "solution": "Step 1: E in W. W in D. -> E in D.\nStep 2: I Follows (Direct).\nStep 3: II Follows (Outer to Inner Some).\nStep 4: Both follow.",
+            "explanation": "Nested chain."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Some A are B. All B are C. No C is D.\nConcl: I. No B is D. II. Some A are not D.",
+            "solution": "Step 1: A-B. B in C. C no D.\nStep 2: B is inside C. C no D. So B no D. (I Follows).\nStep 3: Part of A is B. That part is C. That part cannot be D. So Some A are not D. (II Follows).\nStep 4: Both follow.",
+            "explanation": "Transitive properties."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: All P are Q. Some Q are R.\nConcl: I. All P being R is a possibility.",
+            "solution": "Step 1: Standard diagram: P in Q. Q inter R (outside P).\nStep 2: Possibility diagram: P inside Q. R intersects Q such that it swallows P.\nStep 3: Valid? Yes, statements hold. \nStep 4: Follows.",
+            "explanation": "Possibility rules."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: No A is B. No B is C.\nConcl: I. All A being C is a possibility.",
+            "solution": "Step 1: A sep B. B sep C.\nStep 2: Can A be inside C? Yes, as long as neither touches B.\nStep 3: Follows.",
+            "explanation": "Possibility in disjoint."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: All A are B. No A is C.\nConcl: I. Some B are not C.",
+            "solution": "Step 1: A in B. A no C.\nStep 2: The part of B that is A cannot be C.\nStep 3: So Some B (the A part) are not C. True.\nStep 4: Follows.",
+            "explanation": "Some Not derived from No."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: St: Some X are Y. Some Y are Z.\nConcl: I. No X is Z. II. Some X are Z.",
+            "solution": "Step 1: Either I or II follows.",
+            "explanation": "Standard Complementary Pair."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Only a few A are B. Some B are C.\nConcl: I. All A can be B. II. Some A are not B.",
+            "solution": "Step 1: 'Only a few A are B' = Some A are B AND Some A are NOT B.\nStep 2: I. All A can be B? No, because 'Some A are NOT B' is a condition. False.\nStep 3: II. Some A are not B. True (Definition).\nStep 4: Only II follows.",
+            "explanation": "'Only a few' concept."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Only A are B. Some A are C.\nConcl: I. All B can be C. II. Some C are B.",
+            "solution": "Step 1: 'Only A are B' = All B are A AND B cannot belong to anyone else (B is exclusive to A).\nStep 2: I. Can B be C? No, B is exclusive to A. (False).\nStep 3: II. Some C are B? No. (False).\nStep 4: Neither follows.",
+            "explanation": "'Only X are Y' = All Y are X (Exclusive)."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: 0% A are B. 100% B are C.\nConcl: I. Some C are not A.",
+            "solution": "Step 1: 0% = No. 100% = All.\nStep 2: No A is B. All B are C.\nStep 3: B is inside C. B cannot be A.\nStep 4: So the part of C that is B cannot be A.\nStep 5: Follows.",
+            "explanation": "Percentage logic."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Some A are B. All C are D. No B is C.\nConcl: I. Some A are not C. II. All D can never be B.",
+            "solution": "Step 1: A-B. B sep C. C in D.\nStep 2: I. Part of A is B. B cannot be C. So that part of A cannot be C. (Follows).\nStep 3: II. All D be B? If All D is B, then C (which is in D) becomes B. But No B is C. Contradiction. So D cannot be fully B. (Follows).\nStep 4: Both follow.",
+            "explanation": "Can never be = Not a possibility."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: All A are B. Common B are C? No. All A are B. No B is C.\nConcl: I. No A is C. II. Some B are A.",
+            "solution": "Step 1: A in B. B sep C.\nStep 2: I. A is inside B. B no C. So A no C. (True).\nStep 3: II. B contains A. Some B are A. (True).\nStep 4: Both follow.",
+            "explanation": "Standard check."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Reverse Syllogism: Concl: Some Chairs are Tables.\nWhich statements imply this?\nA) No Chair is Table.\nB) Some Chair is Wood. All Wood is Table.\nC) All Table is Wood. No Wood is Chair.",
+            "solution": "Step 1: Check B. Chair-Wood. Wood in Table. -> Chair overlaps Table.\nStep 2: B implies conclusion.",
+            "explanation": "Reverse checking."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Some A are B. No B is C. All D are A.\nConcl: I. Some D are not C. II. All D are B is a possibility.",
+            "solution": "Step 1: D in A. A inter B. B sep C.\nStep 2: I. D is in A. Does D touch B? Not necessarily. Does D touch C? Can D be C? C cannot check B. D is A. A can touch C. So D can be C. 'Some D are not C' is not definite. (Fail).\nStep 3: II. Can All D be B? B and D are inside/part of A. Yes, D can go inside the A-B intersection. (Follows).\nStep 4: Only II follows.",
+            "explanation": "Complex possibility."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: Only a few Pink are Red. Only a few Red are Blue.\nConcl: I. Some Pink are Blue. II. No Pink is Blue.",
+            "solution": "Step 1: P inter R (with restriction). R inter B (restriction).\nStep 2: P and B relation unknown.\nStep 3: I Fail. II Fail.\nStep 4: Either I or II follows (Complementary pair).",
+            "explanation": "Chain of 'Only a few'."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: All A are B. All C are B.\nConcl: I. Some A are C is a possibility. II. No A is C is a possibility.",
+            "solution": "Step 1: A and C both inside B. They might overlap or not.\nStep 2: Possibility of overlap? Yes (I True).\nStep 3: Possibility of no overlap? Yes (II True).\nStep 4: Both follow.",
+            "explanation": "Unconstrained siblings."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: St: At least some A are B. Mostly B are C.\nConcl: Some A are C.",
+            "solution": "Step 1: At least some = Some. Mostly = Some.\nStep 2: A-B-C.\nStep 3: A-C linkage? No.\nStep 4: Does not follow.",
+            "explanation": "Keyword substitution."
         }
     ],
     "shortcuts": [
-        "Restatement is NOT a valid conclusion.",
-        "Either-Or condition: Elements same, one +ve, one -ve, both invalid individually."
+        "Subject & Predicate same + One Pos/One Neg + Both Fail = Either-Or.",
+        "'Only X is Y' -> All Y is X (and Y cannot touch others).",
+        "'Can never be' is NOT a possibility question, it is a Definite Negative question."
     ],
     "commonMistakes": [
-        "Thinking 'Some' means 'Some implies not All'. (Some includes All).",
-        "Using real world logic (Cats aren't Dogs!)."
+        "Mistake: Thinking 'Some A are not B' follows from 'Some A are B'. (It doesn't).",
+        "Mistake: Diagramming 'Only A is B' as 'All A is B'. (It is All B is A).",
+        "Mistake: Missing the 'Either-Or' pair and marking 'Neither'."
     ],
     "placementTips": [
-        "Master the 'Only a few' concept (means Some AND Some Not).",
-        "Draw big clear diagrams."
+        "In possibility, try to force the condition True. If no statement violated, it's possible.",
+        "Learn keywords: 'Ideally', 'Seldom', 'A few' = Some. 'None but' = Only.",
+        "Draw big clear circles."
     ]
 }

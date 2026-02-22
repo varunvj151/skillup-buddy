@@ -3,42 +3,211 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Family Tree",
-            "concept": "Mapping relationships across generations.",
-            "formula": "Male (+), Female (-), Sibling (=), Spouse (<->).",
-            "solvingTechnique": "Draw generation gap vertically.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "A is B's brother. C is A's father. D is C's sister. B to D?",
-                    "solution": "Step 1: C is father of A & B.\nStep 2: D is aunt of A & B.\nStep 3: B is niece/nephew of D."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Determining the biological or legal relationship between two persons based on a chain of information.",
+            "solvingTechnique": "Use 'Generation Tree'. Males (+ or Square), Females (- or Circle). Vertical line for generation gap, Horizontal for siblings, Double Horizontal for Spouse."
         },
         {
-            "questionType": "Coded Relations",
-            "concept": "A+B means A is father of B.",
-            "formula": "Decode back to front or front to back.",
-            "solvingTechnique": "Substitute symbols with relations.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "P+Q means P is father of Q. P-Q means P is sister. A+B-C. A to C?",
-                    "solution": "Step 1: B is sister of C.\nStep 2: A is father of B.\nStep 3: A is father of C."
-                }
-            ]
+            "questionType": "Types",
+            "concept": "Pointing to a Photograph, Coded Relations (A+B means A is father of B), Introduction.",
+            "solvingTechnique": "For 'Pointing' problems, break the sentence into parts: 'My father's only son' -> 'Me'."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A is brother of B. B is sister of C. C is father of D. How is D related to A?",
+            "solution": "Step 1: A(M) - B(F) - C(M).\nStep 2: C -> D(?).\nStep 3: D is child of C. A is uncle of D.\nStep 4: D's gender unknown. Nephew or Niece.",
+            "explanation": "Direct links."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Pointing to a man, a woman said, 'His mother is the only daughter of my mother.'",
+            "solution": "Step 1: 'My mother's only daughter' = The woman herself.\nStep 2: 'His mother' is 'The woman'.\nStep 3: The woman is the mother of the man.",
+            "explanation": "Backtracking technique."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A is father of B. C is daughter of B. D is brother of C. A is?",
+            "solution": "Step 1: A -> B -> C, D.\nStep 2: A is grandfather of C and D.\nStep 3: Answer: Grandfather.",
+            "explanation": "Generation gap."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: P is Q's sister. R is Q's mother. S is R's father. T is S's mother. How is P related to S?",
+            "solution": "Step 1: S -> R -> Q, P.\nStep 2: P is female (Sister).\nStep 3: P is Granddaughter of S.",
+            "explanation": "Multi-generation check."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: E is the son of A. D is the son of B. E is married to C. C is B's daughter. How is D related to E?",
+            "solution": "Step 1: E(M) = C(F).\nStep 2: B -> C(F), D(M).\nStep 3: C and D are siblings.\nStep 4: E is husband of C. D is Brother-in-Law of E.",
+            "explanation": "In-law relation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Introducing a boy, a girl said, 'He is the son of the daughter of the father of my uncle.'",
+            "solution": "Step 1: My uncle's father = My Grandfather.\nStep 2: Daughter of Grandfather = Mother or Aunt.\nStep 3: Son of Mother/Aunt = Brother or Cousin.",
+            "explanation": "Ambiguity handling."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A is B's sister. C is B's mother. D is C's father. E is D's mother. Then A is to D?",
+            "solution": "Step 1: A is C's daughter.\nStep 2: C is D's daughter.\nStep 3: A is Granddaughter of D.",
+            "explanation": "Standard tree."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: X is the husband of Y. W is daughter of X. Z is husband of W. N is daughter of Z. Relation N to Y?",
+            "solution": "Step 1: Y = X -> W(F) = Z(M) -> N(F).\nStep 2: Y is Grandmother of N.\nStep 3: N is Granddaughter of Y.",
+            "explanation": "Gender tracking."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Start with A. A's father's wife's brother's son is B. A to B?",
+            "solution": "Step 1: A's father's wife = Mother.\nStep 2: Mother's brother = Maternal Uncle.\nStep 3: Uncle's son = Cousin.",
+            "explanation": "Chain method."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Deepak said to Nitin, 'That boy is the son of my father's only brother'.",
+            "solution": "Step 1: Father's only brother = Uncle.\nStep 2: Son of Uncle = Cousin.",
+            "explanation": "Simple breakdown."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Coded: A+B (A is father), A-B (A is wife), A*B (A is brother). Equation: P + R * T - Q. P to Q?",
+            "solution": "Step 1: P is father of R.\nStep 2: R is brother of T.\nStep 3: T is wife of Q.\nStep 4: Q is male (Husband).\nStep 5: P is Father-in-Law of Q.",
+            "explanation": "Symbol decoding."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Pointing to a gentleman, Deepak said, 'His only brother is the father of my daughter's father.'",
+            "solution": "Step 1: My daughter's father = Me (Deepak).\nStep 2: His only brother is My Father.\nStep 3: So He is the Brother of my Father.\nStep 4: He is Deepak's Uncle.",
+            "explanation": "Self-referencing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A family has 2 parents, 3 sons. Each son has 2 children. Total members?",
+            "solution": "Step 1: Parents (2).\nStep 2: Sons (3) + Wives (3) = 6. (Usually sons imply married in context of 'each has children').\nStep 3: Children 3*2 = 6.\nStep 4: Total 2 + 6 + 6 = 14.\nStep 5: Wait, wives not mentioned? 'Each son has children' implies wives exist. Safe bet 14.",
+            "explanation": "Implicit members."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A+B (A son B), A-B (A wife B). P+R-Q. Q is father of P?",
+            "solution": "Step 1: P is son of R.\nStep 2: R is wife of Q.\nStep 3: Q is husband of R (Male).\nStep 4: So Q is father of P. True.",
+            "explanation": "Verification."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A is uncle of B. B is daughter of C. C is daughter-in-law of P. P to A?",
+            "solution": "Step 1: A is C's brother-in-law or brother.\nStep 2: C is daughter-in-law of P -> C's husband is P's son.\nStep 3: A could be P's other son. P to A is Father/Mother.",
+            "explanation": "Possibility check."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Rahul's mother is the only daughter of Monika's father. Monika's husband to Rahul?",
+            "solution": "Step 1: Monika's father's only daughter = Monika.\nStep 2: Rahul's mother is Monika.\nStep 3: Monika's husband is Rahul's Father.",
+            "explanation": "Identity resolution."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: M is son of P. Q is granddaughter of O, who is husband of P. M to O?",
+            "solution": "Step 1: O = P.\nStep 2: M is son of P and O.\nStep 3: M is son of O.",
+            "explanation": "Direct relation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A$B (A mother B), A#B (A father B), A@B (A husband B). Which shows P is grandson of M?",
+            "solution": "Step 1: Need P to be Male and 2 gen below M.\nStep 2: Options check. M # R # P? M father R, R father P. P gender?\nStep 3: M # R $ P? M father R(M), R mother P.\nStep 4: Need gender of P. Usually last variable gender unknown. Need P @ T.\nStep 5: Look for M ... ... P @ T.",
+            "explanation": "Generation gap counting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: X introduces Y saying, 'He is the husband of the granddaughter of the father of my father.'",
+            "solution": "Step 1: Father of my father = Grandfather.\nStep 2: Granddaughter of GF = Sister or Cousin.\nStep 3: Husband of Sister = Brother-in-Law.",
+            "explanation": "Deep nesting."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Sita is niece of Ashok. Ashok's mother is Lakshmi. Kalyani is Lakshmi's mother. Kalyani's husband is Gopal. Parvathi is mother-in-law of Gopal. Sita to Gopal?",
+            "solution": "Step 1: Gopal = Kalyani.\nStep 2: Lakshmi is daughter.\nStep 3: Ashok is son of Lakshmi. Sita is niece of Ashok (Daughter of Ashok's sibling).\nStep 4: Sita is Great-Granddaughter of Gopal.",
+            "explanation": "4 Generations."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A family consists of 6 members P, Q, R, S, T, U. Q is son of R but R is not mother of Q. P and R are married. T is brother of R. S is daughter of P. U is brother of Q.",
+            "solution": "Step 1: R is father (not mother). P is mother.\nStep 2: P=R.\nStep 3: Q(M), S(F), U(M) are children.\nStep 4: T(M) is brother of R (Uncle).\nStep 5: Relation U to T? U is Nephew of T.",
+            "explanation": "Information synthesis."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Coded: P*Q (P father Q), P-Q (P sister Q), P+Q (P mother Q). Which implies M is nephew of N?",
+            "solution": "Step 1: N must be sibling of M's parent. M must be Male.\nStep 2: N - K * M (N sister K, K father M). M gender?\nStep 3: N - K * M * T (M father T -> M is Male).\nStep 4: Yes. N is aunt. M is nephew.",
+            "explanation": "Gender inference from subsequent."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A is B's sister. C is B's mother. D is C's father. E is D's mother. How is A related to D?",
+            "solution": "Step 1: A -> C (Daughter). C -> D (Daughter).\nStep 2: A is Granddaughter of D.",
+            "explanation": "Repeated for complexity check."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: If X+Y means X is daughter of Y; X-Y means X is brother of Y; X*Y means X is father. A - B * C + D. Relationship A to D?",
+            "solution": "Step 1: C is daughter of D.\nStep 2: B is father of C. Means B and D are husband-wife.\nStep 3: A is brother of B.\nStep 4: A is Brother-in-law of D.",
+            "explanation": "Spouse inference."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Pointing to a photo, a lady tells Pramod, 'I am the only daughter of this lady and her son is your maternal uncle.'",
+            "solution": "Step 1: 'This lady's' son is Pramod's Maternal Uncle (Mama).\nStep 2: Speaker is 'Only daughter' of 'This lady'. mean Speaker is sister of 'The Son'.\nStep 3: Speaker is Sister of Pramod's Uncle.\nStep 4: Who is sister of Mama? Mama is Mother's brother.\nStep 5: Speaker is Pramod's Mother.",
+            "explanation": "Key: Maternal Uncle = Mother's brother."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: In a family, there are 6 members. A and B are married. A is male. D is only son of C, who is brother of A. E is sister of D. B is daughter-in-law of F. F to C?",
+            "solution": "Step 1: A=B. A is Male.\nStep 2: C is brother of A.\nStep 3: F has daughter-in-law B -> F is parent of A.\nStep 4: F is parent of C too.\nStep 5: F is Father or Mother of C.",
+            "explanation": "Parent identification."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: P is father of Q. R is sister of P. S is brother of Q. T is father of S. How is T related to R?",
+            "solution": "Step 1: P is father of Q. S is brother of Q.\nStep 2: T is father of S. \nStep 3: So P and T are both fathers? Impossible biologically unless Step-relations. Or P is Mother? Step 1 said P is Father. \nStep 4: Wait. P is father Q. S is brother Q. T is father S. \nStep 5: This implies P=T. T is brother of R.",
+            "explanation": "Identity deduction."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A is uncle of B, who is daughter of C. C is daughter-in-law of P. How is A related to P?",
+            "solution": "Step 1: C is daughter-in-law of P -> C's husband is P's son.\nStep 2: B is daughter of C. A is uncle of B -> A is brother of C's husband.\nStep 3: So A is also son of P.",
+            "explanation": "Implicit sibling."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A told B, 'Yesterday I met the only brother of the daughter of my grandmother.' Whom did A meet?",
+            "solution": "Step 1: My GM's daughter = My Mother or Aunt.\nStep 2: Only brother of Mother/Aunt = Maternal Uncle? Or Father?\nStep 3: If GM has only one daughter and one son -> Uncle/Father.\nStep 4: If GM has only daughter (mother), brother is Uncle.\nStep 5: Option: Father or Uncle. \nStep 6: 'Only brother of daughter'. Daughter could be A's mother. Brother is A's Uncle/Father.",
+            "explanation": "Usually implies Father if specific context, else Uncle."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A family has man, wife, 3 sons, their wives, and 3 children each. Total?",
+            "solution": "Step 1: Man+Wife = 2.\nStep 2: 3 Sons + 3 Wives = 6.\nStep 3: 3*3 Children = 9.\nStep 4: Total = 17.",
+            "explanation": "Counting."
         }
     ],
     "shortcuts": [
-        "My mother's husband = My father.",
-        "Only son of my grandfather's only child = Me (if male)."
+        "Generation Gap: +1 (Father), -1 (Son), 0 (Brother).",
+        "Replace 'my' with yourself to solve pointing problems.",
+        "Draw the tree! Do not solve exclusively in head."
     ],
     "commonMistakes": [
-        "Assuming gender based on name (don't assume 'Ram' is male unless specified).",
-        "Mixing 'Paternal' (father side) and 'Maternal' (mother side)."
+        "Mistake: Assuming A is male because B is his wife (Correct), but assuming A is male because B is his brother (Wrong, A could be sister).",
+        "Mistake: 'Only son' does NOT mean 'Only child' (Can have daughters).",
+        "Mistake: Confusing Paternal/Maternal uncle."
     ],
     "placementTips": [
-        "Draw trees. Don't solve in head.",
-        "Start with 'My...' statements and work outwards."
+        "Gender is key. Draw +/- signs immediately.",
+        "Use options to eliminate impossible generations (e.g., if answer must be Gen +1, remove Brother/Son).",
+        "Double check 'How is A related to B' vs 'How is B related to A'."
     ]
 }

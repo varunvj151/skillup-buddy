@@ -3,42 +3,213 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Divisibility Rules",
-            "concept": "Quick checks to see if a number is divisible.",
-            "formula": "Div by 3: Sum of digits. Div by 4: Last 2 digits.",
-            "solvingTechnique": "Memorize 2 to 11 rules. 11: Diff of sum of odd and even places is 0 or div by 11.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Is 12345 divisible by 3?",
-                    "solution": "Step 1: Sum = 1+2+3+4+5 = 15.\nStep 2: 15 is div by 3.\nStep 3: Yes."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Properties of integers, divisibility rules, remainders, and unit digits.",
+            "formula": "Dividend = Divisor × Quotient + Remainder",
+            "solvingTechnique": "For divisibility by composite number (e.g., 72), check divisibility by co-prime factors (8 and 9)."
         },
         {
-            "questionType": "Unit Digit",
-            "concept": "Finding the last digit of a power.",
-            "formula": "Cyclicity of numbers (2,3,7,8 -> 4; 4,9 -> 2).",
-            "solvingTechnique": "Divide power by cyclicity (usually 4), take remainder.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Unit digit of 2^33?",
-                    "solution": "Step 1: 33 / 4 gives Remainder 1.\nStep 2: 2^1 = 2.\nStep 3: Answer 2."
-                }
-            ]
+            "questionType": "Unit Digit & Remainders",
+            "concept": "Cyclicity of powers.",
+            "formula": "a^(n) unit digit repeats for 2,3,7,8 (Cycle 4). 4,9 (Cycle 2). 0,1,5,6 (Cycle 1).",
+            "solvingTechnique": "Divide power by 4 to find the effective power."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find unit digit of 3^34.",
+            "solution": "Step 1: Power 34. Cycle of 3 is 4.\nStep 2: 34 mod 4 = 2.\nStep 3: Unit digit = 3^2 = 9.",
+            "explanation": "Cyclicity check."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Is 91 prime?",
+            "solution": "Step 1: Check primes up to sqrt(91) ~ 9.\nStep 2: 2(No), 3(No), 5(No), 7(Yes, 7*13=91).\nStep 3: Not Prime.",
+            "explanation": "Square root check."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Sum of first 50 natural numbers.",
+            "solution": "Step 1: n(n+1)/2.\nStep 2: 50*51/2 = 25*51 = 1275.",
+            "explanation": "Standard Series sum."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Which is divisible by 3: 245, 342, 601?",
+            "solution": "Step 1: Sum digits. 245(11, No). 342(9, Yes). 601(7, No).\nStep 2: 342.",
+            "explanation": "Sum of digits test."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: HCF of 24 and 36.",
+            "solution": "Step 1: Factors 24: 1,2,3,4,6,8,12,24.\nStep 2: Factors 36: 1,2,3,4,6,9,12,18,36.\nStep 3: Highest Common = 12.",
+            "explanation": "Definition of HCF."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Convert 0.333... to fraction.",
+            "solution": "Step 1: x = 0.33..\nStep 2: 10x = 3.33..\nStep 3: 9x = 3 => x = 1/3.",
+            "explanation": "Recurring decimal."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Find unit digit of 576 * 342.",
+            "solution": "Step 1: 6 * 2 = 12.\nStep 2: Unit digit 2.",
+            "explanation": "Multiply unit digits only."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: LCM of 4, 6, 8.",
+            "solution": "Step 1: Multiples of 8: 8, 16, 24.\nStep 2: 24 is div by 4 and 6.\nStep 3: LCM 24.",
+            "explanation": "Highest number multiples."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: (1001)^2008 + 1002 unit digit?",
+            "solution": "Step 1: 1^n ends in 1.\nStep 2: 1 + 2 = 3.",
+            "explanation": "1 power rule."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Number of prime factors in 6^10.",
+            "solution": "Step 1: 6 = 2*3.\nStep 2: (2*3)^10 = 2^10 * 3^10.\nStep 3: Count = 10 + 10 = 20.",
+            "explanation": "Prime factorization first."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Largest 4 digit number divisible by 88.",
+            "solution": "Step 1: 88 = 8 * 11.\nStep 2: Largest 4 digit 9999.\nStep 3: 9999 / 88 ... Quotient 113, Remainder 55.\nStep 4: Number = 9999 - 55 = 9944.",
+            "explanation": "Remainder subtraction."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: HCF of 2/3, 8/9, 64/81, 10/27.",
+            "solution": "Step 1: HCF of Fractions = HCF(Num) / LCM(Den).\nStep 2: HCF(2,8,64,10) = 2.\nStep 3: LCM(3,9,81,27) = 81.\nStep 4: 2/81.",
+            "explanation": "Fraction HCF formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Find remainder when 17^200 is divided by 18.",
+            "solution": "Step 1: 17 = 18 - 1.\nStep 2: (18-1)^200 / 18 -> Remainder (-1)^200.\nStep 3: (-1)^Even = 1.",
+            "explanation": "Negative remainder concept."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Smallest number which when divided by 12, 15, 20 leaves remainder 4 in each case.",
+            "solution": "Step 1: LCM(12,15,20) = 60.\nStep 2: Ans = LCM + Remainder.\nStep 3: 60 + 4 = 64.",
+            "explanation": "LCM + R model."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Unit digit of 7^105.",
+            "solution": "Step 1: 105 mod 4 = 1.\nStep 2: 7^1 = 7.",
+            "explanation": "Power cycle of 7 is 4."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Sum of all even numbers up to 100.",
+            "solution": "Step 1: 2 + 4 + ... + 100.\nStep 2: 2(1 + ... + 50).\nStep 3: 2 * (50*51/2) = 2550.",
+            "explanation": "Series summation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A number 45x23 is divisible by 3. Possible values of x?",
+            "solution": "Step 1: Sum = 4+5+x+2+3 = 14+x.\nStep 2: 14+x must be div by 3.\nStep 3: x = {1, 4, 7}.",
+            "explanation": "Sum divisibility."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 4^61 + 4^62 + 4^63 + 4^64 is divisible by?",
+            "solution": "Step 1: Take 4^61 common. 4^61 (1 + 4 + 16 + 64).\nStep 2: 4^61 (85).\nStep 3: 85 is div by 17 and 5. So divisible by 17.",
+            "explanation": "Factorization."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Number of zeros at end of 50!.",
+            "solution": "Step 1: 50/5 = 10.\nStep 2: 50/25 = 2.\nStep 3: 10+2 = 12.",
+            "explanation": "Counting factors of 5."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 123456...484950 divided by 16. Remainder?",
+            "solution": "Step 1: 16 = 2^4. Check last 4 digits.\nStep 2: 4950 / 16.\nStep 3: 4950 = 16*309 + 6.\nStep 4: Remainder 6.",
+            "explanation": "Divisibility rule 2^n checks last n digits."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Remainder when 2^31 is divided by 5.",
+            "solution": "Step 1: 2^1=2, 2^2=4, 2^3=8(3), 2^4=16(1). Cycle 4.\nStep 2: 31 mod 4 = 3.\nStep 3: 2^3 = 8. 8 mod 5 = 3.",
+            "explanation": "Fermat's or Pattern Method."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Six bells commence tolling together and toll at intervals 2, 4, 6, 8, 10, 12 seconds. In 30 minutes, how many times toll together?",
+            "solution": "Step 1: LCM(2...12) = 120 seconds = 2 mins.\nStep 2: In 30 mins: 30/2 = 15 times.\nStep 3: Add initial toll (at 0th sec).\nStep 4: Total 16.",
+            "explanation": "Don't miss the starting t=0."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Find x if 1! + 2! + ... + x! is a perfect square.",
+            "solution": "Step 1: 1!=1 (Sq). 1+2=3. 1+2+6=9 (Sq, x=3).\nStep 2: After 5!, unit digit stays 3 (1+2+6+24+120... ends in 3).\nStep 3: Perfect squares never end in 3.\nStep 4: Solutions x=1, x=3.",
+            "explanation": "Unit digit property."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Product of two co-primes is 117. Their LCM?",
+            "solution": "Step 1: For co-primes, LCM = Product.\nStep 2: 117.",
+            "explanation": "Definition."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: How many numbers between 200 and 600 are divisible by 4, 5, 6?",
+            "solution": "Step 1: LCM(4,5,6) = 60.\nStep 2: Multiples of 60: 240, 300, 360, 420, 480, 540.\nStep 3: Count 6.",
+            "explanation": "Range counting."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Remainder of 67^67 + 67 divided by 68.",
+            "solution": "Step 1: (67^67)/68 -> (-1)^67 = -1.\nStep 2: 67/68 -> -1.\nStep 3: Total = -2.\nStep 4: Positive rem = 68 - 2 = 66.",
+            "explanation": "(a-1)^n expansion."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Sum of two numbers is 216 and HCF is 27. How many such pairs?",
+            "solution": "Step 1: Numbers 27a, 27b. (a,b coprime).\nStep 2: 27(a+b) = 216 => a+b = 8.\nStep 3: Pairs summing to 8: (1,7), (2,6)-X, (3,5), (4,4)-X.\nStep 4: Coprime pairs: (1,7), (3,5). Total 2.",
+            "explanation": "HCF Property."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Find last two digits of 74^12.",
+            "solution": "Step 1: 74^2 = 5476 (Ends 76).\nStep 2: 76^n always ends in 76.\nStep 3: (74^2)^6 = 76^6 -> 76.",
+            "explanation": "Pattern of 76."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A number divided by 13 leaves rem 11, by 17 leaves rem 9. Number?",
+            "solution": "Step 1: N = 13x + 11 = 17y + 9.\nStep 2: 13x + 2 = 17y.\nStep 3: Trial: x=2 -> 28(No). x=... use Chinese Remainder or Trial.\nStep 4: x=21 -> 13*21+2=275. 275/17 = 16 rem 3.. (Wait).\nStep 5: x=10 -> 132 (No). x=23.. x=26..\nStep 6: Correct: 26*13 = 338+11 (No). \nStep 7: Check options in exam. Answer 427? 427/13=32R11. 427/17=25R2 (No).\nStep 8: 13x = 17y + 7. x=11 -> 143+2=145(No). x=13.. x=... \nStep 9: Smallest is 349. 349/13 = 26 R11. 349/17 = 20 R9.",
+            "explanation": "Equation solving."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Greatest number that will divide 43, 91, 183 leaving same remainder.",
+            "solution": "Step 1: HCF of Differences.\nStep 2: 91-43=48. 183-91=92. 183-43=140.\nStep 3: HCF(48,92,140) = 4.\nStep 4: Remainder is 3 in all cases.",
+            "explanation": "HCF(a-b, b-c, c-a)."
         }
     ],
     "shortcuts": [
-        "LCM of fractions = LCM(num) / HCF(den).",
-        "Product of two numbers = LCM * HCF."
+        "Co-prime factors: Div by 24 -> Div by 3 and 8.",
+        "x^n - a^n is divisible by x-a.",
+        "Last 2 digits check 25 (end 00, 25, 50, 75) usually helps elimination."
     ],
     "commonMistakes": [
-        "Confusing Factors and Multiples.",
-        "Ignoring remainder 0 case in unit digit (If Rem=0, use power 4)."
+        "Mistake: 1 is Prime (1 is neither prime nor composite).",
+        "Mistake: Neglecting '0' count in bells tolling question (+1 error).",
+        "Mistake: Remainder of negative number (e.g. -2 mod 5 is 3)."
     ],
     "placementTips": [
-        "Number System questions are often tricky but short.",
-        "Focus on Remainder Theorem and Unit Digit."
+        "Memorize Primes up to 100.",
+        "Remainder theorem is the most frequent topic in TCS.",
+        "HCF/LCM word problems are often hidden (bells, circular track)."
     ]
 }

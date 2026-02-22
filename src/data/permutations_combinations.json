@@ -3,42 +3,214 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Arrangements (Permutation)",
-            "concept": "Order matters (e.g. Seating, Letters).",
-            "formula": "nPr = n! / (n-r)!",
-            "solvingTechnique": "If items distinct: n!. If repeated: n!/p!q!.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Arrangements of word 'APPLE'?",
-                    "solution": "Step 1: Total letters 5. P is repeated 2 times.\nStep 2: 5! / 2! = 120 / 2 = 60."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Permutation is Arrangement (Order matters). Combination is Selection (Order does not matter).",
+            "formula": "nPr = n! / (n-r)!\nnCr = n! / (r! * (n-r)!)\nnCr = nCn-r",
+            "solvingTechnique": "Use 'Slot Method' (Fundamental Principle of Counting) for arrangement. Use C for committees/teams."
         },
         {
-            "questionType": "Selection (Combination)",
-            "concept": "Order does NOT matter (e.g. Teams, Committees).",
-            "formula": "nCr = n! / (r! * (n-r)!)",
-            "solvingTechnique": "Committee of 3 from 5 men, 4 women.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Select 2 men from 5 men.",
-                    "solution": "Step 1: 5C2 = (5*4)/(2*1) = 10."
-                }
-            ]
+            "questionType": "Common Patterns",
+            "concept": "Words with repetition: Total! / Repetition!.\nCircular Permutation: (n-1)!.",
+            "formula": "Total Handshakes = nC2.",
+            "solvingTechnique": "Fixing a position reduces the problem size by 1."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Value of 5P2 and 5C2.",
+            "solution": "Step 1: 5P2 = 5*4 = 20.\nStep 2: 5C2 = (5*4)/(2*1) = 10.",
+            "explanation": "Direct calculation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Arrange letters of word 'CAT'.",
+            "solution": "Step 1: 3 distinct letters.\nStep 2: 3! = 6.",
+            "explanation": "n! for n distinct items."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Select 3 players from 10.",
+            "solution": "Step 1: Selection = Combination.\nStep 2: 10C3 = (10*9*8)/(3*2*1) = 120.",
+            "explanation": "Order doesn't matter."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Arrange 'APPLE'.",
+            "solution": "Step 1: Total 5 letters. P repeats 2 times.\nStep 2: 5! / 2! = 120 / 2 = 60.",
+            "explanation": "Divide by factorial of repetitions."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: How many diagonals in a pentagon?",
+            "solution": "Step 1: Formula nC2 - n.\nStep 2: 5C2 - 5 = 10 - 5 = 5.",
+            "explanation": "Select 2 vertices, subtract sides."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Ways to post 3 letters in 4 letterboxes.",
+            "solution": "Step 1: Letter 1 has 4 options. L2 has 4. L3 has 4.\nStep 2: 4 * 4 * 4 = 64.",
+            "explanation": "Repetition allowed logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 5 people round table.",
+            "solution": "Step 1: Circular = (n-1)!.\nStep 2: 4! = 24.",
+            "explanation": "Fix one person."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Handshakes in party of 10 people.",
+            "solution": "Step 1: 10C2.\nStep 2: 45.",
+            "explanation": "Handshake requires 2 people."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Arrange 'BANANA'.",
+            "solution": "Step 1: 6 letters. 3 A's, 2 N's.\nStep 2: 6! / (3! 2!) = 720 / (6*2) = 60.",
+            "explanation": "Multiple repetitions."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Select 1 boy and 1 girl from 5 boys and 4 girls.",
+            "solution": "Step 1: 5C1 * 4C1.\nStep 2: 5 * 4 = 20.",
+            "explanation": "AND means multiply."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Words from 'DAUGHTER' such that vowels always come together.",
+            "solution": "Step 1: Vowels A,U,E. Consonants D,G,H,T,R.\nStep 2: Treat (AUE) as 1 unit. Total units = 5(C) + 1(V) = 6.\nStep 3: Arrange units = 6! = 720.\nStep 4: Arrange vowels inside = 3! = 6.\nStep 5: Total = 720 * 6 = 4320.",
+            "explanation": "String method."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: From 7 men and 6 women, team of 5 selected. At least 3 men.",
+            "solution": "Step 1: Cases: (3M,2W) or (4M,1W) or (5M,0W).\nStep 2: 7C3*6C2 + 7C4*6C1 + 7C5*6C0.\nStep 3: 35*15 + 35*6 + 21*1.\nStep 4: 525 + 210 + 21 = 756.",
+            "explanation": "Case summation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 4 digit numbers divisible by 5 using 0,1,2,3,4,5 without repetition.",
+            "solution": "Step 1: Ends in 0: _ _ _ 0. 5*4*3 = 60.\nStep 2: Ends in 5: _ _ _ 5. First place can't be 0 (4 options). Then 4, then 3. 4*4*3 = 48.\nStep 3: Total = 108.",
+            "explanation": "Handling '0' at start and divisibility."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Arrange 5 boys and 4 girls such that no two girls are together.",
+            "solution": "Step 1: Gap Method. Arrange Boys first: B B B B B (5! = 120).\nStep 2: 6 Gaps created (Ends included). _ B _ B _ B _ B _ B _.\nStep 3: Select 4 gaps for girls: 6P4.\nStep 4: 120 * (6*5*4*3) = 120 * 360 = 43200.",
+            "explanation": "Gap method is best for separation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Ways to distribute 5 distinct prizes to 3 students if each can get any number.",
+            "solution": "Step 1: Prize 1 -> 3 options. Prize 2 -> 3 options...\nStep 2: 3^5 = 243.",
+            "explanation": "Students are fixed boxes, prizes are balls."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Arrange 'DETAIL' so vowels occupy odd positions.",
+            "solution": "Step 1: Vowels E,A,I (3). Consonants D,T,L (3).\nStep 2: Positions 1,2,3,4,5,6. Odd: 1,3,5.\nStep 3: Arrange 3 V in 3 Pos: 3!. Arrange 3 C in 3 Pos: 3!.\nStep 4: 6 * 6 = 36.",
+            "explanation": "Position constraint."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Dictionary Rank of 'NAAGI'.",
+            "solution": "Step 1: Order A, A, G, I, N.\nStep 2: Start A: 4!/1! = 24. Start G: 4!/2! = 12. Start I: 12.\nStep 3: Start N-A-A-G-I (First word Starting N). Rank = 24 + 12 + 12 + 1 = 49.",
+            "explanation": "Systematic listing."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Number of parallelograms formed by 4 parallel lines intersecting 3 parallel lines.",
+            "solution": "Step 1: Select 2 lines from set A and 2 from set B.\nStep 2: 4C2 * 3C2.\nStep 3: 6 * 3 = 18.",
+            "explanation": "Geometric selection."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Total ways to invite one or more of 5 friends.",
+            "solution": "Step 1: 2^n - 1.\nStep 2: 32 - 1 = 31.",
+            "explanation": "Each friend has 2 choices (Come/Don't Come)."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: 6 beads in a necklace.",
+            "solution": "Step 1: Necklace: (n-1)! / 2.\nStep 2: 5! / 2 = 60.",
+            "explanation": "Flip allowed in necklace."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: How many numbers greater than 24000 can be formed using 1,2,3,4,5 (no repetition)?",
+            "solution": "Step 1: Total 5 digit numbers = 120.\nStep 2: Start with 3,4,5 (All > 20000). 3 * 4! = 72.\nStep 3: Start with 2. Next digit 4 or 5? If 24xxx -> 3! = 6. If 25xxx -> 3! = 6.\nStep 4: Start 21 or 23 (< 24k). Ignore.\nStep 5: Total = 72 + 12 = 84.",
+            "explanation": "MSB fixation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Sum of all 4 digit numbers formed by 1, 2, 3, 4.",
+            "solution": "Step 1: Each digit appears in each place 3! = 6 times.\nStep 2: Sum of digits = 10.\nStep 3: Sum at units = 60. Tens = 60... \nStep 4: Formula: (Sum of digits) * (n-1)! * (1111).\nStep 5: 10 * 6 * 1111 = 66660.",
+            "explanation": "Summation formula shortcut."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A box has 2 white, 3 blue, 4 red balls. Draw 3 balls such that at least one is red.",
+            "solution": "Step 1: Total cases - No Red cases.\nStep 2: Total 9C3 = 84.\nStep 3: No Red (Select from W, B) = 5C3 = 10.\nStep 4: 84 - 10 = 74.",
+            "explanation": "Complement method is faster."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Grid 4x4. Ways to reach bottom-right from top-left moving only Right and Down.",
+            "solution": "Step 1: Need 4 Rights and 4 Downs. Total 8 moves.\nStep 2: Arrange RRRRDDDD.\nStep 3: 8! / (4! 4!) = 70.",
+            "explanation": "Path counting."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Number of zeros at end of 100!.",
+            "solution": "Step 1: Count of 5s in factors.\nStep 2: 100/5 = 20. 100/25 = 4.\nStep 3: 20 + 4 = 24.",
+            "explanation": "Concept of trailing zeros."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Round table 6 men, 5 women. No 2 women together.",
+            "solution": "Step 1: Seat Men: (6-1)! = 120.\nStep 2: 6 Gaps. Select 5 gaps: 6P5 = 720.\nStep 3: 120 * 720 = 86400.",
+            "explanation": "Circular Gap method."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Number of integral solutions for x + y + z = 10 (Non-negative).",
+            "solution": "Step 1: Formula n+r-1 C r-1.\nStep 2: n=10, r=3. 10+3-1 C 2 = 12C2.\nStep 3: 66.",
+            "explanation": "Beggar's method (Stars and Bars)."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Same problem, Positive integer solutions (x,y,z >= 1).",
+            "solution": "Step 1: Give 1 to each first. Remainder = 7.\nStep 2: Distribute 7 to 3. 7+3-1 C 2 = 9C2 = 36.\nStep 3: Formula n-1 C r-1 = 9C2.",
+            "explanation": "Adjusted Stars and Bars."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Derangement of 4 letters in 4 envelopes (None in correct).",
+            "solution": "Step 1: D4 = 4! (1 - 1 + 1/2! - 1/3! + 1/4!).\nStep 2: 24 (1/2 - 1/6 + 1/24) = 12 - 4 + 1 = 9.",
+            "explanation": "Memorize D3=2, D4=9, D5=44."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A set has 10 elements. Number of subsets with at least 1 element?",
+            "solution": "Step 1: 2^10 - 1 = 1023.",
+            "explanation": "Exclude Null Set."
         }
     ],
     "shortcuts": [
-        "nCr = nC(n-r).",
-        "Number of handshakes = nC2."
+        "Arranging n things in circle: (n-1)!",
+        "Diagonals: n(n-3)/2.",
+        "Sum of digits: (Sum of digits) * (n-1)! * (11...1).",
+        "Dearrangement: D4 = 9, D5 = 44."
     ],
     "commonMistakes": [
-        "Confusing Permutation (Arrangement) with Combination (Selection).",
-        "Forgetting to divide by r! in Combinations."
+        "Mistake: Forgetting to divide by repetition! (APPLE is 5!/2! not 5!).",
+        "Mistake: Confusing 'At least' logic (Misses cases).",
+        "Mistake: Circular: Applying linear formula."
     ],
     "placementTips": [
-        "Circular Permutations = (n-1)!",
-        "Committee formation rules (At least 1 woman) are frequent."
+        "Start with restrictions first (Vowels together, Ends with 0 etc).",
+        "For huge calculations, look for divisibility rules in options.",
+        "Rank problems are lengthy, skip if low on time."
     ]
 }

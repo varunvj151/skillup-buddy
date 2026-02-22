@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Trophy, Target, Clock, CheckCircle, XCircle, Home, RotateCcw } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, Home, RotateCcw, BookOpen, TrendingUp, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { TestQuestion } from '@/data/testQuestions';
 
 export default function TestResult() {
   const location = useLocation();
@@ -22,122 +23,157 @@ export default function TestResult() {
     return `${mins}m ${secs}s`;
   };
 
-  const getScoreMessage = () => {
-    if (percentage >= 80) return { emoji: '🎉', text: 'Excellent! You\'re doing amazing!' };
-    if (percentage >= 60) return { emoji: '👍', text: 'Good job! Keep practicing!' };
-    if (percentage >= 40) return { emoji: '💪', text: 'Not bad! Room for improvement.' };
-    return { emoji: '📚', text: 'Keep learning! You\'ve got this!' };
+  const getPerformanceFeedback = () => {
+    if (percentage >= 80) {
+      return {
+        emoji: '🏆',
+        title: 'Outstanding!',
+        text: 'You have mastered this topic. Ready for Placement Level tests.',
+        action: 'Try Hard / Placement Tests',
+        color: 'text-primary',
+        actionIcon: TrendingUp
+      };
+    }
+    if (percentage >= 50) {
+      return {
+        emoji: '💪',
+        title: 'Good Job!',
+        text: 'You are doing well. Practice Medium level to improve further.',
+        action: 'Practice Medium Level',
+        color: 'text-warning',
+        actionIcon: Target
+      };
+    }
+    return {
+      emoji: '📚',
+      title: 'Keep Learning',
+      text: 'Review the basic concepts in the Learn module to build a strong foundation.',
+      action: 'Go to Learn Module',
+      color: 'text-muted-foreground',
+      actionIcon: BookOpen
+    };
   };
 
-  const message = getScoreMessage();
+  const feedback = getPerformanceFeedback();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header title="Test Results" showBack />
-      
-      <main className="px-4 py-6 max-w-4xl mx-auto pb-24">
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header title="Test Results" showBack onBack={() => navigate('/aptitude/test', { replace: true })} />
+
+      <main className="flex-1 px-4 py-6 max-w-4xl mx-auto w-full pb-32">
         {/* Score Card */}
-        <Card className="p-8 text-center mb-6 animate-scale-in overflow-hidden relative">
-          <div className="absolute inset-0 gradient-primary opacity-5" />
+        <Card className="p-8 text-center mb-6 animate-scale-in overflow-hidden relative border-2 border-primary/10">
+          <div className="absolute inset-0 bg-primary/5 pattern-dots opacity-50" />
           <div className="relative z-10">
-            <span className="text-6xl mb-4 block">{message.emoji}</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">{message.text}</h2>
-            <p className="text-muted-foreground mb-6">{topicName}</p>
-            
-            <div className="flex justify-center items-center gap-2 mb-6">
-              <div className="text-6xl font-bold text-primary">{score}</div>
-              <div className="text-2xl text-muted-foreground">/ {total}</div>
-            </div>
-            
-            {/* Progress Circle */}
-            <div className="relative w-32 h-32 mx-auto">
-              <svg className="w-full h-full -rotate-90">
-                <circle
-                  cx="64"
-                  cy="64"
-                  r="56"
-                  fill="none"
-                  stroke="hsl(var(--muted))"
-                  strokeWidth="12"
-                />
-                <circle
-                  cx="64"
-                  cy="64"
-                  r="56"
-                  fill="none"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="12"
-                  strokeLinecap="round"
-                  strokeDasharray={`${percentage * 3.52} 352`}
-                  className="transition-all duration-1000"
-                />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-2xl font-bold text-foreground">{percentage}%</span>
+            <span className="text-6xl mb-4 block animate-bounce-slow">{feedback.emoji}</span>
+            <h2 className="text-3xl font-bold text-foreground mb-2">{feedback.title}</h2>
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto">{feedback.text}</p>
+
+            <div className="flex justify-center items-center gap-2 mb-8">
+              <div className="text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                {score}
               </div>
+              <div className="text-3xl text-muted-foreground self-end mb-2">/ {total}</div>
             </div>
+
+            {/* Progress Bar */}
+            <div className="w-full max-w-xs mx-auto h-3 bg-muted rounded-full overflow-hidden mb-2">
+              <div
+                className="h-full bg-primary transition-all duration-1000 ease-out"
+                style={{ width: `${percentage}%` }}
+              />
+            </div>
+            <p className="text-sm font-medium text-muted-foreground">{percentage}% Accuracy</p>
           </div>
         </Card>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <Card className="p-4 text-center animate-slide-up" style={{ animationDelay: '100ms' }}>
-            <CheckCircle className="w-6 h-6 text-success mx-auto mb-2" />
-            <p className="text-2xl font-bold text-foreground">{score}</p>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-3 gap-3 mb-8">
+          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '100ms' }}>
+            <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center mb-2">
+              <CheckCircle className="w-5 h-5 text-success" />
+            </div>
+            <p className="text-xl font-bold text-foreground">{score}</p>
             <p className="text-xs text-muted-foreground">Correct</p>
           </Card>
-          <Card className="p-4 text-center animate-slide-up" style={{ animationDelay: '150ms' }}>
-            <XCircle className="w-6 h-6 text-destructive mx-auto mb-2" />
-            <p className="text-2xl font-bold text-foreground">{total - score}</p>
-            <p className="text-xs text-muted-foreground">Wrong</p>
+          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '150ms' }}>
+            <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-2">
+              <XCircle className="w-5 h-5 text-destructive" />
+            </div>
+            <p className="text-xl font-bold text-foreground">{total - score}</p>
+            <p className="text-xs text-muted-foreground">Incorrect</p>
           </Card>
-          <Card className="p-4 text-center animate-slide-up" style={{ animationDelay: '200ms' }}>
-            <Clock className="w-6 h-6 text-primary mx-auto mb-2" />
-            <p className="text-2xl font-bold text-foreground">{formatTime(timeTaken)}</p>
-            <p className="text-xs text-muted-foreground">Time</p>
+          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '200ms' }}>
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+              <Clock className="w-5 h-5 text-primary" />
+            </div>
+            <p className="text-xl font-bold text-foreground">{formatTime(timeTaken)}</p>
+            <p className="text-xs text-muted-foreground">Time Taken</p>
           </Card>
         </div>
 
-        {/* Detailed Results */}
-        <h3 className="text-lg font-semibold text-foreground mb-4">Detailed Review</h3>
+        {/* Detailed Analysis */}
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-bold text-foreground">Detailed Analysis</h3>
+        </div>
+
         <div className="space-y-4">
-          {questions.map((q: any, idx: number) => {
+          {questions.map((q: TestQuestion, idx: number) => {
             const userAnswer = answers[idx];
             const isCorrect = userAnswer === q.correctAnswer;
-            
+            const isSkipped = userAnswer === null;
+
             return (
-              <Card 
-                key={idx} 
+              <Card
+                key={idx}
                 className={cn(
-                  "p-5 animate-slide-up",
-                  isCorrect ? "border-success/30" : "border-destructive/30"
+                  "p-5 animate-slide-up transition-all hover:shadow-md",
+                  isCorrect ? "border-l-4 border-l-success" :
+                    isSkipped ? "border-l-4 border-l-muted" : "border-l-4 border-l-destructive"
                 )}
                 style={{ animationDelay: `${(idx + 3) * 50}ms` }}
               >
-                <div className="flex items-start gap-3 mb-3">
-                  {isCorrect ? (
-                    <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  )}
-                  <p className="font-medium text-foreground">{q.question}</p>
-                </div>
-                
-                <div className="ml-8 space-y-2">
-                  {!isCorrect && userAnswer !== null && (
-                    <p className="text-sm">
-                      <span className="text-destructive">Your answer:</span>{' '}
-                      <span className="text-muted-foreground">{q.options[userAnswer]}</span>
-                    </p>
-                  )}
-                  <p className="text-sm">
-                    <span className="text-success">Correct answer:</span>{' '}
-                    <span className="text-foreground font-medium">{q.options[q.correctAnswer]}</span>
-                  </p>
-                  <div className="mt-2 p-3 bg-muted/50 rounded-lg">
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">Explanation:</span> {q.explanation}
-                    </p>
+                <div className="flex items-start gap-4 mb-3">
+                  <div className="font-mono text-sm text-muted-foreground mt-1">
+                    Q{idx + 1}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-foreground text-lg mb-4">{q.question}</p>
+
+                    <div className="space-y-2 mb-4">
+                      {/* User Answer */}
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="w-24 text-muted-foreground">Your Answer:</span>
+                        {isSkipped ? (
+                          <span className="text-muted-foreground italic">Skipped</span>
+                        ) : (
+                          <span className={cn(
+                            "font-medium",
+                            isCorrect ? "text-success" : "text-destructive"
+                          )}>
+                            {q.options[userAnswer]} {isCorrect ? "(Correct)" : "(Incorrect)"}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Correct Answer (if wrong or skipped) */}
+                      {(!isCorrect || isSkipped) && (
+                        <div className="flex items-center gap-2 text-sm">
+                          <span className="w-24 text-muted-foreground">Correct Answer:</span>
+                          <span className="font-medium text-success">
+                            {q.options[q.correctAnswer]}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="bg-muted/30 p-4 rounded-lg border border-border/50">
+                      <p className="text-xs font-bold text-primary mb-1 uppercase tracking-wider">Explanation</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {q.explanation}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -147,20 +183,20 @@ export default function TestResult() {
       </main>
 
       {/* Fixed bottom */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border">
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border z-10">
         <div className="max-w-4xl mx-auto flex gap-3">
           <Button
             variant="outline"
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/aptitude/test', { replace: true })}
             className="flex-1 h-12"
           >
-            <Home className="w-4 h-4 mr-2" /> Home
+            <Home className="w-4 h-4 mr-2" /> Dashboard
           </Button>
           <Button
-            onClick={() => navigate('/aptitude/test')}
-            className="flex-1 h-12 gradient-primary"
+            onClick={() => navigate('/aptitude/test', { replace: true })}
+            className="flex-1 h-12 gradient-primary font-semibold"
           >
-            <RotateCcw className="w-4 h-4 mr-2" /> Try Again
+            <RotateCcw className="w-4 h-4 mr-2" /> New Test
           </Button>
         </div>
       </div>

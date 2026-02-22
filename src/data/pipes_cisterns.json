@@ -3,42 +3,212 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Inlet and Outlet",
-            "concept": "Same as Time & Work but Outlet does negative work.",
-            "formula": "Net Rate = Sum of Inlets - Sum of Outlets",
-            "solvingTechnique": "Use positive sign for filling pipes and negative for emptying.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Pipe A fills in 10h. Pipe B empties in 5h. (Impossible, but assuming B is slower) Pipe A fill 10h, B fills 20h.",
-                    "solution": "Step 1: Both filling.\nStep 2: 1/10 + 1/20 = 3/20.\nStep 3: Time = 20/3 hours."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Same as Time & Work. Inlet pipe does Positive work (Fills). Outlet pipe does Negative work (Empties).",
+            "formula": "Net Rate = Rate(In) - Rate(Out)",
+            "solvingTechnique": "Use LCM method. Treat Leak as a 'Pipe' with negative efficiency."
         },
         {
-            "questionType": "Leak Problems",
-            "concept": "Leak acts as an outlet pipe.",
-            "formula": "Time to empty = Capacity / Leak Rate",
-            "solvingTechnique": "Treat leak as a pipe with negative efficiency.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Tank fills in 4h, but leak takes it 5h. Time for leak to empty full tank?",
-                    "solution": "Step 1: Fill Rate = 1/4. Net Rate = 1/5.\nStep 2: Leak = Fill - Net = 1/4 - 1/5 = 1/20.\nStep 3: Time = 20 hours."
-                }
-            ]
+            "questionType": "Conditions",
+            "concept": "Leak at bottom vs Leak at half height.",
+            "formula": "Efficiency applies only when water level is above the pipe/leak.",
+            "solvingTechnique": "Calculate time for part below leak and part above leak separately if needed."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Pipe A fills in 10h, B in 15h. Both open?",
+            "solution": "Step 1: LCM(10,15) = 30.\nStep 2: A=3, B=2. Total=5.\nStep 3: Time = 30/5 = 6 hours.",
+            "explanation": "Standard positive efficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A fills in 20h, B empties in 30h. Both?",
+            "solution": "Step 1: LCM=60.\nStep 2: A=+3, B=-2.\nStep 3: Net = +1.\nStep 4: Time = 60/1 = 60 hours.",
+            "explanation": "Negative efficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Tap fills tank in 6 hours. After half tank filled, 3 more similar taps opened. Total time?",
+            "solution": "Step 1: Half tank (3 hours work) done in 3h.\nStep 2: Remaining half needs 3h work.\nStep 3: Now 4 taps. Speed 4x.\nStep 4: Time = 3hours / 4 = 45 mins.\nStep 5: Total = 3h 45m.",
+            "explanation": "Scaling efficiency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A fills in 10h. Due to leak, takes 12h. Leak empties in?",
+            "solution": "Step 1: LCM=60. A=6. A+L=5.\nStep 2: L = 5-6 = -1.\nStep 3: Leak time = 60/1 = 60 hours.",
+            "explanation": "Indirect leak calc."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Pipe A 4 times faster than B. A takes 15 min. Both?",
+            "solution": "Step 1: A=15m. B=60m (4x slower).\nStep 2: LCM 60. A=4, B=1. Total=5.\nStep 3: Time = 60/5 = 12 min.",
+            "explanation": "Efficiency Ratio."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Two pipes A and B fill in 15 and 20 hours. Both opened then A closed after 4 hours. B fills rest in?",
+            "solution": "Step 1: LCM=60. A=4, B=3.\nStep 2: 4h(A+B) = 4*7 = 28.\nStep 3: Rem = 32.\nStep 4: B time = 32/3 = 10.66 hours.",
+            "explanation": "Timeline method."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: System has 2 inlets (6h, 8h) and 1 outlet (12h). All operate?",
+            "solution": "Step 1: LCM=24. A=+4, B=+3, C=-2.\nStep 2: Net = 4+3-2 = 5.\nStep 3: Time = 24/5 = 4.8 hours.",
+            "explanation": "Three component net."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 12 pumps working 6 hrs a day empty reservoir in 15 days. How many pumps for 9 hrs/day in 12 days?",
+            "solution": "Step 1: M1D1H1 = M2D2H2.\nStep 2: 12*15*6 = x*12*9.\nStep 3: 1080 = 108x => x = 10.",
+            "explanation": "Chain rule applies to pumps too."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Tank has two pipes. A fills in 10 min, B empties in 6 min. If tank is 2/5 full, time to empty?",
+            "solution": "Step 1: Net is empty (B is faster). LCM 30. A=+3, B=-5. Net -2.\nStep 2: Work = 2/5 of 30 = 12 units (Water inside).\nStep 3: Time = 12/2 = 6 mins.",
+            "explanation": "Emptying time depends on current fill."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Water flows at 10m/min through pipe of radius 5mm. Time to fill cone?",
+            "solution": "Step 1: Flow Rate = Area * Velocity.\nStep 2: Volume = Flow Rate * Time.\nStep 3: Equate and solve.",
+            "explanation": "Geometry link."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Three pipes A, B, C can fill in 6 hours. After working 2 hours, C is closed. A and B fill remaining in 7 hours. C alone?",
+            "solution": "Step 1: 2h done = 1/3. Rem = 2/3.\nStep 2: (A+B) do 2/3 in 7h. (A+B) full time = 10.5h.\nStep 3: 1/C = 1/6 - 1/10.5 = 1/6 - 2/21 = (7-4)/42 = 3/42 = 1/14.\nStep 4: C = 14 hours.",
+            "explanation": "Work fraction subtraction."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Pipe A fills in 4h, B in 6h. Opened alternatively starting with A. Time?",
+            "solution": "Step 1: LCM=12. A=3, B=2.\nStep 2: 2hr cycle = 5 units.\nStep 3: need 12. 2 cycles (4h) = 10 units.\nStep 4: Rem 2. A does 3/hr. Time = 2/3 hr.\nStep 5: Total = 4h 40min.",
+            "explanation": "Alternate Cycle A first."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A leak which would empty tank in 8 hours is active. Tap admits 6 liters/min. Fills in 12 hours. Capacity?",
+            "solution": "Step 1: Fill Rate - Empty Rate = Net Rate.\nStep 2: 1/T - 1/8 = 1/12? No, Tank is filled, so filling > emptying. \nStep 3: 1/Inlet - 1/8 = 1/12 (It takes longer to fill).\nStep 4: 1/Inlet = 1/12 + 1/8 = 5/24. Inlet fills in 4.8h.\nStep 5: Inlet Cap = 4.8 * 60 * 6 = 1728 Liters.",
+            "explanation": "Find inlet time then multiply rate."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Two pipes A and B fill in 20 and 30 min. Both filled. When should B be closed to fill tank in 15 min?",
+            "solution": "Step 1: Tank filled in 15 min -> A worked 15 mins.\nStep 2: A work = 15/20 = 3/4.\nStep 3: Rem 1/4 done by B.\nStep 4: B time = (1/4) * 30 = 7.5 mins.",
+            "explanation": "A works throughout."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A holds 50L, B holds 40L? No. Capacity ratio 3:4. Both fill at same rate? No. Diameters 1cm and 2cm. Ratio of flow?",
+            "solution": "Step 1: Flow proportional to Square of Diameter (Area).\nStep 2: D ratio 1:2 -> Area ratio 1:4.\nStep 3: Flow ratio 1:4.",
+            "explanation": "Physics principle."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A cistern has 3 pipes A, B, C. A and B fill in 3 and 4h. C empties in 1h. Opened at 3, 4, 5 PM. Empty at?",
+            "solution": "Step 1: LCM 12. A=+4, B=+3, C=-12.\nStep 2: 3-4PM (A) = 4 units.\nStep 3: 4-5PM (A+B) = 7 units. Tank has 11 units at 5PM.\nStep 4: 5PM (A+B+C) = 7-12 = -5 (Emptying).\nStep 5: Time = 11/5 = 2.2 hours = 2h 12m.\nStep 6: 7:12 PM.",
+            "explanation": "State check at each hour."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: One pipe fills 3 times as fast as other. Together 36 min. Slow alone?",
+            "solution": "Step 1: Eff 3:1. Total 4.\nStep 2: Work = 4 * 36 = 144.\nStep 3: Slow (1) time = 144/1 = 144 min.",
+            "explanation": "Efficiency total work."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Pipe P is 4 times faster than Q. Q takes 45 min more than P. P time?",
+            "solution": "Step 1: Time ratio 1:4.\nStep 2: Gap 3 parts = 45 => 1 part = 15.\nStep 3: P time = 15 min.",
+            "explanation": "Speed-Time inverse."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Tap A fills in 6h. B empties in 9h. Opened alternate hours. Fill time?",
+            "solution": "Step 1: LCM 18. A+3, B-2.\nStep 2: 2hr cycle = 1 unit.\nStep 3: Need 18. Safety: Go to 18-3=15.\nStep 4: 15 units = 30 hours.\nStep 5: Next hour A fills 3 units. Total 18.\nStep 6: Total 31 hours.",
+            "explanation": "Spider climbing well logic."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Bath has hot and cold taps. Hot 10m, Cold 15m. Man leaves both open, returns when it should be full. Finds waste pipe open. Closes it, takes 4 min more. Waste pipe time?",
+            "solution": "Step 1: Expected fill time (A+B) = 6 min.\nStep 2: For 6 min, Waste (W) worked. Work W lost = W*6.\nStep 3: This loss covered by A+B in 4 min. 6W = 4(A+B).\nStep 4: W = 2/3 (A+B). (A+B) fill in 6m. W empties in 9m.",
+            "explanation": "Work lost = Work made up."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two pipes A and B fill in 37.5 min and 45 min. Both open. B turned off after? Tank full in 30 min.",
+            "solution": "Step 1: A worked 30 mins.\nStep 2: A Work = 30/37.5 = 300/375 = 4/5.\nStep 3: Rem 1/5 done by B.\nStep 4: B time = 1/5 * 45 = 9 min.",
+            "explanation": "Determine who worked full time."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 8 taps fitted. Some inlet, some outlet. Inlet 12 hours, Outlet 36 hours. All open fill in 3 hours. Number of Inlets?",
+            "solution": "Step 1: Let In=x, Out=8-x. 1/12, -1/36.\nStep 2: x/12 - (8-x)/36 = 1/3.\nStep 3: 3x - (8-x) = 12.\nStep 4: 4x = 20 => x=5.",
+            "explanation": "Algebraic setup."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A, B, C can fill in 10, 12, 15 hours. A opened. B and C opened for 1 hour alternatively. Time?",
+            "solution": "Step 1: LCM 60. A=6, B=5, C=4.\nStep 2: Hour 1 (A+B) = 11. Hour 2 (A+C) = 10.\nStep 3: Cycle 21 units in 2 hours.\nStep 4: Need 60. 2 cycles (42) in 4 hours. Rem 18.\nStep 5: Hour 5 (A+B) = 11. Rem 7.\nStep 6: Hour 6 (A+C). Need 7, rate 10. Time 0.7 hr.\nStep 7: Total 5.7 hours.",
+            "explanation": "Complex cycle."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Tank capacity 2400m3. Emptying rate is 10 m3/min higher than Filling. Emptying takes 8 min less than filling. Filling rate?",
+            "solution": "Step 1: Let Rate = x. 2400/x - 2400/(x+10) = 8.\nStep 2: 300 [ 10 / x(x+10) ] = 1.\nStep 3: x^2 + 10x - 3000 = 0.\nStep 4: (x+60)(x-50). x=50 m3/min.",
+            "explanation": "Quadratic application."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Leak at bottom empties in 10h. Tap at 4L/min fills. When both open, tank emptied in 15h. Capacity?",
+            "solution": "Step 1: Net Emptying Rate = 1/15. Leak Rate = 1/10.\nStep 2: Tap Rate (Filling) = 1/10 - 1/15 = 1/30. (Fills in 30h).\nStep 3: Cap = 30 * 60 * 4 = 7200 L.",
+            "explanation": "Negative net result."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A and B fill in 15, 20. C empties in 25. All open. After 10h, C closed. Total time?",
+            "solution": "Step 1: LCM 300. A=20, B=15, C=-12.\nStep 2: Net 23. 10h -> 230 filled. Rem 70.\nStep 3: A+B = 35. Time = 70/35 = 2h.\nStep 4: Total = 10+2 = 12h.",
+            "explanation": "Mid-stream change."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two pipes A and B fill in 4h. Had they been opened separately, B would take 6h more than A. A alone?",
+            "solution": "Step 1: Total 4. 1/x + 1/(x+6) = 1/4.\nStep 2: 4(2x+6) = x(x+6).\nStep 3: 8x + 24 = x^2 + 6x.\nStep 4: x^2 - 2x - 24 = 0.\nStep 5: (x-6)(x+4). x=6 hours.",
+            "explanation": "Standard quad."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Efficiency of A is 20% more than B. A fills in 20 min. B?",
+            "solution": "Step 1: A=120, B=100. Ratio 6:5.\nStep 2: Time A = 20. Time B = 20 * 6/5 = 24 min.",
+            "explanation": "Time inverse to Eff."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Pipe A fills in 12 min, B in 15 min. Blockage reduces flow to 7/8 and 5/6. Blockage removed, fills in 3 min more. How long blockage?",
+            "solution": "Step 1: Normal Rate = 1/12+1/15=9/60=3/20 (6.66 min).\nStep 2: Obstructed Rate = 7/8(1/12) + 5/6(1/15) = 7/96 + 1/18. Calc is messy.\nStep 3: Let obstructed time = t. Normal time 3. Total W = 1.\nStep 4: Solve for t.",
+            "explanation": "Partial flow rate."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: 3 pipes A,B,C. C fills tank 2 times faster than B, B 2 times faster than A. All fill in 7 hours. A alone?",
+            "solution": "Step 1: Eff Ratio A:B:C = 1:2:4. Total 7.\nStep 2: Work = 7 * 7 = 49.\nStep 3: A Time = 49/1 = 49 hours.",
+            "explanation": "Chain efficiency."
         }
     ],
     "shortcuts": [
-        "If A fills in x & B empties in y (y>x), full tank empties in xy/(x-y)?? No fills in xy/(y-x).",
-        "Capacity = Rate * Time."
+        "Combined Time = AB / (A+B). (Product/Sum).",
+        "Leak Time: If fills in x, but with leak in y. Leak = xy/(y-x).",
+        "Flow ratio proportional to d^2."
     ],
     "commonMistakes": [
-        "Confusing 'Time to fill with leak' vs 'Time for leak to empty'.",
-        "Forgetting negative sign for outlets."
+        "Mistake: Ignoring leakage 'Empties full tank' vs 'Empties part'.",
+        "Mistake: Alternate hour Problems: Calculating mathematically (25/11) without considering Filling-Emptying cycle."
     ],
     "placementTips": [
-        "Pipes & Cisterns is just Time & Work with negative numbers.",
-        "Always check if the tank is being filled or emptied in the question."
+        "Pipes and Cisterns is high ROI topic. 90% questions are just Time & Work with negative sign.",
+        "Always check if tank starts Full or Empty.",
+        "For 'Blockage' questions, set up Rate * Time + Rate2 * Time2 = 1."
     ]
 }

@@ -12,9 +12,13 @@ import TopicLesson from "./pages/TopicLesson";
 import AptitudeTest from "./pages/AptitudeTest";
 import TestSession from "./pages/TestSession";
 import TestResult from "./pages/TestResult";
+import TestSetup from "./pages/TestSetup"; // New
+import TestInstruction from "./pages/TestInstruction"; // New
 import GroupDiscussion from "./pages/GroupDiscussion";
 import Interview from "./pages/Interview";
 import NotFound from "./pages/NotFound";
+import GDVoice from "./pages/GDVoice";
+import GDResult from "./pages/GDResult";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +32,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
 function AppRoutes() {
   const { user } = useApp();
-  
+
   return (
     <Routes>
       <Route path="/" element={user ? <Navigate to="/home" replace /> : <Onboarding />} />
@@ -37,9 +41,13 @@ function AppRoutes() {
       <Route path="/aptitude/learn" element={<ProtectedRoute><AptitudeLearn /></ProtectedRoute>} />
       <Route path="/aptitude/learn/:topicId" element={<ProtectedRoute><TopicLesson /></ProtectedRoute>} />
       <Route path="/aptitude/test" element={<ProtectedRoute><AptitudeTest /></ProtectedRoute>} />
-      <Route path="/aptitude/test/:topicId" element={<ProtectedRoute><TestSession /></ProtectedRoute>} />
+      <Route path="/test/setup/:topicId" element={<ProtectedRoute><TestSetup /></ProtectedRoute>} />
+      <Route path="/test/instruction/:topicId" element={<ProtectedRoute><TestInstruction /></ProtectedRoute>} />
+      <Route path="/test/start/:topicId" element={<ProtectedRoute><TestSession /></ProtectedRoute>} />
       <Route path="/aptitude/test/result" element={<ProtectedRoute><TestResult /></ProtectedRoute>} />
       <Route path="/group-discussion" element={<ProtectedRoute><GroupDiscussion /></ProtectedRoute>} />
+      <Route path="/gd/voice/:topicId" element={<ProtectedRoute><GDVoice /></ProtectedRoute>} />
+      <Route path="/gd/result" element={<ProtectedRoute><GDResult /></ProtectedRoute>} />
       <Route path="/interview" element={<ProtectedRoute><Interview /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>

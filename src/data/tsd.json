@@ -1,57 +1,222 @@
 {
-    "topic": "Time, Speed & Distance",
+    "topic": "Time Speed Distance",
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Basic TSD",
-            "concept": "Relationship between Speed, Distance, and Time.",
-            "formula": "D = S * T | S = D / T",
-            "solvingTechnique": "Be careful with units. Km/hr to m/s -> Multiply by 5/18.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Train covers 20m in 2 sec. Speed in km/hr?",
-                    "solution": "Step 1: Speed = 20/2 = 10 m/s.\nStep 2: Convert: 10 * (18/5).\nStep 3: = 36 km/hr."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "The relationship between Distance, Speed, and Time is fundamental. Relative speed is key for moving objects.",
+            "formula": "Distance = Speed × Time\nSpeed = Distance / Time\nTime = Distance / Speed",
+            "solvingTechnique": "Always check units. Convert km/hr to m/s by multiplying with 5/18."
         },
         {
             "questionType": "Relative Speed",
-            "concept": "Two objects moving relative to each other.",
-            "formula": "Opposite Direction: S = S1 + S2 | Same Direction: S = S1 - S2",
-            "solvingTechnique": "Imagine yourself freezing one object and giving its speed to the other.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "Two trains 100m each moving opposite at 50kmph and 40kmph. Cross time?",
-                    "solution": "Step 1: Relative Speed = 50+40 = 90 kmph = 25 m/s.\nStep 2: Total D = 100+100 = 200m.\nStep 3: Time = 200/25 = 8 sec."
-                }
-            ]
+            "concept": "When two bodies move.",
+            "formula": "Same Direction: S_rel = S1 - S2\nOpposite Direction: S_rel = S1 + S2",
+            "solvingTechnique": "For trains crossing each other, Total Distance = L1 + L2."
         },
         {
             "questionType": "Boats & Streams",
-            "concept": "Downstream (with flow), Upstream (against flow).",
-            "formula": "Down = B + S | Up = B - S",
-            "solvingTechnique": "Boat Speed (B) = (Down + Up)/2. Stream Speed (S) = (Down - Up)/2.",
-            "examples": [
-                {
-                    "difficulty": "Hard",
-                    "question": "Boat goes 12km downstream in 2h, upstream in 3h. Find stream speed.",
-                    "solution": "Step 1: Down Speed = 12/2 = 6 kmph.\nStep 2: Up Speed = 12/3 = 4 kmph.\nStep 3: Stream = (6-4)/2 = 1 kmph."
-                }
-            ]
+            "concept": "Boat moves with or against water flow.",
+            "formula": "Downstream (With) = B + S\nUpstream (Against) = B - S\nBoat Speed = (D + U)/2\nStream Speed = (D - U)/2",
+            "solvingTechnique": "Remember: Downstream speed is always greater than Upstream."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Convert 72 km/hr into m/s.",
+            "solution": "Step 1: Multiply by 5/18.\nStep 2: 72 * 5/18 = 4 * 5 = 20 m/s.",
+            "explanation": "Standard conversion factor."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A car covers 150 km in 3 hours. Speed?",
+            "solution": "Step 1: S = D/T.\nStep 2: S = 150/3 = 50 km/hr.",
+            "explanation": "Direct formula."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A train 100m long passes a pole in 10 seconds. Speed of train?",
+            "solution": "Step 1: Distance = Length of Train = 100m.\nStep 2: Time = 10s.\nStep 3: Speed = 100/10 = 10 m/s.\nStep 4: In km/hr = 10 * 18/5 = 36 km/hr.",
+            "explanation": "Object with negligible length."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Walking at 5/6 of his usual speed, a man is 10 min late. Usual time?",
+            "solution": "Step 1: Speed S -> 5/6 S. Time T -> 6/5 T.\nStep 2: Diff = 6/5 T - T = 1/5 T.\nStep 3: 1/5 T = 10 min => T = 50 min.",
+            "explanation": "Inverse ratio of S and T."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Boat speed 10 km/hr, Stream 2 km/hr. Downstream speed?",
+            "solution": "Step 1: D = B + S.\nStep 2: D = 10 + 2 = 12 km/hr.",
+            "explanation": "Add for Downstream."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A man covers half journey at 6 km/hr and remaining at 3 km/hr. Avg Speed?",
+            "solution": "Step 1: Avg Speed = 2xy / (x+y) for equal distances.\nStep 2: (2 * 6 * 3) / (6+3) = 36 / 9 = 4 km/hr.",
+            "explanation": "Harmonic Mean formula."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: How many minutes does Aditya take to cover 400m at 20 km/hr?",
+            "solution": "Step 1: S = 20 * 5/18 = 50/9 m/s.\nStep 2: T = D/S = 400 / (50/9) = 400 * 9 / 50 = 8 * 9 = 72 sec.\nStep 3: 72 sec = 1.2 min.",
+            "explanation": "Unit conversion first."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Ratio of speeds A:B is 3:4. Time ratio?",
+            "solution": "Step 1: Time is inverse to Speed.\nStep 2: Ratio 1/3 : 1/4 = 4 : 3.",
+            "explanation": "Inverse proportionality."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: 200m train crosses 300m bridge in 20s. Speed?",
+            "solution": "Step 1: Total D = 200+300 = 500m.\nStep 2: S = 500/20 = 25 m/s.\nStep 3: 25 * 18/5 = 90 km/hr.",
+            "explanation": "Add lengths of both objects."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Two trains 100m, 120m run opp direction at 72km/hr and 36km/hr. Time to cross?",
+            "solution": "Step 1: Relative Speed = 72+36 = 108 km/hr.\nStep 2: 108 * 5/18 = 30 m/s.\nStep 3: Distance = 100+120 = 220m.\nStep 4: Time = 220/30 = 7.33 sec.",
+            "explanation": "Rel Speed Additive for Opp dir."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Excluding stoppages, speed is 54 km/hr. Including stoppages, 45 km/hr. Minutes stop per hour?",
+            "solution": "Step 1: Decrease in speed = 54 - 45 = 9 km.\nStep 2: Time to cover 9 km at original speed = 9/54 hr.\nStep 3: 1/6 hr = 10 mins.",
+            "explanation": "Trick: (Diff/Orig) * 60."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Thief spotter 100m away. Thief runs 8 km/h, Cop 10 km/h. Distance thief runs before caught?",
+            "solution": "Step 1: Rel Speed = 2 km/hr.\nStep 2: Time to cover 0.1 km = 0.1/2 = 0.05 hr.\nStep 3: Dist by Thief = 8 * 0.05 = 0.4 km = 400m.",
+            "explanation": "Time is constant for both."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Does 24 km upstream and 36 km downstream in 6 hours. Also 36 up and 24 down in 6.5 hours. Current speed?",
+            "solution": "Step 1: 24/U + 36/D = 6.\nStep 2: 36/U + 24/D = 6.5.\nStep 3: Let 1/U = x, 1/D = y. Solve linear equations.\nStep 4: U=8, D=12.\nStep 5: Current = (12-8)/2 = 2 km/hr.",
+            "explanation": "Standard equation method."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Walking at 4 km/hr, reach school 5 min late. At 5 km/hr, reach 10 min early. Distance?",
+            "solution": "Step 1: Formula D = (S1*S2)/(S1-S2) * TimeDiff.\nStep 2: Diff = 5 late to 10 early = 15 min = 1/4 hr.\nStep 3: D = (4*5)/1 * 1/4 = 20/4 = 5 km.",
+            "explanation": "Delta time formula."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A train passes two bridges of lengths 800m and 400m in 100s and 60s respectively. Length of train?",
+            "solution": "Step 1: L+800 = S*100. L+400 = S*60.\nStep 2: Subtract: 400 = S*40 => S = 10 m/s.\nStep 3: Put S in eq 2: L+400 = 600 => L = 200m.",
+            "explanation": "Difference in distance covered in difference of time."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Two trains start from A and B towards each other at 50 and 60 kmph. Upon meeting, one has traveled 120km more. Distance AB?",
+            "solution": "Step 1: In T time, one travels 60T, other 50T.\nStep 2: Diff = 10T = 120 => T = 12 hrs.\nStep 3: Total Dist = (50+60)*12 = 110 * 12 = 1320 km.",
+            "explanation": "Meeting time is same."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Speed of boat in standing water is 9 km/hr, speed of stream is 1.5 km/hr. Man rows to place 105 km away and comes back. Total time?",
+            "solution": "Step 1: D = 9+1.5 = 10.5. U = 9-1.5 = 7.5.\nStep 2: Time = 105/10.5 + 105/7.5.\nStep 3: 10 + 14 = 24 hours.",
+            "explanation": "Separate Calculation."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Two guns fired at interval of 28 mins. Person in train approaching hears 2nd shot 26 mins after first. Speed of sound 325 m/s. Speed of Train?",
+            "solution": "Step 1: Distance travelled by Train in 26 min = Dist by Sound in (28-26) = 2 min.\nStep 2: S_train * 26 = S_sound * 2.\nStep 3: S_train = 325 * 2/26 = 325/13 = 25 m/s.\nStep 4: 25 * 18/5 = 90 km/hr.",
+            "explanation": "Sound gap concept."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A Monkey climbs 12m pole. Ascends 2m in 1 min, slips 1m in next. Time to reach top?",
+            "solution": "Step 1: Net in 2 min = 1m.\nStep 2: Need to climb 12. Caution: Last step is only climb (no slip).\nStep 3: Climb 10m first. Takes 10*2 = 20 mins.\nStep 4: Next 2m climb in 1 min. Reaches 12m.\nStep 5: Total = 21 mins.",
+            "explanation": "Subtract the positive work first."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A takes 2 hours more than B to walk d km. If A doubles speed, takes 1 hr less than B. A's time?",
+            "solution": "Step 1: Let B time = t. A time = t+2.\nStep 2: New A time = t-1. (Reduced by 3 hrs).\nStep 3: Double Speed -> Half Time. T_new = T_old / 2.\nStep 4: t-1 = (t+2)/2 => 2t-2 = t+2 => t=4.\nStep 5: A time = 4+2 = 6 hours.",
+            "explanation": "Ratio change."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two trains start same time from Aligarh and Delhi, proceed toward each other at 16 km/hr and 21 km/hr. When they meet, it is found one travelled 60km more. Dist between stations?",
+            "solution": "Step 1: S1=16, S2=21. Rel Speed = 37.\nStep 2: Diff Speed = 5 km/hr.\nStep 3: Gap = 60km. Time = 60/5 = 12 hrs.\nStep 4: Total Dist = Sum Speed * Time = 37 * 12 = 444 km.",
+            "explanation": "Time = Gap / Diff Speed."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A train overtakes two persons walking in same direction at 2 kmph and 4 kmph in 9 and 10 seconds. Length of train?",
+            "solution": "Step 1: Rel Speed 1 = (S-2). Rel Speed 2 = (S-4).\nStep 2: Dist = Length = (S-2)*9*k = (S-4)*10*k (k=5/18).\nStep 3: 9S - 18 = 10S - 40 => S = 22 kmph.\nStep 4: Length = (22-2) * 5/18 * 9 = 20 * 5/2 = 50 meters.",
+            "explanation": "Equate Distance (Length)."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A car travels 840 km at constant speed. If speed was 10 kmph more, it would take 2 hours less. What is speed?",
+            "solution": "Step 1: 840/S - 840/(S+10) = 2.\nStep 2: 420 [ (S+10 - S) / S(S+10) ] = 1.\nStep 3: 4200 = S^2 + 10S => S^2 + 10S - 4200 = 0.\nStep 4: Factors of 4200 diff 10? 60, 70.\nStep 5: (S+70)(S-60)=0. S=60 kmph.",
+            "explanation": "Quadratic equation standard form."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: In a 100m race, A beats B by 10m and B beats C by 10m. By how much did A beat C?",
+            "solution": "Step 1: A:B = 100:90.\nStep 2: B:C = 100:90.\nStep 3: A:B:C = 100 : 90 : 81.\nStep 4: When A=100, C=81.\nStep 5: Beat by 19m.",
+            "explanation": "Compound Ratio."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A dog sees a cat. Cat runs. Dog chases. Dog takes 5 leaps for every 6 leaps of cat, but 4 leaps of dog are equal to 5 leaps of cat. Ratio of speeds?",
+            "solution": "Step 1: Frequency ratio D:C = 5:6.\nStep 2: Stride ratio D:C = 5:4 (Inverse of 4:5? No. 4D=5C => D=1.25, C=1).\nStep 3: Speed = Freq * Stride.\nStep 4: Speed D = 5 * 5 = 25. Speed C = 6 * 4 = 24.\nStep 5: Ratio 25:24.",
+            "explanation": "Cross multiply: 5*5 : 6*4."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Two places P and Q are 162 km apart. Train from P and Q start towards each other. They meet after 6 hours. If P train travels 8km/hr faster than Q, speed of Q?",
+            "solution": "Step 1: Rel S = 162/6 = 27 kmph.\nStep 2: P + Q = 27. P - Q = 8.\nStep 3: 2Q = 19 => Q = 9.5 kmph.",
+            "explanation": "Simultaneous equations."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Speed of a steam engine is 24 kmph without wagons. Diminution in speed is proportional to sq root of number of wagons. With 4 wagons speed is 20 kmph. Max wagons it can pull?",
+            "solution": "Step 1: Reduction = k * sqrt(w).\nStep 2: 24 - 20 = k * sqrt(4) => 4 = 2k => k=2.\nStep 3: Speed becomes 0 when 24 = 2 * sqrt(w) => sqrt(w) = 12 => w = 144.\nStep 4: With 144 wagons speed is 0. So it can move with 143 wagons.",
+            "explanation": "Functional dependency."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A man can row 30 km upstream and 44 km downstream in 10 hours. Also 40 km up and 55 km down in 13 hours. Speed of man?",
+            "solution": "Step 1: Let 1/U=x, 1/D=y.\nStep 2: 30x + 44y = 10. 40x + 55y = 13.\nStep 3: Solve: Multiply 1 by 4, 2 by 3. 120x+176y=40. 120x+165y=39.\nStep 4: 11y = 1 => y=1/11 (D=11). 30x + 4 = 10 => 30x=6 => x=1/5 (U=5).\nStep 5: Man = (11+5)/2 = 8 kmph.",
+            "explanation": "Standard Set of Linear Equation."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A train leaves Station A at 7 AM reaches B at 11 AM. Another leaves B at 8 AM reaches A at 11:30 AM. Meeting time?",
+            "solution": "Step 1: T1 = 4h. T2 = 3.5h (7/2).\nStep 2: Let Dist = LCM(4, 3.5) = 28km.\nStep 3: S1 = 7. S2 = 8.\nStep 4: Train 1 starts 1 hr early. Travels 7km. Gap rem = 21km.\nStep 5: Rel S = 15. Time = 21/15 = 1.4 hrs = 1 hr 24 min.\nStep 6: 8:00 + 1:24 = 9:24 AM.",
+            "explanation": "Assume Distance as LCM of times."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Average speed of a train without stoppages is 50kmph and with stoppages is 45kmph. If on average it stops for 1 min per stoppage, how many stoppages per hour?",
+            "solution": "Step 1: Stop Time = (5/50)*60 = 6 mins.\nStep 2: Total Stop Time per hour is 6 mins.\nStep 3: If each stop is 1 min, then 6 stoppages.",
+            "explanation": "Variation of the stoppage formula."
         }
     ],
     "shortcuts": [
-        "Distance Constant -> Speed ratio a:b -> Time ratio b:a.",
-        "Late/Early Concept: D = (S1*S2)/(S1-S2) * TimeDiff."
+        "Meeting Time = Gap / Relative Speed.",
+        "Late/Early Formula: D = S1*S2 / (S1~S2) * TimeDiff.",
+        "Avg Speed = 2xy/(x+y) (For equal distance).",
+        "Trains: Cross T = (L1+L2) / RelS."
     ],
     "commonMistakes": [
-        "Not converting minutes to hours when speed is in km/hr.",
-        "Adding speeds in same direction (Relative speed should be subtracted)."
+        "Mistake: Forgetting 5/18 conversion.",
+        "Mistake: Relative Speed: Adding speeds in SAME direction (Should subtract).",
+        "Mistake: Avg Speed = (S1+S2)/2 (Only true for equal TIME, not Distance)."
     ],
     "placementTips": [
-        "Trains problems are guaranteed. Master the 'Relative Speed' concept.",
-        "Draw diagrams for relative motion questions."
+        "Draw the diagram for Train Crossing problems.",
+        "Boats & Streams is just TSD with specific Relative Speed rules.",
+        "Circular Track problems often use LCM of time per lap."
     ]
 }

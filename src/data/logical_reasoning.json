@@ -3,42 +3,206 @@
     "category": "Reasoning",
     "sections": [
         {
-            "questionType": "Statement & Assumption",
-            "concept": "Validating the underlying assumption of a statement.",
-            "formula": "Assumption is implicit. It must link premise and conclusion.",
-            "solvingTechnique": "Use the 'Unless' test. Is the statement possible without the assumption?",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "Statement: 'Buy pure milk from us.' Assumption: Pure milk is desirable.",
-                    "solution": "Step 1: If pure milk wasn't desirable, the ad makes no sense.\nStep 2: Valid."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Logical reasoning tests the ability to analyze information and draw correct conclusions. It includes Statement & Assumptions, Arguments, Course of Action, and Cause & Effect.",
+            "solvingTechnique": "For Assumptions: Think from the author's perspective (What did they take for granted?). For Course of Action: Solution must be practical and solve the problem."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: 'Please switch off the lights when leaving.' - Notice.\nAssumption I: People read notices.\nAssumption II: People are careless.",
+            "solution": "Step 1: Assumption I is implicit because notices are put up with the expectation they are read.\nStep 2: Assumption II is not necessarily true (generalization).\nStep 3: Only I is implicit.",
+            "explanation": "Author assumes notice will be read."
         },
         {
-            "questionType": "Statement & Conclusion",
-            "concept": "Drawing definite conclusions from given facts.",
-            "formula": "Conclusion must NOT introduce new info.",
-            "solvingTechnique": "Stick strictly to the statement. Avoid external knowledge.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "All players are fit. Ram is a player.",
-                    "solution": "Step 1: Ram is a player -> Ram is fit.\nStep 2: Conclusion: Ram is fit. Valid."
-                }
-            ]
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Govt has reduced bus fares.\nAssumption I: More people will travel by bus.\nAssumption II: Trains will lose passengers.",
+            "solution": "Step 1: I is implicit (Lower cost -> Higher demand).\nStep 2: II is a consequence, not an assumption for the action.\nStep 3: Only I follows.",
+            "explanation": "Assumption justifies the action."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Use low calorie sugar for health.\nAssumption I: Health is important.\nAssumption II: Artificial sugar is harmful.",
+            "solution": "Step 1: I is implicit (Why else advise?).\nStep 2: II is not stated or assumed.\nStep 3: Only I follows.",
+            "explanation": "Identify the motivation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: 'Buy pure butter from Company A.'\nAssumption I: No other company sells pure butter.\nAssumption II: People want pure butter.",
+            "solution": "Step 1: I is not implicit (Advertisement doesn't deny others).\nStep 2: II is implicit (Target audience need).\nStep 3: Only II follows.",
+            "explanation": "Adverts target needs."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Heavy rains caused flooding.\nCourse of Action I: Evacuate people.\nCourse of Action II: Build a dam immediately.",
+            "solution": "Step 1: I is immediate and necessary.\nStep 2: II is long term, not immediate relief.\nStep 3: Only I follows.",
+            "explanation": "CoA must be feasible immediately."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Students are failing in Math.\nCoA I: Make Math optional.\nCoA II: Improve teaching methods.",
+            "solution": "Step 1: I is escapist (Not a solution).\nStep 2: II solves the root cause.\nStep 3: Only II follows.",
+            "explanation": "Don't avoid the problem, solve it."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: 'Do not lean out of the train'.\nAssumption I: Leaning out is dangerous.\nAssumption II: People want to lean out.",
+            "solution": "Step 1: I is implicit (Safety warning).\nStep 2: II is implicit (Why else warn?).\nStep 3: Both follow.",
+            "explanation": "Warnings assume danger and tendency."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Prices of veg soared.\nCause: Transport strike.\nEffect: Prices soared.",
+            "solution": "Step 1: Strike (Cause) -> Supply Cut -> Price Rise (Effect).\nStep 2: Valid Cause-Effect relationship.",
+            "explanation": "Supply and Demand logic."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: 'X' chocolate is the best gift.\nAssumption I: People like chocolates.\nAssumption II: X is expensive.",
+            "solution": "Step 1: I is implicit.\nStep 2: II is not linked to 'best'.\nStep 3: Only I follows.",
+            "explanation": "Irrelevant attributes."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Statement: Employee productivity is low.\nCoA I: Fire everyone.\nCoA II: Provide training.",
+            "solution": "Step 1: I is extreme.\nStep 2: II is corrective.\nStep 3: Only II follows.",
+            "explanation": "Avoid harsh measures initially."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: 'If you are intelligent, we need you.' - Recruitment Ad.\nAssumption I: You are intelligent.\nAssumption II: The company needs intelligent people.",
+            "solution": "Step 1: I is not assumed (It's a condition 'If').\nStep 2: II is implicit (Why else advertise?).\nStep 3: Only II follows.",
+            "explanation": "Conditions vs Assumptions."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: Should luxury hotels be banned?\nArg I: Yes, they are places for international criminals.\nArg II: No, they bring foreign tourists and revenue.",
+            "solution": "Step 1: I is a generalization/weak argument.\nStep 2: II is strong (Economic benefit).\nStep 3: Only II is strong.",
+            "explanation": "Strong arguments focus on key benefits/detriments."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: Should school education be made free?\nArg I: Yes, this is the only way to improve literacy.\nArg II: No, it will burden the exchequer.",
+            "solution": "Step 1: I uses 'only' (Weak).\nStep 2: II is a valid economic concern (Strong).\nStep 3: Only II is strong.",
+            "explanation": "Avoid 'Only', 'Best', 'Always'."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: High oil prices -> Inflation.\nCause: Oil prices increased.\nEffect: Inflation increased.",
+            "solution": "Step 1: Direct link established.\nStep 2: Statement I is Cause, II is Effect.",
+            "explanation": "Causal chain."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: Severe drought in state.\nCoA I: Govt should request food from other states.\nCoA II: People should simplify their diet.",
+            "solution": "Step 1: I is practical administrative action.\nStep 2: II is vague and unenforceable.\nStep 3: Only I follows.",
+            "explanation": "Govt action vs Personal advice."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: 'Double your money in 1 year' - Ad.\nAssumption I: The assumption is not clearly true.\nAssumption II: People want their money to grow.",
+            "solution": "Step 1: Ad assumes people are attracted to growth.\nStep 2: Only II follows.",
+            "explanation": "Desirability assumption."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: Accident on highway due to speed.\nCoA I: Ban all cars.\nCoA II: Install speed cameras and fines.",
+            "solution": "Step 1: I is absurdly extreme.\nStep 2: II is regulatory and logical.\nStep 3: Only II follows.",
+            "explanation": "Proportionality of action."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Statement: Should exams be banned?\nArg I: Yes, they cause stress.\nArg II: No, they are necessary to evaluate progress.",
+            "solution": "Step 1: I addresses a side effect but ignores utility.\nStep 2: II addresses the core purpose (Strong).\nStep 3: Only II is strong.",
+            "explanation": "Core purpose analysis."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Assert: Leaves are green.\nReason: Chlorophyll presence.",
+            "solution": "Step 1: A is True.\nStep 2: R is True and explains A.\nStep 3: Both true, R explains A.",
+            "explanation": "Scientific fact."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Assert: Diamond is used for cutting glass.\nReason: It has high refractive index.",
+            "solution": "Step 1: A is True.\nStep 2: R is True.\nStep 3: But R does not explain A (Hardness explains cutting).\nStep 4: Both true, R NOT correct explanation.",
+            "explanation": "Distinguish between Property and Cause."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: 'Computer education should be mandatory'.\nAssumption I: Computers are essential for modern jobs.\nAssumption II: Schools have infrastructure.",
+            "solution": "Step 1: I is the rationale behind the statement (Implicit).\nStep 2: II must be assumed for the order to be feasible (Implicit).\nStep 3: Both I and II are implicit.",
+            "explanation": "Feasibility + Desirability."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: Decline in cotton production.\nCoA I: Import cotton.\nCoA II: Subsidize cotton farmers.",
+            "solution": "Step 1: I solves the immediate shortage.\nStep 2: II solves the long term production issue.\nStep 3: Both I and II follow (Short term + Long term).",
+            "explanation": "Comprehensive solution."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Should India have nuclear weapons?\nArg I: Yes, to protect sovereignty against threats.\nArg II: No, it promotes an arms race.",
+            "solution": "Step 1: I is a strong strategic argument.\nStep 2: II is a strong ethical/geopolitical argument.\nStep 3: Both are Strong.",
+            "explanation": "Balanced debate."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Event A: Gold prices dropped. Event B: Jewelry sales increased.\nRelationship?",
+            "solution": "Step 1: Drop in Price -> Increase in Demand.\nStep 2: A is Cause, B is Effect.",
+            "explanation": "Economic law."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: 'Contact us for the best training.'\nAssumption I: Other institutes don't provide training.\nAssumption II: People prefer quality training.",
+            "solution": "Step 1: I is not implicit (Best doesn't mean others are zero).\nStep 2: II is implicit.\nStep 3: Only II follows.",
+            "explanation": "Comparative vs Absolute."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: Malaria cases are rising.\nCoA I: Fumigate the area.\nCoA II: Aware people about mosquito breeding.",
+            "solution": "Step 1: I attacks the vector (Immediate).\nStep 2: II prevents recurrence (Preventive).\nStep 3: Both follow.",
+            "explanation": "Multi-pronged approach."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Assert: Shimla is colder than Delhi.\nReason: Shimla is at higher altitude.",
+            "solution": "Step 1: A is True.\nStep 2: R is True.\nStep 3: R explains A (Lapse rate of temperature).\nStep 4: R is correct explanation.",
+            "explanation": "Geographical logic."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: Large number of people die due to cold wave.\nCoA I: Distribute blankets.\nCoA II: Stop the cold wave.",
+            "solution": "Step 1: I is feasible.\nStep 2: II is impossible (Natural phenomenon).\nStep 3: Only I follows.",
+            "explanation": "Feasibility check."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Should strikes be banned?\nArg I: Yes, they disrupt public life.\nArg II: No, it is a democratic right.",
+            "solution": "Step 1: I is strong (Public interest).\nStep 2: II is strong (Constitution).\nStep 3: Both are Strong.",
+            "explanation": "Rights vs Duties conflict."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Statement: 'X' brand TV sales increased.\nAssumption I: The price decreased.\nAssumption II: The quality improved.",
+            "solution": "Step 1: Sales increase can be due to marketing, need, price, or quality.\nStep 2: Neither I nor II is definitely assumed (Could be either or neither).\nStep 3: Neither follows.",
+            "explanation": "Don't assume precise cause without data."
         }
     ],
     "shortcuts": [
-        "Words like 'All', 'Always', 'Only' usually indicate invalid assumptions (too extreme).",
-        "Assumptions are always positive/supportive of the statement."
+        "Assumption: Look for 'Desirability', 'Feasibility', 'Requirement'.",
+        "Arguments: Reject 'Only', 'Best', 'Copy others' arguments.",
+        "Course of Action: Must be 'Practical' and 'Solve the problem'."
     ],
     "commonMistakes": [
-        "Using real-world knowledge instead of given statements.",
-        "Confusing Assumption (Implicit) with Conclusion (Derivable)."
+        "Mistake: Assuming personal opinion as valid argument.",
+        "Mistake: Thinking 'If I doesn't happen, II will' (Arguments are independent).",
+        "Mistake: In Assumptions, restatement of statement is NOT an assumption."
     ],
     "placementTips": [
-        "Read carefully. One word changes the meaning.",
-        "Practice 50 questions to get the 'intuition'."
+        "In 'Cause & Effect', check if both are effects of a common cause.",
+        "For 'Strong Arguments', look for analytical backing, not emotional appeal.",
+        "Ethical/Constitutional arguments are usually 'Strong'."
     ]
 }

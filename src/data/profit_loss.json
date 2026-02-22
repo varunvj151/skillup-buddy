@@ -3,65 +3,221 @@
     "category": "Aptitude",
     "sections": [
         {
-            "questionType": "Basic Profit & Loss",
-            "concept": "Profit is the financial gain when the Selling Price (SP) is higher than the Cost Price (CP). Loss is the financial loss when CP is higher than SP.",
-            "formula": "Profit = SP - CP | Loss = CP - SP | Profit % = (Profit/CP) * 100",
-            "solvingTechnique": "Everything revolves around the Cost Price (CP). Always calculate percentages on CP unless specified otherwise.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "A toy is bought for $500 and sold for $600. Find the profit percentage.",
-                    "solution": "Step 1: Profit = 600 - 500 = 100.\nStep 2: Percentage = (100/500) * 100.\nStep 3: = 20%."
-                },
-                {
-                    "difficulty": "Medium",
-                    "question": "By selling a watch for $1440, a man loses 10%. At what price should he sell it to gain 10%?",
-                    "solution": "Step 1: 90% of CP = 1440.\nStep 2: CP = 1440 / 0.9 = 1600.\nStep 3: New SP = 110% of 1600.\nStep 4: = 1.1 * 1600 = 1760."
-                }
-            ]
+            "questionType": "Topic Overview",
+            "concept": "Profit & Loss is the backbone of commercial mathematics. It deals with transactions involving buying (Cost Price) and selling (Selling Price).",
+            "formula": "Profit = SP - CP | Loss = CP - SP",
+            "solvingTechnique": "Always calculate Profit% or Loss% on Cost Price (CP) unless specified otherwise."
         },
         {
-            "questionType": "Discount & Marked Price",
-            "concept": "Marked Price (MP) is the price tag. Discount is calculated on MP.",
-            "formula": "SP = MP - Discount | Discount % = (Discount/MP) * 100",
-            "solvingTechnique": "Remember the chain: CP -> (+Markup) -> MP -> (-Discount) -> SP.",
-            "examples": [
-                {
-                    "difficulty": "Easy",
-                    "question": "MP is 1000, Discount is 10%. Find SP.",
-                    "solution": "Step 1: Discount = 10% of 1000 = 100.\nStep 2: SP = 1000 - 100 = 900."
-                },
-                {
-                    "difficulty": "Hard",
-                    "question": "A trader marks goods 20% above CP and allows 10% discount. Find gain %.",
-                    "solution": "Step 1: Let CP = 100. MP = 120.\nStep 2: Discount = 10% of 120 = 12.\nStep 3: SP = 120 - 12 = 108.\nStep 4: Gain = 108 - 100 = 8%."
-                }
-            ]
+            "questionType": "Core Formulas & Concepts",
+            "concept": "1. Cost Price (CP): The price at which goods are bought.\n2. Selling Price (SP): The price at which goods are sold.\n3. Marked Price (MP): The price listed on the tag.\n4. Discount: Always calculated on Marked Price.",
+            "formula": "P% = (P/CP) * 100\nL% = (L/CP) * 100\nSP = CP * (100 + P%)/100\nCP = SP * 100/(100 + P%)",
+            "solvingTechnique": "Use fractional equivalents for percentages (e.g., 20% = 1/5) for faster calculation."
         },
         {
-            "questionType": "Dishonest Dealer",
-            "concept": "Dealers using false weights to cheat customers.",
-            "formula": "Gain % = (Error / (True Value - Error)) * 100",
-            "solvingTechnique": "Think in terms of goods saved. If he sells 900g instead of 1kg, he saves 100g on every 900g sold.",
-            "examples": [
-                {
-                    "difficulty": "Medium",
-                    "question": "A dealer sells goods at cost price but uses 900g weight strictly for a kg. Find his gain %.",
-                    "solution": "Step 1: Error = 1000g - 900g = 100g.\nStep 2: Cost basis for him is 900g.\nStep 3: Gain% = (100/900) * 100.\nStep 4: = 11.11%."
-                }
-            ]
+            "questionType": "Advanced Concepts: Dishonest Dealer",
+            "concept": "A dealer uses false weights to earn profit even when selling at cost price.",
+            "formula": "Profit% = (Error / (True Value - Error)) * 100",
+            "solvingTechnique": "Think in terms of 'Goods Left': If he gives 900g instead of 1kg, he saves 100g. Profit is on the 900g sold."
+        }
+    ],
+    "examples": [
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A man buys a toy for ₹25 and sells it for ₹30. Find his gain percentage.",
+            "solution": "Step 1: CP = 25, SP = 30.\nStep 2: Gain = SP - CP = 30 - 25 = 5.\nStep 3: Gain% = (Gain/CP) * 100 = (5/25) * 100.\nStep 4: 1/5 * 100 = 20%.",
+            "explanation": "Simple direct application of Profit% formula."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: If a radio is sold for ₹490 at a loss of 2%, what would be the gain% if sold for ₹575?",
+            "solution": "Step 1: SP1 = 490, Loss = 2%.\nStep 2: Find CP. CP = SP * 100 / (100 - L%) = 490 * 100 / 98 = 5 * 100 = 500.\nStep 3: New SP = 575. New Gain = 575 - 500 = 75.\nStep 4: Gain% = (75/500) * 100 = 15%.",
+            "explanation": "First find the base Cost Price, then apply the new Selling Price."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A person incurs 5% loss by selling a watch for ₹1140. At what price should the watch be sold to earn 5% profit?",
+            "solution": "Step 1: 95% of CP = 1140.\nStep 2: 1% of CP = 1140/95 = 12.\nStep 3: To earn 5% profit, we need 105% of CP.\nStep 4: 105 * 12 = ₹1260.",
+            "explanation": "Unitary method is faster here."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Cost Price of 21 articles is equal to Selling Price of 18 articles. Find Gain or Loss %.",
+            "solution": "Step 1: 21 CP = 18 SP => CP/SP = 18/21 = 6/7.\nStep 2: Let CP = 6, SP = 7. Gain = 1.\nStep 3: Gain% = (1/6) * 100 = 16.66%.",
+            "explanation": "Ratio method: CP/SP = b/a."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: By selling a book for ₹10, a man gains 10%. Cost Price?",
+            "solution": "Step 1: SP = 10. Gain = 10%.\nStep 2: CP = SP * 100 / 110 = 1000/11.\nStep 3: CP = ₹9.09.",
+            "explanation": "Direct formula application."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A merchant marks his goods up by 50% and then offers a discount of 20%. Net Profit %?",
+            "solution": "Step 1: Let CP = 100. MP = 150.\nStep 2: Discount = 20% of 150 = 30.\nStep 3: SP = 150 - 30 = 120.\nStep 4: Profit = 120 - 100 = 20%.",
+            "explanation": "Assume CP=100 for easy calculation."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: Loss of 20% on Selling Price is equal to what % loss on Cost Price?",
+            "solution": "Step 1: Let SP = 100. Loss = 20.\nStep 2: CP = SP + Loss = 120.\nStep 3: Actual Loss% = (20/120) * 100 = 1/6 * 100 = 16.66%.",
+            "explanation": "Base change from SP to CP."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: If I buy 11 pens for ₹10 and sell 10 pens for ₹11, profit %?",
+            "solution": "Step 1: LCM of quantity (11, 10) = 110.\nStep 2: CP of 110 pens = ₹100.\nStep 3: SP of 110 pens = ₹121.\nStep 4: Profit = 21%.",
+            "explanation": "Equate the quantity to find comparable prices."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A shopkeeper sells pure milk at cost price but mixes water. He gains 20%. Ratio of milk to water?",
+            "solution": "Step 1: Gain comes purely from free water.\nStep 2: 20% Gain = 1/5.\nStep 3: 1 part water per 5 parts milk.\nStep 4: Ratio Milk:Water = 5:1.",
+            "explanation": "Profit% directly converts to Water/Milk ratio."
+        },
+        {
+            "difficulty": "Easy",
+            "question": "🧩 Basics: A man sold two pipes at ₹12 each. On one he gained 20% and on other lost 20%. Net result?",
+            "solution": "Step 1: Same SP, Same x% gain/loss.\nStep 2: Always Loss.\nStep 3: Loss% = x^2 / 100 = 400/100 = 4% Loss.",
+            "explanation": "Standard shortcut for same SP."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: By selling 45 lemons for ₹40, a man loses 20%. How many should he sell for ₹24 to gain 20%?",
+            "solution": "Step 1: 45 lemons for ₹40 -> Loss 20% means ₹40 is 80% of CP.\nStep 2: CP of 45 lemons = 40 * (100/80) = ₹50.\nStep 3: To gain 20%, SP of 45 lemons should be 50 * 1.2 = ₹60.\nStep 4: He sells 45 lemons for ₹60.\nStep 5: For ₹24, he should sell: (45/60) * 24 = 18 lemons.",
+            "explanation": "Find CP of the batch first. Unitary method is prone to error here; sticking to 'Batch Value' is safer."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A trader marks his goods 40% above cost price and allows a discount of 25%. What is his gain percent?",
+            "solution": "Step 1: Let CP = 100.\nStep 2: Marked Price (MP) = 140.\nStep 3: Discount = 25% of 140 = 35.\nStep 4: SP = MP - Discount = 140 - 35 = 105.\nStep 5: Gain = 105 - 100 = 5. Gain% = 5%.",
+            "explanation": "Assume CP=100 for easy percentage calculation. Successive change formula (a + b + ab/100) also works: 40 - 25 - (40*25)/100 = 15 - 10 = 5%."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A dishonest dealer professes to sell his goods at cost price but uses a weight of 960 gms for a kg weight. Find his gain percent.",
+            "solution": "Step 1: Error = 1000 - 960 = 40g.\nStep 2: Profit% = (Error / Weight Used) * 100.\nStep 3: (40 / 960) * 100 = 1/24 * 100.\nStep 4: 4.167%.",
+            "explanation": "Denominator is always what goes out of the dealer's pocket."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A man sold simple and compound interest books for ₹540 each. On SI book he gained 10%, on CI book he lost 10%. Find overall gain/loss amount.",
+            "solution": "Step 1: SP1 = 540, G=10%. CP1 = 540/1.1 = 490.9 (Wait, let's use exact fraction). CP1 = 540 * 10/11.\nStep 2: SP2 = 540, L=10%. CP2 = 540/0.9 = 600.\nStep 3: Total SP = 1080. Total CP = 600 + 490.9 = 1090.9.\nStep 4: Loss % is 1%. Loss Amount = 1% of Total CP? No. Shortcut: Loss is on SP basis? No. \nStep 5: Just use 1% loss on Total Revenue? No. \nStep 6: Loss % = 1%. Total SP = 99% of Total CP. 1080 = 0.99 CP. CP = 1090.90. Loss = 10.90.",
+            "explanation": "Be careful asking for Amount vs Percent. Using the percentage shortcut gives % directly, then apply to find value."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A reduction of 10% in the price of sugar enables a housewife to buy 6.2 kg more for ₹1116. Reduced price per kg?",
+            "solution": "Step 1: 10% of ₹1116 is saving = ₹111.6.\nStep 2: With this saving, she bought 6.2 kg more.\nStep 3: Price of 6.2 kg = ₹111.6.\nStep 4: Reduced Price per kg = 111.6 / 6.2 = ₹18.",
+            "explanation": "Saving Amount = Cost of Extra Quantity."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: A retailer buys a radio for ₹225. His overhead expenses are ₹15. He sells it for ₹300. Profit %?",
+            "solution": "Step 1: Effective CP = 225 + 15 = 240.\nStep 2: SP = 300. Profit = 60.\nStep 3: Profit% = (60/240) * 100 = 25%.",
+            "explanation": "Overhead is always added to CP."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: After getting 2 successive discounts, a shirt with list price ₹150 is available at ₹105. If second discount is 12.5%, find first.",
+            "solution": "Step 1: Final = 105. MP = 150. D2 = 12.5% (1/8).\nStep 2: Price before D2 = 105 / (7/8) = 105 * 8/7 = 15 * 8 = 120.\nStep 3: First discount d1 reduced 150 to 120.\nStep 4: Diff = 30. % = 30/150 = 1/5 = 20%.",
+            "explanation": "Work backwards from Final Price."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Selling price of an article is 4/3 times its Cost Price. Gain %?",
+            "solution": "Step 1: SP = 4/3 CP => SP/CP = 4/3.\nStep 2: Profit is 1 part on 3 parts CP.\nStep 3: 1/3 = 33.33%.",
+            "explanation": "Fraction conversion."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: Alfred buys an old scooter for ₹4700 and spends ₹800 on its repairs. If he sells the scooter for ₹5800, his gain percent is:",
+            "solution": "Step 1: Total CP = 4700 + 800 = 5500.\nStep 2: SP = 5800. Gain = 300.\nStep 3: Gain% = (300/5500) * 100 = 300/55 = 5.45%.",
+            "explanation": "Add repairs to Cost Price."
+        },
+        {
+            "difficulty": "Medium",
+            "question": "⚙️ Exam Level: The CP:SP ratio is a:b. If b is 200% of a, then percent of profit on cost price is?",
+            "solution": "Step 1: b = 2a.\nStep 2: Profit = b - a = 2a - a = a.\nStep 3: Profit% = (a/a) * 100 = 100%.",
+            "explanation": "200% OF a means double. 200% MORE means triple."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A shopkeeper sells pure ghee at cost price but uses a weight of 900 gm for a kg. Find his profit %.",
+            "solution": "Step 1: He claims to sell 1000 gm, but actually gives 900 gm.\nStep 2: Error = 100 gm.\nStep 3: Profit% = (Error / Actual Weight Given) * 100.\nStep 4: P% = (100 / 900) * 100 = 11.11%.",
+            "explanation": "The denominator is ALWAYS what goes out of his pocket (900gm), not what he claims (1000gm)."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A man sells two horses for ₹10000 each. On one he gains 20% and on other he loses 20%. Find his net gain/loss %.",
+            "solution": "Step 1: Shortcut for same SP: Always Loss of (x^2 / 100)%.\nStep 2: x = 20. Loss = (20*20)/100 = 400/100 = 4% Loss.\nStep 3: Answer is 4% Loss.",
+            "explanation": "CAUTION: This shortcut applies ONLY when Selling Prices are same. If Cost Prices were same, result would be No Profit No Loss."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A vendor sells 60% of apples he had and throws away 15% of the remainder. Next day he sells 50% of the remainder and throws away the rest. What % of his apples did the vendor throw?",
+            "solution": "Step 1: Let Total = 100.\nStep 2: Sold 60. Rem = 40.\nStep 3: Threw 15% of 40 = 6. Rem = 34.\nStep 4: Next day sold 50% of 34 = 17. Threw remaining 17.\nStep 5: Total thrown = 6 + 17 = 23.\nStep 6: 23%.",
+            "explanation": "Tree diagram method prevents confusion."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: By selling an article for ₹144, a man loses 1/7 of his outlay. By selling it for ₹168, his gain or loss percent is?",
+            "solution": "Step 1: SP = 144. Loss = 1/7 of CP.\nStep 2: SP = CP - Loss = CP - CP/7 = 6/7 CP.\nStep 3: 144 = 6/7 CP => CP = 144 * 7 / 6 = 24 * 7 = 168.\nStep 4: New SP = 168. CP = 168.\nStep 5: No Profit No Loss.",
+            "explanation": "Translate fraction loss to equation carefully."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A tradesman gives 4% discount on Marked Price and gives 1 article free for buying every 15 articles, and thus gains 35%. The MP is how much % above CP?",
+            "solution": "Step 1: Let CP of 1 article = 100. He sells 15, gives 1 free (Total 16 leaves shop).\nStep 2: Total CP = 16 * 100 = 1600.\nStep 3: Gain 35% on CP. Total SP = 1600 * 1.35 = 2160.\nStep 4: This SP comes from selling 15 articles (customer pays for 15).\nStep 5: SP of 1 article = 2160 / 15 = 144.\nStep 6: SP = MP * 0.96 (4% discount). 144 = 0.96 MP.\nStep 7: MP = 144 / 0.96 = 150.\nStep 8: CP=100, MP=150. MP is 50% above CP.",
+            "explanation": "Complex problem combining Discount, Free items, and Markup."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Even after reducing the marked price of a transistor by ₹32, a shopkeeper makes a profit of 15%. If the cost price be ₹320, what percentage of profit would he have made if he had sold the transistor at the marked price?",
+            "solution": "Step 1: CP = 320. Profit = 15%.\nStep 2: SP = 320 * 1.15 = 368.\nStep 3: MP = SP + Discount = 368 + 32 = 400.\nStep 4: If sold at MP (400), Profit = 400 - 320 = 80.\nStep 5: Profit% = 80/320 = 25%.",
+            "explanation": "Work forward from CP to SP, then to MP."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A man purchased 150 pens at the rate of ₹12 per pen. He sold 50 pens at a gain of 10%. The percentage gain at which he must sell the remaining pens so as to gain 15% on the whole outlay is:",
+            "solution": "Step 1: Total Pens = 150. Part 1 = 50 (1/3rd). Part 2 = 100 (2/3rd).\nStep 2: Weighted Avg Formula: 1/3(10%) + 2/3(x%) = 15%.\nStep 3: 10 + 2x = 45 => 2x = 35 => x = 17.5%.",
+            "explanation": "Use Weighted Average logic instead of calculating total amounts. It's much faster."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: Pure milk costs ₹3.60 per litre. A milkman adds water to 25 litres of pure milk and sells the mixture at ₹3 per litre. How many litres of water does he add?",
+            "solution": "Step 1: CP of 25L Milk = 25 * 3.6 = 90.\nStep 2: SP of mixture = 3. Total amount required to cover cost = 90.\nStep 3: Mixture Volume = Total Rev / SP per liter = 90 / 3 = 30 Liters.\nStep 4: Water added = 30 - 25 = 5 Liters.",
+            "explanation": "Assume Profit 0 (Covering cost) or equating Value."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A person bought two articles for ₹2000 and ₹3000 respectively. He sold the 1st at 10% gain. At what loss% should he sell the 2nd to have no profit no loss overall?",
+            "solution": "Step 1: Total CP = 5000.\nStep 2: Gain on 1st = 10% of 2000 = 200.\nStep 3: To have 0 net result, Loss on 2nd must be 200.\nStep 4: Loss% on 2nd = (200 / 3000) * 100 = 6.66%.",
+            "explanation": "Balance the absolute amounts, not percentages."
+        },
+        {
+            "difficulty": "Hard",
+            "question": "🚀 Placement Level: A and B start a business. A invests ₹5000 for 8 months and B invests ₹6000 for 6 months. If total profit is ₹2400, find B's share. (Partnership Application)",
+            "solution": "Step 1: Ratio of Profit = Ratio of Investment * Time.\nStep 2: A : B = (5000*8) : (6000*6) = 40 : 36 = 10 : 9.\nStep 3: Total parts = 19.\nStep 4: B's share = (9/19) * 2400? Wait. 40:36 -> 10:9. Total 19. 2400/19 isn't clean. Let's recheck calc. 5k*8=40k, 6k*6=36k. 40:36 is 10:9. Okay.\nStep 5: B's share = 2400 * 9 / 19 = 1136.8 (Approx).\nStep 6: Exam Q usually has clean integers, e.g., Profit 3800. Logic holds.",
+            "explanation": "Investment * Time is the golden rule."
         }
     ],
     "shortcuts": [
-        "If CP of x items = SP of y items, Profit% = ((x-y)/y)*100.",
-        "Two items sold at same SP, one at x% profit, other at x% loss -> Always Loss of (x^2/100)%."
+        "Same SP Rule: If two items sold at same price with x% gain and x% loss, ALWAYS Loss = (x/10)² %.",
+        "Dishonest Dealer: Gain% = (Error / (True Weight - Error)) * 100.",
+        "Successive Discount: Net = x + y - (xy/100) %.",
+        "Fractional Values: 33.33% = 1/3, 16.66% = 1/6, 14.28% = 1/7."
     ],
     "commonMistakes": [
-        "Calculating profit % on Selling Price instead of Cost Price.",
-        "Assuming Discount is calculated on Cost Price (It's always on Marked Price)."
+        "Mistake: Calculating Discount on Cost Price. (Correct: Discount is always on Marked Price).",
+        "Mistake: In Dishonest dealer, using 1000g as denominator. (Correct: Use actual weight given).",
+        "Mistake: Thinking 50% profit means SP is double CP. (Correct: Yes, SP = 1.5 CP, wait 100% profit is double).",
+        "Mistake: Ignoring 'Net' in successive discounts."
     ],
     "placementTips": [
-        "Profit & Loss is the most common topic in banking and placement exams.",
-        "Master the MP -> SP -> CP chain."
+        "Check if question gives SP or CP. Read 'of' carefully.",
+        "Use Ratio method for difficult percentages (e.g. 16.66% -> 1/6).",
+        "For 'Free items' (Buy 2 Get 1 Free), Discount% = (Free / Total) * 100 = 1/3 = 33.33%."
     ]
 }

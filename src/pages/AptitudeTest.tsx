@@ -14,8 +14,8 @@ export default function AptitudeTest() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(preselectedTopic);
 
   const handleStartTest = () => {
-    if (selectedTopic && sampleQuestions[selectedTopic]) {
-      navigate(`/aptitude/test/${selectedTopic}`);
+    if (selectedTopic) {
+      navigate(`/test/setup/${selectedTopic}`);
     }
   };
 
@@ -23,8 +23,8 @@ export default function AptitudeTest() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header title="Practice Test" showBack />
-      
+      <Header title="Practice Test" showBack onBack={() => navigate('/home')} />
+
       <main className="px-4 py-6 max-w-4xl mx-auto pb-24">
         <div className="mb-6 animate-fade-in">
           <h2 className="text-xl font-bold text-foreground mb-2">Select a Topic</h2>
@@ -38,7 +38,7 @@ export default function AptitudeTest() {
             <TabsTrigger value="aptitude" className="flex-1">Aptitude</TabsTrigger>
             <TabsTrigger value="reasoning" className="flex-1">Reasoning</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="aptitude">
             <div className="space-y-3">
               {aptitudeTopics.map((topic, index) => (
@@ -46,7 +46,6 @@ export default function AptitudeTest() {
                   key={topic.id}
                   name={topic.name}
                   icon={topic.icon}
-                  description={`${sampleQuestions[topic.id]?.length || 0} questions available`}
                   isSelected={selectedTopic === topic.id}
                   onClick={() => setSelectedTopic(topic.id)}
                   delay={index * 50}
@@ -54,7 +53,7 @@ export default function AptitudeTest() {
               ))}
             </div>
           </TabsContent>
-          
+
           <TabsContent value="reasoning">
             <div className="space-y-3">
               {reasoningTopics.map((topic, index) => (
@@ -62,7 +61,6 @@ export default function AptitudeTest() {
                   key={topic.id}
                   name={topic.name}
                   icon={topic.icon}
-                  description={`${sampleQuestions[topic.id]?.length || 0} questions available`}
                   isSelected={selectedTopic === topic.id}
                   onClick={() => setSelectedTopic(topic.id)}
                   delay={index * 50}
@@ -77,12 +75,11 @@ export default function AptitudeTest() {
       {selectedTopic && (
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border">
           <div className="max-w-4xl mx-auto">
-            <Button 
+            <Button
               onClick={handleStartTest}
-              disabled={!hasQuestions}
-              className="w-full h-14 text-lg font-semibold gradient-primary disabled:opacity-50"
+              className="w-full h-14 text-lg font-semibold gradient-primary"
             >
-              {hasQuestions ? 'Start Test' : 'No questions available yet'}
+              Take Test
             </Button>
           </div>
         </div>

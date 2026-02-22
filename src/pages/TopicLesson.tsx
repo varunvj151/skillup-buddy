@@ -10,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, Lightbulb, ArrowRight, BookOpen, Calculator, AlertTriangle, Zap, GraduationCap } from 'lucide-react';
 
 export default function TopicLesson() {
@@ -61,11 +62,71 @@ export default function TopicLesson() {
 
   // Helper to get difficulty color
   const getDifficultyColor = (problem: string) => {
-    if (problem.toLowerCase().includes('easy')) return 'bg-green-100 text-green-800 border-green-200';
-    if (problem.toLowerCase().includes('medium')) return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-    if (problem.toLowerCase().includes('hard')) return 'bg-red-100 text-red-800 border-red-200';
+    const lower = problem.toLowerCase();
+    if (lower.includes('basics')) return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+    if (lower.includes('exam')) return 'bg-blue-100 text-blue-800 border-blue-200';
+    if (lower.includes('placement')) return 'bg-rose-100 text-rose-800 border-rose-200';
+
+    // Fallback for old content
+    if (lower.includes('easy')) return 'bg-green-100 text-green-800 border-green-200';
+    if (lower.includes('medium')) return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+    if (lower.includes('hard')) return 'bg-red-100 text-red-800 border-red-200';
     return 'bg-secondary text-secondary-foreground';
   };
+
+  // Group examples by difficulty
+  const groupedExamples = {
+    basics: lesson.examples.filter(ex => ex.problem.toLowerCase().includes('basics') || ex.problem.toLowerCase().includes('easy')),
+    exam: lesson.examples.filter(ex => ex.problem.toLowerCase().includes('exam') || ex.problem.toLowerCase().includes('medium')),
+    placement: lesson.examples.filter(ex => ex.problem.toLowerCase().includes('placement') || ex.problem.toLowerCase().includes('hard')),
+  };
+
+  // Helper to render an accordion list of examples
+  const renderExampleList = (examples: any[]) => (
+    <Accordion type="single" collapsible className="space-y-4">
+      {examples.map((example, index) => {
+        const difficultyColor = getDifficultyColor(example.problem);
+        const difficultyText = example.problem.split(':')[0]; // e.g. "🧩 Basics"
+        const cleanProblem = example.problem.includes(':') ? example.problem.split(':').slice(1).join(':').trim() : example.problem;
+
+        return (
+          <AccordionItem key={index} value={`item-${index}`} className="bg-white border border-slate-200 rounded-xl px-2 shadow-sm hover:shadow-md transition-all duration-200">
+            <AccordionTrigger className="hover:no-underline px-4 py-4">
+              <div className="flex flex-col sm:flex-row text-left gap-3 w-full pr-4">
+                <Badge className={`w-fit h-fit shrink-0 ${difficultyColor} border`}>
+                  {difficultyText.length < 15 ? difficultyText : `Q${index + 1}`}
+                </Badge>
+                <span className="text-slate-700 font-medium">
+                  {cleanProblem}
+                </span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-4 pb-4 pt-1">
+              <div className="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
+                <div className="bg-slate-50 rounded-lg p-4 font-mono text-sm text-slate-700 whitespace-pre-wrap border border-slate-200/60">
+                  {example.solution.split('\n').map((line: string, i: number) => (
+                    <div key={i} className="mb-1">
+                      {line.trim().startsWith('Step') ? (
+                        <span className="font-bold text-slate-900">{line}</span>
+                      ) : (
+                        line
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-start gap-2 text-sm text-slate-500 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
+                  <Lightbulb className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                  <span className="leading-relaxed">
+                    <span className="font-semibold text-blue-700">Explanation:</span> {example.explanation}
+                  </span>
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
+  );
 
   return (
     <div className="min-h-screen bg-slate-50/50">
@@ -150,7 +211,7 @@ export default function TopicLesson() {
           ))}
         </div>
 
-        {/* Practice Examples */}
+        {/* Practice Examples with Tabs */}
         <div className="mb-12 animate-slide-up" style={{ animationDelay: '400ms' }}>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
@@ -159,56 +220,48 @@ export default function TopicLesson() {
               </span>
               Solved Examples
             </h2>
-            <Badge variant="outline" className="text-slate-500 border-slate-300">
-              {lesson.examples.length} Problems
-            </Badge>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
-            {lesson.examples.map((example, index) => {
-              const difficultyColor = getDifficultyColor(example.problem);
-              // Extract difficulty text if present (e.g. "Easy: ...")
-              const difficultyText = example.problem.split(':')[0];
-              const cleanProblem = example.problem.includes(':') ? example.problem.split(':').slice(1).join(':').trim() : example.problem;
+          <Tabs defaultValue="basics" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6 h-auto p-1 bg-slate-100/80">
+              <TabsTrigger value="basics" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white py-2.5">
+                🧩 Basics
+              </TabsTrigger>
+              <TabsTrigger value="exam" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white py-2.5">
+                ⚙️ Exam Level
+              </TabsTrigger>
+              <TabsTrigger value="placement" className="data-[state=active]:bg-rose-500 data-[state=active]:text-white py-2.5">
+                🚀 Placement Level
+              </TabsTrigger>
+            </TabsList>
 
-              return (
-                <AccordionItem key={index} value={`item-${index}`} className="bg-white border border-slate-200 rounded-xl px-2 shadow-sm hover:shadow-md transition-all duration-200">
-                  <AccordionTrigger className="hover:no-underline px-4 py-4">
-                    <div className="flex flex-col sm:flex-row text-left gap-3 w-full pr-4">
-                      <Badge className={`w-fit h-fit shrink-0 ${difficultyColor} border`}>
-                        {difficultyText.length < 10 ? difficultyText : `Q${index + 1}`}
-                      </Badge>
-                      <span className="text-slate-700 font-medium">
-                        {cleanProblem}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4 pt-1">
-                    <div className="pl-4 border-l-2 border-slate-200 space-y-4 mt-2">
-                      <div className="bg-slate-50 rounded-lg p-4 font-mono text-sm text-slate-700 whitespace-pre-wrap border border-slate-200/60">
-                        {/* Highlights "Step X:" in bold */}
-                        {example.solution.split('\n').map((line, i) => (
-                          <div key={i} className="mb-1">
-                            {line.startsWith('Step') ? (
-                              <span className="font-bold text-slate-900">{line}</span>
-                            ) : (
-                              line
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex items-start gap-2 text-sm text-slate-500 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
-                        <Lightbulb className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
-                        <span className="leading-relaxed">
-                          <span className="font-semibold text-blue-700">Explanation:</span> {example.explanation}
-                        </span>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              );
-            })}
-          </Accordion>
+            <TabsContent value="basics" className="space-y-4">
+              <div className="mb-4 p-4 bg-emerald-50 rounded-lg border border-emerald-100 text-emerald-800 text-sm">
+                Start here to build confidence. Conceptual problems to understand the basics.
+              </div>
+              {groupedExamples.basics.length > 0 ? renderExampleList(groupedExamples.basics) : (
+                <p className="text-muted-foreground text-center py-8">No basic examples available yet.</p>
+              )}
+            </TabsContent>
+
+            <TabsContent value="exam" className="space-y-4">
+              <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-100 text-blue-800 text-sm">
+                Standard competitive exam questions. Focus on step-by-step logic.
+              </div>
+              {groupedExamples.exam.length > 0 ? renderExampleList(groupedExamples.exam) : (
+                <p className="text-muted-foreground text-center py-8">No exam level examples available yet.</p>
+              )}
+            </TabsContent>
+
+            <TabsContent value="placement" className="space-y-4">
+              <div className="mb-4 p-4 bg-rose-50 rounded-lg border border-rose-100 text-rose-800 text-sm">
+                High-level placement aptitude. Focus on shortcuts and complex scenarios.
+              </div>
+              {groupedExamples.placement.length > 0 ? renderExampleList(groupedExamples.placement) : (
+                <p className="text-muted-foreground text-center py-8">No placement level examples available yet.</p>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
 
         {/* Tips & Shortcuts */}
