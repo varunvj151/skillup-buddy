@@ -57,3 +57,5 @@ export interface Message {
   content: string;
   timestamp: Date;
 }
+
+export * from './interview';

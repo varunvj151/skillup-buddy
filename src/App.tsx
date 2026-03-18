@@ -19,6 +19,8 @@ import Interview from "./pages/Interview";
 import NotFound from "./pages/NotFound";
 import GDVoice from "./pages/GDVoice";
 import GDResult from "./pages/GDResult";
+import InterviewSession from "./pages/InterviewSession";
+import InterviewResult from "./pages/InterviewResult";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +51,8 @@ function AppRoutes() {
       <Route path="/gd/voice/:topicId" element={<ProtectedRoute><GDVoice /></ProtectedRoute>} />
       <Route path="/gd/result" element={<ProtectedRoute><GDResult /></ProtectedRoute>} />
       <Route path="/interview" element={<ProtectedRoute><Interview /></ProtectedRoute>} />
+      <Route path="/interview/session" element={<ProtectedRoute><InterviewSession /></ProtectedRoute>} />
+      <Route path="/interview/result" element={<ProtectedRoute><InterviewResult /></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

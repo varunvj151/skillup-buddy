@@ -4,11 +4,74 @@ import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Mic, Square, Timer, Play } from 'lucide-react';
+import { Mic, Square, Timer, AlertCircle, Loader2 } from 'lucide-react';
 import { gdTopics } from '@/data/gdTopics';
 import { useToast } from '@/components/ui/use-toast';
 
 type Phase = 'preparation' | 'recording' | 'processing';
+
+const validateTranscriptLocally = (transcript: string) => {
+    const words = transcript.trim().split(/\s+/);
+    const flags: string[] = [];
+    const reasons: string[] = [];
+
+    // Check length
+    if (words.length < 40) {
+        flags.push("insufficient_response");
+        reasons.push(`Your response was only ${words.length} words. A meaningful GD contribution requires at least 40 words with substantive arguments.`);
+    }
+
+    // Check repetition
+    const phraseCounts = new Map<string, number>();
+    for (let len = 3; len <= Math.min(6, words.length); len++) {
+        for (let i = 0; i <= words.length - len; i++) {
+            const phrase = words.slice(i, i + len).join(" ").toLowerCase();
+            phraseCounts.set(phrase, (phraseCounts.get(phrase) || 0) + 1);
+        }
+    }
+
+    const repeated = Array.from(phraseCounts.entries())
+        .filter(([_, count]) => count > 3)
+        .map(([phrase]) => phrase);
+
+    if (repeated.length > 0) {
+        flags.push("low_communication_quality");
+        const sample = repeated.slice(0, 3);
+        reasons.push(`Repeated phrases detected: "${sample.join('", "')}". Excessive repetition indicates poor communication quality.`);
+    }
+
+    if (flags.length === 0) return null;
+
+    // Generate local fallback evaluation
+    let base = 30;
+    if (flags.includes("insufficient_response")) base = Math.min(base, 15 + words.length);
+    if (flags.includes("low_communication_quality")) base = Math.min(base, 25);
+    base = Math.max(10, Math.min(30, base));
+    
+    const catScore = Math.max(1, Math.floor(base / 10));
+
+    return {
+        scores: {
+            content: { score: catScore, explanation: "Very limited content was provided." },
+            clarity: { score: catScore, explanation: "Insufficient content to assess clarity of thought." },
+            communication: { 
+                score: flags.includes("low_communication_quality") ? Math.max(1, catScore - 1) : catScore, 
+                explanation: flags.includes("low_communication_quality") ? "Excessive repetition of phrases indicates poor communication." : "Not enough speech to evaluate communication skills." 
+            },
+            confidence: { score: catScore, explanation: "Cannot assess confidence from such a brief response." },
+            structure: { score: Math.max(1, catScore - 1), explanation: "No clear introduction, body, or conclusion was present." },
+        },
+        overall_score: base,
+        strengths: ["Attempted to participate in the discussion."],
+        improvements: reasons,
+        tips: [
+            "Speak for at least 1–2 minutes with clear arguments for and against the topic.",
+            "Structure your response: start with an introduction, present 2–3 key points, and end with a conclusion.",
+            "Use specific examples to support your arguments.",
+        ],
+        validation_flags: flags,
+    };
+};
 
 export default function GDVoice() {
     const { topicId } = useParams();
@@ -16,33 +79,33 @@ export default function GDVoice() {
     const { toast } = useToast();
 
     // Topic handling
-    const topicIndex = topicId ? parseInt(topicId) : -1;
-    const isCustomTopic = topicId === 'custom'; // Simplified handling for now, might need state passing for custom topics
-    // For now let's assume topicId corresponds to index in gdTopics or passed via state. 
-    // Since URL params don't carry state well on refresh, let's look up by index or handle differently.
-    // Actually, let's decode the topic from the URL if it's a string, or index.
-    // Simplest: pass topic as query param or state? Prompt said /gd/voice/:topicId
-    // Let's assume topicId is the actual topic string URL-encoded for simplicity, or an index.
-    // Let's try to verify if it is an index.
-
     const decodedTopic = decodeURIComponent(topicId || '');
     const topic = gdTopics.includes(decodedTopic) ? decodedTopic : decodedTopic;
 
     const [phase, setPhase] = useState<Phase>('preparation');
-    const [timeLeft, setTimeLeft] = useState(10); // 10 seconds for prep
+    const [timeLeft, setTimeLeft] = useState(60); // 60 seconds for prep
     const [recordingTime, setRecordingTime] = useState(0);
     const [maxRecordingTime] = useState(300); // 5 minutes max
-    const [transcript, setTranscript] = useState('');
     const [isRecording, setIsRecording] = useState(false);
+    const [processingMessage, setProcessingMessage] = useState('Analyzing your GD performance…');
 
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-    const recognitionRef = useRef<any>(null);
     const chunksRef = useRef<Blob[]>([]);
+    const streamRef = useRef<MediaStream | null>(null);
 
     // Preparation Timer
     useEffect(() => {
         if (phase === 'preparation' && timeLeft > 0) {
-            const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+            const timer = setInterval(() => {
+                setTimeLeft((t) => {
+                    if (t <= 1) {
+                        clearInterval(timer);
+                        startRecording();
+                        return 0;
+                    }
+                    return t - 1;
+                });
+            }, 1000);
             return () => clearInterval(timer);
         }
     }, [phase, timeLeft]);
@@ -63,13 +126,30 @@ export default function GDVoice() {
         }
     }, [phase, isRecording, maxRecordingTime]);
 
-    // Start Recording Logic
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach(track => track.stop());
+            }
+        };
+    }, []);
+
+    // Start Recording – MediaRecorder only, no SpeechRecognition
     const startRecording = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            streamRef.current = stream;
 
-            // Setup MediaRecorder
-            const mediaRecorder = new MediaRecorder(stream);
+            // Choose a supported MIME type
+            const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+                ? 'audio/webm;codecs=opus'
+                : MediaRecorder.isTypeSupported('audio/webm')
+                    ? 'audio/webm'
+                    : '';
+
+            const options: MediaRecorderOptions = mimeType ? { mimeType } : {};
+            const mediaRecorder = new MediaRecorder(stream, options);
             mediaRecorderRef.current = mediaRecorder;
             chunksRef.current = [];
 
@@ -79,91 +159,134 @@ export default function GDVoice() {
                 }
             };
 
-            mediaRecorder.start();
+            // Collect data every second for reliability
+            mediaRecorder.start(1000);
             setIsRecording(true);
             setPhase('recording');
 
-            // Setup Speech Recognition
-            // @ts-ignore
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-            if (SpeechRecognition) {
-                const recognition = new SpeechRecognition();
-                recognitionRef.current = recognition;
-                recognition.continuous = true;
-                recognition.interimResults = true;
-                recognition.lang = 'en-US';
-
-                recognition.onstart = () => {
-                    console.log("Speech recognition started");
-                };
-
-                recognition.onresult = (event: any) => {
-                    let newFinalTranscript = '';
-                    // Loop through results starting from resultIndex
-                    for (let i = event.resultIndex; i < event.results.length; ++i) {
-                        if (event.results[i].isFinal) {
-                            newFinalTranscript += event.results[i][0].transcript + ' ';
-                        }
-                    }
-
-                    if (newFinalTranscript) {
-                        setTranscript((prev) => prev + newFinalTranscript);
-                    }
-                };
-
-                recognition.onerror = (event: any) => {
-                    console.error('Speech recognition error', event.error);
-                };
-
-                recognition.onend = () => {
-                    console.log("Speech recognition ended");
-                };
-
-                recognition.start();
-            } else {
-                setTranscript("Speech recognition is not supported in this browser. Please use Google Chrome.");
-                console.error("Speech Recognition API not supported");
-            }
-
-        } catch (err) {
+        } catch (err: any) {
             console.error("Error accessing microphone:", err);
+            const message = err?.name === 'NotAllowedError'
+                ? 'Microphone permission denied. Please allow microphone access and try again.'
+                : 'Could not access microphone. Please check your audio device.';
             toast({
                 title: "Microphone Error",
-                description: "Could not access microphone. Please check permissions.",
+                description: message,
                 variant: "destructive"
             });
         }
     };
 
     const stopRecording = () => {
-        if (mediaRecorderRef.current && isRecording) {
-            mediaRecorderRef.current.stop();
-            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
-        }
+        if (!mediaRecorderRef.current || !isRecording) return;
 
-        if (recognitionRef.current) {
-            recognitionRef.current.stop();
-        }
-
-        setIsRecording(false);
-        setPhase('processing');
-
-        // Slight delay to ensure final processing
-        setTimeout(() => {
-            if (!transcript) {
-                console.error("No transcript captured from SpeechRecognition.");
+        // We need to handle the onstop event to process the audio
+        mediaRecorderRef.current.onstop = async () => {
+            // Stop the mic stream
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach(track => track.stop());
+                streamRef.current = null;
             }
 
+            const mimeType = mediaRecorderRef.current?.mimeType || 'audio/webm';
+            const audioBlob = new Blob(chunksRef.current, { type: mimeType });
+
+            if (audioBlob.size === 0) {
+                toast({
+                    title: "Recording Error",
+                    description: "No audio was captured. Please try again.",
+                    variant: "destructive"
+                });
+                setPhase('preparation');
+                setTimeLeft(0);
+                setRecordingTime(0);
+                return;
+            }
+
+            // Send audio to backend for transcription + evaluation
+            await processAudio(audioBlob, mimeType);
+        };
+
+        mediaRecorderRef.current.stop();
+        setIsRecording(false);
+        setPhase('processing');
+    };
+
+    const processAudio = async (audioBlob: Blob, mimeType: string) => {
+        try {
+            // Step 1: Transcribe
+            setProcessingMessage('Transcribing your speech…');
+
+            const ext = mimeType.includes('webm') ? 'webm' : 'wav';
+            const formData = new FormData();
+            formData.append('audio', audioBlob, `recording.${ext}`);
+
+            const transcribeRes = await fetch('/api/transcribe', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!transcribeRes.ok) {
+                const err = await transcribeRes.json().catch(() => ({}));
+                throw new Error(err.detail || `Transcription failed (${transcribeRes.status})`);
+            }
+
+            const { transcript } = await transcribeRes.json();
+
+            if (!transcript || transcript === '(No speech detected in the audio.)') {
+                toast({
+                    title: "No Speech Detected",
+                    description: "We couldn't detect any speech in your recording. Please try again.",
+                    variant: "destructive"
+                });
+                setPhase('preparation');
+                setTimeLeft(0);
+                setRecordingTime(0);
+                return;
+            }
+
+            // Step 1.5: Pre-validate
+            let evaluation = validateTranscriptLocally(transcript);
+
+            if (!evaluation) {
+                // Step 2: Evaluate via AI if client validation passed
+                setProcessingMessage('Evaluating your performance…');
+
+                const evaluateRes = await fetch('/api/evaluate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, transcript }),
+                });
+
+                if (!evaluateRes.ok) {
+                    const err = await evaluateRes.json().catch(() => ({}));
+                    throw new Error(err.detail || `Evaluation failed (${evaluateRes.status})`);
+                }
+
+                evaluation = await evaluateRes.json();
+            }
+
+            // Navigate to results page with all data
             navigate('/gd/result', {
                 state: {
                     topic,
-                    transcript: transcript || "No transcript available (Browser may not support SpeechRecognition).",
-                    audioBlob: new Blob(chunksRef.current, { type: 'audio/webm' })
+                    transcript,
+                    evaluation,
                 },
-                replace: true
+                replace: true,
             });
-        }, 1000);
+
+        } catch (err: any) {
+            console.error("Processing error:", err);
+            toast({
+                title: "Processing Failed",
+                description: err.message || "Something went wrong. Please try again.",
+                variant: "destructive"
+            });
+            setPhase('preparation');
+            setTimeLeft(0);
+            setRecordingTime(0);
+        }
     };
 
     const formatTime = (seconds: number) => {
@@ -174,7 +297,7 @@ export default function GDVoice() {
 
     return (
         <div className="min-h-screen bg-background">
-            <Header title="GD Session" showBack={false} /> {/* No back button during active session to enforce flow */}
+            <Header title="GD Session" showBack={false} />
 
             <main className="container max-w-2xl mx-auto px-4 py-8">
                 <Card className="p-8 text-center space-y-8">
@@ -193,7 +316,9 @@ export default function GDVoice() {
                                     </div>
                                     <Timer className="absolute -top-6 text-primary w-8 h-8" />
                                 </div>
-                                <p className="text-lg text-muted-foreground">Preparation Time Remaining</p>
+                                <p className="text-lg text-muted-foreground">
+                                    {timeLeft > 0 ? 'Preparation Time Remaining' : 'Ready to speak!'}
+                                </p>
                             </div>
 
                             <div className="space-y-2">
@@ -207,17 +332,15 @@ export default function GDVoice() {
                                 size="lg"
                                 className="w-full h-14 text-lg gradient-gd"
                                 onClick={startRecording}
-                                disabled={timeLeft > 0} // Enforce timer? Prompt said "Start Speaking" button but also "Speaking cannot start before preparation ends"
                             >
-                                {timeLeft > 0 ? `Wait for Preparation (${formatTime(timeLeft)})` : "Start Speaking Now"}
+                                Start Speaking Now (Skip Timer)
                             </Button>
-                            {/* Dev Mode Skip for testing - maybe hidden or removed for prod. keeping strictly to prompt: "Speaking cannot start before preparation ends" */}
                         </div>
                     )}
 
                     {phase === 'recording' && (
                         <div className="space-y-8 animate-in fade-in zoom-in duration-500">
-                            <div className="relative w-48 h-48 flex items-center justify-center rounded-full border-4 border-red-500/20 bg-red-500/5 animate-pulse">
+                            <div className="relative w-48 h-48 flex items-center justify-center rounded-full border-4 border-red-500/20 bg-red-500/5 animate-pulse mx-auto">
                                 <div className="text-5xl font-mono font-bold text-red-500">
                                     {formatTime(recordingTime)}
                                 </div>
@@ -232,9 +355,34 @@ export default function GDVoice() {
                                 </p>
                             </div>
 
-                            <div className="bg-muted/50 p-4 rounded-lg text-left h-32 overflow-y-auto font-mono text-sm">
-                                <p className="text-muted-foreground mb-1">Live Transcript:</p>
-                                {transcript || <span className="italic opacity-50">Listening...</span>}
+                            <div className="bg-muted/50 p-4 rounded-lg flex items-center justify-center gap-3 h-20">
+                                <div className="flex gap-1">
+                                    {[...Array(5)].map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className="w-1.5 bg-red-500 rounded-full animate-pulse"
+                                            style={{
+                                                height: `${12 + Math.random() * 24}px`,
+                                                animationDelay: `${i * 0.15}s`,
+                                                animationDuration: `${0.5 + Math.random() * 0.5}s`,
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                                <p className="text-muted-foreground font-medium">Recording in progress…</p>
+                                <div className="flex gap-1">
+                                    {[...Array(5)].map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className="w-1.5 bg-red-500 rounded-full animate-pulse"
+                                            style={{
+                                                height: `${12 + Math.random() * 24}px`,
+                                                animationDelay: `${(i + 5) * 0.15}s`,
+                                                animationDuration: `${0.5 + Math.random() * 0.5}s`,
+                                            }}
+                                        />
+                                    ))}
+                                </div>
                             </div>
 
                             <Button
@@ -249,9 +397,12 @@ export default function GDVoice() {
                     )}
 
                     {phase === 'processing' && (
-                        <div className="py-12 space-y-4">
-                            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-                            <p className="text-xl text-muted-foreground">Processing your session...</p>
+                        <div className="py-12 space-y-6 animate-in fade-in duration-500">
+                            <Loader2 className="w-16 h-16 text-primary animate-spin mx-auto" />
+                            <p className="text-xl font-medium text-foreground">{processingMessage}</p>
+                            <p className="text-sm text-muted-foreground">
+                                This may take a moment. Please don't close this page.
+                            </p>
                         </div>
                     )}
 
