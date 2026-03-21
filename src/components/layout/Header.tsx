@@ -37,13 +37,15 @@ export function Header({ title, showBack = false, transparent = false, onBack, r
             <h1 className="text-xl font-bold text-foreground">{title}</h1>
           ) : (
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center border border-border">
+                <img src="/src/assets/logo.png" className="w-full h-full object-cover" alt="SkillUp Buddy Logo" />
               </div>
+
               <div>
-                <h1 className="text-lg font-bold text-foreground">Skill Buddy</h1>
+                <h1 className="text-lg font-bold text-foreground">SkillUp Buddy</h1>
                 <p className="text-xs text-muted-foreground">Your AI Learning Companion</p>
               </div>
+
             </div>
           )}
         </div>

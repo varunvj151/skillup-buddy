@@ -10,19 +10,14 @@ export interface PerQuestionFeedback {
   question: string;
   answer: string;
   score: number;
+  communication: number;
+  technical: number;
   feedback: string;
+  status: 'OK' | 'TRANSCRIPTION_ERROR';
 }
 
 export interface InterviewEvaluation {
-  overall_score: number;
-  communication: number;
-  confidence: number;
-  answer_quality: number;
-  clarity: number;
-  professionalism: number;
-  response_structure: number;
-  strengths: string[];
-  improvements: string[];
-  suggestions: string[];
-  per_question_feedback: PerQuestionFeedback[];
+  overallScore: number;
+  summary: string;
+  questions: PerQuestionFeedback[];
 }

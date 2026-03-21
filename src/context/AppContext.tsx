@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, TestResult, Message } from '@/types';
+import { auth, firebaseReady } from '@/lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 interface AppContextType {
   user: User | null;
@@ -24,6 +26,35 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [gdMessages, setGdMessages] = useState<Message[]>([]);
   const [interviewMessages, setInterviewMessages] = useState<Message[]>([]);
+
+  // If the user previously finished onboarding, restore their profile
+  // from localStorage using their Firebase UID.
+  useEffect(() => {
+    if (!firebaseReady || !auth) return;
+
+    const unsub = onAuthStateChanged(auth, (fbUser) => {
+      if (!fbUser) {
+        setUser(null);
+        return;
+      }
+
+      const raw = localStorage.getItem(`profile:${fbUser.uid}`);
+      if (!raw) {
+        // Keep `user` null so `/` still shows onboarding/profile steps.
+        setUser(null);
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(raw) as User;
+        setUser(parsed);
+      } catch {
+        setUser(null);
+      }
+    });
+
+    return () => unsub();
+  }, []);
 
   const addTestResult = (result: TestResult) => {
     setTestResults(prev => [...prev, result]);

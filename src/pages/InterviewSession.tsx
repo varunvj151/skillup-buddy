@@ -28,6 +28,7 @@ export default function InterviewSession() {
   
   const [sessionPhase, setSessionPhase] = useState<'greeting' | 'speakingQuestion' | 'listening' | 'processing' | 'evaluating'>('greeting');
   const [aiText, setAiText] = useState("");
+  const [showSkipButton, setShowSkipButton] = useState(false);
   
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -37,8 +38,12 @@ export default function InterviewSession() {
   const maxTimerRef = useRef<NodeJS.Timeout | null>(null);
   const emptySilenceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const recognitionRef = useRef<any>(null);
+  const edgeCaseRef = useRef<'empty' | 'max' | 'skip' | null>(null);
+  const skipButtonTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const hasSpokenRef = useRef(false);
+  const currentQuestionIndexRef = useRef(0);
+
 
   // 1. Initialize Questions
   useEffect(() => {
@@ -48,7 +53,9 @@ export default function InterviewSession() {
     }
     const pool = interviewQuestions[interviewType];
     const shuffled = [...pool].sort(() => 0.5 - Math.random());
-    setQuestions(shuffled.slice(0, 5));
+    const selected = shuffled.slice(0, 5);
+    setQuestions(selected);
+    setTranscripts(new Array(selected.length).fill(""));
   }, [interviewType, navigate]);
 
   // 2. Start Session Flow
@@ -62,20 +69,29 @@ export default function InterviewSession() {
         setTimeout(() => triggerNextQuestion(0), 1000);
       });
     }
-  }, [questions]);
+  }, [questions, interviewType, sessionPhase]);
+
   
-  const triggerNextQuestion = useCallback((index: number) => {
+  const triggerNextQuestion = (index: number, edgeCase: 'empty' | 'max' | 'skip' | null = null) => {
     if (index >= questions.length) {
       endInterview();
       return;
     }
     setCurrentQuestionIndex(index);
+    currentQuestionIndexRef.current = index;
     setSessionPhase('speakingQuestion');
+
     
     let textToSpeak = "";
-    if (index > 0) {
+    if (edgeCase === 'empty') {
+      textToSpeak = `No problem. Let's move to the next question. ${questions[index]}`;
+    } else if (edgeCase === 'max') {
+      textToSpeak = `Thank you for the explanation. Let's continue. ${questions[index]}`;
+    } else if (edgeCase === 'skip') {
+      textToSpeak = `Alright. Let's move to the next question. ${questions[index]}`;
+    } else if (index > 0) {
       const reaction = INTERVIEWER_REACTIONS[Math.floor(Math.random() * INTERVIEWER_REACTIONS.length)];
-      textToSpeak = `${reaction} Next question. ${questions[index]}`;
+      textToSpeak = `${reaction} ${questions[index]}`;
     } else {
       textToSpeak = `First question. ${questions[index]}`;
     }
@@ -85,11 +101,20 @@ export default function InterviewSession() {
     speakText(textToSpeak, () => {
       startListening();
     });
-  }, [questions]);
+  };
+
 
   // SpeechSynthesis Helper
   const speakText = (text: string, onEnd: () => void) => {
+    console.log("DEBUG: Speaking:", text);
     window.speechSynthesis.cancel();
+    
+    // Safety fallback: if speech doesn't end in 15 seconds, move on anyway
+    const fallbackTimeout = setTimeout(() => {
+        console.warn("DEBUG: speakText fallback triggered");
+        onEnd();
+    }, 15000);
+
     const utterance = new SpeechSynthesisUtterance(text);
     
     const voices = window.speechSynthesis.getVoices();
@@ -102,16 +127,19 @@ export default function InterviewSession() {
     utterance.pitch = 1.0;
     
     utterance.onend = () => {
+      clearTimeout(fallbackTimeout);
       onEnd();
     };
     
-    utterance.onerror = () => {
-      console.warn("SpeechSynthesis error, continuing flow anyway");
+    utterance.onerror = (e) => {
+      console.warn("DEBUG: SpeechSynthesis error:", e);
+      clearTimeout(fallbackTimeout);
       onEnd(); 
     };
 
     window.speechSynthesis.speak(utterance);
   };
+
 
   const startListening = async () => {
     try {
@@ -146,34 +174,50 @@ export default function InterviewSession() {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRecognition) {
           const recognition = new SpeechRecognition();
+          recognition.lang = 'en-US';
           recognition.continuous = true;
           recognition.interimResults = true;
+          
           recognition.onresult = (e: any) => {
-              let currentStr = "";
-              for (let i = e.resultIndex; i < e.results.length; ++i) {
-                  currentStr += e.results[i][0].transcript;
+              let final = "";
+              let interim = "";
+              for (let i = 0; i < e.results.length; ++i) {
+                  if (e.results[i].isFinal) {
+                    final += e.results[i][0].transcript + " ";
+                  } else {
+                    interim += e.results[i][0].transcript;
+                  }
               }
-              setLiveTranscript(prev => prev + " " + currentStr);
+              setLiveTranscript((final + interim).trim());
           };
           try {
              recognition.start();
              recognitionRef.current = recognition;
-          } catch(e) { }
+             console.log("DEBUG: SpeechRecognition started");
+          } catch(e) { 
+             console.error("DEBUG: SpeechRecognition start failed", e);
+          }
       }
+
       
       monitorSilence();
       
       // Edge case: complete silence for 20s
       emptySilenceTimerRef.current = setTimeout(() => {
         if (!hasSpokenRef.current) {
-          stopListening(true);
+          stopListening('empty');
         }
       }, 20000);
 
       // Hard stop at 90s
       maxTimerRef.current = setTimeout(() => {
-        stopListening(false, true);
+        stopListening('max');
       }, 90000);
+      
+      // Show skip button after 15s
+      skipButtonTimerRef.current = setTimeout(() => {
+        setShowSkipButton(true);
+      }, 15000);
       
     } catch (err) {
       console.error("Error accessing mic:", err);
@@ -198,8 +242,9 @@ export default function InterviewSession() {
       const sum = dataArray.reduce((acc, val) => acc + val, 0);
       const average = sum / bufferLength;
 
-      // Threshold for speech vs silence
-      if (average > 10) { 
+      // Threshold for speech vs silence. Increased to 20 to ignore background noise.
+      if (average > 20) { 
+
         // User is speaking
         if (!hasSpokenRef.current) {
            hasSpokenRef.current = true;
@@ -230,7 +275,10 @@ export default function InterviewSession() {
     checkAudioLevel();
   };
 
-  const stopListening = (emptySilenceEdgeCase = false, durationMaxEdgeCase = false) => {
+  const stopListening = (edgeCase: 'empty' | 'max' | 'skip' | null = null) => {
+    setShowSkipButton(false);
+    if (skipButtonTimerRef.current) clearTimeout(skipButtonTimerRef.current);
+    edgeCaseRef.current = edgeCase;
     if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
       mediaRecorderRef.current.stop();
       mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
@@ -251,29 +299,30 @@ export default function InterviewSession() {
       audioContextRef.current = null;
     }
     analyserRef.current = null;
-
-    if (emptySilenceEdgeCase) {
-      // 20s without speaking edge case handling
-      window.speechSynthesis.cancel();
-      setAiText("No problem. Let's move to the next question.");
-      speakText("No problem. Let's move to the next question.", () => {
-         // Proceed naturally in handleRecordingStop since the stream stopped
-      });
-    } else if (durationMaxEdgeCase) {
-      window.speechSynthesis.cancel();
-      setAiText("Thank you for the explanation. Let's continue.");
-      speakText("Thank you for the explanation. Let's continue.", () => {});
-    }
   };
 
   const handleRecordingStop = async () => {
-    setSessionPhase('processing');
+    const capturedIndex = currentQuestionIndexRef.current;
+    const capturedEdgeCase = edgeCaseRef.current;
+    edgeCaseRef.current = null;
+    
+    console.log(`DEBUG: Recording stopped for Q${capturedIndex + 1}. Transitioning to Q${capturedIndex + 2}...`);
+
+
+    // Move to next question IMMEDIATELY (with a tiny delay for UX)
+    setSessionPhase('speakingQuestion');
+    setTimeout(() => {
+      triggerNextQuestion(capturedIndex + 1, capturedEdgeCase);
+    }, 1000);
+
+
+    // Process transcription in the background
     const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
     const formData = new FormData();
     formData.append('audio', audioBlob, 'interview_answer.webm');
 
     try {
-      const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
       const response = await fetch(`${BASE_URL}/api/transcribe`, {
         method: 'POST',
         body: formData,
@@ -282,28 +331,24 @@ export default function InterviewSession() {
       if (!response.ok) throw new Error("Processing failed");
 
       const data = await response.json();
-      const returnedText = data.transcript?.trim() || "(No speech detected)";
+      const returnedText = data.text?.trim() || "(No speech detected)";
       
       setTranscripts(prev => {
-        const next = [...prev, returnedText];
-        setTimeout(() => triggerNextQuestion(next.length), 500);
+        const next = [...prev];
+        next[capturedIndex] = returnedText;
         return next;
       });
 
     } catch (error) {
       console.error(error);
-      toast({
-        title: "Error",
-        description: "Failed to transcribe audio. Moving to next question safely.",
-        variant: "destructive"
-      });
       setTranscripts(prev => {
-         const next = [...prev, "(Transcription failed)"];
-         setTimeout(() => triggerNextQuestion(next.length), 500);
+         const next = [...prev];
+         next[capturedIndex] = "(Transcription failed)";
          return next;
       });
     }
   };
+
 
   const endInterview = () => {
     setSessionPhase('evaluating');
@@ -315,14 +360,37 @@ export default function InterviewSession() {
   };
 
   useEffect(() => {
-      if (sessionPhase === 'evaluating' && questions.length > 0 && transcripts.length === questions.length) {
+      const allTranscribed = questions.length > 0 && 
+                           transcripts.length === questions.length && 
+                           transcripts.every(t => t !== "");
+
+      if (sessionPhase === 'evaluating' && allTranscribed) {
           let hasFiredEvaluation = false;
+
           
           const doSubmit = async () => {
             if (hasFiredEvaluation) return;
             hasFiredEvaluation = true;
+
+            const fallbackEvaluation = {
+              overallScore: 0,
+              questions: questions.map((q, i) => ({
+                question: q,
+                answer: transcripts[i] || "(Skipped)",
+                score: 0,
+                communication: 0,
+                technical: 0,
+                feedback: "No valid answer provided.",
+                status: "TRANSCRIPTION_ERROR"
+              })),
+              summary: "Interview could not be evaluated because of an internal processing error."
+            };
+
             try {
-              const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+              const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 12000);
+
               const response = await fetch(`${BASE_URL}/api/evaluate-interview`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -331,11 +399,21 @@ export default function InterviewSession() {
                   questions: questions,
                   transcripts: transcripts
                 }),
+                signal: controller.signal
               });
+              clearTimeout(timeoutId);
 
               if (!response.ok) throw new Error("Evaluation failed");
               const evalData = await response.json();
-              
+
+              if (
+                typeof evalData?.overallScore !== "number" ||
+                !Array.isArray(evalData?.questions) ||
+                typeof evalData?.summary !== "string"
+              ) {
+                throw new Error("Invalid evaluation response shape");
+              }
+
               navigate('/interview/result', { 
                 state: { 
                   session: {
@@ -347,11 +425,16 @@ export default function InterviewSession() {
                 }
               });
             } catch (error) {
-              console.error(error);
-              toast({
-                title: "Evaluation Failed",
-                description: "An error occurred while evaluating your interview.",
-                variant: "destructive"
+              console.error("Evaluation error or timeout:", error);
+              navigate('/interview/result', { 
+                state: { 
+                  session: {
+                    type: interviewType,
+                    questions,
+                    transcripts,
+                    evaluation: fallbackEvaluation
+                  }
+                }
               });
             }
           };
@@ -363,7 +446,8 @@ export default function InterviewSession() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header title={`${interviewType === 'hr' ? 'HR' : 'Technical'} Interview`} showBack={false} />
+      <Header title={`${interviewType === 'hr' ? 'HR' : 'Technical'} Interview`} showBack={true} />
+
       
       <main className="flex-1 px-4 py-8 max-w-3xl mx-auto w-full flex flex-col items-center justify-center">
         
@@ -394,6 +478,14 @@ export default function InterviewSession() {
                 <div className="bg-muted/30 p-4 rounded-lg border border-border mt-3 text-sm italic text-muted-foreground w-full text-center">
                    "{liveTranscript}"
                 </div>
+              )}
+              {showSkipButton && (
+                <button 
+                  onClick={() => stopListening('skip')}
+                  className="mt-6 px-6 py-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 font-medium transition-colors shadow-sm"
+                >
+                  Skip / Next Question
+                </button>
               )}
             </div>
           )}

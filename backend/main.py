@@ -4,6 +4,7 @@ import json
 import math
 import tempfile
 import traceback
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -36,14 +37,20 @@ print("Loading Whisper model (base)…")
 whisper_model = whisper.load_model("base")
 print("Whisper model loaded ✓")
 
+
 # ---------------------------------------------------------------------------
 # Configure Gemini
 # ---------------------------------------------------------------------------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
-    gemini_model = genai.GenerativeModel("gemini-2.0-flash")
-    print("Gemini API configured ✓")
+    # Use JSON mode for more reliable parsing
+    gemini_model = genai.GenerativeModel(
+        "gemini-2.0-flash",
+        generation_config={"response_mime_type": "application/json"}
+    )
+    print("Gemini API configured (JSON Mode) ✓")
+
 else:
     gemini_model = None
     print("⚠  GEMINI_API_KEY not set – /api/evaluate will return mock data")
@@ -320,40 +327,70 @@ def _adjust_scores_for_relevance(evaluation: dict, topic: str, transcript: str) 
 # ---------------------------------------------------------------------------
 @app.post("/api/transcribe")
 async def transcribe_audio(audio: UploadFile = File(...)):
-    """Accept an audio file, run Whisper, return transcript."""
+    """Accept an audio file, convert to wav via ffmpeg, run Whisper, return transcript."""
     if not audio.filename:
-        raise HTTPException(status_code=400, detail="No audio file provided.")
+        return {"text": "", "status": "failed"}
 
-    # Save uploaded file to a temp location
     suffix = Path(audio.filename).suffix or ".webm"
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    tmp_webm = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    tmp_wav = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
     try:
         contents = await audio.read()
-        if len(contents) == 0:
-            raise HTTPException(status_code=400, detail="Uploaded audio file is empty.")
-        tmp.write(contents)
-        tmp.close()
+        print(f"[Backend] Received audio file: size={len(contents)}")
+        
+        if len(contents) < 10000:
+            print("[Backend] Audio file too small, discarding.")
+            tmp_webm.close()
+            tmp_wav.close()
+            return {"text": "", "status": "failed"}
 
-        # Transcribe with Whisper
-        result = whisper_model.transcribe(tmp.name)
+        with open(tmp_webm.name, "wb") as f:
+            f.write(contents)
+            
+        tmp_webm.close()
+        tmp_wav.close() # Close so ffmpeg can overwrite
+
+        # Convert to WAV
+        print(f"[Backend] Converting {tmp_webm.name} to {tmp_wav.name}...")
+        cmd = ["ffmpeg", "-y", "-i", tmp_webm.name, "-ar", "16000", "-ac", "1", tmp_wav.name]
+        process = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        if process.returncode != 0:
+            print("[Backend] FFmpeg conversion failed!")
+            print(process.stderr.decode("utf-8", errors="ignore"))
+            return {"text": "", "status": "failed"}
+            
+        print("[Backend] FFmpeg conversion success.")
+
+        # Transcribe with Whisper (Forcing English for better accuracy)
+        print(f"[Backend] Running Whisper (base) on {tmp_wav.name}...")
+        import time
+        start_t = time.time()
+        # Force English and transcribe task
+        result = whisper_model.transcribe(tmp_wav.name, language="en", task="transcribe")
+        end_t = time.time()
+        print(f"[Backend] Whisper finished in {end_t - start_t:.2f} seconds.")
+
         transcript = result.get("text", "").strip()
 
+        print(f"[Backend] Transcription result length: {len(transcript)}")
+        
         if not transcript:
-            return {"transcript": "(No speech detected in the audio.)"}
+            return {"text": "", "status": "failed"}
 
-        return {"transcript": transcript}
+        return {"text": transcript, "status": "success"}
 
-    except HTTPException:
-        raise
     except Exception as exc:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Transcription failed: {exc}")
+        return {"text": "", "status": "failed"}
     finally:
-        # Cleanup temp file
-        try:
-            os.unlink(tmp.name)
-        except OSError:
-            pass
+        # Cleanup temp files
+        for fpath in [tmp_webm.name, tmp_wav.name]:
+            try:
+                if os.path.exists(fpath):
+                    os.unlink(fpath)
+            except OSError:
+                pass
 
 # ---------------------------------------------------------------------------
 # POST /api/evaluate
@@ -482,84 +519,143 @@ async def evaluate_gd(req: EvaluateRequest):
         raise HTTPException(status_code=500, detail=f"Evaluation failed: {exc}")
 
 
-INTERVIEW_EVALUATION_PROMPT = """You are a STRICT and REALISTIC campus placement interviewer evaluating a candidate's {interview_type} Interview performance. You must be brutally honest.
+INTERVIEW_EVALUATION_PROMPT = """
+You are a BRUTALLY HONEST Technical Interview Evaluator. Your goal is to distinguish between a candidate who knows the subject and one who is giving nonsense, irrelevant, or very poor answers.
 
-Here are the questions asked and the candidate's transcribed answers, along with any system validation notes:
-{qa_pairs}
+IMPORTANT RULES:
+1. **ZREO TOLERANCE FOR NONSENSE**: If the answer is gibberish, nonsense words (e.g., "clap your legs", "costumes", non-English text), or completely irrelevant to the technical question, YOU MUST mark:
+   - score: 0
+   - communication: 0
+   - technical: 0
+   - status: "TRANSCRIPTION_ERROR"
+   - feedback: "The provided answer is nonsense or completely irrelevant to the question."
 
-═══════════════════════════════════════════════════
-MANDATORY EVALUATION RULES (violating any of these is UNACCEPTABLE):
-1. Length Check: If an answer is flagged as 'very short answer' (<10 words), the Answer Quality and Communication scores for that question MUST be low (1-3/10).
-2. Repetition: If the candidate repeats phrases, heavily penalize the Communication score.
-3. Relevance: If the answer does not address the specific question topic, penalize Answer Quality heavily (1-2/10).
-4. Do NOT inflate scores. An average response should be 4-6/10. 9-10/10 is for exceptional answers only.
-5. Provide specific feedback for each question referencing the candidate's exact words.
-═══════════════════════════════════════════════════
+2. **STRICT SCORING**:
+   - A superficial one-sentence answer that is technically correct but lacks depth should NOT score more than 30/100.
+   - For an answer to score above 80, it must be technically precise, use correct terminology, and show depth.
+   - Communication should be penalized for fillers, repetition, and poor grammar.
 
-Evaluate across these 6 criteria (score 0-10 each) for the OVERALL interview:
-1. Communication
-2. Confidence
-3. Answer Quality
-4. Clarity
-5. Professionalism
-6. Response Structure
+3. **TECHNICAL ACCURACY**: 
+   - If the answer is technically wrong, even if it sounds confident, the 'technical' score must be 1-2 and 'score' must be below 20.
 
-Respond ONLY with a valid JSON strictly following this schema (no extra text, no markdown fences):
+4. **JSON ONLY**: Return ONLY valid JSON. No markdown, no explanations.
+
+Scoring Scale (score):
+- 0: Nonsense / Empty
+- 1-30: Poor / Very Superficial
+- 31-60: Average / Needs more depth
+- 61-85: Good / Technical knowledge present
+- 86-100: Excellent (Rare)
+
+Overall Score Calculation:
+- The overallScore should be a weighted average of the individual question scores.
+- If more than 3 answers are nonsensical, overallScore should be below 20.
+
+Return EXACTLY this JSON schema:
 {{
-  "overall_score": <int 0-100>,
-  "communication": <int>,
-  "confidence": <int>,
-  "answer_quality": <int>,
-  "clarity": <int>,
-  "professionalism": <int>,
-  "response_structure": <int>,
-  "strengths": ["<string>", "<string>", "<string>"],
-  "improvements": ["<string>", "<string>", "<string>"],
-  "suggestions": ["<string>", "<string>", "<string>"],
-  "per_question_feedback": [
+  "overallScore": 0,
+  "questions": [
     {{
-      "question": "<string>",
-      "answer": "<string>",
-      "score": <int 0-10>,
-      "feedback": "<string>"
+      "question": "string",
+      "score": 0,
+      "communication": 0,
+      "technical": 0,
+      "feedback": "string",
+      "status": "OK"
     }}
-  ]
-}}"""
+  ],
+  "summary": "string"
+}}
+
+Input:
+{qa_pairs}
+"""
+
+def _is_mostly_junk(text: str) -> bool:
+    """Heuristic to detect nonsense or non-English text."""
+    t = text.strip()
+    if not t: return True
+    if t in ["(Skipped)", "(No speech detected)", "(Transcription failed)"]: return True
+    
+    # Check for non-Latin characters (simplified)
+    # If more than 30% of characters are non-ASCII/non-Latin, it's likely noise or another lang
+    non_latin = len([c for c in t if ord(c) > 127 and not c.isspace()])
+    if len(t) > 0 and (non_latin / len(t)) > 0.3:
+        return True
+    
+    # Check for nonsense repetitive phrases like "can you tell me" x 10
+    words = t.lower().split()
+    if len(words) > 10:
+        counts = Counter(words)
+        most_common_ratio = counts.most_common(1)[0][1] / len(words)
+        if most_common_ratio > 0.5: # One word makes up > 50% of the answer
+            return True
+            
+    return False
 
 @app.post("/api/evaluate-interview")
 async def evaluate_interview(req: EvaluateInterviewRequest):
-    """Evaluate an interview session using Gemini AI."""
+    """Evaluate an interview session using Gemini AI with strong fallback handling and pre-validation."""
     if len(req.questions) != len(req.transcripts):
         raise HTTPException(status_code=400, detail="Questions and transcripts count mismatch.")
 
-    # ── Pre-validation step ──
     qa_pairs_text = ""
+    junk_count = 0
+    validated_transcripts = []
+
     for i, (q, a) in enumerate(zip(req.questions, req.transcripts)):
-        notes = []
-        word_count = _word_count(a)
+        answer = (a or "").strip()
         
-        if word_count < 10:
-            notes.append("System Validation Note: 'very short answer' (<10 words).")
-        if _find_repeated_phrases(a):
-            notes.append("System Validation Note: repeated phrases detected.")
-        if _compute_topic_relevance(q, a) < 3 and word_count >= 10:
-            notes.append("System Validation Note: likely does not address the question topic.")
-            
-        qa_pairs_text += f"\nQ{i+1}: {q}\nA{i+1}: {a}\n"
-        if notes:
-            qa_pairs_text += " ".join(notes) + "\n"
+        # Pre-validate for nonsense
+        if _is_mostly_junk(answer):
+            junk_count += 1
+            validated_transcripts.append("(Invalid/Nonsense Answer Detected)")
+        else:
+            if len(answer.split()) > 200:
+                answer = " ".join(answer.split()[:200]) + " ...[TRUNCATED]"
+            validated_transcripts.append(answer)
+
+        qa_pairs_text += f"\nQuestion {i+1}: {q}\nAnswer {i+1}: {validated_transcripts[-1]}\n"
+
+    # If ALL answers are junk, return immediately with 0
+    if junk_count == len(req.questions):
+        print("⚠ All interview transcripts failed validation (all junk). Returning 0.")
+        return {
+            "overallScore": 0,
+            "questions": [
+                {
+                    "question": q,
+                    "answer": a,
+                    "score": 0, "communication": 0, "technical": 0,
+                    "feedback": "No valid technical answer detected. Please speak clearly in English.",
+                    "status": "TRANSCRIPTION_ERROR"
+                }
+                for q, a in zip(req.questions, req.transcripts)
+            ],
+            "summary": "The candidate provided no valid technical content during the session."
+        }
 
     if not gemini_model:
         return _mock_interview_evaluation(req.questions, req.transcripts)
 
-    prompt = INTERVIEW_EVALUATION_PROMPT.format(
-        interview_type=req.interview_type,
-        qa_pairs=qa_pairs_text
-    )
+    prompt = INTERVIEW_EVALUATION_PROMPT.format(qa_pairs=qa_pairs_text)
 
     try:
+        print("DEBUG: Sending request to Gemini...")
+        import time
+        start_eval = time.time()
         response = gemini_model.generate_content(prompt)
-        raw_text = response.text.strip()
+        end_eval = time.time()
+        print(f"DEBUG: Gemini responded in {end_eval - start_eval:.2f} seconds")
+
+        raw_text = ""
+        if hasattr(response, "text") and response.text:
+            raw_text = response.text.strip()
+        
+        print(f"DEBUG: Raw response length: {len(raw_text)}")
+        if len(raw_text) < 50:
+             print(f"DEBUG: Suspiciously short response: {raw_text}")
+
 
         if raw_text.startswith("```"):
             raw_text = raw_text.split("\n", 1)[1] if "\n" in raw_text else raw_text[3:]
@@ -569,36 +665,84 @@ async def evaluate_interview(req: EvaluateInterviewRequest):
             raw_text = raw_text[4:].strip()
 
         data = json.loads(raw_text)
-        return data
 
-    except json.JSONDecodeError as exc:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"AI returned invalid JSON: {exc}")
+        if "overallScore" not in data or "questions" not in data or "summary" not in data:
+            raise ValueError("Gemini JSON missing required keys")
+
+        if not isinstance(data["questions"], list):
+            raise ValueError("'questions' must be a list")
+
+        normalized_questions = []
+        for i, q in enumerate(req.questions):
+            if i < len(data["questions"]) and isinstance(data["questions"][i], dict):
+                item = data["questions"][i]
+                normalized_questions.append({
+                    "question": item.get("question", q),
+                    "answer": req.transcripts[i],
+                    "score": int(item.get("score", 0)),
+                    "communication": int(item.get("communication", 0)),
+                    "technical": int(item.get("technical", 0)),
+                    "feedback": item.get("feedback", "No feedback generated."),
+                    "status": item.get("status", "TRANSCRIPTION_ERROR"),
+                })
+            else:
+                normalized_questions.append({
+                    "question": q,
+                    "answer": req.transcripts[i],
+                    "score": 0,
+                    "communication": 0,
+                    "technical": 0,
+                    "feedback": "Evaluation output was incomplete for this answer.",
+                    "status": "TRANSCRIPTION_ERROR",
+                })
+
+        return {
+            "overallScore": int(data.get("overallScore", 0)),
+            "questions": normalized_questions,
+            "summary": data.get("summary", "Evaluation completed with partial fallback handling.")
+        }
+
     except Exception as exc:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Evaluation failed: {exc}")
+        print(f"ERROR: Interview evaluation failed, returning mock data. Detail: {exc}")
+        return _mock_interview_evaluation(req.questions, req.transcripts)
+
+
 
 def _mock_interview_evaluation(questions: list[str], transcripts: list[str]):
+    """Stricter mock evaluation for fallback scenarios."""
+    def get_mock_scores(ans: str):
+        a = ans.strip().lower()
+        if not a or a in ["(skipped)", "(no speech detected)", "(transcription failed)", "none"]:
+            return 0, 0, 0, "No valid answer provided.", "TRANSCRIPTION_ERROR"
+        
+        # Very short or suspicious answers (likely filler)
+        if len(a.split()) < 10:
+            return 15, 3, 2, "Answer is too brief to demonstrate technical competence.", "PARTIAL"
+        
+        # Generic moderate score fallback
+        return 40, 5, 3, "A basic attempt was made, but the explanation lacks technical precision, correct terminology, and depth. Stricter evaluation is required.", "OK"
+
+
+    evaluated_questions = []
+    for q, a in zip(questions, transcripts):
+        score, comm, tech, feedback, status = get_mock_scores(a)
+        evaluated_questions.append({
+            "question": q,
+            "answer": a,
+            "score": score,
+            "communication": comm,
+            "technical": tech,
+            "feedback": feedback,
+            "status": status
+        })
+
     return {
-        "overall_score": 65,
-        "communication": 6,
-        "confidence": 7,
-        "answer_quality": 6,
-        "clarity": 7,
-        "professionalism": 8,
-        "response_structure": 7,
-        "strengths": ["Spoke clearly", "Maintained good tone", "Attempted all questions"],
-        "improvements": ["Elaborate more on technical points", "Provide more concrete examples", "Avoid filler words"],
-        "suggestions": ["Practice mock interviews", "Use STAR method for HR questions", "Review basic concepts"],
-        "per_question_feedback": [
-            {
-                "question": q,
-                "answer": a,
-                "score": 6,
-                "feedback": "Reasonable attempt but could be more detailed."
-            } for q, a in zip(questions, transcripts)
-        ]
+        "overallScore": sum(q["score"] for q in evaluated_questions) // len(questions) if questions else 0,
+        "questions": evaluated_questions,
+        "summary": "The interview was evaluated with a stricter fallback mechanism because the primary AI service was unavailable or return an error."
     }
+
 
 
 def _mock_evaluation():

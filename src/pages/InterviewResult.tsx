@@ -24,7 +24,8 @@ export default function InterviewResult() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header title="Interview Feedback" showBack={false} />
+      <Header title="Interview Feedback" showBack={true} />
+
       
       <main className="px-4 py-8 max-w-4xl mx-auto space-y-8 pb-20">
         <div className="text-center animate-fade-in">
@@ -35,112 +36,75 @@ export default function InterviewResult() {
         {/* Overall Score Card */}
         <Card className="p-6 md:p-8 animate-slide-up shadow-lg border-primary/10 bg-gradient-to-br from-card to-primary/5">
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-muted-foreground mb-4">Overall Score</h2>
+            <h2 className="text-lg font-semibold text-muted-foreground mb-4">Overall Interview Score</h2>
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className={`text-6xl font-bold ${
-                evaluation.overall_score >= 80 ? 'text-green-500' :
-                evaluation.overall_score >= 60 ? 'text-amber-500' :
+                evaluation.overallScore >= 80 ? 'text-green-500' :
+                evaluation.overallScore >= 60 ? 'text-amber-500' :
                 'text-destructive'
               }`}>
-                {evaluation.overall_score}
+                {evaluation.overallScore}
               </span>
               <span className="text-2xl text-muted-foreground mt-4">/ 100</span>
             </div>
+            {evaluation.summary && (
+              <p className="mt-6 text-foreground leading-relaxed max-w-2xl mx-auto italic font-medium">
+                "{evaluation.summary}"
+              </p>
+            )}
           </div>
         </Card>
 
-        {/* Category Scores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-slide-up" style={{ animationDelay: '100ms' }}>
-          {[
-            { label: 'Communication', score: evaluation.communication },
-            { label: 'Confidence', score: evaluation.confidence },
-            { label: 'Answer Quality', score: evaluation.answer_quality },
-            { label: 'Clarity', score: evaluation.clarity },
-            { label: 'Professionalism', score: evaluation.professionalism },
-            { label: 'Response Structure', score: evaluation.response_structure }
-          ].map((cat, i) => (
-            <Card key={i} className="p-4 flex items-center justify-between shadow-sm">
-              <span className="font-medium text-foreground">{cat.label}</span>
-              <div className="flex items-center gap-3 w-32 justify-end">
-                <Progress value={cat.score * 10} className="w-20 h-2" />
-                <span className="font-semibold text-sm w-8 text-right text-foreground">{cat.score}/10</span>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
-          {/* Strengths */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="font-semibold text-lg flex items-center gap-2 mb-4 text-green-600 dark:text-green-400">
-              <CheckCircle2 className="w-5 h-5" /> Strengths
-            </h3>
-            <ul className="space-y-3">
-              {evaluation.strengths.map((str, i) => (
-                <li key={i} className="flex gap-2 text-sm text-muted-foreground">
-                  <span className="mt-1 block w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
-                  {str}
-                </li>
-              ))}
-            </ul>
-          </Card>
-
-          {/* Improvements */}
-          <Card className="p-6 shadow-sm">
-            <h3 className="font-semibold text-lg flex items-center gap-2 mb-4 text-amber-600 dark:text-amber-400">
-              <TrendingUp className="w-5 h-5" /> Areas to Improve
-            </h3>
-            <ul className="space-y-3">
-              {evaluation.improvements.map((str, i) => (
-                <li key={i} className="flex gap-2 text-sm text-muted-foreground">
-                  <span className="mt-1 block w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
-                  {str}
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </div>
-
-        {/* Suggestions */}
-        <Card className="p-6 shadow-sm animate-slide-up" style={{ animationDelay: '300ms' }}>
-          <h3 className="font-semibold text-lg flex items-center gap-2 mb-4 text-blue-600 dark:text-blue-400">
-            <Lightbulb className="w-5 h-5" /> Actionable Suggestions
-          </h3>
-          <ul className="space-y-3">
-            {evaluation.suggestions.map((str, i) => (
-              <li key={i} className="flex gap-2 text-sm text-foreground">
-                <span className="mt-1 block w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
-                {str}
-              </li>
-            ))}
-          </ul>
-        </Card>
-
         {/* Per-Question Transcript & Feedback */}
-        <div className="space-y-4 animate-slide-up" style={{ animationDelay: '400ms' }}>
+        <div className="space-y-4 animate-slide-up" style={{ animationDelay: '200ms' }}>
           <h2 className="text-2xl font-bold flex items-center gap-2 mb-4 text-foreground">
-            <MessageSquare className="w-6 h-6" /> Detailed Evaluation
+            <MessageSquare className="w-6 h-6" /> Detailed Question Analysis
           </h2>
           
-          {evaluation.per_question_feedback.map((fb, i) => (
-            <Card key={i} className="p-5 md:p-6 mb-4 shadow-sm border-border/50">
+          {evaluation.questions?.map((fb: any, i: number) => (
+            <Card key={i} className={`p-5 md:p-6 mb-4 shadow-sm border-border/50 relative overflow-hidden ${fb.status === 'TRANSCRIPTION_ERROR' ? 'bg-destructive/5 border-destructive/20' : ''}`}>
+              {fb.status === 'TRANSCRIPTION_ERROR' && (
+                <div className="absolute top-0 right-0 bg-destructive text-destructive-foreground px-3 py-1 text-xs font-bold uppercase tracking-wider">
+                  Error
+                </div>
+              )}
+              
               <div className="mb-4">
                 <div className="flex items-start justify-between gap-4 mb-2">
-                  <h4 className="font-semibold text-foreground leading-tight">
-                    Q{i + 1}: {fb.question}
-                  </h4>
-                  <span className="shrink-0 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold border border-primary/20">
-                    {fb.score}/10
-                  </span>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-foreground leading-tight">
+                      Q{i + 1}: {fb.question}
+                    </h4>
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="shrink-0 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-bold border border-primary/20">
+                      {fb.score}/100
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-muted/30 p-4 rounded-lg border border-border mt-3 text-sm italic text-muted-foreground">
-                  "{fb.answer}"
+
+                {/* Score Pills */}
+                {fb.status !== 'TRANSCRIPTION_ERROR' && (
+                  <div className="flex gap-3 mt-2">
+                    <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-md border border-border">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">Technical</span>
+                      <span className="font-bold text-sm text-primary">{fb.technical}/10</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-md border border-border">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">Communication</span>
+                      <span className="font-bold text-sm text-primary">{fb.communication}/10</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className={`p-4 rounded-lg border border-border mt-4 text-sm italic ${fb.status === 'TRANSCRIPTION_ERROR' ? 'bg-background/50 text-destructive' : 'bg-muted/30 text-muted-foreground'}`}>
+                   "{fb.answer || "(No transcript available)"}"
                 </div>
               </div>
-              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+              <div className={`p-4 rounded-lg border ${fb.status === 'TRANSCRIPTION_ERROR' ? 'bg-destructive/10 border-destructive/20' : 'bg-primary/5 border-primary/20'}`}>
                 <p className="text-sm">
-                  <span className="font-semibold text-foreground block mb-1">Feedback:</span>
-                  <span className="text-muted-foreground">{fb.feedback}</span>
+                  <span className={`font-semibold block mb-1 ${fb.status === 'TRANSCRIPTION_ERROR' ? 'text-destructive' : 'text-foreground'}`}>Feedback:</span>
+                  <span className="text-muted-foreground leading-relaxed">{fb.feedback}</span>
                 </p>
               </div>
             </Card>
