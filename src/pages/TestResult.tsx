@@ -88,26 +88,26 @@ export default function TestResult() {
         </Card>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '100ms' }}>
-            <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center mb-2">
-              <CheckCircle className="w-5 h-5 text-success" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <Card className="p-3 sm:p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '100ms' }}>
+            <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-success/10 flex items-center justify-center mb-2">
+              <CheckCircle className="w-4 sm:w-5 h-4 sm:h-5 text-success" />
             </div>
-            <p className="text-xl font-bold text-foreground">{score}</p>
+            <p className="text-lg sm:text-xl font-bold text-foreground">{score}</p>
             <p className="text-xs text-muted-foreground">Correct</p>
           </Card>
-          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '150ms' }}>
-            <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-2">
-              <XCircle className="w-5 h-5 text-destructive" />
+          <Card className="p-3 sm:p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '150ms' }}>
+            <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-2">
+              <XCircle className="w-4 sm:w-5 h-4 sm:h-5 text-destructive" />
             </div>
-            <p className="text-xl font-bold text-foreground">{total - score}</p>
+            <p className="text-lg sm:text-xl font-bold text-foreground">{total - score}</p>
             <p className="text-xs text-muted-foreground">Incorrect</p>
           </Card>
-          <Card className="p-4 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '200ms' }}>
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-              <Clock className="w-5 h-5 text-primary" />
+          <Card className="p-3 sm:p-4 col-span-1 sm:col-span-2 lg:col-span-1 flex flex-col items-center justify-center animate-slide-up" style={{ animationDelay: '200ms' }}>
+            <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+              <Clock className="w-4 sm:w-5 h-4 sm:h-5 text-primary" />
             </div>
-            <p className="text-xl font-bold text-foreground">{formatTime(timeTaken)}</p>
+            <p className="text-lg sm:text-xl font-bold text-foreground">{formatTime(timeTaken)}</p>
             <p className="text-xs text-muted-foreground">Time Taken</p>
           </Card>
         </div>

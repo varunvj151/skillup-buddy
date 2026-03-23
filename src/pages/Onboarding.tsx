@@ -1,12 +1,11 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { GraduationCap, Target, Rocket } from 'lucide-react';
-import { firebaseReady, auth, googleProvider, facebookProvider, appleProvider } from '@/lib/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, type AuthError } from 'firebase/auth';
+import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 
 const branches = [
@@ -42,82 +41,64 @@ export default function Onboarding() {
   const [authLoading, setAuthLoading] = useState(false);
 
   const explainAuthError = (error: unknown) => {
-    const code = (error as AuthError)?.code || 'unknown';
-    const rawMessage = (error as { message?: string })?.message || '';
+    const message = (error as { message?: string })?.message || '';
 
-    if (code.includes('popup-closed-by-user')) return 'Login popup was closed before sign-in.';
-    if (code.includes('popup-blocked')) return 'Popup was blocked. Trying redirect login instead.';
-    if (code.includes('unauthorized-domain')) return 'Domain is not authorized in Firebase Auth settings.';
-    if (code.includes('operation-not-allowed')) return 'Provider is not enabled in Firebase Authentication.';
-    if (code.includes('account-exists-with-different-credential')) return 'This email is linked with a different sign-in method.';
-    if (code.includes('invalid-credential')) return 'Invalid credentials. Please try again.';
-    if (code.includes('wrong-password')) return 'Wrong password.';
-    if (code.includes('user-not-found')) return 'No account found with this email.';
-    if (code.includes('invalid-email')) return 'Invalid email format.';
-    if (code.includes('weak-password')) return 'Password is too weak (minimum 6 characters).';
-    return `Authentication failed (${code}). ${rawMessage || 'Please check Firebase provider setup and try again.'}`;
-  };
-
-  const handleSocialLogin = async (provider: 'google' | 'facebook' | 'apple') => {
-    if (!firebaseReady || !auth) {
-      toast({
-        title: 'Firebase not configured',
-        description: 'Missing VITE_FIREBASE_* values. Please verify .env.local and restart dev server.',
-        variant: 'destructive',
-      });
-      return;
+    if (message.toLowerCase().includes('invalid login credentials')) {
+      return 'Invalid email or password.';
+    }
+    if (message.toLowerCase().includes('email not confirmed')) {
+      return 'Please confirm your email before signing in.';
+    }
+    if (message.toLowerCase().includes('password should be at least 6 characters')) {
+      return 'Password should be at least 6 characters.';
     }
 
-    const providerObj =
-      provider === 'google'
-        ? googleProvider
-        : provider === 'facebook'
-          ? facebookProvider
-          : appleProvider;
+    return message || 'Authentication failed. Please try again.';
+  };
 
-    if (!providerObj) {
+  useEffect(() => {
+    const loadExistingSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      const sessionUser = data.session?.user;
+      if (!sessionUser) return;
+
+      const nextName =
+        sessionUser.user_metadata?.full_name ||
+        (sessionUser.email ? sessionUser.email.split('@')[0] : null) ||
+        'User';
+      setEmail(sessionUser.email || '');
+      setName(nextName);
+      setStep(2);
+    };
+
+    loadExistingSession();
+  }, []);
+
+  const handleSocialLogin = async (provider: 'google' | 'facebook' | 'apple') => {
+    if (provider !== 'google') {
       toast({
-        title: 'Provider unavailable',
-        description: 'Selected login provider is not initialized.',
-        variant: 'destructive',
+        title: 'Coming soon',
+        description: `${provider === 'facebook' ? 'Facebook' : 'Apple'} login is not configured yet.`,
       });
       return;
     }
 
     try {
       setAuthLoading(true);
-      const credential = await signInWithPopup(auth, providerObj);
-      const fbUser = credential.user;
-      const nextName =
-        fbUser.displayName ||
-        (fbUser.email ? fbUser.email.split('@')[0] : null) ||
-        'User';
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
 
-      setEmail(fbUser.email || '');
-      setName(nextName);
-      setStep(2);
-      toast({ title: 'Signed in', description: `Logged in with ${provider}.` });
-    } catch (err) {
-      const message = explainAuthError(err);
-      const code = (err as AuthError)?.code || '';
-
-      if (code.includes('popup-blocked')) {
-        try {
-          await signInWithRedirect(auth, providerObj);
-          return;
-        } catch (redirectErr) {
-          toast({
-            title: 'Social login failed',
-            description: explainAuthError(redirectErr),
-            variant: 'destructive',
-          });
-          return;
-        }
+      if (error) {
+        throw error;
       }
-
+    } catch (err) {
       toast({
         title: 'Social login failed',
-        description: message,
+        description: explainAuthError(err),
         variant: 'destructive',
       });
     } finally {
@@ -130,10 +111,11 @@ export default function Onboarding() {
     const profile = { name: finalName, branch, careerGoal };
     setUser(profile);
 
-    // Persist profile so refresh doesn't force onboarding again.
-    if (auth?.currentUser?.uid) {
-      localStorage.setItem(`profile:${auth.currentUser.uid}`, JSON.stringify(profile));
-    }
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session?.user) {
+        localStorage.setItem(`profile:${data.session.user.id}`, JSON.stringify(profile));
+      }
+    });
 
     navigate('/home');
   };
@@ -141,34 +123,40 @@ export default function Onboarding() {
   const handleAuthSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!firebaseReady || !auth) {
+    if (!email.trim() || !password.trim()) {
       toast({
-        title: 'Firebase not configured',
-        description: 'Missing VITE_FIREBASE_* values. Please verify .env.local and restart dev server.',
+        title: 'Missing fields',
+        description: 'Email and password are required.',
         variant: 'destructive',
       });
       return;
     }
 
-    if (!email || !password) return;
-
     try {
       setAuthLoading(true);
       if (authMode === 'login') {
-        await signInWithEmailAndPassword(auth, email, password);
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        const sessionUser = data.user;
+        const nextName =
+          sessionUser?.user_metadata?.full_name ||
+          (sessionUser?.email ? sessionUser.email.split('@')[0] : null) ||
+          email.split('@')[0];
+        setName(nextName);
+        setEmail(sessionUser?.email || email);
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const { data, error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+
+        const sessionUser = data.user;
+        const nextName =
+          sessionUser?.user_metadata?.full_name ||
+          (sessionUser?.email ? sessionUser.email.split('@')[0] : null) ||
+          email.split('@')[0];
+        setName(nextName);
+        setEmail(sessionUser?.email || email);
       }
-
-      const fbUser = auth.currentUser;
-      const nextName =
-        fbUser?.displayName ||
-        (fbUser?.email ? fbUser.email.split('@')[0] : null) ||
-        (email ? email.split('@')[0] : null) ||
-        'User';
-
-      setName(nextName);
-      setEmail(fbUser?.email || email);
       setStep(2);
       toast({
         title: authMode === 'login' ? 'Login successful' : 'Account created',
@@ -215,16 +203,16 @@ export default function Onboarding() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-6 pb-8 flex items-center justify-center">
+      <div className="flex-1 px-3 sm:px-6 pb-6 sm:pb-8 flex items-center justify-center">
         {step === 1 && (
           <div className="w-full max-w-md animate-fade-in">
-            <Card className="p-8 shadow-2xl border-primary/5 bg-card/50 backdrop-blur-sm rounded-[2rem]">
-              <h1 className="text-3xl font-bold text-center mb-8 text-foreground">
+            <Card className="p-4 sm:p-6 md:p-8 shadow-lg sm:shadow-2xl border-primary/5 bg-card/50 backdrop-blur-sm rounded-2xl sm:rounded-[2rem]">
+              <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8 text-foreground">
                 {authMode === 'login' ? 'Sign-in' : 'Sign-up'}
               </h1>
 
               {/* Social Buttons */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2 sm:space-y-3 mb-6">
                 <Button 
                   variant="outline" 
                   type="button"
@@ -232,7 +220,7 @@ export default function Onboarding() {
                   onClick={() => {
                     handleSocialLogin('google');
                   }}
-                  className="w-full h-12 rounded-full border-border hover:bg-muted font-medium flex gap-3 text-foreground transition-all"
+                  className="w-full h-10 sm:h-11 md:h-12 rounded-full border-border hover:bg-muted font-medium flex gap-2 sm:gap-3 text-sm sm:text-base text-foreground transition-all"
                 >
                    <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
                    Continue with Google
@@ -240,11 +228,11 @@ export default function Onboarding() {
                 <Button 
                   variant="outline" 
                   type="button"
-                  disabled={authLoading}
+                  disabled
                   onClick={() => {
                     handleSocialLogin('facebook');
                   }}
-                  className="w-full h-12 rounded-full border-border hover:bg-muted font-medium flex gap-3 text-foreground transition-all"
+                  className="w-full h-10 sm:h-11 md:h-12 rounded-full border-border hover:bg-muted font-medium flex gap-2 sm:gap-3 text-sm sm:text-base text-foreground transition-all"
                 >
                    <div className="w-4 h-4 bg-[#1877F2] rounded-sm flex items-center justify-center text-[10px] text-white font-bold">f</div>
                    Continue with Facebook
@@ -252,7 +240,7 @@ export default function Onboarding() {
                 <Button 
                   variant="outline" 
                   type="button"
-                  disabled={authLoading}
+                  disabled
                   onClick={() => {
                     handleSocialLogin('apple');
                   }}
@@ -317,27 +305,27 @@ export default function Onboarding() {
 
         {step === 2 && (
           <div className="animate-fade-in">
-            <div className="w-20 h-20 rounded-2xl gradient-aptitude flex items-center justify-center mx-auto mb-6">
-              <GraduationCap className="w-10 h-10 text-white" />
+            <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-lg sm:rounded-2xl gradient-aptitude flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <GraduationCap className="w-8 sm:w-10 h-8 sm:h-10 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-center mb-2 text-foreground">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-1 sm:mb-2 text-foreground">
               Hey {name}! 🎓
             </h2>
-            <p className="text-center text-muted-foreground mb-8">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-8">
               What's your branch or field of study?
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {branches.map((b) => (
                 <button
                   key={b}
                   onClick={() => setBranch(b)}
-                  className={`p-4 rounded-xl text-left transition-all duration-300 ${
+                  className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-300 text-xs sm:text-sm font-medium ${
                     branch === b
                       ? 'gradient-primary text-white shadow-md'
                       : 'bg-card border border-border hover:border-primary'
                   }`}
                 >
-                  <span className="font-medium">{b}</span>
+                  <span>{b}</span>
                 </button>
               ))}
             </div>
@@ -346,27 +334,27 @@ export default function Onboarding() {
 
         {step === 3 && (
           <div className="animate-fade-in">
-            <div className="w-20 h-20 rounded-2xl gradient-accent flex items-center justify-center mx-auto mb-6">
-              <Target className="w-10 h-10 text-white" />
+            <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-lg sm:rounded-2xl gradient-accent flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Target className="w-8 sm:w-10 h-8 sm:h-10 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-center mb-2 text-foreground">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-1 sm:mb-2 text-foreground">
               Almost there! 🎯
             </h2>
-            <p className="text-center text-muted-foreground mb-8">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-8">
               What's your career goal?
             </p>
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-2 sm:gap-3">
               {goals.map((g) => (
                 <button
                   key={g}
                   onClick={() => setCareerGoal(g)}
-                  className={`p-4 rounded-xl text-left transition-all duration-300 ${
+                  className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-300 text-xs sm:text-sm font-medium ${
                     careerGoal === g
                       ? 'gradient-accent text-white shadow-md'
                       : 'bg-card border border-border hover:border-accent'
                   }`}
                 >
-                  <span className="font-medium">{g}</span>
+                  <span>{g}</span>
                 </button>
               ))}
             </div>
@@ -376,7 +364,7 @@ export default function Onboarding() {
 
       {/* Footer */}
       {step > 1 && (
-        <div className="p-6 pb-8">
+        <div className="p-3 sm:p-4 md:p-6 pb-4 sm:pb-6 md:pb-8">
           <Button
             onClick={() => {
               if (step < 3) setStep(step + 1);
@@ -386,13 +374,13 @@ export default function Onboarding() {
               (step === 2 && !branch) ||
               (step === 3 && !careerGoal)
             }
-            className="w-full h-14 text-lg font-semibold gradient-primary hover:opacity-90 disabled:opacity-50"
+            className="w-full h-10 sm:h-12 md:h-14 text-xs sm:text-sm md:text-base font-semibold gradient-primary hover:opacity-90 disabled:opacity-50"
           >
             {step < 3 ? (
               'Continue'
             ) : (
               <span className="flex items-center gap-2">
-                <Rocket className="w-5 h-5" /> Let's Go!
+                <Rocket className="w-4 sm:w-5 h-4 sm:h-5" /> Let's Go!
               </span>
             )}
           </Button>

@@ -449,33 +449,32 @@ export default function InterviewSession() {
       <Header title={`${interviewType === 'hr' ? 'HR' : 'Technical'} Interview`} showBack={true} />
 
       
-      <main className="flex-1 px-4 py-8 max-w-3xl mx-auto w-full flex flex-col items-center justify-center">
+      <main className="flex-1 px-3 sm:px-4 py-4 sm:py-8 max-w-3xl mx-auto w-full flex flex-col items-center justify-center">
         
         {/* AI Interviewer Avatar Area */}
-        <div className="text-center mb-12 animate-fade-in flex flex-col items-center">
-           <div className={`w-36 h-36 rounded-full flex items-center justify-center mb-8 shadow-2xl transition-all duration-700
-             ${sessionPhase === 'speakingQuestion' || sessionPhase === 'greeting' ? 'bg-primary/20 scale-110 shadow-primary/40 ring-4 ring-primary/30' : 'bg-muted border border-border'}
-           `}>
-             <UserIcon className={`w-16 h-16 transition-colors duration-700 ${sessionPhase === 'speakingQuestion' || sessionPhase === 'greeting' ? 'text-primary' : 'text-muted-foreground'}`} />
+        <div className="text-center mb-8 sm:mb-12 animate-fade-in flex flex-col items-center">
+           <div className={`w-24 sm:w-32 md:w-36 h-24 sm:h-32 md:h-36 rounded-full flex items-center justify-center mb-4 sm:mb-8 shadow-2xl transition-all duration-700
+             ${sessionPhase === 'speakingQuestion' || sessionPhase === 'greeting' ? 'bg-primary/20 scale-110 shadow-primary/40 ring-4 ring-primary/30' : 'bg-muted border border-border'}  `}>
+             <UserIcon className={`w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 transition-colors duration-700 ${sessionPhase === 'speakingQuestion' || sessionPhase === 'greeting' ? 'text-primary' : 'text-muted-foreground'}`} />
            </div>
            
-           <h2 className="text-2xl md:text-3xl font-medium text-foreground max-w-2xl leading-relaxed min-h-[5rem]">
+           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-foreground max-w-2xl leading-relaxed min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem]">
              {aiText}
            </h2>
         </div>
 
         {/* Listening / Processing Indicators */}
-        <div className="min-h-[6rem] flex flex-col items-center justify-center">
+        <div className="min-h-[4rem] sm:min-h-[5rem] md:min-h-[6rem] flex flex-col items-center justify-center">
           {sessionPhase === 'listening' && (
             <div className="flex flex-col items-center animate-fade-in w-full max-w-lg">
-              <div className="flex gap-2 mb-4">
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}/>
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}/>
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}/>
+              <div className="flex gap-1.5 sm:gap-2 mb-2 sm:mb-4">
+                <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}/>
+                <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}/>
+                <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}/>
               </div>
-              <p className="text-muted-foreground font-medium text-lg mb-2">Listening...</p>
+              <p className="text-muted-foreground font-medium text-sm sm:text-base md:text-lg mb-2">Listening...</p>
               {liveTranscript && (
-                <div className="bg-muted/30 p-4 rounded-lg border border-border mt-3 text-sm italic text-muted-foreground w-full text-center">
+                <div className="bg-muted/30 p-2.5 sm:p-3 md:p-4 rounded-lg border border-border mt-2 sm:mt-3 text-xs sm:text-sm italic text-muted-foreground w-full text-center">
                    "{liveTranscript}"
                 </div>
               )}

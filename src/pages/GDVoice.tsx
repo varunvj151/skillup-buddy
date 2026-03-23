@@ -299,12 +299,12 @@ export default function GDVoice() {
         <div className="min-h-screen bg-background">
             <Header title="GD Session" showBack={false} />
 
-            <main className="container max-w-2xl mx-auto px-4 py-8">
-                <Card className="p-8 text-center space-y-8">
+            <main className="container max-w-2xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
+                <Card className="p-4 sm:p-6 md:p-8 text-center space-y-4 sm:space-y-6 md:space-y-8">
 
-                    <div className="space-y-4">
-                        <h2 className="text-xl text-muted-foreground uppercase tracking-wide">Topic</h2>
-                        <h1 className="text-3xl font-bold text-foreground">{topic}</h1>
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4">
+                        <h2 className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wide">Topic</h2>
+                        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground break-words">{topic}</h1>
                     </div>
 
                     {phase === 'preparation' && (
@@ -355,43 +355,49 @@ export default function GDVoice() {
                                 </p>
                             </div>
 
-                            <div className="bg-muted/50 p-4 rounded-lg flex items-center justify-center gap-3 h-20">
+                            <div className="bg-muted/50 p-2 sm:p-4 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 min-h-16 sm:h-20">
                                 <div className="flex gap-1">
-                                    {[...Array(5)].map((_, i) => (
-                                        <div
-                                            key={i}
-                                            className="w-1.5 bg-red-500 rounded-full animate-pulse"
-                                            style={{
-                                                height: `${12 + Math.random() * 24}px`,
-                                                animationDelay: `${i * 0.15}s`,
-                                                animationDuration: `${0.5 + Math.random() * 0.5}s`,
-                                            }}
-                                        />
-                                    ))}
+                                    {[...Array(5)].map((_, i) => {
+                                        const heightMultiplier = 12 + Math.random() * 24;
+                                        return (
+                                            <div
+                                                key={i}
+                                                className="w-1 sm:w-1.5 bg-red-500 rounded-full animate-pulse"
+                                                style={{
+                                                    height: `${Math.max(12, Math.min(32, heightMultiplier))}px`,
+                                                    animationDelay: `${i * 0.15}s`,
+                                                    animationDuration: `${0.5 + Math.random() * 0.5}s`,
+                                                }}
+                                            />
+                                        );
+                                    })}
                                 </div>
-                                <p className="text-muted-foreground font-medium">Recording in progress…</p>
+                                <p className="text-xs sm:text-sm text-muted-foreground font-medium text-center sm:text-left">Recording in progress…</p>
                                 <div className="flex gap-1">
-                                    {[...Array(5)].map((_, i) => (
-                                        <div
-                                            key={i}
-                                            className="w-1.5 bg-red-500 rounded-full animate-pulse"
-                                            style={{
-                                                height: `${12 + Math.random() * 24}px`,
-                                                animationDelay: `${(i + 5) * 0.15}s`,
-                                                animationDuration: `${0.5 + Math.random() * 0.5}s`,
-                                            }}
-                                        />
-                                    ))}
+                                    {[...Array(5)].map((_, i) => {
+                                        const heightMultiplier = 12 + Math.random() * 24;
+                                        return (
+                                            <div
+                                                key={i}
+                                                className="w-1 sm:w-1.5 bg-red-500 rounded-full animate-pulse"
+                                                style={{
+                                                    height: `${Math.max(12, Math.min(32, heightMultiplier))}px`,
+                                                    animationDelay: `${(i + 5) * 0.15}s`,
+                                                    animationDuration: `${0.5 + Math.random() * 0.5}s`,
+                                                }}
+                                            />
+                                        );
+                                    })}
                                 </div>
                             </div>
 
                             <Button
                                 size="lg"
                                 variant="destructive"
-                                className="w-full h-14 text-lg"
+                                className="w-full h-10 sm:h-12 md:h-14 text-sm sm:text-base"
                                 onClick={stopRecording}
                             >
-                                <Square className="w-5 h-5 mr-2 fill-current" /> Stop & Submit
+                                <Square className="w-4 sm:w-5 h-4 sm:h-5 mr-2 fill-current" /> Stop & Submit
                             </Button>
                         </div>
                     )}

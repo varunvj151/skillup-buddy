@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, TestResult, Message } from '@/types';
-import { auth, firebaseReady } from '@/lib/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { supabase } from '@/lib/supabase';
 
 interface AppContextType {
   user: User | null;
@@ -16,6 +15,7 @@ interface AppContextType {
   interviewMessages: Message[];
   addInterviewMessage: (message: Message) => void;
   clearInterviewMessages: () => void;
+  logout: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -27,20 +27,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [gdMessages, setGdMessages] = useState<Message[]>([]);
   const [interviewMessages, setInterviewMessages] = useState<Message[]>([]);
 
-  // If the user previously finished onboarding, restore their profile
-  // from localStorage using their Firebase UID.
   useEffect(() => {
-    if (!firebaseReady || !auth) return;
-
-    const unsub = onAuthStateChanged(auth, (fbUser) => {
-      if (!fbUser) {
+    const restoreProfile = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error || !data.session?.user) {
         setUser(null);
         return;
       }
 
-      const raw = localStorage.getItem(`profile:${fbUser.uid}`);
+      const raw = localStorage.getItem(`profile:${data.session.user.id}`);
       if (!raw) {
-        // Keep `user` null so `/` still shows onboarding/profile steps.
         setUser(null);
         return;
       }
@@ -51,9 +47,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       } catch {
         setUser(null);
       }
+    };
+
+    restoreProfile();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session?.user) {
+        setUser(null);
+      }
     });
 
-    return () => unsub();
+    return () => subscription.unsubscribe();
   }, []);
 
   const addTestResult = (result: TestResult) => {
@@ -76,6 +82,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setInterviewMessages([]);
   };
 
+  const logout = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <AppContext.Provider value={{
       user,
@@ -89,7 +99,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       clearGdMessages,
       interviewMessages,
       addInterviewMessage,
-      clearInterviewMessages
+      clearInterviewMessages,
+      logout
     }}>
       {children}
     </AppContext.Provider>

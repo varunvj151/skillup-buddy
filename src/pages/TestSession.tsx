@@ -183,28 +183,28 @@ export default function TestSession() {
               </h2>
 
               {/* Options */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {question.options.map((option, index) => (
                   <button
                     key={index}
                     onClick={() => handleSelectAnswer(index)}
                     className={cn(
-                      "w-full p-4 rounded-xl text-left transition-all duration-200 flex items-center gap-4",
-                      "border-2",
+                      "w-full p-3 sm:p-4 rounded-lg sm:rounded-xl text-left transition-all duration-200 flex items-center gap-3 sm:gap-4 touch-manipulation",
+                      "border-2 min-h-12 sm:min-h-14",
                       selectedAnswer === index
                         ? "border-primary bg-primary/5 shadow-sm"
                         : "border-muted hover:border-primary/50 bg-card hover:bg-muted/30"
                     )}
                   >
                     <span className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors",
+                      "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-colors flex-shrink-0",
                       selectedAnswer === index
                         ? "bg-primary text-primary-foreground"
                         : "bg-muted text-muted-foreground"
                     )}>
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className="text-foreground font-medium">{option}</span>
+                    <span className="text-sm sm:text-base text-foreground font-medium break-words">{option}</span>
                   </button>
                 ))}
               </div>
@@ -212,10 +212,10 @@ export default function TestSession() {
           </div>
 
           {/* Right: Question Palette (Desktop) */}
-          <div className="hidden lg:block w-72 flex-shrink-0">
-            <Card className="p-4 sticky top-24">
-              <h3 className="font-semibold mb-4">Question Palette</h3>
-              <div className="grid grid-cols-4 gap-2 mb-6">
+          <div className="hidden md:block w-48 lg:w-56 xl:w-72 flex-shrink-0">
+            <Card className="p-3 md:p-4 sticky top-24">
+              <h3 className="font-semibold text-sm md:text-base mb-3 md:mb-4">Question Palette</h3>
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-1.5 md:gap-2 mb-4 md:mb-6">
                 {questions.map((_, idx) => (
                   <button
                     key={idx}
@@ -253,8 +253,8 @@ export default function TestSession() {
       </main>
 
       {/* Fixed bottom navigation */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border z-10">
-        <div className="max-w-4xl mx-auto flex gap-3 items-center">
+      <div className="fixed bottom-0 left-0 right-0 p-2 sm:p-3 md:p-4 bg-background/80 backdrop-blur-xl border-t border-border z-10 safe-area-inset-bottom">
+        <div className="max-w-4xl mx-auto flex gap-2 sm:gap-3 items-center">
           {/* Mobile Palette Trigger */}
           <Sheet open={isPaletteOpen} onOpenChange={setIsPaletteOpen}>
             <SheetTrigger asChild>
