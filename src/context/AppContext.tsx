@@ -28,6 +28,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [interviewMessages, setInterviewMessages] = useState<Message[]>([]);
 
   useEffect(() => {
+    if (!supabase) {
+      console.warn('Supabase client not initialized; skipping auth restore.');
+      setUser(null);
+      return;
+    }
+
     const restoreProfile = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (error || !data.session?.user) {
@@ -50,6 +56,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
 
     restoreProfile();
+
+    if (!supabase) {
+      return;
+    }
 
     const {
       data: { subscription },
@@ -83,6 +93,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
+    if (!supabase) {
+      console.warn('Supabase client is not initialized; logout skipped.');
+      return;
+    }
     await supabase.auth.signOut();
   };
 
