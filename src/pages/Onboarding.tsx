@@ -179,8 +179,8 @@ export default function Onboarding() {
       {/* Header */}
       <div className="p-6">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center border border-border">
-            <img src="/src/assets/logo.png" className="w-full h-full object-cover" alt="SkillUp Buddy Logo" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center border border-border bg-card">
+            <img src="/logo.png" className="w-full h-full object-cover" alt="SkillUp Buddy Logo" onError={(e) => (e.currentTarget.src = 'https://w7.pngwing.com/pngs/454/535/png-transparent-graduation-ceremony-square-academic-cap-computer-icons-academic-dress-graduation-hat-graduation-cap-monochrome-black-silhouette-thumbnail.png')} />
           </div>
           <span className="text-xl font-bold text-foreground">SkillUp Buddy</span>
         </div>

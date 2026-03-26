@@ -22,7 +22,38 @@ import GDResult from "./pages/GDResult";
 import InterviewSession from "./pages/InterviewSession";
 import InterviewResult from "./pages/InterviewResult";
 
+import { isSupabaseConfigured } from "@/lib/supabase";
+import { AlertTriangle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 const queryClient = new QueryClient();
+
+function ConfigErrorFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4 bg-background">
+      <div className="max-w-md w-full text-center space-y-6 animate-in fade-in zoom-in duration-500">
+        <div className="w-20 h-20 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <AlertTriangle className="w-10 h-10 text-destructive" />
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">Configuration Required</h1>
+        <p className="text-muted-foreground leading-relaxed">
+          The application is missing critical environment variables (<code className="bg-muted px-1 rounded text-sm">VITE_SUPABASE_URL</code> and <code className="bg-muted px-1 rounded text-sm">VITE_SUPABASE_PUBLISHABLE_KEY</code>).
+        </p>
+        <div className="p-4 bg-muted/30 rounded-lg text-sm text-left border border-border/50 font-mono overflow-auto">
+          <p className="text-xs text-muted-foreground mb-2">Check your deployment settings for:</p>
+          <p className="text-primary">1. Supabase Project URL</p>
+          <p className="text-primary">2. Project API (Anon) Key</p>
+        </div>
+        <Button 
+          onClick={() => window.location.reload()}
+          className="w-full h-12 rounded-full font-semibold mt-4 transition-all"
+        >
+          I've fixed it, reload the app
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user } = useApp();
@@ -58,18 +89,24 @@ function AppRoutes() {
   );
 }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AppProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </AppProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  if (!isSupabaseConfigured) {
+    return <ConfigErrorFallback />;
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <AppProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </AppProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
