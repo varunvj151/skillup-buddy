@@ -225,30 +225,6 @@ export default function Onboarding() {
                    <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
                    Continue with Google
                 </Button>
-                <Button 
-                  variant="outline" 
-                  type="button"
-                  disabled
-                  onClick={() => {
-                    handleSocialLogin('facebook');
-                  }}
-                  className="w-full h-10 sm:h-11 md:h-12 rounded-full border-border hover:bg-muted font-medium flex gap-2 sm:gap-3 text-sm sm:text-base text-foreground transition-all"
-                >
-                   <div className="w-4 h-4 bg-[#1877F2] rounded-sm flex items-center justify-center text-[10px] text-white font-bold">f</div>
-                   Continue with Facebook
-                </Button>
-                <Button 
-                  variant="outline" 
-                  type="button"
-                  disabled
-                  onClick={() => {
-                    handleSocialLogin('apple');
-                  }}
-                  className="w-full h-12 rounded-full border-border hover:bg-muted font-medium flex gap-3 text-foreground transition-all"
-                >
-                   <div className="w-4 h-4 bg-black rounded-sm flex items-center justify-center text-[10px] text-white"></div>
-                   Continue with Apple
-                </Button>
               </div>
 
 
