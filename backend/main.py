@@ -33,8 +33,8 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Load Whisper model once at startup
 # ---------------------------------------------------------------------------
-print("Loading Whisper model (base)…")
-whisper_model = whisper.load_model("base")
+print("Loading Whisper model (small)…")
+whisper_model = whisper.load_model("small")
 print("Whisper model loaded ✓")
 
 
@@ -198,7 +198,15 @@ def _validate_transcript(topic: str, transcript: str) -> dict | None:
             "requires at least 40 words with substantive arguments."
         )
 
-    # ── Check 2: Repeated phrases ──
+    # ── Check 2: Junk/nonsense transcript ──
+    if _is_mostly_junk(transcript):
+        flags.append("transcription_error")
+        reasons.append(
+            "The transcription appears to contain nonsense or irrelevant content. "
+            "This may be due to poor audio quality or background noise. Please try again."
+        )
+
+    # ── Check 3: Repeated phrases ──
     repeated = _find_repeated_phrases(transcript)
     if repeated:
         flags.append("low_communication_quality")
@@ -230,6 +238,8 @@ def _validate_transcript(topic: str, transcript: str) -> dict | None:
         base = min(base, 20)
     if "low_communication_quality" in flags:
         base = min(base, 25)
+    if "transcription_error" in flags:
+        base = 10  # Very low for junk transcripts
     base = max(10, min(30, base))  # clamp 10–30
 
     cat_score = max(1, base // 10)  # 1–3
@@ -237,32 +247,48 @@ def _validate_transcript(topic: str, transcript: str) -> dict | None:
     return {
         "scores": {
             "content": {
-                "score": cat_score if "off_topic" not in flags else 1,
+                "score": 1 if "transcription_error" in flags or "off_topic" in flags else cat_score,
                 "explanation": (
-                    "The speech did not address the given topic."
+                    "The transcription contains nonsense or irrelevant content."
+                    if "transcription_error" in flags
+                    else "The speech did not address the given topic."
                     if "off_topic" in flags
                     else "Very limited content was provided."
                 ),
             },
             "clarity": {
-                "score": cat_score,
-                "explanation": "Insufficient content to assess clarity of thought.",
+                "score": 1 if "transcription_error" in flags else cat_score,
+                "explanation": (
+                    "Unable to assess clarity due to transcription errors."
+                    if "transcription_error" in flags
+                    else "Insufficient content to assess clarity of thought."
+                ),
             },
             "communication": {
-                "score": max(1, cat_score - 1) if "low_communication_quality" in flags else cat_score,
+                "score": 1 if "transcription_error" in flags else (max(1, cat_score - 1) if "low_communication_quality" in flags else cat_score),
                 "explanation": (
-                    "Excessive repetition of phrases indicates poor communication."
+                    "Transcription errors prevent proper evaluation of communication skills."
+                    if "transcription_error" in flags
+                    else "Excessive repetition of phrases indicates poor communication."
                     if "low_communication_quality" in flags
                     else "Not enough speech to evaluate communication skills."
                 ),
             },
             "confidence": {
-                "score": cat_score,
-                "explanation": "Cannot assess confidence from such a brief or irrelevant response.",
+                "score": 1 if "transcription_error" in flags else cat_score,
+                "explanation": (
+                    "Cannot assess confidence due to transcription issues."
+                    if "transcription_error" in flags
+                    else "Cannot assess confidence from such a brief or irrelevant response."
+                ),
             },
             "structure": {
-                "score": max(1, cat_score - 1),
-                "explanation": "No clear introduction, body, or conclusion was present.",
+                "score": 1 if "transcription_error" in flags else max(1, cat_score - 1),
+                "explanation": (
+                    "Unable to evaluate structure due to transcription errors."
+                    if "transcription_error" in flags
+                    else "No clear introduction, body, or conclusion was present."
+                ),
             },
         },
         "overall_score": base,
@@ -329,7 +355,7 @@ def _adjust_scores_for_relevance(evaluation: dict, topic: str, transcript: str) 
 async def transcribe_audio(audio: UploadFile = File(...)):
     """Accept an audio file, convert to wav via ffmpeg, run Whisper, return transcript."""
     if not audio.filename:
-        return {"text": "", "status": "failed"}
+        return {"text": "(No speech detected in the audio.)", "status": "failed"}
 
     suffix = Path(audio.filename).suffix or ".webm"
     tmp_webm = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
@@ -342,7 +368,7 @@ async def transcribe_audio(audio: UploadFile = File(...)):
             print("[Backend] Audio file too small, discarding.")
             tmp_webm.close()
             tmp_wav.close()
-            return {"text": "", "status": "failed"}
+            return {"text": "(No speech detected in the audio.)", "status": "failed"}
 
         with open(tmp_webm.name, "wb") as f:
             f.write(contents)
@@ -350,15 +376,19 @@ async def transcribe_audio(audio: UploadFile = File(...)):
         tmp_webm.close()
         tmp_wav.close() # Close so ffmpeg can overwrite
 
-        # Convert to WAV
-        print(f"[Backend] Converting {tmp_webm.name} to {tmp_wav.name}...")
-        cmd = ["ffmpeg", "-y", "-i", tmp_webm.name, "-ar", "16000", "-ac", "1", tmp_wav.name]
+        # Convert to WAV and trim silence
+        print(f"[Backend] Converting {tmp_webm.name} to {tmp_wav.name} and trimming silence...")
+        cmd = [
+            "ffmpeg", "-y", "-i", tmp_webm.name, 
+            "-af", "silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-50dB",
+            "-ar", "16000", "-ac", "1", tmp_wav.name
+        ]
         process = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         
         if process.returncode != 0:
             print("[Backend] FFmpeg conversion failed!")
             print(process.stderr.decode("utf-8", errors="ignore"))
-            return {"text": "", "status": "failed"}
+            return {"text": "(No speech detected in the audio.)", "status": "failed"}
             
         print("[Backend] FFmpeg conversion success.")
 
@@ -376,13 +406,13 @@ async def transcribe_audio(audio: UploadFile = File(...)):
         print(f"[Backend] Transcription result length: {len(transcript)}")
         
         if not transcript:
-            return {"text": "", "status": "failed"}
+            return {"text": "(No speech detected in the audio.)", "status": "failed"}
 
         return {"text": transcript, "status": "success"}
 
     except Exception as exc:
         traceback.print_exc()
-        return {"text": "", "status": "failed"}
+        return {"text": "(No speech detected in the audio.)", "status": "failed"}
     finally:
         # Cleanup temp files
         for fpath in [tmp_webm.name, tmp_wav.name]:
@@ -490,21 +520,37 @@ async def evaluate_gd(req: EvaluateRequest):
     if not gemini_model:
         return _mock_evaluation()
 
-    prompt = EVALUATION_PROMPT.format(topic=req.topic, transcript=req.transcript)
+    # Use replace instead of format to avoid KeyError if transcript contains curlies
+    prompt = EVALUATION_PROMPT.replace("{topic}", req.topic).replace("{transcript}", req.transcript)
 
     try:
         response = gemini_model.generate_content(prompt)
+        
+        # Check if response has valid parts (not blocked)
+        if not response.candidates or not response.candidates[0].content.parts:
+             print("⚠ Gemini response blocked or empty.")
+             return _mock_evaluation()
+             
         raw_text = response.text.strip()
 
-        # Strip markdown fences if present
-        if raw_text.startswith("```"):
-            raw_text = raw_text.split("\n", 1)[1] if "\n" in raw_text else raw_text[3:]
-        if raw_text.endswith("```"):
-            raw_text = raw_text[:-3].strip()
-        if raw_text.startswith("json"):
-            raw_text = raw_text[4:].strip()
+        # Robust JSON extraction
+        json_match = re.search(r"(\{.*\})", raw_text, re.DOTALL)
+        if json_match:
+            raw_text = json_match.group(1)
+        else:
+            # Strip markdown fences if present (fallback)
+            if raw_text.startswith("```"):
+                raw_text = raw_text.split("\n", 1)[1] if "\n" in raw_text else raw_text[3:]
+            if raw_text.endswith("```"):
+                raw_text = raw_text[:-3].strip()
+            if raw_text.startswith("json"):
+                raw_text = raw_text[4:].strip()
 
-        data = json.loads(raw_text)
+        try:
+            data = json.loads(raw_text)
+        except json.JSONDecodeError:
+            print(f"FAILED to parse AI JSON. Raw text: {raw_text[:200]}...")
+            return _mock_evaluation()
 
         # ── Step 3: Post-AI score adjustment ──
         data = _adjust_scores_for_relevance(data, req.topic, req.transcript)
@@ -575,7 +621,11 @@ def _is_mostly_junk(text: str) -> bool:
     """Heuristic to detect nonsense or non-English text."""
     t = text.strip()
     if not t: return True
-    if t in ["(Skipped)", "(No speech detected)", "(Transcription failed)"]: return True
+    if t in ["(Skipped)", "(No speech detected)", "(Transcription failed)", "(No speech detected in the audio.)"]: return True
+    
+    # Check for very short transcripts
+    words = t.split()
+    if len(words) < 5: return True
     
     # Check for non-Latin characters (simplified)
     # If more than 30% of characters are non-ASCII/non-Latin, it's likely noise or another lang
@@ -583,13 +633,72 @@ def _is_mostly_junk(text: str) -> bool:
     if len(t) > 0 and (non_latin / len(t)) > 0.3:
         return True
     
-    # Check for nonsense repetitive phrases like "can you tell me" x 10
-    words = t.lower().split()
+    # Check for nonsense repetitive phrases
     if len(words) > 10:
         counts = Counter(words)
         most_common_ratio = counts.most_common(1)[0][1] / len(words)
         if most_common_ratio > 0.5: # One word makes up > 50% of the answer
             return True
+    
+    # Check for gibberish patterns (words that don't look like English)
+    english_words = set([
+        "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
+        "have", "has", "had", "do", "does", "did", "will", "would", "could",
+        "should", "may", "might", "shall", "can", "need", "dare", "ought",
+        "used", "to", "of", "in", "for", "on", "with", "at", "by", "from",
+        "as", "into", "through", "during", "before", "after", "above", "below",
+        "between", "out", "off", "over", "under", "again", "further", "then",
+        "once", "here", "there", "when", "where", "why", "how", "all", "each",
+        "every", "both", "few", "more", "most", "other", "some", "such", "no",
+        "nor", "not", "only", "own", "same", "so", "than", "too", "very",
+        "just", "because", "but", "and", "or", "if", "while", "about", "up",
+        "its", "it", "this", "that", "these", "those", "what", "which", "who",
+        "whom", "his", "her", "their", "our", "my", "your", "i", "you", "he",
+        "she", "we", "they", "me", "him", "her", "us", "them", "good", "bad",
+        "yes", "no", "ok", "okay", "hello", "hi", "thank", "thanks", "please",
+        "sorry", "excuse", "pardon", "yes", "no", "maybe", "perhaps", "sure",
+        "certainly", "definitely", "absolutely", "totally", "really", "very",
+        "so", "too", "also", "and", "but", "or", "if", "then", "because",
+        "although", "however", "therefore", "consequently", "thus", "hence",
+        "so", "accordingly", "moreover", "furthermore", "besides", "likewise",
+        "similarly", "conversely", "instead", "rather", "on", "the", "other",
+        "hand", "nevertheless", "nonetheless", "notwithstanding", "still",
+        "yet", "though", "although", "even", "though", "whereas", "while",
+        "whilst", "meanwhile", "afterwards", "later", "soon", "immediately",
+        "now", "then", "before", "previously", "ago", "since", "for", "during",
+        "while", "when", "as", "soon", "as", "no", "sooner", "than", "hardly",
+        "scarcely", "barely", "just", "only", "merely", "simply", "just",
+        "exactly", "precisely", "specifically", "particularly", "especially",
+        "notably", "chiefly", "mainly", "primarily", "principally", "largely",
+        "generally", "usually", "typically", "normally", "commonly", "frequently",
+        "often", "sometimes", "occasionally", "seldom", "rarely", "never",
+        "always", "ever", "never", "ever", "at", "all", "in", "the", "least",
+        "by", "no", "means", "on", "no", "account", "under", "no", "circumstances",
+        "in", "no", "way", "not", "at", "all", "not", "in", "the", "least",
+        "not", "by", "any", "means", "not", "on", "any", "account", "not",
+        "under", "any", "circumstances", "not", "in", "any", "way", "not",
+        "a", "bit", "not", "a", "whit", "not", "a", "jot", "not", "a", "scrap",
+        "not", "a", "particle", "not", "a", "grain", "not", "a", "morsel",
+        "not", "a", "fragment", "not", "a", "shred", "not", "a", "trace",
+        "not", "a", "hint", "not", "a", "suggestion", "not", "a", "shadow",
+        "not", "a", "ghost", "not", "a", "whisper", "not", "a", "breath",
+        "not", "a", "sigh", "not", "a", "murmur", "not", "a", "sound", "not",
+        "a", "word", "not", "a", "syllable", "not", "a", "letter", "not",
+        "a", "iota", "not", "a", "jot", "not", "a", "tittle", "not", "a",
+        "dot", "not", "a", "comma", "not", "a", "semicolon", "not", "a",
+        "colon", "not", "a", "dash", "not", "a", "hyphen", "not", "a", "mark",
+        "not", "a", "sign", "not", "a", "symbol", "not", "a", "character",
+        "not", "a", "figure", "not", "a", "number", "not", "a", "digit",
+        "not", "a", "numeral", "not", "a", "cipher", "not", "a", "zero",
+        "not", "a", "one", "not", "a", "two", "not", "a", "three", "not",
+        "a", "four", "not", "a", "five", "not", "a", "six", "not", "a",
+        "seven", "not", "a", "eight", "not", "a", "nine", "not", "a", "ten"
+    ])
+    
+    # Count how many words are in our English word list
+    recognized_words = sum(1 for word in words if word.lower().strip('.,!?') in english_words)
+    if len(words) > 0 and (recognized_words / len(words)) < 0.3:  # Less than 30% recognized words
+        return True
             
     return False
 
@@ -638,7 +747,8 @@ async def evaluate_interview(req: EvaluateInterviewRequest):
     if not gemini_model:
         return _mock_interview_evaluation(req.questions, req.transcripts)
 
-    prompt = INTERVIEW_EVALUATION_PROMPT.format(qa_pairs=qa_pairs_text)
+    # Use replace instead of format for safety
+    prompt = INTERVIEW_EVALUATION_PROMPT.replace("{qa_pairs}", qa_pairs_text)
 
     try:
         print("DEBUG: Sending request to Gemini...")
@@ -648,23 +758,29 @@ async def evaluate_interview(req: EvaluateInterviewRequest):
         end_eval = time.time()
         print(f"DEBUG: Gemini responded in {end_eval - start_eval:.2f} seconds")
 
-        raw_text = ""
-        if hasattr(response, "text") and response.text:
-            raw_text = response.text.strip()
+        if not response.candidates or not response.candidates[0].content.parts:
+             print("⚠ Gemini response blocked or empty.")
+             return _mock_interview_evaluation(req.questions, req.transcripts)
+
+        raw_text = response.text.strip()
         
-        print(f"DEBUG: Raw response length: {len(raw_text)}")
-        if len(raw_text) < 50:
-             print(f"DEBUG: Suspiciously short response: {raw_text}")
+        # Robust JSON extraction
+        json_match = re.search(r"(\{.*\})", raw_text, re.DOTALL)
+        if json_match:
+            raw_text = json_match.group(1)
+        else:
+            if raw_text.startswith("```"):
+                raw_text = raw_text.split("\n", 1)[1] if "\n" in raw_text else raw_text[3:]
+            if raw_text.endswith("```"):
+                raw_text = raw_text[:-3].strip()
+            if raw_text.startswith("json"):
+                raw_text = raw_text[4:].strip()
 
-
-        if raw_text.startswith("```"):
-            raw_text = raw_text.split("\n", 1)[1] if "\n" in raw_text else raw_text[3:]
-        if raw_text.endswith("```"):
-            raw_text = raw_text[:-3].strip()
-        if raw_text.startswith("json"):
-            raw_text = raw_text[4:].strip()
-
-        data = json.loads(raw_text)
+        try:
+            data = json.loads(raw_text)
+        except json.JSONDecodeError:
+            print(f"FAILED to parse Interview AI JSON. Raw text: {raw_text[:200]}...")
+            return _mock_interview_evaluation(req.questions, req.transcripts)
 
         if "overallScore" not in data or "questions" not in data or "summary" not in data:
             raise ValueError("Gemini JSON missing required keys")
@@ -771,3 +887,8 @@ def _mock_evaluation():
             "Use real-world examples to strengthen arguments",
         ],
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

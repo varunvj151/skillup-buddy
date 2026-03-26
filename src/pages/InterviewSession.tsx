@@ -389,7 +389,7 @@ export default function InterviewSession() {
             try {
               const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
               const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 12000);
+              const timeoutId = setTimeout(() => controller.abort(), 30000);
 
               const response = await fetch(`${BASE_URL}/api/evaluate-interview`, {
                 method: 'POST',

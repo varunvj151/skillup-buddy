@@ -80,7 +80,7 @@ export default function GDVoice() {
 
     // Topic handling
     const decodedTopic = decodeURIComponent(topicId || '');
-    const topic = gdTopics.includes(decodedTopic) ? decodedTopic : decodedTopic;
+    const topic = decodedTopic || 'General Discussion';
 
     const [phase, setPhase] = useState<Phase>('preparation');
     const [timeLeft, setTimeLeft] = useState(60); // 60 seconds for prep
@@ -153,14 +153,40 @@ export default function GDVoice() {
             mediaRecorderRef.current = mediaRecorder;
             chunksRef.current = [];
 
+            // Define onstop behavior early
+            mediaRecorder.onstop = async () => {
+                const capturedChunks = [...chunksRef.current];
+                const type = mediaRecorder.mimeType || 'audio/webm';
+                const audioBlob = new Blob(capturedChunks, { type });
+
+                console.log(`[GDVoice] Recording stopped. Chunks: ${capturedChunks.length}, Blob size: ${audioBlob.size}`);
+
+                if (audioBlob.size === 0) {
+                    toast({
+                        title: "Recording Error",
+                        description: "No audio was captured. Please ensure your microphone is working and speak clearly.",
+                        variant: "destructive"
+                    });
+                    setPhase('preparation');
+                    setTimeLeft(0);
+                    setRecordingTime(0);
+                    setIsRecording(false);
+                    return;
+                }
+
+                // Send audio to backend
+                await processAudio(audioBlob, type);
+            };
+
+            // Define ondataavailable
             mediaRecorder.ondataavailable = (e) => {
-                if (e.data.size > 0) {
+                if (e.data && e.data.size > 0) {
                     chunksRef.current.push(e.data);
                 }
             };
 
-            // Collect data every second for reliability
-            mediaRecorder.start(1000);
+            // Start recording — using a timeslice can help keep data fresh
+            mediaRecorder.start(500);
             setIsRecording(true);
             setPhase('recording');
 
@@ -178,34 +204,13 @@ export default function GDVoice() {
     };
 
     const stopRecording = () => {
-        if (!mediaRecorderRef.current || !isRecording) return;
+        if (!mediaRecorderRef.current || mediaRecorderRef.current.state === 'inactive') return;
 
-        // We need to handle the onstop event to process the audio
-        mediaRecorderRef.current.onstop = async () => {
-            // Stop the mic stream
-            if (streamRef.current) {
-                streamRef.current.getTracks().forEach(track => track.stop());
-                streamRef.current = null;
-            }
-
-            const mimeType = mediaRecorderRef.current?.mimeType || 'audio/webm';
-            const audioBlob = new Blob(chunksRef.current, { type: mimeType });
-
-            if (audioBlob.size === 0) {
-                toast({
-                    title: "Recording Error",
-                    description: "No audio was captured. Please try again.",
-                    variant: "destructive"
-                });
-                setPhase('preparation');
-                setTimeLeft(0);
-                setRecordingTime(0);
-                return;
-            }
-
-            // Send audio to backend for transcription + evaluation
-            await processAudio(audioBlob, mimeType);
-        };
+        // Stop the mic stream tracks IMMEDIATELY when stop is clicked
+        if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => track.stop());
+            streamRef.current = null;
+        }
 
         mediaRecorderRef.current.stop();
         setIsRecording(false);
@@ -231,7 +236,8 @@ export default function GDVoice() {
                 throw new Error(err.detail || `Transcription failed (${transcribeRes.status})`);
             }
 
-            const { transcript } = await transcribeRes.json();
+            const result = await transcribeRes.json();
+            const transcript = (result.text || result.transcript || "").trim();
 
             if (!transcript || transcript === '(No speech detected in the audio.)') {
                 toast({

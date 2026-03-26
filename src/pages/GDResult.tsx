@@ -96,12 +96,12 @@ export default function GDResult() {
                                 </div>
                             </div>
                         )}
-                        {validationFlags.includes('off_topic') && (
+                        {validationFlags.includes('transcription_error') && (
                             <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg flex gap-3 items-start">
                                 <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
                                 <div>
-                                    <h4 className="font-medium">Off-Topic Response</h4>
-                                    <p className="text-sm opacity-90 mt-1">Your speech did not appear to address the given topic. Focus directly on the subject matter.</p>
+                                    <h4 className="font-medium">Transcription Error</h4>
+                                    <p className="text-sm opacity-90 mt-1">The system detected issues with the audio transcription. This may be due to poor audio quality or background noise. Please try recording again in a quiet environment.</p>
                                 </div>
                             </div>
                         )}
@@ -130,7 +130,7 @@ export default function GDResult() {
                         <div className="space-y-5">
                             {Object.entries(SCORE_META).map(([key, meta]) => {
                                 const scoreData = scores[key];
-                                const score = typeof scoreData === 'object' ? scoreData.score : (scoreData ?? 0);
+                                const score = typeof scoreData === 'object' ? (scoreData.score ?? 0) : (scoreData ?? 0);
                                 const explanation = typeof scoreData === 'object' ? scoreData.explanation : '';
 
                                 return (
