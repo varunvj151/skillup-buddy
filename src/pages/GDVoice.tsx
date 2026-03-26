@@ -222,11 +222,12 @@ export default function GDVoice() {
             // Step 1: Transcribe
             setProcessingMessage('Transcribing your speech…');
 
+            const BASE_URL = import.meta.env.VITE_API_URL || '';
             const ext = mimeType.includes('webm') ? 'webm' : 'wav';
             const formData = new FormData();
             formData.append('audio', audioBlob, `recording.${ext}`);
 
-            const transcribeRes = await fetch('/api/transcribe', {
+            const transcribeRes = await fetch(`${BASE_URL}/api/transcribe`, {
                 method: 'POST',
                 body: formData,
             });
@@ -256,9 +257,10 @@ export default function GDVoice() {
 
             if (!evaluation) {
                 // Step 2: Evaluate via AI if client validation passed
+                const BASE_URL = import.meta.env.VITE_API_URL || '';
                 setProcessingMessage('Evaluating your performance…');
 
-                const evaluateRes = await fetch('/api/evaluate', {
+                const evaluateRes = await fetch(`${BASE_URL}/api/evaluate`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ topic, transcript }),
