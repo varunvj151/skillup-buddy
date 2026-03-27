@@ -3,28 +3,38 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-// Export a flag to check if Supabase is properly initialized
+// Check if variables exist
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabasePublishableKey);
 
-// Debugging logs for production (only values existence, not the keys themselves for security)
+// Debugging logs for production (Safe: only checks existence)
 if (import.meta.env.PROD) {
-  console.log('Production mode detected. Checking Supabase configuration...');
-  console.log('VITE_SUPABASE_URL exists:', !!supabaseUrl);
-  console.log('VITE_SUPABASE_PUBLISHABLE_KEY exists:', !!supabasePublishableKey);
+  console.log('[Supabase] Initializing in production...');
+  console.log('[Supabase] URL available:', !!supabaseUrl);
+  console.log('[Supabase] Key available:', !!supabasePublishableKey);
 }
 
-// Fail-fast validation (logged but not throwing to avoid total white-screen crash before React mounts)
+// If configuration is missing, we create a proxy or throw a clear error
+// We'll use a functional client but it will fail on calls if missing config
 if (!isSupabaseConfigured) {
+  const missingVar = !supabaseUrl ? 'VITE_SUPABASE_URL' : 'VITE_SUPABASE_PUBLISHABLE_KEY';
   console.error(
-    'CRITICAL ERROR: Missing Supabase environment variables!\n' +
-    'Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in your deployment environment settings.'
+    `[Supabase] CRITICAL: Missing environment variable: ${missingVar}.\n` +
+    'Please ensure you have added your Supabase credentials to Netlify environment variables.'
   );
 }
 
-// Provide a safe client or a dummy if not configured
-// Using dummy strings if missing to avoid throwing within createClient
+// Initialize the client
+// We use fallback strings to prevent createClient from crashing immediately,
+// but isSupabaseConfigured export can be used by components to show a warned state.
 export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabasePublishableKey || 'placeholder'
+  supabaseUrl || 'https://missing-url.supabase.co',
+  supabasePublishableKey || 'missing-key'
 );
+
+// Helper to get safe redirect URL
+export const getSafeRedirectUrl = () => {
+  const url = window.location.origin;
+  // Ensure no trailing slash for consistency if needed, but usually origin is fine
+  return url;
+};
 

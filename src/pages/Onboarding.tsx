@@ -83,12 +83,27 @@ export default function Onboarding() {
       return;
     }
 
+    if (!supabase || !supabase.auth) {
+      toast({
+        title: 'Initialization error',
+        description: 'Supabase client is not initialized. Please check your config.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setAuthLoading(true);
+      // Ensure we have a valid ORIGIN for redirectTo
+      const origin = window.location.origin;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin,
+          redirectTo: `${origin}/`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         },
       });
 
@@ -96,6 +111,7 @@ export default function Onboarding() {
         throw error;
       }
     } catch (err) {
+      console.error('[OAuth] Social login failed:', err);
       toast({
         title: 'Social login failed',
         description: explainAuthError(err),
