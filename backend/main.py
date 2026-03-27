@@ -33,8 +33,8 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Load Whisper model once at startup
 # ---------------------------------------------------------------------------
-print("Loading Whisper model (base)…")
-whisper_model = whisper.load_model("base")
+print("Loading Whisper model (small)…")
+whisper_model = whisper.load_model("small")
 print("Whisper model loaded ✓")
 
 
