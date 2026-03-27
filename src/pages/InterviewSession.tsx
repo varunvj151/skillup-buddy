@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Loader2, User as UserIcon } from 'lucide-react';
 import { interviewQuestions } from '@/data/questions/interviewQuestions';
 import { useToast } from '@/hooks/use-toast';
+import { API_BASE_URL, apiFetch } from '@/lib/api';
 
 const INTERVIEWER_REACTIONS = [
   "Alright.",
@@ -322,15 +323,10 @@ export default function InterviewSession() {
     formData.append('audio', audioBlob, 'interview_answer.webm');
 
     try {
-      const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-      const response = await fetch(`${BASE_URL}/api/transcribe`, {
+      const data = await apiFetch('/api/transcribe', {
         method: 'POST',
         body: formData,
       });
-
-      if (!response.ok) throw new Error("Processing failed");
-
-      const data = await response.json();
       const returnedText = data.text?.trim() || "(No speech detected)";
       
       setTranscripts(prev => {
@@ -387,24 +383,15 @@ export default function InterviewSession() {
             };
 
             try {
-              const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-              const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-              const response = await fetch(`${BASE_URL}/api/evaluate-interview`, {
+              const evalData = await apiFetch('/api/evaluate-interview', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   interview_type: interviewType,
                   questions: questions,
                   transcripts: transcripts
-                }),
-                signal: controller.signal
+                })
               });
-              clearTimeout(timeoutId);
-
-              if (!response.ok) throw new Error("Evaluation failed");
-              const evalData = await response.json();
 
               if (
                 typeof evalData?.overallScore !== "number" ||

@@ -6,7 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Mic, Square, Timer, AlertCircle, Loader2 } from 'lucide-react';
 import { gdTopics } from '@/data/gdTopics';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
+import { API_BASE_URL, apiFetch } from '@/lib/api';
 
 type Phase = 'preparation' | 'recording' | 'processing';
 
@@ -222,22 +223,14 @@ export default function GDVoice() {
             // Step 1: Transcribe
             setProcessingMessage('Transcribing your speech…');
 
-            const BASE_URL = import.meta.env.VITE_API_URL || '';
             const ext = mimeType.includes('webm') ? 'webm' : 'wav';
             const formData = new FormData();
             formData.append('audio', audioBlob, `recording.${ext}`);
 
-            const transcribeRes = await fetch(`${BASE_URL}/api/transcribe`, {
+            const result = await apiFetch('/api/transcribe', {
                 method: 'POST',
                 body: formData,
             });
-
-            if (!transcribeRes.ok) {
-                const err = await transcribeRes.json().catch(() => ({}));
-                throw new Error(err.detail || `Transcription failed (${transcribeRes.status})`);
-            }
-
-            const result = await transcribeRes.json();
             const transcript = (result.text || result.transcript || "").trim();
 
             if (!transcript || transcript === '(No speech detected in the audio.)') {
@@ -257,21 +250,13 @@ export default function GDVoice() {
 
             if (!evaluation) {
                 // Step 2: Evaluate via AI if client validation passed
-                const BASE_URL = import.meta.env.VITE_API_URL || '';
                 setProcessingMessage('Evaluating your performance…');
 
-                const evaluateRes = await fetch(`${BASE_URL}/api/evaluate`, {
+                evaluation = await apiFetch('/api/evaluate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ topic, transcript }),
                 });
-
-                if (!evaluateRes.ok) {
-                    const err = await evaluateRes.json().catch(() => ({}));
-                    throw new Error(err.detail || `Evaluation failed (${evaluateRes.status})`);
-                }
-
-                evaluation = await evaluateRes.json();
             }
 
             // Navigate to results page with all data
