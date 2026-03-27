@@ -14,8 +14,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Pre-load the Whisper model during build to speed up startup
-# We use the same model as in main.py: "small"
-RUN python -c "import whisper; whisper.load_model('small')"
+# We use the same model as in main.py: "base"
+RUN python -c "import whisper; whisper.load_model('base')"
 
 # Copy the rest of the application code
 COPY . .
