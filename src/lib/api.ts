@@ -13,23 +13,36 @@ if (import.meta.env.PROD) {
 }
 
 /**
- * Common fetch wrapper to handle errors consistently
+ * Common fetch wrapper to handle errors consistently with a 60s timeout
  */
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
   
+  // Create an AbortController for timeout
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    
+    clearTimeout(id);
     
     if (!response.ok) {
-      // Attempt to parse error details
       const errorData = await response.json().catch(() => ({}));
       const message = errorData.detail || errorData.message || `API Error: ${response.status} ${response.statusText}`;
       throw new Error(message);
     }
     
     return await response.json();
-  } catch (error) {
+  } catch (error: any) {
+    clearTimeout(id);
+    if (error.name === 'AbortError') {
+      console.error(`[API] Timeout error for ${url}`);
+      throw new Error("Request timed out after 60 seconds. Please try again.");
+    }
     console.error(`[API] Fetch error for ${url}:`, error);
     throw error;
   }
