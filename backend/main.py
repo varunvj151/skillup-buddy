@@ -33,8 +33,8 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Load Whisper model once at startup
 # ---------------------------------------------------------------------------
-print("Loading Whisper model (small)…")
-whisper_model = whisper.load_model("small")
+print("Loading Whisper model (tiny)…")
+whisper_model = whisper.load_model("tiny")
 print("Whisper model loaded ✓")
 
 
@@ -393,7 +393,7 @@ async def transcribe_audio(audio: UploadFile = File(...)):
         print("[Backend] FFmpeg conversion success.")
 
         # Transcribe with Whisper (Forcing English for better accuracy)
-        print(f"[Backend] Running Whisper (base) on {tmp_wav.name}...")
+        print(f"[Backend] Running Whisper on {tmp_wav.name}...")
         import time
         start_t = time.time()
         # Force English and transcribe task
@@ -489,19 +489,19 @@ Also provide:
 - **Overall Score**: 0–100 (must realistically reflect the quality — be harsh, not generous)
 
 Respond ONLY with a valid JSON object in exactly this format (no extra text, no markdown fences):
-{{
-  "scores": {{
-    "content": {{"score": <int>, "explanation": "<string>"}},
-    "clarity": {{"score": <int>, "explanation": "<string>"}},
-    "communication": {{"score": <int>, "explanation": "<string>"}},
-    "confidence": {{"score": <int>, "explanation": "<string>"}},
-    "structure": {{"score": <int>, "explanation": "<string>"}}
-  }},
+{
+  "scores": {
+    "content": {"score": <int>, "explanation": "<string>"},
+    "clarity": {"score": <int>, "explanation": "<string>"},
+    "communication": {"score": <int>, "explanation": "<string>"},
+    "confidence": {"score": <int>, "explanation": "<string>"},
+    "structure": {"score": <int>, "explanation": "<string>"}
+  },
   "overall_score": <int>,
   "strengths": ["<string>", ...],
   "improvements": ["<string>", ...],
   "tips": ["<string>", ...]
-}}"""
+}"""
 
 
 @app.post("/api/evaluate")
@@ -531,7 +531,12 @@ async def evaluate_gd(req: EvaluateRequest):
              print("⚠ Gemini response blocked or empty.")
              return _mock_evaluation()
              
-        raw_text = response.text.strip()
+        try:
+            raw_text = response.text.strip()
+        except ValueError as e:
+            # This happens if the model didn't return text (e.g. blocked)
+            print(f"⚠ Gemini returned no text: {e}")
+            return _mock_evaluation()
 
         # Robust JSON extraction
         json_match = re.search(r"(\{.*\})", raw_text, re.DOTALL)
@@ -557,12 +562,10 @@ async def evaluate_gd(req: EvaluateRequest):
 
         return data
 
-    except json.JSONDecodeError as exc:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"AI returned invalid JSON: {exc}")
     except Exception as exc:
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Evaluation failed: {exc}")
+        print(f"ERROR: GD evaluation failed, returning mock data. Detail: {exc}")
+        return _mock_evaluation()
 
 
 INTERVIEW_EVALUATION_PROMPT = """
@@ -598,20 +601,20 @@ Overall Score Calculation:
 - If more than 3 answers are nonsensical, overallScore should be below 20.
 
 Return EXACTLY this JSON schema:
-{{
+{
   "overallScore": 0,
   "questions": [
-    {{
+    {
       "question": "string",
       "score": 0,
       "communication": 0,
       "technical": 0,
       "feedback": "string",
       "status": "OK"
-    }}
+    }
   ],
   "summary": "string"
-}}
+}
 
 Input:
 {qa_pairs}
