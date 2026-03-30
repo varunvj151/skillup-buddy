@@ -414,13 +414,106 @@ async def transcribe_audio(audio: UploadFile = File(...)):
         traceback.print_exc()
         return {"text": "(No speech detected in the audio.)", "status": "failed"}
     finally:
-        # Cleanup temp files
-        for fpath in [tmp_webm.name, tmp_wav.name]:
+        _cleanup_temp_files(tmp_webm.name, tmp_wav.name)
+
+
+def _cleanup_temp_files(*fpaths):
+    """Cleanup temporary files."""
+    for fpath in fpaths:
+        try:
+            if fpath and os.path.exists(fpath):
+                os.unlink(fpath)
+        except OSError:
+            pass
+
+
+@app.post("/api/gd-transcribe-evaluate")
+async def gd_transcribe_evaluate(topic: str = File(...), audio: UploadFile = File(...)):
+    """Consolidated endpoint to transcribe audio AND evaluate GD performance in one go."""
+    print(f"[Backend] Integrated GD evaluation started for topic: {topic}")
+    
+    # --- Step 1: Transcribe ---
+    suffix = Path(audio.filename or "recording.webm").suffix or ".webm"
+    tmp_webm = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    tmp_wav = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+    
+    transcript = ""
+    try:
+        contents = await audio.read()
+        if len(contents) < 1000: # Very small file
+             return {"error": "Audio file too small", "status": "failed"}
+
+        with open(tmp_webm.name, "wb") as f:
+            f.write(contents)
+        tmp_webm.close()
+        tmp_wav.close()
+
+        # Convert
+        cmd = [
+            "ffmpeg", "-y", "-i", tmp_webm.name, 
+            "-af", "silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-50dB",
+            "-ar", "16000", "-ac", "1", tmp_wav.name
+        ]
+        subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Transcribe
+        result = whisper_model.transcribe(tmp_wav.name, language="en", task="transcribe")
+        transcript = result.get("text", "").strip()
+
+    except Exception as exc:
+        traceback.print_exc()
+        return {"error": str(exc), "status": "failed"}
+    finally:
+        _cleanup_temp_files(tmp_webm.name, tmp_wav.name)
+
+    if not transcript:
+        return {"transcript": "(No speech detected)", "evaluation": None, "status": "empty"}
+
+    # --- Step 2: Evaluate ---
+    # Pre-validation
+    validation_result = _validate_transcript(topic, transcript)
+    if validation_result is not None:
+        return {
+            "transcript": transcript,
+            "evaluation": validation_result,
+            "status": "success"
+        }
+
+    if not gemini_model:
+        return {
+            "transcript": transcript,
+            "evaluation": _mock_evaluation(),
+            "status": "success"
+        }
+
+    # AI evaluation
+    prompt = EVALUATION_PROMPT.replace("{topic}", topic).replace("{transcript}", transcript)
+    try:
+        response = gemini_model.generate_content(prompt)
+        if not response.candidates or not response.candidates[0].content.parts:
+             evaluation = _mock_evaluation()
+        else:
             try:
-                if os.path.exists(fpath):
-                    os.unlink(fpath)
-            except OSError:
-                pass
+                raw_text = response.text.strip()
+                json_match = re.search(r"(\{.*\})", raw_text, re.DOTALL)
+                if json_match: raw_text = json_match.group(1)
+                evaluation = json.loads(raw_text)
+                evaluation = _adjust_scores_for_relevance(evaluation, topic, transcript)
+            except Exception:
+                evaluation = _mock_evaluation()
+
+        return {
+            "transcript": transcript,
+            "evaluation": evaluation,
+            "status": "success"
+        }
+
+    except Exception:
+        return {
+            "transcript": transcript,
+            "evaluation": _mock_evaluation(),
+            "status": "success"
+        }
 
 # ---------------------------------------------------------------------------
 # POST /api/evaluate

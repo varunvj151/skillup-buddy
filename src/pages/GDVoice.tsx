@@ -220,46 +220,31 @@ export default function GDVoice() {
 
     const processAudio = async (audioBlob: Blob, mimeType: string) => {
         try {
-            // Step 1: Transcribe
-            setProcessingMessage('Transcribing your speech…');
+            setProcessingMessage('Analyzing your GD performance…');
 
             const ext = mimeType.includes('webm') ? 'webm' : 'wav';
             const formData = new FormData();
             formData.append('audio', audioBlob, `recording.${ext}`);
+            formData.append('topic', topic);
 
-            const result = await apiFetch('/api/transcribe', {
+            const result = await apiFetch('/api/gd-transcribe-evaluate', {
                 method: 'POST',
                 body: formData,
             });
-            const transcript = (result.text || result.transcript || "").trim();
 
-            if (!transcript || transcript === '(No speech detected in the audio.)') {
-                toast({
-                    title: "No Speech Detected",
-                    description: "We couldn't detect any speech in your recording. Please try again.",
+            if (result.status === 'failed' || result.status === 'empty') {
+                 toast({
+                    title: "Processing Error",
+                    description: result.error || "Could not analyze your speech. Please try again.",
                     variant: "destructive"
                 });
                 setPhase('preparation');
-                setTimeLeft(0);
-                setRecordingTime(0);
                 return;
             }
 
-            // Step 1.5: Pre-validate
-            let evaluation = validateTranscriptLocally(transcript);
+            const { transcript, evaluation } = result;
 
-            if (!evaluation) {
-                // Step 2: Evaluate via AI if client validation passed
-                setProcessingMessage('Evaluating your performance…');
-
-                evaluation = await apiFetch('/api/evaluate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ topic, transcript }),
-                });
-            }
-
-            // Navigate to results page with all data
+            // Navigate to results page
             navigate('/gd/result', {
                 state: {
                     topic,
